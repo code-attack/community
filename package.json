@@ -4,7 +4,8 @@
     "workspaces": {
         "packages": [
             "./services/*",
-            "./packages/*"
+            "./packages/*",
+            "./clis/*"
         ]
     },
     "devDependencies": {
@@ -12,7 +13,7 @@
         "lint-staged": ">=10",
         "pinst": ">=2",
         "prettier": "^2.8.8",
-        "typescript": "^5.1.3"
+        "typescript": "5.0.4"
     },
     "lint-staged": {
         "{services,packages}/**/*.{js,ts,jsx,tsx}": "prettier --write"
