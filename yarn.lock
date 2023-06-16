@@ -9,9 +9,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@cli/template@workspace:clis/template"
   dependencies:
+    "@types/cross-spawn": ^6.0.2
     "@types/node": ^20.3.1
     "@types/prompts": ^2.4.4
     "@types/validate-npm-package-name": ^4.0.0
+    cross-spawn: ^7.0.3
     prompts: ^2.4.2
     ts-node: ^10.9.1
     typescript: 5.0.4
@@ -77,6 +79,15 @@ __metadata:
   version: 1.0.4
   resolution: "@tsconfig/node16@npm:1.0.4"
   checksum: 202319785901f942a6e1e476b872d421baec20cf09f4b266a1854060efbf78cde16a4d256e8bc949d31e6cd9a90f1e8ef8fb06af96a65e98338a2b6b0de0a0ff
+  languageName: node
+  linkType: hard
+
+"@types/cross-spawn@npm:^6.0.2":
+  version: 6.0.2
+  resolution: "@types/cross-spawn@npm:6.0.2"
+  dependencies:
+    "@types/node": "*"
+  checksum: fa9edd32178878cab3ea8d6d0260639e0fe4860ddb3887b8de53d6e8036e154fc5f313c653f690975aa25025aea8beb83fb0870b931bf8d9202c3ac530a24c9d
   languageName: node
   linkType: hard
 

@@ -47,9 +47,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./clis/template/",\
           "packageDependencies": [\
             ["@cli/template", "workspace:clis/template"],\
+            ["@types/cross-spawn", "npm:6.0.2"],\
             ["@types/node", "npm:20.3.1"],\
             ["@types/prompts", "npm:2.4.4"],\
             ["@types/validate-npm-package-name", "npm:4.0.0"],\
+            ["cross-spawn", "npm:7.0.3"],\
             ["prompts", "npm:2.4.2"],\
             ["ts-node", "virtual:487378cb48cef6c5d70f46a6430449e91251a1115ef7b109854974ceb96c860fa31eb11c0ae0d18b1862c70782610ca0c86839a5d772f390b177f8378cfdad71#npm:10.9.1"],\
             ["typescript", "patch:typescript@npm%3A5.0.4#~builtin<compat/typescript>::version=5.0.4&hash=85af82"],\
@@ -129,6 +131,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@tsconfig-node16-npm-1.0.4-b7cb87d859-2023197859.zip/node_modules/@tsconfig/node16/",\
           "packageDependencies": [\
             ["@tsconfig/node16", "npm:1.0.4"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@types/cross-spawn", [\
+        ["npm:6.0.2", {\
+          "packageLocation": "./.yarn/cache/@types-cross-spawn-npm-6.0.2-f5d63b3325-fa9edd3217.zip/node_modules/@types/cross-spawn/",\
+          "packageDependencies": [\
+            ["@types/cross-spawn", "npm:6.0.2"],\
+            ["@types/node", "npm:20.3.1"]\
           ],\
           "linkType": "HARD"\
         }]\
