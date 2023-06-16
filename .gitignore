@@ -9,3 +9,5 @@
 !.yarn/versions
 
 .env
+
+.DS_Store
