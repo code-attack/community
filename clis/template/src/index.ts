@@ -1,4 +1,5 @@
 import path from "path";
+import fs from "fs";
 
 import { cli } from "./helpers/spawn";
 import { prompts } from "./helpers/prompts";
@@ -12,6 +13,10 @@ const command = async () => {
 
   const source = path.resolve(`_templates/${template}`);
   const target = path.resolve(`../../${dir}/${packageName}`);
+
+  if (!fs.existsSync(target)) {
+    fs.mkdirSync(`../../${dir}`);
+  }
 
   copyFolderSync(source, target);
 
