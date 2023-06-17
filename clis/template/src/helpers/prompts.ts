@@ -24,7 +24,7 @@ const dir = async () => {
     name: "value",
     message: "무슨 경로에 만드실껀가요?",
     choices: [
-      { title: "pacakge", value: "packages" },
+      { title: "package", value: "packages" },
       { title: "service", value: "services" },
     ],
   });
