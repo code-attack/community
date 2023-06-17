@@ -14,7 +14,7 @@ const command = async () => {
   const source = path.resolve(`_templates/${template}`);
   const target = path.resolve(`../../${dir}/${packageName}`);
 
-  if (!fs.existsSync(target)) {
+  if (!fs.existsSync(`../../${dir}`)) {
     fs.mkdirSync(`../../${dir}`);
   }
 
