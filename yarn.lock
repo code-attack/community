@@ -155,6 +155,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+
+"@service/web@workspace:services/web":
+  version: 0.0.0-use.local
+  resolution: "@service/web@workspace:services/web"
+  dependencies:
+    "@types/node": ^20.3.1
+    "@types/react": ^18.2.12
+    "@types/react-dom": ^18.2.5
+    autoprefixer: ^10.4.14
+    next: ^13.4.6
+    postcss: ^8.4.24
+    react: ^18.2.0
+    react-dom: ^18.2.0
+    tailwindcss: ^3.3.2
+    typescript: ^5.1.3
+  languageName: unknown
+  linkType: soft
+
+"@swc/helpers@npm:0.5.1":
+  version: 0.5.1
+  resolution: "@swc/helpers@npm:0.5.1"
 "@prisma/client@npm:^4.14.1":
   version: 4.15.0
   resolution: "@prisma/client@npm:4.15.0"
