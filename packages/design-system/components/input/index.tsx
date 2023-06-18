@@ -16,8 +16,8 @@ interface PropsType {
   label: string;
   placeholder?: string;
   disabled?: boolean;
-  errorMsg?: boolean | string;
-  supportMsg?: string;
+  isError?: boolean;
+  supportMsg?: string | boolean;
 }
 
 const disabledStyleObject = "opacity-[38%] border-[#1C1B1F]";
@@ -49,7 +49,7 @@ export const Input = ({
   placeholder,
   onChange,
   disabled,
-  errorMsg,
+  isError,
   kind = "fill",
   supportMsg,
 }: PropsType) => {
@@ -79,7 +79,7 @@ export const Input = ({
       <div
         className={`h-14  w-[210px] relative transition-all flex items-center px-3 gap-3 box-border ${wrapperStyle} [&>svg]:shrink-0 ${addDisableStyle(
           `${
-            errorMsg && "[&_label]:text-[#B3261E] border-[#B3261E]"
+            isError && "[&_label]:text-[#B3261E] border-[#B3261E]"
           } border-[#79747E] ${activeStyle}  focus-within:border-[#6750A4]`
         )}  `}
       >
@@ -114,7 +114,7 @@ export const Input = ({
         </div>
 
         {hasClear &&
-          (errorMsg && !disabled ? (
+          (isError && !disabled ? (
             <Error />
           ) : (
             <Blocking onClick={clearInput} />
@@ -123,7 +123,7 @@ export const Input = ({
       {supportMsg && (
         <div
           className={`text-xs mt-1 ml-4 ${addDisableStyle(
-            errorMsg && "text-[#B3261E]"
+            isError && "text-[#B3261E]"
           )}`}
         >
           {supportMsg}
