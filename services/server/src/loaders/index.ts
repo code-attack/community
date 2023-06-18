@@ -5,6 +5,7 @@ import { Application, json } from "express";
 import { router } from "../apis/routes";
 import { commonError } from "@/constants";
 import { ErrorResponse } from "@/utils/error-res";
+import { errorHandler } from "@/apis/middlewares/error";
 
 export const loader = (app: Application) => {
   app.use(json());
@@ -21,4 +22,6 @@ export const loader = (app: Application) => {
   app.all("*", (_req, _res, next) => {
     next(new ErrorResponse(commonError.notFound));
   });
+
+  app.use(errorHandler);
 };
