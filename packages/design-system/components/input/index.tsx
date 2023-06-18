@@ -1,98 +1,132 @@
 import { Blocking, Search, Error } from "../../assets/svg";
+import { ChangeEvent } from "react";
+
+interface InputEventType {
+  value: string;
+  name: string;
+}
 
 interface PropsType {
   kind?: "fill" | "outline";
-  onSearch?: () => void;
-  onClear?: () => void;
+  onSearch?: (e: InputEventType) => void;
+  hasClear?: boolean;
+  onChange: (e: InputEventType) => void;
+  name: string;
   value: string;
+  label: string;
   placeholder?: string;
   disabled?: boolean;
   errorMsg?: boolean | string;
   supportMsg?: string;
 }
 
-const disabledStyleObject = {
-  fill: "opacity-[38%] border-[#1C1B1F]",
-  outline: "",
-} as const;
+const disabledStyleObject = "opacity-[38%] border-[#1C1B1F]";
 
 const KindStyleObject = {
   fill: {
-    wrapper: "rounded-[4px_4px_0_0] bg-[#E7E0EC] border-b-2",
-    active:
+    wrapperStyle: "rounded-[4px_4px_0_0] bg-[#E7E0EC] border-b-2",
+    activeStyle:
       "focus-within:border-b-4 focus-within:pt-0.5 hover:bg-[rgba(28,27,31,0.08)]",
-    label:
-      "[&>label]:focus-within:top-1 [&>label]:transition-all [&>input]:focus-within:mt-4",
+    contentStyle: "[&>label]:focus-within:top-1 [&>input]:focus-within:mt-4",
+    labelStyle: "absolute   transition-all ",
+    valueExistStyle: "",
   },
   outline: {
-    wrapper: "rounded bg-white border-[1px]",
-    active: "focus-within:border-2 focus-within:px-[11px]",
-    label:
-      "focus-within:relative [&>label]:focus-within:-top-2 [&>label]:left-0  [&>label]:bg-white [&>label]:duration-700",
+    wrapperStyle: "rounded bg-white border-[1px]",
+    activeStyle: "focus-within:border-2 focus-within:px-[11px]",
+    contentStyle: "[&>label]:focus-within:-top-2 relative",
+    labelStyle: "absolute  left-0  duration-150 px-1 bg-white",
+    valueExistStyle: " absolute -top-2  bg-white px-1 bg-white",
   },
-};
+} as const;
 
 export const Input = ({
   onSearch,
-  onClear,
+  hasClear,
   value,
+  name,
+  label,
   placeholder,
+  onChange,
   disabled,
   errorMsg,
   kind = "fill",
   supportMsg,
 }: PropsType) => {
-  const isValuePlaceholderNone = !(value || placeholder);
+  const isValueAndPlaceholderNone = !(value || placeholder);
 
   const addDisableStyle = (style?: string | boolean) =>
-    disabled ? disabledStyleObject[kind] : style;
+    disabled ? disabledStyleObject : style;
+  const onInputChange = (e: ChangeEvent<HTMLInputElement>) =>
+    onChange(e.target);
+  const clearInput = () => onChange({ value: "", name });
 
-  const { wrapper, active, label } = KindStyleObject[kind];
+  const {
+    wrapperStyle,
+    activeStyle,
+    contentStyle,
+    labelStyle,
+    valueExistStyle,
+  } = KindStyleObject[kind];
 
-  const outlineLabel =
-    kind === "outline" && onSearch && `[&>label]:focus-within:-left-[32px]`;
+  const isOutSideAndSearch = kind === "outline" && onSearch;
+
+  const outlineLabelLocation =
+    isOutSideAndSearch && `[&>label]:focus-within:-left-[32px]`;
+  const outlineValueExistLocation = isOutSideAndSearch && "-left-[32px]";
   return (
     <div>
       <div
-        className={`h-14  w-[210px] relative transition-all flex items-center px-3 gap-3 box-border ${wrapper} [&>svg]:shrink-0 ${addDisableStyle(
+        className={`h-14  w-[210px] relative transition-all flex items-center px-3 gap-3 box-border ${wrapperStyle} [&>svg]:shrink-0 ${addDisableStyle(
           `${
             errorMsg && "[&_label]:text-[#B3261E] border-[#B3261E]"
-          } border-[#79747E] ${active}  focus-within:border-[#6750A4]`
+          } border-[#79747E] ${activeStyle}  focus-within:border-[#6750A4]`
         )}  `}
       >
         {onSearch && <Search className="relative z-20" />}
         <div
-          className={`h-full flex flex-col justify-center [&>label]:focus-within:text-[#6750A4] ${
-            isValuePlaceholderNone &&
-            `${label} ${outlineLabel} relative [&>label]:focus-within:text-xs [&>input]:h-full [&>input]:focus-within:h-auto [&>input]:opacity-0 [&>input]:focus-within:opacity-100`
+          className={`h-full flex flex-col justify-center [&>label]:focus-within:text-[#6750A4]  ${
+            isValueAndPlaceholderNone
+              ? `${contentStyle} ${outlineLabelLocation} [&>label]:focus-within:text-xs [&>input]:h-full [&>input]:focus-within:h-auto [&>input]:opacity-0 [&>input]:focus-within:opacity-100`
+              : "relative"
           }`}
         >
           <label
             className={`${
-              isValuePlaceholderNone ? "text-base absolute top-4" : "text-xs"
-            } z-0  top-3 text-[#49454F] px-1`}
+              isValueAndPlaceholderNone
+                ? `text-base top-4 ${labelStyle}`
+                : `text-xs ${valueExistStyle} ${outlineValueExistLocation}`
+            } z-0 duration-150  text-[#49454F] `}
           >
-            Label
+            {label}
           </label>
           {
             <input
               className={`${onSearch && " ml-1"} ${
-                onClear && " mr-1"
+                hasClear && " mr-1"
               } relative z-10 w-full min-w-0 text-base bg-transparent outline-none transition-all`}
-              value="Input"
+              value={value}
+              placeholder={placeholder}
             />
           }
         </div>
 
-        {onClear && (errorMsg && !disabled ? <Error /> : <Blocking />)}
+        {hasClear &&
+          (errorMsg && !disabled ? (
+            <Error />
+          ) : (
+            <Blocking onClick={clearInput} />
+          ))}
       </div>
-      <div
-        className={`text-xs mt-1 ml-4 ${addDisableStyle(
-          errorMsg && "text-[#B3261E]"
-        )}`}
-      >
-        {supportMsg}
-      </div>
+      {supportMsg && (
+        <div
+          className={`text-xs mt-1 ml-4 ${addDisableStyle(
+            errorMsg && "text-[#B3261E]"
+          )}`}
+        >
+          {supportMsg}
+        </div>
+      )}
     </div>
   );
 };
