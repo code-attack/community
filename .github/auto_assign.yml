@@ -1,0 +1,9 @@
+addReviewers: true
+
+addAssignees: author
+
+reviewers:
+    - 05lazy
+    - ipiyou
+    - jingeon27
+    - paperdeer
