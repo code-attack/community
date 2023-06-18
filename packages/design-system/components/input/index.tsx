@@ -107,6 +107,8 @@ export const Input = ({
               } relative z-10 w-full min-w-0 text-base bg-transparent outline-none transition-all`}
               value={value}
               placeholder={placeholder}
+              onChange={onInputChange}
+              name={name}
             />
           }
         </div>
