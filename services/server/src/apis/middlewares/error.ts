@@ -28,10 +28,6 @@ export const errorHandler = (
   let errorResponse = err;
   const isDevelopment = process.env.NODE_ENV === "development";
 
-  if (errorResponse.name === "UnauthorizedError") {
-    errorResponse = new ErrorResponse(commonError.unauthorized);
-  }
-
   if (isDevelopment) {
     errorInfo = createErrorInfoDevelopment(errorResponse);
   } else {
