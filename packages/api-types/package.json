@@ -1,4 +1,8 @@
 {
-    "name": "@package/api-types",
-    "packageManager": "yarn@3.5.0"
+  "name": "@package/api-types",
+  "packageManager": "yarn@3.5.0",
+  "main": "./src/index.ts",
+  "devDependencies": {
+    "typescript": "^5.1.3"
+  }
 }

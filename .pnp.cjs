@@ -230,7 +230,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         ["workspace:packages/api-types", {\
           "packageLocation": "./packages/api-types/",\
           "packageDependencies": [\
-            ["@package/api-types", "workspace:packages/api-types"]\
+            ["@package/api-types", "workspace:packages/api-types"],\
+            ["typescript", "patch:typescript@npm%3A5.1.3#~builtin<compat/typescript>::version=5.1.3&hash=85af82"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -299,6 +300,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./services/server/",\
           "packageDependencies": [\
             ["@service/server", "workspace:services/server"],\
+            ["@package/api-types", "workspace:packages/api-types"],\
+            ["@package/constant", "workspace:packages/constant"],\
             ["@prisma/client", "virtual:50b014b37d29c7510f82a6e7e233a2c2d6e24ab52c862940a38eb9fd70e4d55c4d0d6cca7f05295daea28d12fb0a37c245fb6123735e1fd98466ecead4731762#npm:4.15.0"],\
             ["@types/bcrypt", "npm:5.0.0"],\
             ["@types/cors", "npm:2.8.13"],\
@@ -319,8 +322,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["nodemon", "npm:2.0.22"],\
             ["prettier", "npm:2.8.8"],\
             ["prisma", "npm:4.15.0"],\
+            ["reflect-metadata", "npm:0.1.13"],\
             ["ts-node", "virtual:487378cb48cef6c5d70f46a6430449e91251a1115ef7b109854974ceb96c860fa31eb11c0ae0d18b1862c70782610ca0c86839a5d772f390b177f8378cfdad71#npm:10.9.1"],\
             ["tsconfig-paths", "npm:4.2.0"],\
+            ["typedi", "npm:0.10.0"],\
             ["typescript", "patch:typescript@npm%3A5.0.4#~builtin<compat/typescript>::version=5.0.4&hash=85af82"]\
           ],\
           "linkType": "SOFT"\
@@ -3556,6 +3561,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["reflect-metadata", [\
+        ["npm:0.1.13", {\
+          "packageLocation": "./.yarn/cache/reflect-metadata-npm-0.1.13-c525998e20-798d379a7b.zip/node_modules/reflect-metadata/",\
+          "packageDependencies": [\
+            ["reflect-metadata", "npm:0.1.13"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["resolve-alpn", [\
         ["npm:1.2.1", {\
           "packageLocation": "./.yarn/cache/resolve-alpn-npm-1.2.1-af77edd28b-f558071fcb.zip/node_modules/resolve-alpn/",\
@@ -4223,11 +4237,27 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["typedi", [\
+        ["npm:0.10.0", {\
+          "packageLocation": "./.yarn/cache/typedi-npm-0.10.0-d5771a2dc0-d26491e368.zip/node_modules/typedi/",\
+          "packageDependencies": [\
+            ["typedi", "npm:0.10.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["typescript", [\
         ["patch:typescript@npm%3A5.0.4#~builtin<compat/typescript>::version=5.0.4&hash=85af82", {\
           "packageLocation": "./.yarn/cache/typescript-patch-260000abbe-bb309d320c.zip/node_modules/typescript/",\
           "packageDependencies": [\
             ["typescript", "patch:typescript@npm%3A5.0.4#~builtin<compat/typescript>::version=5.0.4&hash=85af82"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["patch:typescript@npm%3A5.1.3#~builtin<compat/typescript>::version=5.1.3&hash=85af82", {\
+          "packageLocation": "./.yarn/cache/typescript-patch-e583ca9b0d-32a25b2e12.zip/node_modules/typescript/",\
+          "packageDependencies": [\
+            ["typescript", "patch:typescript@npm%3A5.1.3#~builtin<compat/typescript>::version=5.1.3&hash=85af82"]\
           ],\
           "linkType": "HARD"\
         }]\

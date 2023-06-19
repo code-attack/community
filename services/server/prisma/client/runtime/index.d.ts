@@ -36,6 +36,7 @@ declare class Arg {
   constructor({ key, value, isEnum, error, schemaArg, inputType }: ArgOptions);
   get [Symbol.toStringTag](): string;
   _toString(value: ArgValue, key: string): string | undefined;
+  stringifyValue(value: ArgValue): any;
   toString(): string | undefined;
   collectErrors(): ArgError[];
 }
@@ -90,6 +91,7 @@ declare type ArgValue =
   | boolean[]
   | number[]
   | Args_2[]
+  | Date
   | null;
 
 declare interface AtLeastOneError {
@@ -137,8 +139,9 @@ declare type BatchTransactionOptions = {
 };
 
 declare interface BinaryTargetsEnvValue {
-  fromEnvVar: null | string;
+  fromEnvVar: string | null;
   value: string;
+  native?: boolean;
 }
 
 declare interface CallSite {
@@ -580,7 +583,7 @@ export declare interface DecimalJsLike {
   toFixed(): string;
 }
 
-export declare const decompressFromBase64: (str: string) => any;
+export declare const decompressFromBase64: (str: string) => string;
 
 declare type DefaultArgs = InternalArgs<{}, {}, {}, {}>;
 
@@ -995,7 +998,7 @@ declare type EngineBatchQueries = GraphQLQuery[] | JsonQuery[];
 
 declare interface EngineConfig {
   cwd: string;
-  dirname?: string;
+  dirname: string;
   datamodelPath: string;
   enableDebugLogs?: boolean;
   allowTriggerPanic?: boolean;
@@ -1754,7 +1757,8 @@ declare type InvalidArgError =
   | InvalidArgTypeError
   | AtLeastOneError
   | AtMostOneError
-  | InvalidNullArgError;
+  | InvalidNullArgError
+  | InvalidDateArgError;
 
 /**
  * This error occurs if the user provides an arg name that doesn't exist
@@ -1781,6 +1785,14 @@ declare interface InvalidArgTypeError {
     inputType: DMMF.SchemaArgInputType[];
   };
   providedValue: any;
+}
+
+/**
+ * User provided invalid date value
+ */
+declare interface InvalidDateArgError {
+  type: "invalidDateArg";
+  argName: string;
 }
 
 declare type InvalidFieldError =
@@ -3037,7 +3049,7 @@ declare interface TraceState {
 declare interface TracingHelper {
   isEnabled(): boolean;
   getTraceParent(context?: Context): string;
-  createEngineSpan(engineSpanEvent: EngineSpanEvent): Promise<void>;
+  createEngineSpan(engineSpanEvent: EngineSpanEvent): void;
   getActiveContext(): Context | undefined;
   runInChildSpan<R>(
     nameOrOptions: string | ExtendedSpanOptions,
