@@ -20,6 +20,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "reference": "workspace:clis/template"\
       },\
       {\
+        "name": "@package/api-types",\
+        "reference": "workspace:packages/api-types"\
+      },\
+      {\
+        "name": "@package/constant",\
+        "reference": "workspace:packages/constant"\
+      },\
+      {\
         "name": "@service/server",\
         "reference": "workspace:services/server"\
       }\
@@ -28,6 +36,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
     "ignorePatternData": "(^(?:\\\\.yarn\\\\/sdks(?:\\\\/(?!\\\\.{1,2}(?:\\\\/|$))(?:(?:(?!(?:^|\\\\/)\\\\.{1,2}(?:\\\\/|$)).)*?)|$))$)",\
     "fallbackExclusionList": [\
       ["@cli/template", ["workspace:clis/template"]],\
+      ["@package/api-types", ["workspace:packages/api-types"]],\
+      ["@package/constant", ["workspace:packages/constant"]],\
       ["@service/server", ["workspace:services/server"]],\
       ["community", ["workspace:."]]\
     ],\
@@ -216,6 +226,24 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@package/api-types", [\
+        ["workspace:packages/api-types", {\
+          "packageLocation": "./packages/api-types/",\
+          "packageDependencies": [\
+            ["@package/api-types", "workspace:packages/api-types"]\
+          ],\
+          "linkType": "SOFT"\
+        }]\
+      ]],\
+      ["@package/constant", [\
+        ["workspace:packages/constant", {\
+          "packageLocation": "./packages/constant/",\
+          "packageDependencies": [\
+            ["@package/constant", "workspace:packages/constant"]\
+          ],\
+          "linkType": "SOFT"\
+        }]\
+      ]],\
       ["@pkgjs/parseargs", [\
         ["npm:0.11.0", {\
           "packageLocation": "./.yarn/cache/@pkgjs-parseargs-npm-0.11.0-cd2a3fe948-6ad6a00fc4.zip/node_modules/@pkgjs/parseargs/",\
@@ -289,6 +317,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["morgan", "npm:1.10.0"],\
             ["multer", "npm:1.4.5-lts.1"],\
             ["nodemon", "npm:2.0.22"],\
+            ["prettier", "npm:2.8.8"],\
             ["prisma", "npm:4.15.0"],\
             ["ts-node", "virtual:487378cb48cef6c5d70f46a6430449e91251a1115ef7b109854974ceb96c860fa31eb11c0ae0d18b1862c70782610ca0c86839a5d772f390b177f8378cfdad71#npm:10.9.1"],\
             ["tsconfig-paths", "npm:4.2.0"],\
