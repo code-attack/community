@@ -100,6 +100,7 @@ exports.Prisma.UserScalarFieldEnum = {
   account_id: "account_id",
   name: "name",
   password: "password",
+  role: "role",
 };
 
 exports.Prisma.ModelName = {

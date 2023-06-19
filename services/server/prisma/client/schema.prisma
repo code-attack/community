@@ -16,4 +16,5 @@ model User {
   account_id String @unique @db.VarChar(20)
   name       String @db.VarChar(20)
   password   String @db.Char(60)
+  role       String
 }

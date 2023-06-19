@@ -23,6 +23,7 @@ export type User = {
   account_id: string;
   name: string;
   password: string;
+  role: string;
 };
 
 /**
@@ -908,6 +909,7 @@ export namespace Prisma {
     account_id: string | null;
     name: string | null;
     password: string | null;
+    role: string | null;
   };
 
   export type UserMaxAggregateOutputType = {
@@ -915,6 +917,7 @@ export namespace Prisma {
     account_id: string | null;
     name: string | null;
     password: string | null;
+    role: string | null;
   };
 
   export type UserCountAggregateOutputType = {
@@ -922,6 +925,7 @@ export namespace Prisma {
     account_id: number;
     name: number;
     password: number;
+    role: number;
     _all: number;
   };
 
@@ -938,6 +942,7 @@ export namespace Prisma {
     account_id?: true;
     name?: true;
     password?: true;
+    role?: true;
   };
 
   export type UserMaxAggregateInputType = {
@@ -945,6 +950,7 @@ export namespace Prisma {
     account_id?: true;
     name?: true;
     password?: true;
+    role?: true;
   };
 
   export type UserCountAggregateInputType = {
@@ -952,6 +958,7 @@ export namespace Prisma {
     account_id?: true;
     name?: true;
     password?: true;
+    role?: true;
     _all?: true;
   };
 
@@ -1043,6 +1050,7 @@ export namespace Prisma {
     account_id: string;
     name: string;
     password: string;
+    role: string;
     _count: UserCountAggregateOutputType | null;
     _avg: UserAvgAggregateOutputType | null;
     _sum: UserSumAggregateOutputType | null;
@@ -1067,6 +1075,7 @@ export namespace Prisma {
     account_id?: boolean;
     name?: boolean;
     password?: boolean;
+    role?: boolean;
   };
 
   export type UserGetPayload<S extends boolean | null | undefined | UserArgs> =
@@ -1855,6 +1864,7 @@ export namespace Prisma {
     account_id: "account_id";
     name: "name";
     password: "password";
+    role: "role";
   };
 
   export type UserScalarFieldEnum =
@@ -1872,6 +1882,7 @@ export namespace Prisma {
     account_id?: StringFilter | string;
     name?: StringFilter | string;
     password?: StringFilter | string;
+    role?: StringFilter | string;
   };
 
   export type UserOrderByWithRelationInput = {
@@ -1879,6 +1890,7 @@ export namespace Prisma {
     account_id?: SortOrder;
     name?: SortOrder;
     password?: SortOrder;
+    role?: SortOrder;
   };
 
   export type UserWhereUniqueInput = {
@@ -1891,6 +1903,7 @@ export namespace Prisma {
     account_id?: SortOrder;
     name?: SortOrder;
     password?: SortOrder;
+    role?: SortOrder;
     _count?: UserCountOrderByAggregateInput;
     _avg?: UserAvgOrderByAggregateInput;
     _max?: UserMaxOrderByAggregateInput;
@@ -1906,12 +1919,14 @@ export namespace Prisma {
     account_id?: StringWithAggregatesFilter | string;
     name?: StringWithAggregatesFilter | string;
     password?: StringWithAggregatesFilter | string;
+    role?: StringWithAggregatesFilter | string;
   };
 
   export type UserCreateInput = {
     account_id: string;
     name: string;
     password: string;
+    role: string;
   };
 
   export type UserUncheckedCreateInput = {
@@ -1919,12 +1934,14 @@ export namespace Prisma {
     account_id: string;
     name: string;
     password: string;
+    role: string;
   };
 
   export type UserUpdateInput = {
     account_id?: StringFieldUpdateOperationsInput | string;
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
+    role?: StringFieldUpdateOperationsInput | string;
   };
 
   export type UserUncheckedUpdateInput = {
@@ -1932,6 +1949,7 @@ export namespace Prisma {
     account_id?: StringFieldUpdateOperationsInput | string;
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
+    role?: StringFieldUpdateOperationsInput | string;
   };
 
   export type UserCreateManyInput = {
@@ -1939,12 +1957,14 @@ export namespace Prisma {
     account_id: string;
     name: string;
     password: string;
+    role: string;
   };
 
   export type UserUpdateManyMutationInput = {
     account_id?: StringFieldUpdateOperationsInput | string;
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
+    role?: StringFieldUpdateOperationsInput | string;
   };
 
   export type UserUncheckedUpdateManyInput = {
@@ -1952,6 +1972,7 @@ export namespace Prisma {
     account_id?: StringFieldUpdateOperationsInput | string;
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
+    role?: StringFieldUpdateOperationsInput | string;
   };
 
   export type IntFilter = {
@@ -1984,6 +2005,7 @@ export namespace Prisma {
     account_id?: SortOrder;
     name?: SortOrder;
     password?: SortOrder;
+    role?: SortOrder;
   };
 
   export type UserAvgOrderByAggregateInput = {
@@ -1995,6 +2017,7 @@ export namespace Prisma {
     account_id?: SortOrder;
     name?: SortOrder;
     password?: SortOrder;
+    role?: SortOrder;
   };
 
   export type UserMinOrderByAggregateInput = {
@@ -2002,6 +2025,7 @@ export namespace Prisma {
     account_id?: SortOrder;
     name?: SortOrder;
     password?: SortOrder;
+    role?: SortOrder;
   };
 
   export type UserSumOrderByAggregateInput = {

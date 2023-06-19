@@ -13,7 +13,7 @@ authRouter.post(URI.SIGN_IN, (req, res, next) => {
     validation(
       Joi.object<any, true, Auth.SignInReq>({
         account_id: Joi.string().max(20).required(),
-        password: Joi.string().max(20).required(),
+        password: Joi.string().min(8).max(20).required(),
       }),
       req.body
     );
@@ -30,13 +30,17 @@ authRouter.post(URI.SIGN_UP, (req, res, next) => {
     validation(
       Joi.object<any, true, Auth.SignUpReq>({
         account_id: Joi.string().max(20).required(),
-        password: Joi.string().max(20).required(),
+        // To-do: 비밀번호 특수문자 정규식
+        password: Joi.string().min(8).max(20).required(),
         name: Joi.string().max(20).required(),
+        // To-do: role 유니온 멘토 | 멘티
+        role: Joi.string().required(),
       }),
       req.body
     );
 
     const authService = Container.get(AuthService);
+    authService.signUp(req.body);
 
     res.status(201).json({});
   } catch (e) {
