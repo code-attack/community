@@ -11,12 +11,12 @@ const Prisma = {};
 exports.Prisma = Prisma;
 
 /**
- * Prisma Client JS version: 4.14.1
- * Query Engine version: d9a4c5988f480fa576d43970d5a23641aa77bc9c
+ * Prisma Client JS version: 4.15.0
+ * Query Engine version: 8fbc245156db7124f997f4cecdd8d1219e360944
  */
 Prisma.prismaVersion = {
-  client: "4.14.1",
-  engine: "d9a4c5988f480fa576d43970d5a23641aa77bc9c",
+  client: "4.15.0",
+  engine: "8fbc245156db7124f997f4cecdd8d1219e360944",
 };
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -83,14 +83,6 @@ Prisma.NullTypes = {
  * Enums
  */
 
-exports.Prisma.PostScalarFieldEnum = {
-  id: "id",
-  title: "title",
-  content: "content",
-  published: "published",
-  authorId: "authorId",
-};
-
 exports.Prisma.SortOrder = {
   asc: "asc",
   desc: "desc",
@@ -105,13 +97,14 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.UserScalarFieldEnum = {
   id: "id",
-  email: "email",
+  account_id: "account_id",
   name: "name",
+  password: "password",
+  role: "role",
 };
 
 exports.Prisma.ModelName = {
   User: "User",
-  Post: "Post",
 };
 
 /**

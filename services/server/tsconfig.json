@@ -6,6 +6,8 @@
     "paths": {
       "@prisma": ["./prisma/index.ts"],
       "@/*": ["./src/*"]
-    }
+    },
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   }
 }

@@ -1,5 +1,5 @@
 {
-  "name": "@package/t",
+  "name": "express-app",
   "packageManager": "yarn@3.5.0",
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",

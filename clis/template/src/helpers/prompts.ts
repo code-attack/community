@@ -12,6 +12,7 @@ const kind = async () => {
       { title: "next", value: "next-app" },
       { title: "express", value: "express-app" },
       { title: "react", value: "react-app" },
+      { title: "empty", value: "empty" },
     ],
   });
 

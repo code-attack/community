@@ -20,20 +20,10 @@ export type PrismaPromise<T> = runtime.Types.Public.PrismaPromise<T>;
  */
 export type User = {
   id: number;
-  email: string;
-  name: string | null;
-};
-
-/**
- * Model Post
- *
- */
-export type Post = {
-  id: number;
-  title: string;
-  content: string | null;
-  published: boolean;
-  authorId: number;
+  account_id: string;
+  name: string;
+  password: string;
+  role: string;
 };
 
 /**
@@ -206,16 +196,6 @@ export class PrismaClient<
    * ```
    */
   get user(): Prisma.UserDelegate<GlobalReject>;
-
-  /**
-   * `prisma.post`: Exposes CRUD operations for the **Post** model.
-   * Example usage:
-   * ```ts
-   * // Fetch zero or more Posts
-   * const posts = await prisma.post.findMany()
-   * ```
-   */
-  get post(): Prisma.PostDelegate<GlobalReject>;
 }
 
 export namespace Prisma {
@@ -258,8 +238,8 @@ export namespace Prisma {
   export type MetricHistogramBucket = runtime.MetricHistogramBucket;
 
   /**
-   * Prisma Client JS version: 4.14.1
-   * Query Engine version: d9a4c5988f480fa576d43970d5a23641aa77bc9c
+   * Prisma Client JS version: 4.15.0
+   * Query Engine version: 8fbc245156db7124f997f4cecdd8d1219e360944
    */
   export type PrismaVersion = {
     client: string;
@@ -725,7 +705,6 @@ export namespace Prisma {
 
   export const ModelName: {
     User: "User";
-    Post: "Post";
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName];
@@ -902,48 +881,6 @@ export namespace Prisma {
    */
 
   /**
-   * Count Type UserCountOutputType
-   */
-
-  export type UserCountOutputType = {
-    posts: number;
-  };
-
-  export type UserCountOutputTypeSelect = {
-    posts?: boolean;
-  };
-
-  export type UserCountOutputTypeGetPayload<
-    S extends boolean | null | undefined | UserCountOutputTypeArgs
-  > = S extends { select: any; include: any }
-    ? "Please either choose `select` or `include`"
-    : S extends true
-    ? UserCountOutputType
-    : S extends undefined
-    ? never
-    : S extends { include: any } & UserCountOutputTypeArgs
-    ? UserCountOutputType
-    : S extends { select: any } & UserCountOutputTypeArgs
-    ? {
-        [P in TruthyKeys<S["select"]>]: P extends keyof UserCountOutputType
-          ? UserCountOutputType[P]
-          : never;
-      }
-    : UserCountOutputType;
-
-  // Custom InputTypes
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeArgs = {
-    /**
-     * Select specific fields to fetch from the UserCountOutputType
-     */
-    select?: UserCountOutputTypeSelect | null;
-  };
-
-  /**
    * Models
    */
 
@@ -969,20 +906,26 @@ export namespace Prisma {
 
   export type UserMinAggregateOutputType = {
     id: number | null;
-    email: string | null;
+    account_id: string | null;
     name: string | null;
+    password: string | null;
+    role: string | null;
   };
 
   export type UserMaxAggregateOutputType = {
     id: number | null;
-    email: string | null;
+    account_id: string | null;
     name: string | null;
+    password: string | null;
+    role: string | null;
   };
 
   export type UserCountAggregateOutputType = {
     id: number;
-    email: number;
+    account_id: number;
     name: number;
+    password: number;
+    role: number;
     _all: number;
   };
 
@@ -996,20 +939,26 @@ export namespace Prisma {
 
   export type UserMinAggregateInputType = {
     id?: true;
-    email?: true;
+    account_id?: true;
     name?: true;
+    password?: true;
+    role?: true;
   };
 
   export type UserMaxAggregateInputType = {
     id?: true;
-    email?: true;
+    account_id?: true;
     name?: true;
+    password?: true;
+    role?: true;
   };
 
   export type UserCountAggregateInputType = {
     id?: true;
-    email?: true;
+    account_id?: true;
     name?: true;
+    password?: true;
+    role?: true;
     _all?: true;
   };
 
@@ -1098,8 +1047,10 @@ export namespace Prisma {
 
   export type UserGroupByOutputType = {
     id: number;
-    email: string;
-    name: string | null;
+    account_id: string;
+    name: string;
+    password: string;
+    role: string;
     _count: UserCountAggregateOutputType | null;
     _avg: UserAvgAggregateOutputType | null;
     _sum: UserSumAggregateOutputType | null;
@@ -1121,42 +1072,24 @@ export namespace Prisma {
 
   export type UserSelect = {
     id?: boolean;
-    email?: boolean;
+    account_id?: boolean;
     name?: boolean;
-    posts?: boolean | User$postsArgs;
-    _count?: boolean | UserCountOutputTypeArgs;
-  };
-
-  export type UserInclude = {
-    posts?: boolean | User$postsArgs;
-    _count?: boolean | UserCountOutputTypeArgs;
+    password?: boolean;
+    role?: boolean;
   };
 
   export type UserGetPayload<S extends boolean | null | undefined | UserArgs> =
-    S extends {
-      select: any;
-      include: any;
-    }
+    S extends { select: any; include: any }
       ? "Please either choose `select` or `include`"
       : S extends true
       ? User
       : S extends undefined
       ? never
       : S extends { include: any } & (UserArgs | UserFindManyArgs)
-      ? User & {
-          [P in TruthyKeys<S["include"]>]: P extends "posts"
-            ? Array<PostGetPayload<S["include"][P]>>
-            : P extends "_count"
-            ? UserCountOutputTypeGetPayload<S["include"][P]>
-            : never;
-        }
+      ? User
       : S extends { select: any } & (UserArgs | UserFindManyArgs)
       ? {
-          [P in TruthyKeys<S["select"]>]: P extends "posts"
-            ? Array<PostGetPayload<S["select"][P]>>
-            : P extends "_count"
-            ? UserCountOutputTypeGetPayload<S["select"][P]>
-            : P extends keyof User
+          [P in TruthyKeys<S["select"]>]: P extends keyof User
             ? User[P]
             : never;
         }
@@ -1576,10 +1509,6 @@ export namespace Prisma {
       _isList?: boolean
     );
 
-    posts<T extends User$postsArgs = {}>(
-      args?: Subset<T, User$postsArgs>
-    ): Prisma.PrismaPromise<Array<PostGetPayload<T>> | Null>;
-
     private get _document();
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1628,10 +1557,6 @@ export namespace Prisma {
      */
     select?: UserSelect | null;
     /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: UserInclude | null;
-    /**
      * Filter, which User to fetch.
      */
     where: UserWhereUniqueInput;
@@ -1657,10 +1582,6 @@ export namespace Prisma {
      */
     select?: UserSelect | null;
     /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: UserInclude | null;
-    /**
      * Filter, which User to fetch.
      */
     where: UserWhereUniqueInput;
@@ -1674,10 +1595,6 @@ export namespace Prisma {
      * Select specific fields to fetch from the User
      */
     select?: UserSelect | null;
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: UserInclude | null;
     /**
      * Filter, which User to fetch.
      */
@@ -1734,10 +1651,6 @@ export namespace Prisma {
      */
     select?: UserSelect | null;
     /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: UserInclude | null;
-    /**
      * Filter, which User to fetch.
      */
     where?: UserWhereInput;
@@ -1782,10 +1695,6 @@ export namespace Prisma {
      */
     select?: UserSelect | null;
     /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: UserInclude | null;
-    /**
      * Filter, which Users to fetch.
      */
     where?: UserWhereInput;
@@ -1825,10 +1734,6 @@ export namespace Prisma {
      */
     select?: UserSelect | null;
     /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: UserInclude | null;
-    /**
      * The data needed to create a User.
      */
     data: XOR<UserCreateInput, UserUncheckedCreateInput>;
@@ -1853,10 +1758,6 @@ export namespace Prisma {
      * Select specific fields to fetch from the User
      */
     select?: UserSelect | null;
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: UserInclude | null;
     /**
      * The data needed to update a User.
      */
@@ -1890,10 +1791,6 @@ export namespace Prisma {
      */
     select?: UserSelect | null;
     /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: UserInclude | null;
-    /**
      * The filter to search for the User to update in case it exists.
      */
     where: UserWhereUniqueInput;
@@ -1916,10 +1813,6 @@ export namespace Prisma {
      */
     select?: UserSelect | null;
     /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: UserInclude | null;
-    /**
      * Filter which User to delete.
      */
     where: UserWhereUniqueInput;
@@ -1936,26 +1829,6 @@ export namespace Prisma {
   };
 
   /**
-   * User.posts
-   */
-  export type User$postsArgs = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect | null;
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: PostInclude | null;
-    where?: PostWhereInput;
-    orderBy?: Enumerable<PostOrderByWithRelationInput>;
-    cursor?: PostWhereUniqueInput;
-    take?: number;
-    skip?: number;
-    distinct?: Enumerable<PostScalarFieldEnum>;
-  };
-
-  /**
    * User without action
    */
   export type UserArgs = {
@@ -1963,1045 +1836,11 @@ export namespace Prisma {
      * Select specific fields to fetch from the User
      */
     select?: UserSelect | null;
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: UserInclude | null;
-  };
-
-  /**
-   * Model Post
-   */
-
-  export type AggregatePost = {
-    _count: PostCountAggregateOutputType | null;
-    _avg: PostAvgAggregateOutputType | null;
-    _sum: PostSumAggregateOutputType | null;
-    _min: PostMinAggregateOutputType | null;
-    _max: PostMaxAggregateOutputType | null;
-  };
-
-  export type PostAvgAggregateOutputType = {
-    id: number | null;
-    authorId: number | null;
-  };
-
-  export type PostSumAggregateOutputType = {
-    id: number | null;
-    authorId: number | null;
-  };
-
-  export type PostMinAggregateOutputType = {
-    id: number | null;
-    title: string | null;
-    content: string | null;
-    published: boolean | null;
-    authorId: number | null;
-  };
-
-  export type PostMaxAggregateOutputType = {
-    id: number | null;
-    title: string | null;
-    content: string | null;
-    published: boolean | null;
-    authorId: number | null;
-  };
-
-  export type PostCountAggregateOutputType = {
-    id: number;
-    title: number;
-    content: number;
-    published: number;
-    authorId: number;
-    _all: number;
-  };
-
-  export type PostAvgAggregateInputType = {
-    id?: true;
-    authorId?: true;
-  };
-
-  export type PostSumAggregateInputType = {
-    id?: true;
-    authorId?: true;
-  };
-
-  export type PostMinAggregateInputType = {
-    id?: true;
-    title?: true;
-    content?: true;
-    published?: true;
-    authorId?: true;
-  };
-
-  export type PostMaxAggregateInputType = {
-    id?: true;
-    title?: true;
-    content?: true;
-    published?: true;
-    authorId?: true;
-  };
-
-  export type PostCountAggregateInputType = {
-    id?: true;
-    title?: true;
-    content?: true;
-    published?: true;
-    authorId?: true;
-    _all?: true;
-  };
-
-  export type PostAggregateArgs = {
-    /**
-     * Filter which Post to aggregate.
-     */
-    where?: PostWhereInput;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
-     * Determine the order of Posts to fetch.
-     */
-    orderBy?: Enumerable<PostOrderByWithRelationInput>;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
-     * Sets the start position
-     */
-    cursor?: PostWhereUniqueInput;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
-     * Take `±n` Posts from the position of the cursor.
-     */
-    take?: number;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
-     * Skip the first `n` Posts.
-     */
-    skip?: number;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
-     * Count returned Posts
-     **/
-    _count?: true | PostCountAggregateInputType;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
-     * Select which fields to average
-     **/
-    _avg?: PostAvgAggregateInputType;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
-     * Select which fields to sum
-     **/
-    _sum?: PostSumAggregateInputType;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
-     * Select which fields to find the minimum value
-     **/
-    _min?: PostMinAggregateInputType;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
-     * Select which fields to find the maximum value
-     **/
-    _max?: PostMaxAggregateInputType;
-  };
-
-  export type GetPostAggregateType<T extends PostAggregateArgs> = {
-    [P in keyof T & keyof AggregatePost]: P extends "_count" | "count"
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregatePost[P]>
-      : GetScalarType<T[P], AggregatePost[P]>;
-  };
-
-  export type PostGroupByArgs = {
-    where?: PostWhereInput;
-    orderBy?: Enumerable<PostOrderByWithAggregationInput>;
-    by: PostScalarFieldEnum[];
-    having?: PostScalarWhereWithAggregatesInput;
-    take?: number;
-    skip?: number;
-    _count?: PostCountAggregateInputType | true;
-    _avg?: PostAvgAggregateInputType;
-    _sum?: PostSumAggregateInputType;
-    _min?: PostMinAggregateInputType;
-    _max?: PostMaxAggregateInputType;
-  };
-
-  export type PostGroupByOutputType = {
-    id: number;
-    title: string;
-    content: string | null;
-    published: boolean;
-    authorId: number;
-    _count: PostCountAggregateOutputType | null;
-    _avg: PostAvgAggregateOutputType | null;
-    _sum: PostSumAggregateOutputType | null;
-    _min: PostMinAggregateOutputType | null;
-    _max: PostMaxAggregateOutputType | null;
-  };
-
-  type GetPostGroupByPayload<T extends PostGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickArray<PostGroupByOutputType, T["by"]> & {
-        [P in keyof T & keyof PostGroupByOutputType]: P extends "_count"
-          ? T[P] extends boolean
-            ? number
-            : GetScalarType<T[P], PostGroupByOutputType[P]>
-          : GetScalarType<T[P], PostGroupByOutputType[P]>;
-      }
-    >
-  >;
-
-  export type PostSelect = {
-    id?: boolean;
-    title?: boolean;
-    content?: boolean;
-    published?: boolean;
-    authorId?: boolean;
-    author?: boolean | UserArgs;
-  };
-
-  export type PostInclude = {
-    author?: boolean | UserArgs;
-  };
-
-  export type PostGetPayload<S extends boolean | null | undefined | PostArgs> =
-    S extends {
-      select: any;
-      include: any;
-    }
-      ? "Please either choose `select` or `include`"
-      : S extends true
-      ? Post
-      : S extends undefined
-      ? never
-      : S extends { include: any } & (PostArgs | PostFindManyArgs)
-      ? Post & {
-          [P in TruthyKeys<S["include"]>]: P extends "author"
-            ? UserGetPayload<S["include"][P]>
-            : never;
-        }
-      : S extends { select: any } & (PostArgs | PostFindManyArgs)
-      ? {
-          [P in TruthyKeys<S["select"]>]: P extends "author"
-            ? UserGetPayload<S["select"][P]>
-            : P extends keyof Post
-            ? Post[P]
-            : never;
-        }
-      : Post;
-
-  type PostCountArgs = Omit<PostFindManyArgs, "select" | "include"> & {
-    select?: PostCountAggregateInputType | true;
-  };
-
-  export interface PostDelegate<
-    GlobalRejectSettings extends
-      | Prisma.RejectOnNotFound
-      | Prisma.RejectPerOperation
-      | false
-      | undefined
-  > {
-    /**
-     * Find zero or one Post that matches the filter.
-     * @param {PostFindUniqueArgs} args - Arguments to find a Post
-     * @example
-     * // Get one Post
-     * const post = await prisma.post.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     **/
-    findUnique<
-      T extends PostFindUniqueArgs,
-      LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound
-        ? T["rejectOnNotFound"]
-        : undefined
-    >(
-      args: SelectSubset<T, PostFindUniqueArgs>
-    ): HasReject<
-      GlobalRejectSettings,
-      LocalRejectSettings,
-      "findUnique",
-      "Post"
-    > extends True
-      ? Prisma__PostClient<PostGetPayload<T>>
-      : Prisma__PostClient<PostGetPayload<T> | null, null>;
-
-    /**
-     * Find one Post that matches the filter or throw an error  with `error.code='P2025'`
-     *     if no matches were found.
-     * @param {PostFindUniqueOrThrowArgs} args - Arguments to find a Post
-     * @example
-     * // Get one Post
-     * const post = await prisma.post.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     **/
-    findUniqueOrThrow<T extends PostFindUniqueOrThrowArgs>(
-      args?: SelectSubset<T, PostFindUniqueOrThrowArgs>
-    ): Prisma__PostClient<PostGetPayload<T>>;
-
-    /**
-     * Find the first Post that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PostFindFirstArgs} args - Arguments to find a Post
-     * @example
-     * // Get one Post
-     * const post = await prisma.post.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     **/
-    findFirst<
-      T extends PostFindFirstArgs,
-      LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound
-        ? T["rejectOnNotFound"]
-        : undefined
-    >(
-      args?: SelectSubset<T, PostFindFirstArgs>
-    ): HasReject<
-      GlobalRejectSettings,
-      LocalRejectSettings,
-      "findFirst",
-      "Post"
-    > extends True
-      ? Prisma__PostClient<PostGetPayload<T>>
-      : Prisma__PostClient<PostGetPayload<T> | null, null>;
-
-    /**
-     * Find the first Post that matches the filter or
-     * throw `NotFoundError` if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PostFindFirstOrThrowArgs} args - Arguments to find a Post
-     * @example
-     * // Get one Post
-     * const post = await prisma.post.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     **/
-    findFirstOrThrow<T extends PostFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, PostFindFirstOrThrowArgs>
-    ): Prisma__PostClient<PostGetPayload<T>>;
-
-    /**
-     * Find zero or more Posts that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PostFindManyArgs=} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Posts
-     * const posts = await prisma.post.findMany()
-     *
-     * // Get first 10 Posts
-     * const posts = await prisma.post.findMany({ take: 10 })
-     *
-     * // Only select the `id`
-     * const postWithIdOnly = await prisma.post.findMany({ select: { id: true } })
-     *
-     **/
-    findMany<T extends PostFindManyArgs>(
-      args?: SelectSubset<T, PostFindManyArgs>
-    ): Prisma.PrismaPromise<Array<PostGetPayload<T>>>;
-
-    /**
-     * Create a Post.
-     * @param {PostCreateArgs} args - Arguments to create a Post.
-     * @example
-     * // Create one Post
-     * const Post = await prisma.post.create({
-     *   data: {
-     *     // ... data to create a Post
-     *   }
-     * })
-     *
-     **/
-    create<T extends PostCreateArgs>(
-      args: SelectSubset<T, PostCreateArgs>
-    ): Prisma__PostClient<PostGetPayload<T>>;
-
-    /**
-     * Create many Posts.
-     *     @param {PostCreateManyArgs} args - Arguments to create many Posts.
-     *     @example
-     *     // Create many Posts
-     *     const post = await prisma.post.createMany({
-     *       data: {
-     *         // ... provide data here
-     *       }
-     *     })
-     *
-     **/
-    createMany<T extends PostCreateManyArgs>(
-      args?: SelectSubset<T, PostCreateManyArgs>
-    ): Prisma.PrismaPromise<BatchPayload>;
-
-    /**
-     * Delete a Post.
-     * @param {PostDeleteArgs} args - Arguments to delete one Post.
-     * @example
-     * // Delete one Post
-     * const Post = await prisma.post.delete({
-     *   where: {
-     *     // ... filter to delete one Post
-     *   }
-     * })
-     *
-     **/
-    delete<T extends PostDeleteArgs>(
-      args: SelectSubset<T, PostDeleteArgs>
-    ): Prisma__PostClient<PostGetPayload<T>>;
-
-    /**
-     * Update one Post.
-     * @param {PostUpdateArgs} args - Arguments to update one Post.
-     * @example
-     * // Update one Post
-     * const post = await prisma.post.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     *
-     **/
-    update<T extends PostUpdateArgs>(
-      args: SelectSubset<T, PostUpdateArgs>
-    ): Prisma__PostClient<PostGetPayload<T>>;
-
-    /**
-     * Delete zero or more Posts.
-     * @param {PostDeleteManyArgs} args - Arguments to filter Posts to delete.
-     * @example
-     * // Delete a few Posts
-     * const { count } = await prisma.post.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     *
-     **/
-    deleteMany<T extends PostDeleteManyArgs>(
-      args?: SelectSubset<T, PostDeleteManyArgs>
-    ): Prisma.PrismaPromise<BatchPayload>;
-
-    /**
-     * Update zero or more Posts.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PostUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Posts
-     * const post = await prisma.post.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     *
-     **/
-    updateMany<T extends PostUpdateManyArgs>(
-      args: SelectSubset<T, PostUpdateManyArgs>
-    ): Prisma.PrismaPromise<BatchPayload>;
-
-    /**
-     * Create or update one Post.
-     * @param {PostUpsertArgs} args - Arguments to update or create a Post.
-     * @example
-     * // Update or create a Post
-     * const post = await prisma.post.upsert({
-     *   create: {
-     *     // ... data to create a Post
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Post we want to update
-     *   }
-     * })
-     **/
-    upsert<T extends PostUpsertArgs>(
-      args: SelectSubset<T, PostUpsertArgs>
-    ): Prisma__PostClient<PostGetPayload<T>>;
-
-    /**
-     * Count the number of Posts.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PostCountArgs} args - Arguments to filter Posts to count.
-     * @example
-     * // Count the number of Posts
-     * const count = await prisma.post.count({
-     *   where: {
-     *     // ... the filter for the Posts we want to count
-     *   }
-     * })
-     **/
-    count<T extends PostCountArgs>(
-      args?: Subset<T, PostCountArgs>
-    ): Prisma.PrismaPromise<
-      T extends _Record<"select", any>
-        ? T["select"] extends true
-          ? number
-          : GetScalarType<T["select"], PostCountAggregateOutputType>
-        : number
-    >;
-
-    /**
-     * Allows you to perform aggregations operations on a Post.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PostAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-     **/
-    aggregate<T extends PostAggregateArgs>(
-      args: Subset<T, PostAggregateArgs>
-    ): Prisma.PrismaPromise<GetPostAggregateType<T>>;
-
-    /**
-     * Group by Post.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {PostGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     *
-     **/
-    groupBy<
-      T extends PostGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<"skip", Keys<T>>,
-        Extends<"take", Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: PostGroupByArgs["orderBy"] }
-        : { orderBy?: PostGroupByArgs["orderBy"] },
-      OrderFields extends ExcludeUnderscoreKeys<
-        Keys<MaybeTupleToUnion<T["orderBy"]>>
-      >,
-      ByFields extends TupleToUnion<T["by"]>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T["having"]>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T["by"] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-        ? `Error: "by" must not be empty.`
-        : HavingValid extends False
-        ? {
-            [P in HavingFields]: P extends ByFields
-              ? never
-              : P extends string
-              ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-              : [
-                  Error,
-                  "Field ",
-                  P,
-                  ` in "having" needs to be provided in "by"`
-                ];
-          }[HavingFields]
-        : "take" extends Keys<T>
-        ? "orderBy" extends Keys<T>
-          ? ByValid extends True
-            ? {}
-            : {
-                [P in OrderFields]: P extends ByFields
-                  ? never
-                  : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
-              }[OrderFields]
-          : 'Error: If you provide "take", you also need to provide "orderBy"'
-        : "skip" extends Keys<T>
-        ? "orderBy" extends Keys<T>
-          ? ByValid extends True
-            ? {}
-            : {
-                [P in OrderFields]: P extends ByFields
-                  ? never
-                  : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
-              }[OrderFields]
-          : 'Error: If you provide "skip", you also need to provide "orderBy"'
-        : ByValid extends True
-        ? {}
-        : {
-            [P in OrderFields]: P extends ByFields
-              ? never
-              : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
-          }[OrderFields]
-    >(
-      args: SubsetIntersection<T, PostGroupByArgs, OrderByArg> & InputErrors
-    ): {} extends InputErrors
-      ? GetPostGroupByPayload<T>
-      : Prisma.PrismaPromise<InputErrors>;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Post.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export class Prisma__PostClient<T, Null = never>
-    implements Prisma.PrismaPromise<T>
-  {
-    private readonly _dmmf;
-    private readonly _queryType;
-    private readonly _rootField;
-    private readonly _clientMethod;
-    private readonly _args;
-    private readonly _dataPath;
-    private readonly _errorFormat;
-    private readonly _measurePerformance?;
-    private _isList;
-    private _callsite;
-    private _requestPromise?;
-    readonly [Symbol.toStringTag]: "PrismaPromise";
-    constructor(
-      _dmmf: runtime.DMMFClass,
-      _queryType: "query" | "mutation",
-      _rootField: string,
-      _clientMethod: string,
-      _args: any,
-      _dataPath: string[],
-      _errorFormat: ErrorFormat,
-      _measurePerformance?: boolean | undefined,
-      _isList?: boolean
-    );
-
-    author<T extends UserArgs = {}>(
-      args?: Subset<T, UserArgs>
-    ): Prisma__UserClient<UserGetPayload<T> | Null>;
-
-    private get _document();
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(
-      onfulfilled?:
-        | ((value: T) => TResult1 | PromiseLike<TResult1>)
-        | undefined
-        | null,
-      onrejected?:
-        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-        | undefined
-        | null
-    ): Promise<TResult1 | TResult2>;
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(
-      onrejected?:
-        | ((reason: any) => TResult | PromiseLike<TResult>)
-        | undefined
-        | null
-    ): Promise<T | TResult>;
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
-  }
-
-  // Custom InputTypes
-
-  /**
-   * Post base type for findUnique actions
-   */
-  export type PostFindUniqueArgsBase = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect | null;
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: PostInclude | null;
-    /**
-     * Filter, which Post to fetch.
-     */
-    where: PostWhereUniqueInput;
-  };
-
-  /**
-   * Post findUnique
-   */
-  export interface PostFindUniqueArgs extends PostFindUniqueArgsBase {
-    /**
-     * Throw an Error if query returns no results
-     * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
-     */
-    rejectOnNotFound?: RejectOnNotFound;
-  }
-
-  /**
-   * Post findUniqueOrThrow
-   */
-  export type PostFindUniqueOrThrowArgs = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect | null;
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: PostInclude | null;
-    /**
-     * Filter, which Post to fetch.
-     */
-    where: PostWhereUniqueInput;
-  };
-
-  /**
-   * Post base type for findFirst actions
-   */
-  export type PostFindFirstArgsBase = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect | null;
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: PostInclude | null;
-    /**
-     * Filter, which Post to fetch.
-     */
-    where?: PostWhereInput;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
-     * Determine the order of Posts to fetch.
-     */
-    orderBy?: Enumerable<PostOrderByWithRelationInput>;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
-     * Sets the position for searching for Posts.
-     */
-    cursor?: PostWhereUniqueInput;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
-     * Take `±n` Posts from the position of the cursor.
-     */
-    take?: number;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
-     * Skip the first `n` Posts.
-     */
-    skip?: number;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
-     * Filter by unique combinations of Posts.
-     */
-    distinct?: Enumerable<PostScalarFieldEnum>;
-  };
-
-  /**
-   * Post findFirst
-   */
-  export interface PostFindFirstArgs extends PostFindFirstArgsBase {
-    /**
-     * Throw an Error if query returns no results
-     * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
-     */
-    rejectOnNotFound?: RejectOnNotFound;
-  }
-
-  /**
-   * Post findFirstOrThrow
-   */
-  export type PostFindFirstOrThrowArgs = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect | null;
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: PostInclude | null;
-    /**
-     * Filter, which Post to fetch.
-     */
-    where?: PostWhereInput;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
-     * Determine the order of Posts to fetch.
-     */
-    orderBy?: Enumerable<PostOrderByWithRelationInput>;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
-     * Sets the position for searching for Posts.
-     */
-    cursor?: PostWhereUniqueInput;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
-     * Take `±n` Posts from the position of the cursor.
-     */
-    take?: number;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
-     * Skip the first `n` Posts.
-     */
-    skip?: number;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
-     * Filter by unique combinations of Posts.
-     */
-    distinct?: Enumerable<PostScalarFieldEnum>;
-  };
-
-  /**
-   * Post findMany
-   */
-  export type PostFindManyArgs = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect | null;
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: PostInclude | null;
-    /**
-     * Filter, which Posts to fetch.
-     */
-    where?: PostWhereInput;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
-     * Determine the order of Posts to fetch.
-     */
-    orderBy?: Enumerable<PostOrderByWithRelationInput>;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
-     * Sets the position for listing Posts.
-     */
-    cursor?: PostWhereUniqueInput;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
-     * Take `±n` Posts from the position of the cursor.
-     */
-    take?: number;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
-     * Skip the first `n` Posts.
-     */
-    skip?: number;
-    distinct?: Enumerable<PostScalarFieldEnum>;
-  };
-
-  /**
-   * Post create
-   */
-  export type PostCreateArgs = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect | null;
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: PostInclude | null;
-    /**
-     * The data needed to create a Post.
-     */
-    data: XOR<PostCreateInput, PostUncheckedCreateInput>;
-  };
-
-  /**
-   * Post createMany
-   */
-  export type PostCreateManyArgs = {
-    /**
-     * The data used to create many Posts.
-     */
-    data: Enumerable<PostCreateManyInput>;
-    skipDuplicates?: boolean;
-  };
-
-  /**
-   * Post update
-   */
-  export type PostUpdateArgs = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect | null;
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: PostInclude | null;
-    /**
-     * The data needed to update a Post.
-     */
-    data: XOR<PostUpdateInput, PostUncheckedUpdateInput>;
-    /**
-     * Choose, which Post to update.
-     */
-    where: PostWhereUniqueInput;
-  };
-
-  /**
-   * Post updateMany
-   */
-  export type PostUpdateManyArgs = {
-    /**
-     * The data used to update Posts.
-     */
-    data: XOR<PostUpdateManyMutationInput, PostUncheckedUpdateManyInput>;
-    /**
-     * Filter which Posts to update
-     */
-    where?: PostWhereInput;
-  };
-
-  /**
-   * Post upsert
-   */
-  export type PostUpsertArgs = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect | null;
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: PostInclude | null;
-    /**
-     * The filter to search for the Post to update in case it exists.
-     */
-    where: PostWhereUniqueInput;
-    /**
-     * In case the Post found by the `where` argument doesn't exist, create a new Post with this data.
-     */
-    create: XOR<PostCreateInput, PostUncheckedCreateInput>;
-    /**
-     * In case the Post was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<PostUpdateInput, PostUncheckedUpdateInput>;
-  };
-
-  /**
-   * Post delete
-   */
-  export type PostDeleteArgs = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect | null;
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: PostInclude | null;
-    /**
-     * Filter which Post to delete.
-     */
-    where: PostWhereUniqueInput;
-  };
-
-  /**
-   * Post deleteMany
-   */
-  export type PostDeleteManyArgs = {
-    /**
-     * Filter which Posts to delete
-     */
-    where?: PostWhereInput;
-  };
-
-  /**
-   * Post without action
-   */
-  export type PostArgs = {
-    /**
-     * Select specific fields to fetch from the Post
-     */
-    select?: PostSelect | null;
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: PostInclude | null;
   };
 
   /**
    * Enums
    */
-
-  // Based on
-  // https://github.com/microsoft/TypeScript/issues/3192#issuecomment-261720275
-
-  export const PostScalarFieldEnum: {
-    id: "id";
-    title: "title";
-    content: "content";
-    published: "published";
-    authorId: "authorId";
-  };
-
-  export type PostScalarFieldEnum =
-    (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum];
 
   export const SortOrder: {
     asc: "asc";
@@ -3022,8 +1861,10 @@ export namespace Prisma {
 
   export const UserScalarFieldEnum: {
     id: "id";
-    email: "email";
+    account_id: "account_id";
     name: "name";
+    password: "password";
+    role: "role";
   };
 
   export type UserScalarFieldEnum =
@@ -3038,27 +1879,31 @@ export namespace Prisma {
     OR?: Enumerable<UserWhereInput>;
     NOT?: Enumerable<UserWhereInput>;
     id?: IntFilter | number;
-    email?: StringFilter | string;
-    name?: StringNullableFilter | string | null;
-    posts?: PostListRelationFilter;
+    account_id?: StringFilter | string;
+    name?: StringFilter | string;
+    password?: StringFilter | string;
+    role?: StringFilter | string;
   };
 
   export type UserOrderByWithRelationInput = {
     id?: SortOrder;
-    email?: SortOrder;
+    account_id?: SortOrder;
     name?: SortOrder;
-    posts?: PostOrderByRelationAggregateInput;
+    password?: SortOrder;
+    role?: SortOrder;
   };
 
   export type UserWhereUniqueInput = {
     id?: number;
-    email?: string;
+    account_id?: string;
   };
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder;
-    email?: SortOrder;
+    account_id?: SortOrder;
     name?: SortOrder;
+    password?: SortOrder;
+    role?: SortOrder;
     _count?: UserCountOrderByAggregateInput;
     _avg?: UserAvgOrderByAggregateInput;
     _max?: UserMaxOrderByAggregateInput;
@@ -3071,152 +1916,63 @@ export namespace Prisma {
     OR?: Enumerable<UserScalarWhereWithAggregatesInput>;
     NOT?: Enumerable<UserScalarWhereWithAggregatesInput>;
     id?: IntWithAggregatesFilter | number;
-    email?: StringWithAggregatesFilter | string;
-    name?: StringNullableWithAggregatesFilter | string | null;
-  };
-
-  export type PostWhereInput = {
-    AND?: Enumerable<PostWhereInput>;
-    OR?: Enumerable<PostWhereInput>;
-    NOT?: Enumerable<PostWhereInput>;
-    id?: IntFilter | number;
-    title?: StringFilter | string;
-    content?: StringNullableFilter | string | null;
-    published?: BoolFilter | boolean;
-    authorId?: IntFilter | number;
-    author?: XOR<UserRelationFilter, UserWhereInput>;
-  };
-
-  export type PostOrderByWithRelationInput = {
-    id?: SortOrder;
-    title?: SortOrder;
-    content?: SortOrder;
-    published?: SortOrder;
-    authorId?: SortOrder;
-    author?: UserOrderByWithRelationInput;
-  };
-
-  export type PostWhereUniqueInput = {
-    id?: number;
-  };
-
-  export type PostOrderByWithAggregationInput = {
-    id?: SortOrder;
-    title?: SortOrder;
-    content?: SortOrder;
-    published?: SortOrder;
-    authorId?: SortOrder;
-    _count?: PostCountOrderByAggregateInput;
-    _avg?: PostAvgOrderByAggregateInput;
-    _max?: PostMaxOrderByAggregateInput;
-    _min?: PostMinOrderByAggregateInput;
-    _sum?: PostSumOrderByAggregateInput;
-  };
-
-  export type PostScalarWhereWithAggregatesInput = {
-    AND?: Enumerable<PostScalarWhereWithAggregatesInput>;
-    OR?: Enumerable<PostScalarWhereWithAggregatesInput>;
-    NOT?: Enumerable<PostScalarWhereWithAggregatesInput>;
-    id?: IntWithAggregatesFilter | number;
-    title?: StringWithAggregatesFilter | string;
-    content?: StringNullableWithAggregatesFilter | string | null;
-    published?: BoolWithAggregatesFilter | boolean;
-    authorId?: IntWithAggregatesFilter | number;
+    account_id?: StringWithAggregatesFilter | string;
+    name?: StringWithAggregatesFilter | string;
+    password?: StringWithAggregatesFilter | string;
+    role?: StringWithAggregatesFilter | string;
   };
 
   export type UserCreateInput = {
-    email: string;
-    name?: string | null;
-    posts?: PostCreateNestedManyWithoutAuthorInput;
+    account_id: string;
+    name: string;
+    password: string;
+    role: string;
   };
 
   export type UserUncheckedCreateInput = {
     id?: number;
-    email: string;
-    name?: string | null;
-    posts?: PostUncheckedCreateNestedManyWithoutAuthorInput;
+    account_id: string;
+    name: string;
+    password: string;
+    role: string;
   };
 
   export type UserUpdateInput = {
-    email?: StringFieldUpdateOperationsInput | string;
-    name?: NullableStringFieldUpdateOperationsInput | string | null;
-    posts?: PostUpdateManyWithoutAuthorNestedInput;
+    account_id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    password?: StringFieldUpdateOperationsInput | string;
+    role?: StringFieldUpdateOperationsInput | string;
   };
 
   export type UserUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number;
-    email?: StringFieldUpdateOperationsInput | string;
-    name?: NullableStringFieldUpdateOperationsInput | string | null;
-    posts?: PostUncheckedUpdateManyWithoutAuthorNestedInput;
+    account_id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    password?: StringFieldUpdateOperationsInput | string;
+    role?: StringFieldUpdateOperationsInput | string;
   };
 
   export type UserCreateManyInput = {
     id?: number;
-    email: string;
-    name?: string | null;
+    account_id: string;
+    name: string;
+    password: string;
+    role: string;
   };
 
   export type UserUpdateManyMutationInput = {
-    email?: StringFieldUpdateOperationsInput | string;
-    name?: NullableStringFieldUpdateOperationsInput | string | null;
+    account_id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    password?: StringFieldUpdateOperationsInput | string;
+    role?: StringFieldUpdateOperationsInput | string;
   };
 
   export type UserUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number;
-    email?: StringFieldUpdateOperationsInput | string;
-    name?: NullableStringFieldUpdateOperationsInput | string | null;
-  };
-
-  export type PostCreateInput = {
-    title: string;
-    content?: string | null;
-    published?: boolean;
-    author: UserCreateNestedOneWithoutPostsInput;
-  };
-
-  export type PostUncheckedCreateInput = {
-    id?: number;
-    title: string;
-    content?: string | null;
-    published?: boolean;
-    authorId: number;
-  };
-
-  export type PostUpdateInput = {
-    title?: StringFieldUpdateOperationsInput | string;
-    content?: NullableStringFieldUpdateOperationsInput | string | null;
-    published?: BoolFieldUpdateOperationsInput | boolean;
-    author?: UserUpdateOneRequiredWithoutPostsNestedInput;
-  };
-
-  export type PostUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number;
-    title?: StringFieldUpdateOperationsInput | string;
-    content?: NullableStringFieldUpdateOperationsInput | string | null;
-    published?: BoolFieldUpdateOperationsInput | boolean;
-    authorId?: IntFieldUpdateOperationsInput | number;
-  };
-
-  export type PostCreateManyInput = {
-    id?: number;
-    title: string;
-    content?: string | null;
-    published?: boolean;
-    authorId: number;
-  };
-
-  export type PostUpdateManyMutationInput = {
-    title?: StringFieldUpdateOperationsInput | string;
-    content?: NullableStringFieldUpdateOperationsInput | string | null;
-    published?: BoolFieldUpdateOperationsInput | boolean;
-  };
-
-  export type PostUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number;
-    title?: StringFieldUpdateOperationsInput | string;
-    content?: NullableStringFieldUpdateOperationsInput | string | null;
-    published?: BoolFieldUpdateOperationsInput | boolean;
-    authorId?: IntFieldUpdateOperationsInput | number;
+    account_id?: StringFieldUpdateOperationsInput | string;
+    name?: StringFieldUpdateOperationsInput | string;
+    password?: StringFieldUpdateOperationsInput | string;
+    role?: StringFieldUpdateOperationsInput | string;
   };
 
   export type IntFilter = {
@@ -3244,34 +2000,12 @@ export namespace Prisma {
     not?: NestedStringFilter | string;
   };
 
-  export type StringNullableFilter = {
-    equals?: string | null;
-    in?: Enumerable<string> | string | null;
-    notIn?: Enumerable<string> | string | null;
-    lt?: string;
-    lte?: string;
-    gt?: string;
-    gte?: string;
-    contains?: string;
-    startsWith?: string;
-    endsWith?: string;
-    not?: NestedStringNullableFilter | string | null;
-  };
-
-  export type PostListRelationFilter = {
-    every?: PostWhereInput;
-    some?: PostWhereInput;
-    none?: PostWhereInput;
-  };
-
-  export type PostOrderByRelationAggregateInput = {
-    _count?: SortOrder;
-  };
-
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder;
-    email?: SortOrder;
+    account_id?: SortOrder;
     name?: SortOrder;
+    password?: SortOrder;
+    role?: SortOrder;
   };
 
   export type UserAvgOrderByAggregateInput = {
@@ -3280,14 +2014,18 @@ export namespace Prisma {
 
   export type UserMaxOrderByAggregateInput = {
     id?: SortOrder;
-    email?: SortOrder;
+    account_id?: SortOrder;
     name?: SortOrder;
+    password?: SortOrder;
+    role?: SortOrder;
   };
 
   export type UserMinOrderByAggregateInput = {
     id?: SortOrder;
-    email?: SortOrder;
+    account_id?: SortOrder;
     name?: SortOrder;
+    password?: SortOrder;
+    role?: SortOrder;
   };
 
   export type UserSumOrderByAggregateInput = {
@@ -3327,118 +2065,8 @@ export namespace Prisma {
     _max?: NestedStringFilter;
   };
 
-  export type StringNullableWithAggregatesFilter = {
-    equals?: string | null;
-    in?: Enumerable<string> | string | null;
-    notIn?: Enumerable<string> | string | null;
-    lt?: string;
-    lte?: string;
-    gt?: string;
-    gte?: string;
-    contains?: string;
-    startsWith?: string;
-    endsWith?: string;
-    not?: NestedStringNullableWithAggregatesFilter | string | null;
-    _count?: NestedIntNullableFilter;
-    _min?: NestedStringNullableFilter;
-    _max?: NestedStringNullableFilter;
-  };
-
-  export type BoolFilter = {
-    equals?: boolean;
-    not?: NestedBoolFilter | boolean;
-  };
-
-  export type UserRelationFilter = {
-    is?: UserWhereInput;
-    isNot?: UserWhereInput;
-  };
-
-  export type PostCountOrderByAggregateInput = {
-    id?: SortOrder;
-    title?: SortOrder;
-    content?: SortOrder;
-    published?: SortOrder;
-    authorId?: SortOrder;
-  };
-
-  export type PostAvgOrderByAggregateInput = {
-    id?: SortOrder;
-    authorId?: SortOrder;
-  };
-
-  export type PostMaxOrderByAggregateInput = {
-    id?: SortOrder;
-    title?: SortOrder;
-    content?: SortOrder;
-    published?: SortOrder;
-    authorId?: SortOrder;
-  };
-
-  export type PostMinOrderByAggregateInput = {
-    id?: SortOrder;
-    title?: SortOrder;
-    content?: SortOrder;
-    published?: SortOrder;
-    authorId?: SortOrder;
-  };
-
-  export type PostSumOrderByAggregateInput = {
-    id?: SortOrder;
-    authorId?: SortOrder;
-  };
-
-  export type BoolWithAggregatesFilter = {
-    equals?: boolean;
-    not?: NestedBoolWithAggregatesFilter | boolean;
-    _count?: NestedIntFilter;
-    _min?: NestedBoolFilter;
-    _max?: NestedBoolFilter;
-  };
-
-  export type PostCreateNestedManyWithoutAuthorInput = {
-    create?: XOR<
-      Enumerable<PostCreateWithoutAuthorInput>,
-      Enumerable<PostUncheckedCreateWithoutAuthorInput>
-    >;
-    connectOrCreate?: Enumerable<PostCreateOrConnectWithoutAuthorInput>;
-    createMany?: PostCreateManyAuthorInputEnvelope;
-    connect?: Enumerable<PostWhereUniqueInput>;
-  };
-
-  export type PostUncheckedCreateNestedManyWithoutAuthorInput = {
-    create?: XOR<
-      Enumerable<PostCreateWithoutAuthorInput>,
-      Enumerable<PostUncheckedCreateWithoutAuthorInput>
-    >;
-    connectOrCreate?: Enumerable<PostCreateOrConnectWithoutAuthorInput>;
-    createMany?: PostCreateManyAuthorInputEnvelope;
-    connect?: Enumerable<PostWhereUniqueInput>;
-  };
-
   export type StringFieldUpdateOperationsInput = {
     set?: string;
-  };
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null;
-  };
-
-  export type PostUpdateManyWithoutAuthorNestedInput = {
-    create?: XOR<
-      Enumerable<PostCreateWithoutAuthorInput>,
-      Enumerable<PostUncheckedCreateWithoutAuthorInput>
-    >;
-    connectOrCreate?: Enumerable<PostCreateOrConnectWithoutAuthorInput>;
-    upsert?: Enumerable<PostUpsertWithWhereUniqueWithoutAuthorInput>;
-    createMany?: PostCreateManyAuthorInputEnvelope;
-    set?: Enumerable<PostWhereUniqueInput>;
-    disconnect?: Enumerable<PostWhereUniqueInput>;
-    delete?: Enumerable<PostWhereUniqueInput>;
-    connect?: Enumerable<PostWhereUniqueInput>;
-    update?: Enumerable<PostUpdateWithWhereUniqueWithoutAuthorInput>;
-    updateMany?: Enumerable<PostUpdateManyWithWhereWithoutAuthorInput>;
-    deleteMany?: Enumerable<PostScalarWhereInput>;
   };
 
   export type IntFieldUpdateOperationsInput = {
@@ -3447,50 +2075,6 @@ export namespace Prisma {
     decrement?: number;
     multiply?: number;
     divide?: number;
-  };
-
-  export type PostUncheckedUpdateManyWithoutAuthorNestedInput = {
-    create?: XOR<
-      Enumerable<PostCreateWithoutAuthorInput>,
-      Enumerable<PostUncheckedCreateWithoutAuthorInput>
-    >;
-    connectOrCreate?: Enumerable<PostCreateOrConnectWithoutAuthorInput>;
-    upsert?: Enumerable<PostUpsertWithWhereUniqueWithoutAuthorInput>;
-    createMany?: PostCreateManyAuthorInputEnvelope;
-    set?: Enumerable<PostWhereUniqueInput>;
-    disconnect?: Enumerable<PostWhereUniqueInput>;
-    delete?: Enumerable<PostWhereUniqueInput>;
-    connect?: Enumerable<PostWhereUniqueInput>;
-    update?: Enumerable<PostUpdateWithWhereUniqueWithoutAuthorInput>;
-    updateMany?: Enumerable<PostUpdateManyWithWhereWithoutAuthorInput>;
-    deleteMany?: Enumerable<PostScalarWhereInput>;
-  };
-
-  export type UserCreateNestedOneWithoutPostsInput = {
-    create?: XOR<
-      UserCreateWithoutPostsInput,
-      UserUncheckedCreateWithoutPostsInput
-    >;
-    connectOrCreate?: UserCreateOrConnectWithoutPostsInput;
-    connect?: UserWhereUniqueInput;
-  };
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean;
-  };
-
-  export type UserUpdateOneRequiredWithoutPostsNestedInput = {
-    create?: XOR<
-      UserCreateWithoutPostsInput,
-      UserUncheckedCreateWithoutPostsInput
-    >;
-    connectOrCreate?: UserCreateOrConnectWithoutPostsInput;
-    upsert?: UserUpsertWithoutPostsInput;
-    connect?: UserWhereUniqueInput;
-    update?: XOR<
-      UserUpdateWithoutPostsInput,
-      UserUncheckedUpdateWithoutPostsInput
-    >;
   };
 
   export type NestedIntFilter = {
@@ -3516,20 +2100,6 @@ export namespace Prisma {
     startsWith?: string;
     endsWith?: string;
     not?: NestedStringFilter | string;
-  };
-
-  export type NestedStringNullableFilter = {
-    equals?: string | null;
-    in?: Enumerable<string> | string | null;
-    notIn?: Enumerable<string> | string | null;
-    lt?: string;
-    lte?: string;
-    gt?: string;
-    gte?: string;
-    contains?: string;
-    startsWith?: string;
-    endsWith?: string;
-    not?: NestedStringNullableFilter | string | null;
   };
 
   export type NestedIntWithAggregatesFilter = {
@@ -3574,180 +2144,6 @@ export namespace Prisma {
     _count?: NestedIntFilter;
     _min?: NestedStringFilter;
     _max?: NestedStringFilter;
-  };
-
-  export type NestedStringNullableWithAggregatesFilter = {
-    equals?: string | null;
-    in?: Enumerable<string> | string | null;
-    notIn?: Enumerable<string> | string | null;
-    lt?: string;
-    lte?: string;
-    gt?: string;
-    gte?: string;
-    contains?: string;
-    startsWith?: string;
-    endsWith?: string;
-    not?: NestedStringNullableWithAggregatesFilter | string | null;
-    _count?: NestedIntNullableFilter;
-    _min?: NestedStringNullableFilter;
-    _max?: NestedStringNullableFilter;
-  };
-
-  export type NestedIntNullableFilter = {
-    equals?: number | null;
-    in?: Enumerable<number> | number | null;
-    notIn?: Enumerable<number> | number | null;
-    lt?: number;
-    lte?: number;
-    gt?: number;
-    gte?: number;
-    not?: NestedIntNullableFilter | number | null;
-  };
-
-  export type NestedBoolFilter = {
-    equals?: boolean;
-    not?: NestedBoolFilter | boolean;
-  };
-
-  export type NestedBoolWithAggregatesFilter = {
-    equals?: boolean;
-    not?: NestedBoolWithAggregatesFilter | boolean;
-    _count?: NestedIntFilter;
-    _min?: NestedBoolFilter;
-    _max?: NestedBoolFilter;
-  };
-
-  export type PostCreateWithoutAuthorInput = {
-    title: string;
-    content?: string | null;
-    published?: boolean;
-  };
-
-  export type PostUncheckedCreateWithoutAuthorInput = {
-    id?: number;
-    title: string;
-    content?: string | null;
-    published?: boolean;
-  };
-
-  export type PostCreateOrConnectWithoutAuthorInput = {
-    where: PostWhereUniqueInput;
-    create: XOR<
-      PostCreateWithoutAuthorInput,
-      PostUncheckedCreateWithoutAuthorInput
-    >;
-  };
-
-  export type PostCreateManyAuthorInputEnvelope = {
-    data: Enumerable<PostCreateManyAuthorInput>;
-    skipDuplicates?: boolean;
-  };
-
-  export type PostUpsertWithWhereUniqueWithoutAuthorInput = {
-    where: PostWhereUniqueInput;
-    update: XOR<
-      PostUpdateWithoutAuthorInput,
-      PostUncheckedUpdateWithoutAuthorInput
-    >;
-    create: XOR<
-      PostCreateWithoutAuthorInput,
-      PostUncheckedCreateWithoutAuthorInput
-    >;
-  };
-
-  export type PostUpdateWithWhereUniqueWithoutAuthorInput = {
-    where: PostWhereUniqueInput;
-    data: XOR<
-      PostUpdateWithoutAuthorInput,
-      PostUncheckedUpdateWithoutAuthorInput
-    >;
-  };
-
-  export type PostUpdateManyWithWhereWithoutAuthorInput = {
-    where: PostScalarWhereInput;
-    data: XOR<
-      PostUpdateManyMutationInput,
-      PostUncheckedUpdateManyWithoutPostsInput
-    >;
-  };
-
-  export type PostScalarWhereInput = {
-    AND?: Enumerable<PostScalarWhereInput>;
-    OR?: Enumerable<PostScalarWhereInput>;
-    NOT?: Enumerable<PostScalarWhereInput>;
-    id?: IntFilter | number;
-    title?: StringFilter | string;
-    content?: StringNullableFilter | string | null;
-    published?: BoolFilter | boolean;
-    authorId?: IntFilter | number;
-  };
-
-  export type UserCreateWithoutPostsInput = {
-    email: string;
-    name?: string | null;
-  };
-
-  export type UserUncheckedCreateWithoutPostsInput = {
-    id?: number;
-    email: string;
-    name?: string | null;
-  };
-
-  export type UserCreateOrConnectWithoutPostsInput = {
-    where: UserWhereUniqueInput;
-    create: XOR<
-      UserCreateWithoutPostsInput,
-      UserUncheckedCreateWithoutPostsInput
-    >;
-  };
-
-  export type UserUpsertWithoutPostsInput = {
-    update: XOR<
-      UserUpdateWithoutPostsInput,
-      UserUncheckedUpdateWithoutPostsInput
-    >;
-    create: XOR<
-      UserCreateWithoutPostsInput,
-      UserUncheckedCreateWithoutPostsInput
-    >;
-  };
-
-  export type UserUpdateWithoutPostsInput = {
-    email?: StringFieldUpdateOperationsInput | string;
-    name?: NullableStringFieldUpdateOperationsInput | string | null;
-  };
-
-  export type UserUncheckedUpdateWithoutPostsInput = {
-    id?: IntFieldUpdateOperationsInput | number;
-    email?: StringFieldUpdateOperationsInput | string;
-    name?: NullableStringFieldUpdateOperationsInput | string | null;
-  };
-
-  export type PostCreateManyAuthorInput = {
-    id?: number;
-    title: string;
-    content?: string | null;
-    published?: boolean;
-  };
-
-  export type PostUpdateWithoutAuthorInput = {
-    title?: StringFieldUpdateOperationsInput | string;
-    content?: NullableStringFieldUpdateOperationsInput | string | null;
-    published?: BoolFieldUpdateOperationsInput | boolean;
-  };
-
-  export type PostUncheckedUpdateWithoutAuthorInput = {
-    id?: IntFieldUpdateOperationsInput | number;
-    title?: StringFieldUpdateOperationsInput | string;
-    content?: NullableStringFieldUpdateOperationsInput | string | null;
-    published?: BoolFieldUpdateOperationsInput | boolean;
-  };
-
-  export type PostUncheckedUpdateManyWithoutPostsInput = {
-    id?: IntFieldUpdateOperationsInput | number;
-    title?: StringFieldUpdateOperationsInput | string;
-    content?: NullableStringFieldUpdateOperationsInput | string | null;
-    published?: BoolFieldUpdateOperationsInput | boolean;
   };
 
   /**

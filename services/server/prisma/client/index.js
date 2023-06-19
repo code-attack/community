@@ -27,12 +27,12 @@ const Prisma = {};
 exports.Prisma = Prisma;
 
 /**
- * Prisma Client JS version: 4.14.1
- * Query Engine version: d9a4c5988f480fa576d43970d5a23641aa77bc9c
+ * Prisma Client JS version: 4.15.0
+ * Query Engine version: 8fbc245156db7124f997f4cecdd8d1219e360944
  */
 Prisma.prismaVersion = {
-  client: "4.14.1",
-  engine: "d9a4c5988f480fa576d43970d5a23641aa77bc9c",
+  client: "4.15.0",
+  engine: "8fbc245156db7124f997f4cecdd8d1219e360944",
 };
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -71,14 +71,6 @@ const path = require("path");
  * Enums
  */
 
-exports.Prisma.PostScalarFieldEnum = {
-  id: "id",
-  title: "title",
-  content: "content",
-  published: "published",
-  authorId: "authorId",
-};
-
 exports.Prisma.SortOrder = {
   asc: "asc",
   desc: "desc",
@@ -93,13 +85,14 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.UserScalarFieldEnum = {
   id: "id",
-  email: "email",
+  account_id: "account_id",
   name: "name",
+  password: "password",
+  role: "role",
 };
 
 exports.Prisma.ModelName = {
   User: "User",
-  Post: "Post",
 };
 /**
  * Create the Client
@@ -113,13 +106,19 @@ const config = {
     },
     output: {
       value:
-        "/Users/josanghyeon/Desktop/go-with-the-flow/packages/t/prisma/client",
+        "/Users/josanghyeon/Desktop/github/community/services/server/prisma/client",
       fromEnvVar: null,
     },
     config: {
       engineType: "library",
     },
-    binaryTargets: [],
+    binaryTargets: [
+      {
+        fromEnvVar: null,
+        value: "darwin-arm64",
+        native: true,
+      },
+    ],
     previewFeatures: [],
     isCustomOutput: true,
   },
@@ -128,8 +127,8 @@ const config = {
     schemaEnvPath: "../../.env",
   },
   relativePath: "..",
-  clientVersion: "4.14.1",
-  engineVersion: "d9a4c5988f480fa576d43970d5a23641aa77bc9c",
+  clientVersion: "4.15.0",
+  engineVersion: "8fbc245156db7124f997f4cecdd8d1219e360944",
   datasourceNames: ["db"],
   activeProvider: "mysql",
   dataProxy: false,
@@ -139,24 +138,12 @@ const fs = require("fs");
 
 config.dirname = __dirname;
 if (!fs.existsSync(path.join(__dirname, "schema.prisma"))) {
-  warnOnce(
-    "bundled-warning-1",
-    "Your generated Prisma Client could not immediately find its `schema.prisma`, falling back to finding it via the current working directory."
-  );
-  warnOnce(
-    "bundled-warning-2",
-    "We are interested in learning about your project setup. We'd appreciate if you could take the time to share some information with us."
-  );
-  warnOnce(
-    "bundled-warning-3",
-    "Please help us by answering a few questions: https://pris.ly/bundler-investigation"
-  );
   config.dirname = path.join(process.cwd(), "prisma/client");
   config.isBundled = true;
 }
 
 config.runtimeDataModel = JSON.parse(
-  '{"models":{"User":{"dbName":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"Int","default":{"name":"autoincrement","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"email","kind":"scalar","isList":false,"isRequired":true,"isUnique":true,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","isGenerated":false,"isUpdatedAt":false},{"name":"name","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","isGenerated":false,"isUpdatedAt":false},{"name":"posts","kind":"object","isList":true,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"Post","relationName":"PostToUser","relationFromFields":[],"relationToFields":[],"isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false},"Post":{"dbName":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"Int","default":{"name":"autoincrement","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"title","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","isGenerated":false,"isUpdatedAt":false},{"name":"content","kind":"scalar","isList":false,"isRequired":false,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","isGenerated":false,"isUpdatedAt":false},{"name":"published","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":true,"type":"Boolean","default":false,"isGenerated":false,"isUpdatedAt":false},{"name":"author","kind":"object","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"User","relationName":"PostToUser","relationFromFields":["authorId"],"relationToFields":["id"],"isGenerated":false,"isUpdatedAt":false},{"name":"authorId","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":true,"hasDefaultValue":false,"type":"Int","isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false}},"enums":{},"types":{}}'
+  '{"models":{"User":{"dbName":null,"fields":[{"name":"id","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":true,"isReadOnly":false,"hasDefaultValue":true,"type":"Int","default":{"name":"autoincrement","args":[]},"isGenerated":false,"isUpdatedAt":false},{"name":"account_id","kind":"scalar","isList":false,"isRequired":true,"isUnique":true,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","isGenerated":false,"isUpdatedAt":false},{"name":"name","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","isGenerated":false,"isUpdatedAt":false},{"name":"password","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","isGenerated":false,"isUpdatedAt":false},{"name":"role","kind":"scalar","isList":false,"isRequired":true,"isUnique":false,"isId":false,"isReadOnly":false,"hasDefaultValue":false,"type":"String","isGenerated":false,"isUpdatedAt":false}],"primaryKey":null,"uniqueFields":[],"uniqueIndexes":[],"isGenerated":false}},"enums":{},"types":{}}'
 );
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel);
 
