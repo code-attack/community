@@ -8,7 +8,7 @@ import { URI } from "@package/constant";
 
 export const authRouter = Router();
 
-authRouter.post(URI.SIGN_IN, (req, res, next) => {
+authRouter.post(URI.SIGN_IN, async (req, res, next) => {
   try {
     validation(
       Joi.object<any, true, Auth.SignInReq>({
@@ -18,14 +18,15 @@ authRouter.post(URI.SIGN_IN, (req, res, next) => {
       req.body
     );
     const authService = Container.get(AuthService);
+    const { access_token, refresh_token } = await authService.signIn(req.body);
 
-    res.status(200).json({});
+    res.status(200).json({ access_token, refresh_token });
   } catch (e) {
     next(e);
   }
 });
 
-authRouter.post(URI.SIGN_UP, (req, res, next) => {
+authRouter.post(URI.SIGN_UP, async (req, res, next) => {
   try {
     validation(
       Joi.object<any, true, Auth.SignUpReq>({
@@ -40,10 +41,11 @@ authRouter.post(URI.SIGN_UP, (req, res, next) => {
     );
 
     const authService = Container.get(AuthService);
-    authService.signUp(req.body);
+    const { access_token, refresh_token } = await authService.signUp(req.body);
 
-    res.status(201).json({});
+    res.status(201).json({ access_token, refresh_token });
   } catch (e) {
+    console.log(e);
     next(e);
   }
 });

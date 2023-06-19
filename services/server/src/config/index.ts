@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+import { Algorithm } from "jsonwebtoken";
 
 const isEnvFound = dotenv.config();
 
@@ -7,13 +8,13 @@ if (isEnvFound.error) {
 }
 
 export const config = {
-  port: process.env.PORT,
+  port: process.env.PORT as string,
   jwt: {
-    algorithm: process.env.JWT_ALGORITHM,
-    secret: process.env.JWT_SECRET,
+    algorithm: process.env.JWT_ALGORITHM as Algorithm,
+    secret: process.env.JWT_SECRET as string,
     expire: {
-      access: process.env.JWT_EXPIRE_ACCESS,
-      refresh: process.env.JWT_EXPIRE_REFRESH,
+      access: +(process.env.JWT_EXPIRE_ACCESS || "0"),
+      refresh: +(process.env.JWT_EXPIRE_REFRESH || "0"),
     },
   },
 };
