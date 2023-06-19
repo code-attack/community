@@ -17,4 +17,13 @@ model User {
   name       String @db.VarChar(20)
   password   String @db.Char(60)
   role       String
+  posts      Post[]
+}
+
+model Post {
+  id      Int    @id @default(autoincrement())
+  title   String @db.VarChar(20)
+  content String
+  user    User   @relation(fields: [userId], references: [id])
+  userId  Int
 }
