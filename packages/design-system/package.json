@@ -1,6 +1,7 @@
 {
   "name": "@package/design-system",
   "packageManager": "yarn@3.5.0",
+  "main": "./src/index.ts",
   "devDependencies": {
     "@babel/core": "^7.22.5",
     "@babel/preset-env": "^7.22.5",
