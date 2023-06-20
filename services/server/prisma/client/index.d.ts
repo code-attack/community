@@ -24,6 +24,7 @@ export type User = {
   name: string;
   password: string;
   role: string;
+  profile_img: string | null;
 };
 
 /**
@@ -34,7 +35,24 @@ export type Post = {
   id: number;
   title: string;
   content: string;
+  thumbnail: string;
   userId: string;
+};
+
+/**
+ * Model WorkExprience
+ *
+ */
+export type WorkExprience = {
+  id: number;
+};
+
+/**
+ * Model Introduce
+ *
+ */
+export type Introduce = {
+  id: number;
 };
 
 /**
@@ -217,6 +235,26 @@ export class PrismaClient<
    * ```
    */
   get post(): Prisma.PostDelegate<GlobalReject>;
+
+  /**
+   * `prisma.workExprience`: Exposes CRUD operations for the **WorkExprience** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more WorkExpriences
+   * const workExpriences = await prisma.workExprience.findMany()
+   * ```
+   */
+  get workExprience(): Prisma.WorkExprienceDelegate<GlobalReject>;
+
+  /**
+   * `prisma.introduce`: Exposes CRUD operations for the **Introduce** model.
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more Introduces
+   * const introduces = await prisma.introduce.findMany()
+   * ```
+   */
+  get introduce(): Prisma.IntroduceDelegate<GlobalReject>;
 }
 
 export namespace Prisma {
@@ -727,6 +765,8 @@ export namespace Prisma {
   export const ModelName: {
     User: "User";
     Post: "Post";
+    WorkExprience: "WorkExprience";
+    Introduce: "Introduce";
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName];
@@ -974,6 +1014,7 @@ export namespace Prisma {
     name: string | null;
     password: string | null;
     role: string | null;
+    profile_img: string | null;
   };
 
   export type UserMaxAggregateOutputType = {
@@ -982,6 +1023,7 @@ export namespace Prisma {
     name: string | null;
     password: string | null;
     role: string | null;
+    profile_img: string | null;
   };
 
   export type UserCountAggregateOutputType = {
@@ -990,6 +1032,7 @@ export namespace Prisma {
     name: number;
     password: number;
     role: number;
+    profile_img: number;
     _all: number;
   };
 
@@ -1007,6 +1050,7 @@ export namespace Prisma {
     name?: true;
     password?: true;
     role?: true;
+    profile_img?: true;
   };
 
   export type UserMaxAggregateInputType = {
@@ -1015,6 +1059,7 @@ export namespace Prisma {
     name?: true;
     password?: true;
     role?: true;
+    profile_img?: true;
   };
 
   export type UserCountAggregateInputType = {
@@ -1023,6 +1068,7 @@ export namespace Prisma {
     name?: true;
     password?: true;
     role?: true;
+    profile_img?: true;
     _all?: true;
   };
 
@@ -1115,6 +1161,7 @@ export namespace Prisma {
     name: string;
     password: string;
     role: string;
+    profile_img: string | null;
     _count: UserCountAggregateOutputType | null;
     _avg: UserAvgAggregateOutputType | null;
     _sum: UserSumAggregateOutputType | null;
@@ -1140,6 +1187,7 @@ export namespace Prisma {
     name?: boolean;
     password?: boolean;
     role?: boolean;
+    profile_img?: boolean;
     posts?: boolean | User$postsArgs;
     _count?: boolean | UserCountOutputTypeArgs;
   };
@@ -2007,6 +2055,7 @@ export namespace Prisma {
     id: number | null;
     title: string | null;
     content: string | null;
+    thumbnail: string | null;
     userId: string | null;
   };
 
@@ -2014,6 +2063,7 @@ export namespace Prisma {
     id: number | null;
     title: string | null;
     content: string | null;
+    thumbnail: string | null;
     userId: string | null;
   };
 
@@ -2021,6 +2071,7 @@ export namespace Prisma {
     id: number;
     title: number;
     content: number;
+    thumbnail: number;
     userId: number;
     _all: number;
   };
@@ -2037,6 +2088,7 @@ export namespace Prisma {
     id?: true;
     title?: true;
     content?: true;
+    thumbnail?: true;
     userId?: true;
   };
 
@@ -2044,6 +2096,7 @@ export namespace Prisma {
     id?: true;
     title?: true;
     content?: true;
+    thumbnail?: true;
     userId?: true;
   };
 
@@ -2051,6 +2104,7 @@ export namespace Prisma {
     id?: true;
     title?: true;
     content?: true;
+    thumbnail?: true;
     userId?: true;
     _all?: true;
   };
@@ -2142,6 +2196,7 @@ export namespace Prisma {
     id: number;
     title: string;
     content: string;
+    thumbnail: string;
     userId: string;
     _count: PostCountAggregateOutputType | null;
     _avg: PostAvgAggregateOutputType | null;
@@ -2166,6 +2221,7 @@ export namespace Prisma {
     id?: boolean;
     title?: boolean;
     content?: boolean;
+    thumbnail?: boolean;
     userId?: boolean;
     user?: boolean | UserArgs;
   };
@@ -2985,13 +3041,1894 @@ export namespace Prisma {
   };
 
   /**
+   * Model WorkExprience
+   */
+
+  export type AggregateWorkExprience = {
+    _count: WorkExprienceCountAggregateOutputType | null;
+    _avg: WorkExprienceAvgAggregateOutputType | null;
+    _sum: WorkExprienceSumAggregateOutputType | null;
+    _min: WorkExprienceMinAggregateOutputType | null;
+    _max: WorkExprienceMaxAggregateOutputType | null;
+  };
+
+  export type WorkExprienceAvgAggregateOutputType = {
+    id: number | null;
+  };
+
+  export type WorkExprienceSumAggregateOutputType = {
+    id: number | null;
+  };
+
+  export type WorkExprienceMinAggregateOutputType = {
+    id: number | null;
+  };
+
+  export type WorkExprienceMaxAggregateOutputType = {
+    id: number | null;
+  };
+
+  export type WorkExprienceCountAggregateOutputType = {
+    id: number;
+    _all: number;
+  };
+
+  export type WorkExprienceAvgAggregateInputType = {
+    id?: true;
+  };
+
+  export type WorkExprienceSumAggregateInputType = {
+    id?: true;
+  };
+
+  export type WorkExprienceMinAggregateInputType = {
+    id?: true;
+  };
+
+  export type WorkExprienceMaxAggregateInputType = {
+    id?: true;
+  };
+
+  export type WorkExprienceCountAggregateInputType = {
+    id?: true;
+    _all?: true;
+  };
+
+  export type WorkExprienceAggregateArgs = {
+    /**
+     * Filter which WorkExprience to aggregate.
+     */
+    where?: WorkExprienceWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of WorkExpriences to fetch.
+     */
+    orderBy?: Enumerable<WorkExprienceOrderByWithRelationInput>;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the start position
+     */
+    cursor?: WorkExprienceWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` WorkExpriences from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` WorkExpriences.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Count returned WorkExpriences
+     **/
+    _count?: true | WorkExprienceCountAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to average
+     **/
+    _avg?: WorkExprienceAvgAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to sum
+     **/
+    _sum?: WorkExprienceSumAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the minimum value
+     **/
+    _min?: WorkExprienceMinAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the maximum value
+     **/
+    _max?: WorkExprienceMaxAggregateInputType;
+  };
+
+  export type GetWorkExprienceAggregateType<
+    T extends WorkExprienceAggregateArgs
+  > = {
+    [P in keyof T & keyof AggregateWorkExprience]: P extends "_count" | "count"
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateWorkExprience[P]>
+      : GetScalarType<T[P], AggregateWorkExprience[P]>;
+  };
+
+  export type WorkExprienceGroupByArgs = {
+    where?: WorkExprienceWhereInput;
+    orderBy?: Enumerable<WorkExprienceOrderByWithAggregationInput>;
+    by: WorkExprienceScalarFieldEnum[];
+    having?: WorkExprienceScalarWhereWithAggregatesInput;
+    take?: number;
+    skip?: number;
+    _count?: WorkExprienceCountAggregateInputType | true;
+    _avg?: WorkExprienceAvgAggregateInputType;
+    _sum?: WorkExprienceSumAggregateInputType;
+    _min?: WorkExprienceMinAggregateInputType;
+    _max?: WorkExprienceMaxAggregateInputType;
+  };
+
+  export type WorkExprienceGroupByOutputType = {
+    id: number;
+    _count: WorkExprienceCountAggregateOutputType | null;
+    _avg: WorkExprienceAvgAggregateOutputType | null;
+    _sum: WorkExprienceSumAggregateOutputType | null;
+    _min: WorkExprienceMinAggregateOutputType | null;
+    _max: WorkExprienceMaxAggregateOutputType | null;
+  };
+
+  type GetWorkExprienceGroupByPayload<T extends WorkExprienceGroupByArgs> =
+    Prisma.PrismaPromise<
+      Array<
+        PickArray<WorkExprienceGroupByOutputType, T["by"]> & {
+          [P in keyof T &
+            keyof WorkExprienceGroupByOutputType]: P extends "_count"
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], WorkExprienceGroupByOutputType[P]>
+            : GetScalarType<T[P], WorkExprienceGroupByOutputType[P]>;
+        }
+      >
+    >;
+
+  export type WorkExprienceSelect = {
+    id?: boolean;
+  };
+
+  export type WorkExprienceGetPayload<
+    S extends boolean | null | undefined | WorkExprienceArgs
+  > = S extends { select: any; include: any }
+    ? "Please either choose `select` or `include`"
+    : S extends true
+    ? WorkExprience
+    : S extends undefined
+    ? never
+    : S extends { include: any } & (
+        | WorkExprienceArgs
+        | WorkExprienceFindManyArgs
+      )
+    ? WorkExprience
+    : S extends { select: any } & (
+        | WorkExprienceArgs
+        | WorkExprienceFindManyArgs
+      )
+    ? {
+        [P in TruthyKeys<S["select"]>]: P extends keyof WorkExprience
+          ? WorkExprience[P]
+          : never;
+      }
+    : WorkExprience;
+
+  type WorkExprienceCountArgs = Omit<
+    WorkExprienceFindManyArgs,
+    "select" | "include"
+  > & {
+    select?: WorkExprienceCountAggregateInputType | true;
+  };
+
+  export interface WorkExprienceDelegate<
+    GlobalRejectSettings extends
+      | Prisma.RejectOnNotFound
+      | Prisma.RejectPerOperation
+      | false
+      | undefined
+  > {
+    /**
+     * Find zero or one WorkExprience that matches the filter.
+     * @param {WorkExprienceFindUniqueArgs} args - Arguments to find a WorkExprience
+     * @example
+     * // Get one WorkExprience
+     * const workExprience = await prisma.workExprience.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     **/
+    findUnique<
+      T extends WorkExprienceFindUniqueArgs,
+      LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound
+        ? T["rejectOnNotFound"]
+        : undefined
+    >(
+      args: SelectSubset<T, WorkExprienceFindUniqueArgs>
+    ): HasReject<
+      GlobalRejectSettings,
+      LocalRejectSettings,
+      "findUnique",
+      "WorkExprience"
+    > extends True
+      ? Prisma__WorkExprienceClient<WorkExprienceGetPayload<T>>
+      : Prisma__WorkExprienceClient<WorkExprienceGetPayload<T> | null, null>;
+
+    /**
+     * Find one WorkExprience that matches the filter or throw an error  with `error.code='P2025'`
+     *     if no matches were found.
+     * @param {WorkExprienceFindUniqueOrThrowArgs} args - Arguments to find a WorkExprience
+     * @example
+     * // Get one WorkExprience
+     * const workExprience = await prisma.workExprience.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     **/
+    findUniqueOrThrow<T extends WorkExprienceFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, WorkExprienceFindUniqueOrThrowArgs>
+    ): Prisma__WorkExprienceClient<WorkExprienceGetPayload<T>>;
+
+    /**
+     * Find the first WorkExprience that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkExprienceFindFirstArgs} args - Arguments to find a WorkExprience
+     * @example
+     * // Get one WorkExprience
+     * const workExprience = await prisma.workExprience.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     **/
+    findFirst<
+      T extends WorkExprienceFindFirstArgs,
+      LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound
+        ? T["rejectOnNotFound"]
+        : undefined
+    >(
+      args?: SelectSubset<T, WorkExprienceFindFirstArgs>
+    ): HasReject<
+      GlobalRejectSettings,
+      LocalRejectSettings,
+      "findFirst",
+      "WorkExprience"
+    > extends True
+      ? Prisma__WorkExprienceClient<WorkExprienceGetPayload<T>>
+      : Prisma__WorkExprienceClient<WorkExprienceGetPayload<T> | null, null>;
+
+    /**
+     * Find the first WorkExprience that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkExprienceFindFirstOrThrowArgs} args - Arguments to find a WorkExprience
+     * @example
+     * // Get one WorkExprience
+     * const workExprience = await prisma.workExprience.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     **/
+    findFirstOrThrow<T extends WorkExprienceFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, WorkExprienceFindFirstOrThrowArgs>
+    ): Prisma__WorkExprienceClient<WorkExprienceGetPayload<T>>;
+
+    /**
+     * Find zero or more WorkExpriences that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkExprienceFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all WorkExpriences
+     * const workExpriences = await prisma.workExprience.findMany()
+     *
+     * // Get first 10 WorkExpriences
+     * const workExpriences = await prisma.workExprience.findMany({ take: 10 })
+     *
+     * // Only select the `id`
+     * const workExprienceWithIdOnly = await prisma.workExprience.findMany({ select: { id: true } })
+     *
+     **/
+    findMany<T extends WorkExprienceFindManyArgs>(
+      args?: SelectSubset<T, WorkExprienceFindManyArgs>
+    ): Prisma.PrismaPromise<Array<WorkExprienceGetPayload<T>>>;
+
+    /**
+     * Create a WorkExprience.
+     * @param {WorkExprienceCreateArgs} args - Arguments to create a WorkExprience.
+     * @example
+     * // Create one WorkExprience
+     * const WorkExprience = await prisma.workExprience.create({
+     *   data: {
+     *     // ... data to create a WorkExprience
+     *   }
+     * })
+     *
+     **/
+    create<T extends WorkExprienceCreateArgs>(
+      args: SelectSubset<T, WorkExprienceCreateArgs>
+    ): Prisma__WorkExprienceClient<WorkExprienceGetPayload<T>>;
+
+    /**
+     * Create many WorkExpriences.
+     *     @param {WorkExprienceCreateManyArgs} args - Arguments to create many WorkExpriences.
+     *     @example
+     *     // Create many WorkExpriences
+     *     const workExprience = await prisma.workExprience.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *
+     **/
+    createMany<T extends WorkExprienceCreateManyArgs>(
+      args?: SelectSubset<T, WorkExprienceCreateManyArgs>
+    ): Prisma.PrismaPromise<BatchPayload>;
+
+    /**
+     * Delete a WorkExprience.
+     * @param {WorkExprienceDeleteArgs} args - Arguments to delete one WorkExprience.
+     * @example
+     * // Delete one WorkExprience
+     * const WorkExprience = await prisma.workExprience.delete({
+     *   where: {
+     *     // ... filter to delete one WorkExprience
+     *   }
+     * })
+     *
+     **/
+    delete<T extends WorkExprienceDeleteArgs>(
+      args: SelectSubset<T, WorkExprienceDeleteArgs>
+    ): Prisma__WorkExprienceClient<WorkExprienceGetPayload<T>>;
+
+    /**
+     * Update one WorkExprience.
+     * @param {WorkExprienceUpdateArgs} args - Arguments to update one WorkExprience.
+     * @example
+     * // Update one WorkExprience
+     * const workExprience = await prisma.workExprience.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     **/
+    update<T extends WorkExprienceUpdateArgs>(
+      args: SelectSubset<T, WorkExprienceUpdateArgs>
+    ): Prisma__WorkExprienceClient<WorkExprienceGetPayload<T>>;
+
+    /**
+     * Delete zero or more WorkExpriences.
+     * @param {WorkExprienceDeleteManyArgs} args - Arguments to filter WorkExpriences to delete.
+     * @example
+     * // Delete a few WorkExpriences
+     * const { count } = await prisma.workExprience.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     *
+     **/
+    deleteMany<T extends WorkExprienceDeleteManyArgs>(
+      args?: SelectSubset<T, WorkExprienceDeleteManyArgs>
+    ): Prisma.PrismaPromise<BatchPayload>;
+
+    /**
+     * Update zero or more WorkExpriences.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkExprienceUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many WorkExpriences
+     * const workExprience = await prisma.workExprience.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     **/
+    updateMany<T extends WorkExprienceUpdateManyArgs>(
+      args: SelectSubset<T, WorkExprienceUpdateManyArgs>
+    ): Prisma.PrismaPromise<BatchPayload>;
+
+    /**
+     * Create or update one WorkExprience.
+     * @param {WorkExprienceUpsertArgs} args - Arguments to update or create a WorkExprience.
+     * @example
+     * // Update or create a WorkExprience
+     * const workExprience = await prisma.workExprience.upsert({
+     *   create: {
+     *     // ... data to create a WorkExprience
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the WorkExprience we want to update
+     *   }
+     * })
+     **/
+    upsert<T extends WorkExprienceUpsertArgs>(
+      args: SelectSubset<T, WorkExprienceUpsertArgs>
+    ): Prisma__WorkExprienceClient<WorkExprienceGetPayload<T>>;
+
+    /**
+     * Count the number of WorkExpriences.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkExprienceCountArgs} args - Arguments to filter WorkExpriences to count.
+     * @example
+     * // Count the number of WorkExpriences
+     * const count = await prisma.workExprience.count({
+     *   where: {
+     *     // ... the filter for the WorkExpriences we want to count
+     *   }
+     * })
+     **/
+    count<T extends WorkExprienceCountArgs>(
+      args?: Subset<T, WorkExprienceCountArgs>
+    ): Prisma.PrismaPromise<
+      T extends _Record<"select", any>
+        ? T["select"] extends true
+          ? number
+          : GetScalarType<T["select"], WorkExprienceCountAggregateOutputType>
+        : number
+    >;
+
+    /**
+     * Allows you to perform aggregations operations on a WorkExprience.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkExprienceAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+     **/
+    aggregate<T extends WorkExprienceAggregateArgs>(
+      args: Subset<T, WorkExprienceAggregateArgs>
+    ): Prisma.PrismaPromise<GetWorkExprienceAggregateType<T>>;
+
+    /**
+     * Group by WorkExprience.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkExprienceGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     *
+     **/
+    groupBy<
+      T extends WorkExprienceGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<"skip", Keys<T>>,
+        Extends<"take", Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: WorkExprienceGroupByArgs["orderBy"] }
+        : { orderBy?: WorkExprienceGroupByArgs["orderBy"] },
+      OrderFields extends ExcludeUnderscoreKeys<
+        Keys<MaybeTupleToUnion<T["orderBy"]>>
+      >,
+      ByFields extends TupleToUnion<T["by"]>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T["having"]>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T["by"] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+        ? `Error: "by" must not be empty.`
+        : HavingValid extends False
+        ? {
+            [P in HavingFields]: P extends ByFields
+              ? never
+              : P extends string
+              ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+              : [
+                  Error,
+                  "Field ",
+                  P,
+                  ` in "having" needs to be provided in "by"`
+                ];
+          }[HavingFields]
+        : "take" extends Keys<T>
+        ? "orderBy" extends Keys<T>
+          ? ByValid extends True
+            ? {}
+            : {
+                [P in OrderFields]: P extends ByFields
+                  ? never
+                  : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+              }[OrderFields]
+          : 'Error: If you provide "take", you also need to provide "orderBy"'
+        : "skip" extends Keys<T>
+        ? "orderBy" extends Keys<T>
+          ? ByValid extends True
+            ? {}
+            : {
+                [P in OrderFields]: P extends ByFields
+                  ? never
+                  : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+              }[OrderFields]
+          : 'Error: If you provide "skip", you also need to provide "orderBy"'
+        : ByValid extends True
+        ? {}
+        : {
+            [P in OrderFields]: P extends ByFields
+              ? never
+              : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+          }[OrderFields]
+    >(
+      args: SubsetIntersection<T, WorkExprienceGroupByArgs, OrderByArg> &
+        InputErrors
+    ): {} extends InputErrors
+      ? GetWorkExprienceGroupByPayload<T>
+      : Prisma.PrismaPromise<InputErrors>;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for WorkExprience.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export class Prisma__WorkExprienceClient<T, Null = never>
+    implements Prisma.PrismaPromise<T>
+  {
+    private readonly _dmmf;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
+    readonly [Symbol.toStringTag]: "PrismaPromise";
+    constructor(
+      _dmmf: runtime.DMMFClass,
+      _queryType: "query" | "mutation",
+      _rootField: string,
+      _clientMethod: string,
+      _args: any,
+      _dataPath: string[],
+      _errorFormat: ErrorFormat,
+      _measurePerformance?: boolean | undefined,
+      _isList?: boolean
+    );
+
+    private get _document();
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(
+      onfulfilled?:
+        | ((value: T) => TResult1 | PromiseLike<TResult1>)
+        | undefined
+        | null,
+      onrejected?:
+        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
+        | undefined
+        | null
+    ): Promise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(
+      onrejected?:
+        | ((reason: any) => TResult | PromiseLike<TResult>)
+        | undefined
+        | null
+    ): Promise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+  }
+
+  // Custom InputTypes
+
+  /**
+   * WorkExprience base type for findUnique actions
+   */
+  export type WorkExprienceFindUniqueArgsBase = {
+    /**
+     * Select specific fields to fetch from the WorkExprience
+     */
+    select?: WorkExprienceSelect | null;
+    /**
+     * Filter, which WorkExprience to fetch.
+     */
+    where: WorkExprienceWhereUniqueInput;
+  };
+
+  /**
+   * WorkExprience findUnique
+   */
+  export interface WorkExprienceFindUniqueArgs
+    extends WorkExprienceFindUniqueArgsBase {
+    /**
+     * Throw an Error if query returns no results
+     * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+     */
+    rejectOnNotFound?: RejectOnNotFound;
+  }
+
+  /**
+   * WorkExprience findUniqueOrThrow
+   */
+  export type WorkExprienceFindUniqueOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the WorkExprience
+     */
+    select?: WorkExprienceSelect | null;
+    /**
+     * Filter, which WorkExprience to fetch.
+     */
+    where: WorkExprienceWhereUniqueInput;
+  };
+
+  /**
+   * WorkExprience base type for findFirst actions
+   */
+  export type WorkExprienceFindFirstArgsBase = {
+    /**
+     * Select specific fields to fetch from the WorkExprience
+     */
+    select?: WorkExprienceSelect | null;
+    /**
+     * Filter, which WorkExprience to fetch.
+     */
+    where?: WorkExprienceWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of WorkExpriences to fetch.
+     */
+    orderBy?: Enumerable<WorkExprienceOrderByWithRelationInput>;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for WorkExpriences.
+     */
+    cursor?: WorkExprienceWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` WorkExpriences from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` WorkExpriences.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of WorkExpriences.
+     */
+    distinct?: Enumerable<WorkExprienceScalarFieldEnum>;
+  };
+
+  /**
+   * WorkExprience findFirst
+   */
+  export interface WorkExprienceFindFirstArgs
+    extends WorkExprienceFindFirstArgsBase {
+    /**
+     * Throw an Error if query returns no results
+     * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+     */
+    rejectOnNotFound?: RejectOnNotFound;
+  }
+
+  /**
+   * WorkExprience findFirstOrThrow
+   */
+  export type WorkExprienceFindFirstOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the WorkExprience
+     */
+    select?: WorkExprienceSelect | null;
+    /**
+     * Filter, which WorkExprience to fetch.
+     */
+    where?: WorkExprienceWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of WorkExpriences to fetch.
+     */
+    orderBy?: Enumerable<WorkExprienceOrderByWithRelationInput>;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for WorkExpriences.
+     */
+    cursor?: WorkExprienceWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` WorkExpriences from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` WorkExpriences.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of WorkExpriences.
+     */
+    distinct?: Enumerable<WorkExprienceScalarFieldEnum>;
+  };
+
+  /**
+   * WorkExprience findMany
+   */
+  export type WorkExprienceFindManyArgs = {
+    /**
+     * Select specific fields to fetch from the WorkExprience
+     */
+    select?: WorkExprienceSelect | null;
+    /**
+     * Filter, which WorkExpriences to fetch.
+     */
+    where?: WorkExprienceWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of WorkExpriences to fetch.
+     */
+    orderBy?: Enumerable<WorkExprienceOrderByWithRelationInput>;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for listing WorkExpriences.
+     */
+    cursor?: WorkExprienceWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` WorkExpriences from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` WorkExpriences.
+     */
+    skip?: number;
+    distinct?: Enumerable<WorkExprienceScalarFieldEnum>;
+  };
+
+  /**
+   * WorkExprience create
+   */
+  export type WorkExprienceCreateArgs = {
+    /**
+     * Select specific fields to fetch from the WorkExprience
+     */
+    select?: WorkExprienceSelect | null;
+    /**
+     * The data needed to create a WorkExprience.
+     */
+    data?: XOR<WorkExprienceCreateInput, WorkExprienceUncheckedCreateInput>;
+  };
+
+  /**
+   * WorkExprience createMany
+   */
+  export type WorkExprienceCreateManyArgs = {
+    /**
+     * The data used to create many WorkExpriences.
+     */
+    data: Enumerable<WorkExprienceCreateManyInput>;
+    skipDuplicates?: boolean;
+  };
+
+  /**
+   * WorkExprience update
+   */
+  export type WorkExprienceUpdateArgs = {
+    /**
+     * Select specific fields to fetch from the WorkExprience
+     */
+    select?: WorkExprienceSelect | null;
+    /**
+     * The data needed to update a WorkExprience.
+     */
+    data: XOR<WorkExprienceUpdateInput, WorkExprienceUncheckedUpdateInput>;
+    /**
+     * Choose, which WorkExprience to update.
+     */
+    where: WorkExprienceWhereUniqueInput;
+  };
+
+  /**
+   * WorkExprience updateMany
+   */
+  export type WorkExprienceUpdateManyArgs = {
+    /**
+     * The data used to update WorkExpriences.
+     */
+    data: XOR<
+      WorkExprienceUpdateManyMutationInput,
+      WorkExprienceUncheckedUpdateManyInput
+    >;
+    /**
+     * Filter which WorkExpriences to update
+     */
+    where?: WorkExprienceWhereInput;
+  };
+
+  /**
+   * WorkExprience upsert
+   */
+  export type WorkExprienceUpsertArgs = {
+    /**
+     * Select specific fields to fetch from the WorkExprience
+     */
+    select?: WorkExprienceSelect | null;
+    /**
+     * The filter to search for the WorkExprience to update in case it exists.
+     */
+    where: WorkExprienceWhereUniqueInput;
+    /**
+     * In case the WorkExprience found by the `where` argument doesn't exist, create a new WorkExprience with this data.
+     */
+    create: XOR<WorkExprienceCreateInput, WorkExprienceUncheckedCreateInput>;
+    /**
+     * In case the WorkExprience was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<WorkExprienceUpdateInput, WorkExprienceUncheckedUpdateInput>;
+  };
+
+  /**
+   * WorkExprience delete
+   */
+  export type WorkExprienceDeleteArgs = {
+    /**
+     * Select specific fields to fetch from the WorkExprience
+     */
+    select?: WorkExprienceSelect | null;
+    /**
+     * Filter which WorkExprience to delete.
+     */
+    where: WorkExprienceWhereUniqueInput;
+  };
+
+  /**
+   * WorkExprience deleteMany
+   */
+  export type WorkExprienceDeleteManyArgs = {
+    /**
+     * Filter which WorkExpriences to delete
+     */
+    where?: WorkExprienceWhereInput;
+  };
+
+  /**
+   * WorkExprience without action
+   */
+  export type WorkExprienceArgs = {
+    /**
+     * Select specific fields to fetch from the WorkExprience
+     */
+    select?: WorkExprienceSelect | null;
+  };
+
+  /**
+   * Model Introduce
+   */
+
+  export type AggregateIntroduce = {
+    _count: IntroduceCountAggregateOutputType | null;
+    _avg: IntroduceAvgAggregateOutputType | null;
+    _sum: IntroduceSumAggregateOutputType | null;
+    _min: IntroduceMinAggregateOutputType | null;
+    _max: IntroduceMaxAggregateOutputType | null;
+  };
+
+  export type IntroduceAvgAggregateOutputType = {
+    id: number | null;
+  };
+
+  export type IntroduceSumAggregateOutputType = {
+    id: number | null;
+  };
+
+  export type IntroduceMinAggregateOutputType = {
+    id: number | null;
+  };
+
+  export type IntroduceMaxAggregateOutputType = {
+    id: number | null;
+  };
+
+  export type IntroduceCountAggregateOutputType = {
+    id: number;
+    _all: number;
+  };
+
+  export type IntroduceAvgAggregateInputType = {
+    id?: true;
+  };
+
+  export type IntroduceSumAggregateInputType = {
+    id?: true;
+  };
+
+  export type IntroduceMinAggregateInputType = {
+    id?: true;
+  };
+
+  export type IntroduceMaxAggregateInputType = {
+    id?: true;
+  };
+
+  export type IntroduceCountAggregateInputType = {
+    id?: true;
+    _all?: true;
+  };
+
+  export type IntroduceAggregateArgs = {
+    /**
+     * Filter which Introduce to aggregate.
+     */
+    where?: IntroduceWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of Introduces to fetch.
+     */
+    orderBy?: Enumerable<IntroduceOrderByWithRelationInput>;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the start position
+     */
+    cursor?: IntroduceWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` Introduces from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` Introduces.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Count returned Introduces
+     **/
+    _count?: true | IntroduceCountAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to average
+     **/
+    _avg?: IntroduceAvgAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to sum
+     **/
+    _sum?: IntroduceSumAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the minimum value
+     **/
+    _min?: IntroduceMinAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to find the maximum value
+     **/
+    _max?: IntroduceMaxAggregateInputType;
+  };
+
+  export type GetIntroduceAggregateType<T extends IntroduceAggregateArgs> = {
+    [P in keyof T & keyof AggregateIntroduce]: P extends "_count" | "count"
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateIntroduce[P]>
+      : GetScalarType<T[P], AggregateIntroduce[P]>;
+  };
+
+  export type IntroduceGroupByArgs = {
+    where?: IntroduceWhereInput;
+    orderBy?: Enumerable<IntroduceOrderByWithAggregationInput>;
+    by: IntroduceScalarFieldEnum[];
+    having?: IntroduceScalarWhereWithAggregatesInput;
+    take?: number;
+    skip?: number;
+    _count?: IntroduceCountAggregateInputType | true;
+    _avg?: IntroduceAvgAggregateInputType;
+    _sum?: IntroduceSumAggregateInputType;
+    _min?: IntroduceMinAggregateInputType;
+    _max?: IntroduceMaxAggregateInputType;
+  };
+
+  export type IntroduceGroupByOutputType = {
+    id: number;
+    _count: IntroduceCountAggregateOutputType | null;
+    _avg: IntroduceAvgAggregateOutputType | null;
+    _sum: IntroduceSumAggregateOutputType | null;
+    _min: IntroduceMinAggregateOutputType | null;
+    _max: IntroduceMaxAggregateOutputType | null;
+  };
+
+  type GetIntroduceGroupByPayload<T extends IntroduceGroupByArgs> =
+    Prisma.PrismaPromise<
+      Array<
+        PickArray<IntroduceGroupByOutputType, T["by"]> & {
+          [P in keyof T & keyof IntroduceGroupByOutputType]: P extends "_count"
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], IntroduceGroupByOutputType[P]>
+            : GetScalarType<T[P], IntroduceGroupByOutputType[P]>;
+        }
+      >
+    >;
+
+  export type IntroduceSelect = {
+    id?: boolean;
+  };
+
+  export type IntroduceGetPayload<
+    S extends boolean | null | undefined | IntroduceArgs
+  > = S extends { select: any; include: any }
+    ? "Please either choose `select` or `include`"
+    : S extends true
+    ? Introduce
+    : S extends undefined
+    ? never
+    : S extends { include: any } & (IntroduceArgs | IntroduceFindManyArgs)
+    ? Introduce
+    : S extends { select: any } & (IntroduceArgs | IntroduceFindManyArgs)
+    ? {
+        [P in TruthyKeys<S["select"]>]: P extends keyof Introduce
+          ? Introduce[P]
+          : never;
+      }
+    : Introduce;
+
+  type IntroduceCountArgs = Omit<
+    IntroduceFindManyArgs,
+    "select" | "include"
+  > & {
+    select?: IntroduceCountAggregateInputType | true;
+  };
+
+  export interface IntroduceDelegate<
+    GlobalRejectSettings extends
+      | Prisma.RejectOnNotFound
+      | Prisma.RejectPerOperation
+      | false
+      | undefined
+  > {
+    /**
+     * Find zero or one Introduce that matches the filter.
+     * @param {IntroduceFindUniqueArgs} args - Arguments to find a Introduce
+     * @example
+     * // Get one Introduce
+     * const introduce = await prisma.introduce.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     **/
+    findUnique<
+      T extends IntroduceFindUniqueArgs,
+      LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound
+        ? T["rejectOnNotFound"]
+        : undefined
+    >(
+      args: SelectSubset<T, IntroduceFindUniqueArgs>
+    ): HasReject<
+      GlobalRejectSettings,
+      LocalRejectSettings,
+      "findUnique",
+      "Introduce"
+    > extends True
+      ? Prisma__IntroduceClient<IntroduceGetPayload<T>>
+      : Prisma__IntroduceClient<IntroduceGetPayload<T> | null, null>;
+
+    /**
+     * Find one Introduce that matches the filter or throw an error  with `error.code='P2025'`
+     *     if no matches were found.
+     * @param {IntroduceFindUniqueOrThrowArgs} args - Arguments to find a Introduce
+     * @example
+     * // Get one Introduce
+     * const introduce = await prisma.introduce.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     **/
+    findUniqueOrThrow<T extends IntroduceFindUniqueOrThrowArgs>(
+      args?: SelectSubset<T, IntroduceFindUniqueOrThrowArgs>
+    ): Prisma__IntroduceClient<IntroduceGetPayload<T>>;
+
+    /**
+     * Find the first Introduce that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntroduceFindFirstArgs} args - Arguments to find a Introduce
+     * @example
+     * // Get one Introduce
+     * const introduce = await prisma.introduce.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     **/
+    findFirst<
+      T extends IntroduceFindFirstArgs,
+      LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound
+        ? T["rejectOnNotFound"]
+        : undefined
+    >(
+      args?: SelectSubset<T, IntroduceFindFirstArgs>
+    ): HasReject<
+      GlobalRejectSettings,
+      LocalRejectSettings,
+      "findFirst",
+      "Introduce"
+    > extends True
+      ? Prisma__IntroduceClient<IntroduceGetPayload<T>>
+      : Prisma__IntroduceClient<IntroduceGetPayload<T> | null, null>;
+
+    /**
+     * Find the first Introduce that matches the filter or
+     * throw `NotFoundError` if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntroduceFindFirstOrThrowArgs} args - Arguments to find a Introduce
+     * @example
+     * // Get one Introduce
+     * const introduce = await prisma.introduce.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     **/
+    findFirstOrThrow<T extends IntroduceFindFirstOrThrowArgs>(
+      args?: SelectSubset<T, IntroduceFindFirstOrThrowArgs>
+    ): Prisma__IntroduceClient<IntroduceGetPayload<T>>;
+
+    /**
+     * Find zero or more Introduces that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntroduceFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Introduces
+     * const introduces = await prisma.introduce.findMany()
+     *
+     * // Get first 10 Introduces
+     * const introduces = await prisma.introduce.findMany({ take: 10 })
+     *
+     * // Only select the `id`
+     * const introduceWithIdOnly = await prisma.introduce.findMany({ select: { id: true } })
+     *
+     **/
+    findMany<T extends IntroduceFindManyArgs>(
+      args?: SelectSubset<T, IntroduceFindManyArgs>
+    ): Prisma.PrismaPromise<Array<IntroduceGetPayload<T>>>;
+
+    /**
+     * Create a Introduce.
+     * @param {IntroduceCreateArgs} args - Arguments to create a Introduce.
+     * @example
+     * // Create one Introduce
+     * const Introduce = await prisma.introduce.create({
+     *   data: {
+     *     // ... data to create a Introduce
+     *   }
+     * })
+     *
+     **/
+    create<T extends IntroduceCreateArgs>(
+      args: SelectSubset<T, IntroduceCreateArgs>
+    ): Prisma__IntroduceClient<IntroduceGetPayload<T>>;
+
+    /**
+     * Create many Introduces.
+     *     @param {IntroduceCreateManyArgs} args - Arguments to create many Introduces.
+     *     @example
+     *     // Create many Introduces
+     *     const introduce = await prisma.introduce.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *
+     **/
+    createMany<T extends IntroduceCreateManyArgs>(
+      args?: SelectSubset<T, IntroduceCreateManyArgs>
+    ): Prisma.PrismaPromise<BatchPayload>;
+
+    /**
+     * Delete a Introduce.
+     * @param {IntroduceDeleteArgs} args - Arguments to delete one Introduce.
+     * @example
+     * // Delete one Introduce
+     * const Introduce = await prisma.introduce.delete({
+     *   where: {
+     *     // ... filter to delete one Introduce
+     *   }
+     * })
+     *
+     **/
+    delete<T extends IntroduceDeleteArgs>(
+      args: SelectSubset<T, IntroduceDeleteArgs>
+    ): Prisma__IntroduceClient<IntroduceGetPayload<T>>;
+
+    /**
+     * Update one Introduce.
+     * @param {IntroduceUpdateArgs} args - Arguments to update one Introduce.
+     * @example
+     * // Update one Introduce
+     * const introduce = await prisma.introduce.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     **/
+    update<T extends IntroduceUpdateArgs>(
+      args: SelectSubset<T, IntroduceUpdateArgs>
+    ): Prisma__IntroduceClient<IntroduceGetPayload<T>>;
+
+    /**
+     * Delete zero or more Introduces.
+     * @param {IntroduceDeleteManyArgs} args - Arguments to filter Introduces to delete.
+     * @example
+     * // Delete a few Introduces
+     * const { count } = await prisma.introduce.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     *
+     **/
+    deleteMany<T extends IntroduceDeleteManyArgs>(
+      args?: SelectSubset<T, IntroduceDeleteManyArgs>
+    ): Prisma.PrismaPromise<BatchPayload>;
+
+    /**
+     * Update zero or more Introduces.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntroduceUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Introduces
+     * const introduce = await prisma.introduce.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     *
+     **/
+    updateMany<T extends IntroduceUpdateManyArgs>(
+      args: SelectSubset<T, IntroduceUpdateManyArgs>
+    ): Prisma.PrismaPromise<BatchPayload>;
+
+    /**
+     * Create or update one Introduce.
+     * @param {IntroduceUpsertArgs} args - Arguments to update or create a Introduce.
+     * @example
+     * // Update or create a Introduce
+     * const introduce = await prisma.introduce.upsert({
+     *   create: {
+     *     // ... data to create a Introduce
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Introduce we want to update
+     *   }
+     * })
+     **/
+    upsert<T extends IntroduceUpsertArgs>(
+      args: SelectSubset<T, IntroduceUpsertArgs>
+    ): Prisma__IntroduceClient<IntroduceGetPayload<T>>;
+
+    /**
+     * Count the number of Introduces.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntroduceCountArgs} args - Arguments to filter Introduces to count.
+     * @example
+     * // Count the number of Introduces
+     * const count = await prisma.introduce.count({
+     *   where: {
+     *     // ... the filter for the Introduces we want to count
+     *   }
+     * })
+     **/
+    count<T extends IntroduceCountArgs>(
+      args?: Subset<T, IntroduceCountArgs>
+    ): Prisma.PrismaPromise<
+      T extends _Record<"select", any>
+        ? T["select"] extends true
+          ? number
+          : GetScalarType<T["select"], IntroduceCountAggregateOutputType>
+        : number
+    >;
+
+    /**
+     * Allows you to perform aggregations operations on a Introduce.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntroduceAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+     **/
+    aggregate<T extends IntroduceAggregateArgs>(
+      args: Subset<T, IntroduceAggregateArgs>
+    ): Prisma.PrismaPromise<GetIntroduceAggregateType<T>>;
+
+    /**
+     * Group by Introduce.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IntroduceGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     *
+     **/
+    groupBy<
+      T extends IntroduceGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<"skip", Keys<T>>,
+        Extends<"take", Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: IntroduceGroupByArgs["orderBy"] }
+        : { orderBy?: IntroduceGroupByArgs["orderBy"] },
+      OrderFields extends ExcludeUnderscoreKeys<
+        Keys<MaybeTupleToUnion<T["orderBy"]>>
+      >,
+      ByFields extends TupleToUnion<T["by"]>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T["having"]>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T["by"] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+        ? `Error: "by" must not be empty.`
+        : HavingValid extends False
+        ? {
+            [P in HavingFields]: P extends ByFields
+              ? never
+              : P extends string
+              ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+              : [
+                  Error,
+                  "Field ",
+                  P,
+                  ` in "having" needs to be provided in "by"`
+                ];
+          }[HavingFields]
+        : "take" extends Keys<T>
+        ? "orderBy" extends Keys<T>
+          ? ByValid extends True
+            ? {}
+            : {
+                [P in OrderFields]: P extends ByFields
+                  ? never
+                  : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+              }[OrderFields]
+          : 'Error: If you provide "take", you also need to provide "orderBy"'
+        : "skip" extends Keys<T>
+        ? "orderBy" extends Keys<T>
+          ? ByValid extends True
+            ? {}
+            : {
+                [P in OrderFields]: P extends ByFields
+                  ? never
+                  : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+              }[OrderFields]
+          : 'Error: If you provide "skip", you also need to provide "orderBy"'
+        : ByValid extends True
+        ? {}
+        : {
+            [P in OrderFields]: P extends ByFields
+              ? never
+              : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
+          }[OrderFields]
+    >(
+      args: SubsetIntersection<T, IntroduceGroupByArgs, OrderByArg> &
+        InputErrors
+    ): {} extends InputErrors
+      ? GetIntroduceGroupByPayload<T>
+      : Prisma.PrismaPromise<InputErrors>;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Introduce.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export class Prisma__IntroduceClient<T, Null = never>
+    implements Prisma.PrismaPromise<T>
+  {
+    private readonly _dmmf;
+    private readonly _queryType;
+    private readonly _rootField;
+    private readonly _clientMethod;
+    private readonly _args;
+    private readonly _dataPath;
+    private readonly _errorFormat;
+    private readonly _measurePerformance?;
+    private _isList;
+    private _callsite;
+    private _requestPromise?;
+    readonly [Symbol.toStringTag]: "PrismaPromise";
+    constructor(
+      _dmmf: runtime.DMMFClass,
+      _queryType: "query" | "mutation",
+      _rootField: string,
+      _clientMethod: string,
+      _args: any,
+      _dataPath: string[],
+      _errorFormat: ErrorFormat,
+      _measurePerformance?: boolean | undefined,
+      _isList?: boolean
+    );
+
+    private get _document();
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(
+      onfulfilled?:
+        | ((value: T) => TResult1 | PromiseLike<TResult1>)
+        | undefined
+        | null,
+      onrejected?:
+        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
+        | undefined
+        | null
+    ): Promise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(
+      onrejected?:
+        | ((reason: any) => TResult | PromiseLike<TResult>)
+        | undefined
+        | null
+    ): Promise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+  }
+
+  // Custom InputTypes
+
+  /**
+   * Introduce base type for findUnique actions
+   */
+  export type IntroduceFindUniqueArgsBase = {
+    /**
+     * Select specific fields to fetch from the Introduce
+     */
+    select?: IntroduceSelect | null;
+    /**
+     * Filter, which Introduce to fetch.
+     */
+    where: IntroduceWhereUniqueInput;
+  };
+
+  /**
+   * Introduce findUnique
+   */
+  export interface IntroduceFindUniqueArgs extends IntroduceFindUniqueArgsBase {
+    /**
+     * Throw an Error if query returns no results
+     * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
+     */
+    rejectOnNotFound?: RejectOnNotFound;
+  }
+
+  /**
+   * Introduce findUniqueOrThrow
+   */
+  export type IntroduceFindUniqueOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the Introduce
+     */
+    select?: IntroduceSelect | null;
+    /**
+     * Filter, which Introduce to fetch.
+     */
+    where: IntroduceWhereUniqueInput;
+  };
+
+  /**
+   * Introduce base type for findFirst actions
+   */
+  export type IntroduceFindFirstArgsBase = {
+    /**
+     * Select specific fields to fetch from the Introduce
+     */
+    select?: IntroduceSelect | null;
+    /**
+     * Filter, which Introduce to fetch.
+     */
+    where?: IntroduceWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of Introduces to fetch.
+     */
+    orderBy?: Enumerable<IntroduceOrderByWithRelationInput>;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for Introduces.
+     */
+    cursor?: IntroduceWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` Introduces from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` Introduces.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of Introduces.
+     */
+    distinct?: Enumerable<IntroduceScalarFieldEnum>;
+  };
+
+  /**
+   * Introduce findFirst
+   */
+  export interface IntroduceFindFirstArgs extends IntroduceFindFirstArgsBase {
+    /**
+     * Throw an Error if query returns no results
+     * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
+     */
+    rejectOnNotFound?: RejectOnNotFound;
+  }
+
+  /**
+   * Introduce findFirstOrThrow
+   */
+  export type IntroduceFindFirstOrThrowArgs = {
+    /**
+     * Select specific fields to fetch from the Introduce
+     */
+    select?: IntroduceSelect | null;
+    /**
+     * Filter, which Introduce to fetch.
+     */
+    where?: IntroduceWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of Introduces to fetch.
+     */
+    orderBy?: Enumerable<IntroduceOrderByWithRelationInput>;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for searching for Introduces.
+     */
+    cursor?: IntroduceWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` Introduces from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` Introduces.
+     */
+    skip?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     *
+     * Filter by unique combinations of Introduces.
+     */
+    distinct?: Enumerable<IntroduceScalarFieldEnum>;
+  };
+
+  /**
+   * Introduce findMany
+   */
+  export type IntroduceFindManyArgs = {
+    /**
+     * Select specific fields to fetch from the Introduce
+     */
+    select?: IntroduceSelect | null;
+    /**
+     * Filter, which Introduces to fetch.
+     */
+    where?: IntroduceWhereInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     *
+     * Determine the order of Introduces to fetch.
+     */
+    orderBy?: Enumerable<IntroduceOrderByWithRelationInput>;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     *
+     * Sets the position for listing Introduces.
+     */
+    cursor?: IntroduceWhereUniqueInput;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Take `±n` Introduces from the position of the cursor.
+     */
+    take?: number;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     *
+     * Skip the first `n` Introduces.
+     */
+    skip?: number;
+    distinct?: Enumerable<IntroduceScalarFieldEnum>;
+  };
+
+  /**
+   * Introduce create
+   */
+  export type IntroduceCreateArgs = {
+    /**
+     * Select specific fields to fetch from the Introduce
+     */
+    select?: IntroduceSelect | null;
+    /**
+     * The data needed to create a Introduce.
+     */
+    data?: XOR<IntroduceCreateInput, IntroduceUncheckedCreateInput>;
+  };
+
+  /**
+   * Introduce createMany
+   */
+  export type IntroduceCreateManyArgs = {
+    /**
+     * The data used to create many Introduces.
+     */
+    data: Enumerable<IntroduceCreateManyInput>;
+    skipDuplicates?: boolean;
+  };
+
+  /**
+   * Introduce update
+   */
+  export type IntroduceUpdateArgs = {
+    /**
+     * Select specific fields to fetch from the Introduce
+     */
+    select?: IntroduceSelect | null;
+    /**
+     * The data needed to update a Introduce.
+     */
+    data: XOR<IntroduceUpdateInput, IntroduceUncheckedUpdateInput>;
+    /**
+     * Choose, which Introduce to update.
+     */
+    where: IntroduceWhereUniqueInput;
+  };
+
+  /**
+   * Introduce updateMany
+   */
+  export type IntroduceUpdateManyArgs = {
+    /**
+     * The data used to update Introduces.
+     */
+    data: XOR<
+      IntroduceUpdateManyMutationInput,
+      IntroduceUncheckedUpdateManyInput
+    >;
+    /**
+     * Filter which Introduces to update
+     */
+    where?: IntroduceWhereInput;
+  };
+
+  /**
+   * Introduce upsert
+   */
+  export type IntroduceUpsertArgs = {
+    /**
+     * Select specific fields to fetch from the Introduce
+     */
+    select?: IntroduceSelect | null;
+    /**
+     * The filter to search for the Introduce to update in case it exists.
+     */
+    where: IntroduceWhereUniqueInput;
+    /**
+     * In case the Introduce found by the `where` argument doesn't exist, create a new Introduce with this data.
+     */
+    create: XOR<IntroduceCreateInput, IntroduceUncheckedCreateInput>;
+    /**
+     * In case the Introduce was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<IntroduceUpdateInput, IntroduceUncheckedUpdateInput>;
+  };
+
+  /**
+   * Introduce delete
+   */
+  export type IntroduceDeleteArgs = {
+    /**
+     * Select specific fields to fetch from the Introduce
+     */
+    select?: IntroduceSelect | null;
+    /**
+     * Filter which Introduce to delete.
+     */
+    where: IntroduceWhereUniqueInput;
+  };
+
+  /**
+   * Introduce deleteMany
+   */
+  export type IntroduceDeleteManyArgs = {
+    /**
+     * Filter which Introduces to delete
+     */
+    where?: IntroduceWhereInput;
+  };
+
+  /**
+   * Introduce without action
+   */
+  export type IntroduceArgs = {
+    /**
+     * Select specific fields to fetch from the Introduce
+     */
+    select?: IntroduceSelect | null;
+  };
+
+  /**
    * Enums
    */
+
+  export const IntroduceScalarFieldEnum: {
+    id: "id";
+  };
+
+  export type IntroduceScalarFieldEnum =
+    (typeof IntroduceScalarFieldEnum)[keyof typeof IntroduceScalarFieldEnum];
 
   export const PostScalarFieldEnum: {
     id: "id";
     title: "title";
     content: "content";
+    thumbnail: "thumbnail";
     userId: "userId";
   };
 
@@ -3021,10 +4958,18 @@ export namespace Prisma {
     name: "name";
     password: "password";
     role: "role";
+    profile_img: "profile_img";
   };
 
   export type UserScalarFieldEnum =
     (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum];
+
+  export const WorkExprienceScalarFieldEnum: {
+    id: "id";
+  };
+
+  export type WorkExprienceScalarFieldEnum =
+    (typeof WorkExprienceScalarFieldEnum)[keyof typeof WorkExprienceScalarFieldEnum];
 
   /**
    * Deep Input Types
@@ -3039,6 +4984,7 @@ export namespace Prisma {
     name?: StringFilter | string;
     password?: StringFilter | string;
     role?: StringFilter | string;
+    profile_img?: StringNullableFilter | string | null;
     posts?: PostListRelationFilter;
   };
 
@@ -3048,6 +4994,7 @@ export namespace Prisma {
     name?: SortOrder;
     password?: SortOrder;
     role?: SortOrder;
+    profile_img?: SortOrder;
     posts?: PostOrderByRelationAggregateInput;
   };
 
@@ -3062,6 +5009,7 @@ export namespace Prisma {
     name?: SortOrder;
     password?: SortOrder;
     role?: SortOrder;
+    profile_img?: SortOrder;
     _count?: UserCountOrderByAggregateInput;
     _avg?: UserAvgOrderByAggregateInput;
     _max?: UserMaxOrderByAggregateInput;
@@ -3078,6 +5026,7 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter | string;
     password?: StringWithAggregatesFilter | string;
     role?: StringWithAggregatesFilter | string;
+    profile_img?: StringNullableWithAggregatesFilter | string | null;
   };
 
   export type PostWhereInput = {
@@ -3087,6 +5036,7 @@ export namespace Prisma {
     id?: IntFilter | number;
     title?: StringFilter | string;
     content?: StringFilter | string;
+    thumbnail?: StringFilter | string;
     userId?: StringFilter | string;
     user?: XOR<UserRelationFilter, UserWhereInput>;
   };
@@ -3095,6 +5045,7 @@ export namespace Prisma {
     id?: SortOrder;
     title?: SortOrder;
     content?: SortOrder;
+    thumbnail?: SortOrder;
     userId?: SortOrder;
     user?: UserOrderByWithRelationInput;
   };
@@ -3107,6 +5058,7 @@ export namespace Prisma {
     id?: SortOrder;
     title?: SortOrder;
     content?: SortOrder;
+    thumbnail?: SortOrder;
     userId?: SortOrder;
     _count?: PostCountOrderByAggregateInput;
     _avg?: PostAvgOrderByAggregateInput;
@@ -3122,7 +5074,70 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter | number;
     title?: StringWithAggregatesFilter | string;
     content?: StringWithAggregatesFilter | string;
+    thumbnail?: StringWithAggregatesFilter | string;
     userId?: StringWithAggregatesFilter | string;
+  };
+
+  export type WorkExprienceWhereInput = {
+    AND?: Enumerable<WorkExprienceWhereInput>;
+    OR?: Enumerable<WorkExprienceWhereInput>;
+    NOT?: Enumerable<WorkExprienceWhereInput>;
+    id?: IntFilter | number;
+  };
+
+  export type WorkExprienceOrderByWithRelationInput = {
+    id?: SortOrder;
+  };
+
+  export type WorkExprienceWhereUniqueInput = {
+    id?: number;
+  };
+
+  export type WorkExprienceOrderByWithAggregationInput = {
+    id?: SortOrder;
+    _count?: WorkExprienceCountOrderByAggregateInput;
+    _avg?: WorkExprienceAvgOrderByAggregateInput;
+    _max?: WorkExprienceMaxOrderByAggregateInput;
+    _min?: WorkExprienceMinOrderByAggregateInput;
+    _sum?: WorkExprienceSumOrderByAggregateInput;
+  };
+
+  export type WorkExprienceScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<WorkExprienceScalarWhereWithAggregatesInput>;
+    OR?: Enumerable<WorkExprienceScalarWhereWithAggregatesInput>;
+    NOT?: Enumerable<WorkExprienceScalarWhereWithAggregatesInput>;
+    id?: IntWithAggregatesFilter | number;
+  };
+
+  export type IntroduceWhereInput = {
+    AND?: Enumerable<IntroduceWhereInput>;
+    OR?: Enumerable<IntroduceWhereInput>;
+    NOT?: Enumerable<IntroduceWhereInput>;
+    id?: IntFilter | number;
+  };
+
+  export type IntroduceOrderByWithRelationInput = {
+    id?: SortOrder;
+  };
+
+  export type IntroduceWhereUniqueInput = {
+    id?: number;
+  };
+
+  export type IntroduceOrderByWithAggregationInput = {
+    id?: SortOrder;
+    _count?: IntroduceCountOrderByAggregateInput;
+    _avg?: IntroduceAvgOrderByAggregateInput;
+    _max?: IntroduceMaxOrderByAggregateInput;
+    _min?: IntroduceMinOrderByAggregateInput;
+    _sum?: IntroduceSumOrderByAggregateInput;
+  };
+
+  export type IntroduceScalarWhereWithAggregatesInput = {
+    AND?: Enumerable<IntroduceScalarWhereWithAggregatesInput>;
+    OR?: Enumerable<IntroduceScalarWhereWithAggregatesInput>;
+    NOT?: Enumerable<IntroduceScalarWhereWithAggregatesInput>;
+    id?: IntWithAggregatesFilter | number;
   };
 
   export type UserCreateInput = {
@@ -3130,6 +5145,7 @@ export namespace Prisma {
     name: string;
     password: string;
     role: string;
+    profile_img?: string | null;
     posts?: PostCreateNestedManyWithoutUserInput;
   };
 
@@ -3139,6 +5155,7 @@ export namespace Prisma {
     name: string;
     password: string;
     role: string;
+    profile_img?: string | null;
     posts?: PostUncheckedCreateNestedManyWithoutUserInput;
   };
 
@@ -3147,6 +5164,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     role?: StringFieldUpdateOperationsInput | string;
+    profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
     posts?: PostUpdateManyWithoutUserNestedInput;
   };
 
@@ -3156,6 +5174,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     role?: StringFieldUpdateOperationsInput | string;
+    profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput;
   };
 
@@ -3165,6 +5184,7 @@ export namespace Prisma {
     name: string;
     password: string;
     role: string;
+    profile_img?: string | null;
   };
 
   export type UserUpdateManyMutationInput = {
@@ -3172,6 +5192,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     role?: StringFieldUpdateOperationsInput | string;
+    profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
   };
 
   export type UserUncheckedUpdateManyInput = {
@@ -3180,11 +5201,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     role?: StringFieldUpdateOperationsInput | string;
+    profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
   };
 
   export type PostCreateInput = {
     title: string;
     content: string;
+    thumbnail: string;
     user: UserCreateNestedOneWithoutPostsInput;
   };
 
@@ -3192,12 +5215,14 @@ export namespace Prisma {
     id?: number;
     title: string;
     content: string;
+    thumbnail: string;
     userId: string;
   };
 
   export type PostUpdateInput = {
     title?: StringFieldUpdateOperationsInput | string;
     content?: StringFieldUpdateOperationsInput | string;
+    thumbnail?: StringFieldUpdateOperationsInput | string;
     user?: UserUpdateOneRequiredWithoutPostsNestedInput;
   };
 
@@ -3205,6 +5230,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     title?: StringFieldUpdateOperationsInput | string;
     content?: StringFieldUpdateOperationsInput | string;
+    thumbnail?: StringFieldUpdateOperationsInput | string;
     userId?: StringFieldUpdateOperationsInput | string;
   };
 
@@ -3212,19 +5238,66 @@ export namespace Prisma {
     id?: number;
     title: string;
     content: string;
+    thumbnail: string;
     userId: string;
   };
 
   export type PostUpdateManyMutationInput = {
     title?: StringFieldUpdateOperationsInput | string;
     content?: StringFieldUpdateOperationsInput | string;
+    thumbnail?: StringFieldUpdateOperationsInput | string;
   };
 
   export type PostUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number;
     title?: StringFieldUpdateOperationsInput | string;
     content?: StringFieldUpdateOperationsInput | string;
+    thumbnail?: StringFieldUpdateOperationsInput | string;
     userId?: StringFieldUpdateOperationsInput | string;
+  };
+
+  export type WorkExprienceCreateInput = {};
+
+  export type WorkExprienceUncheckedCreateInput = {
+    id?: number;
+  };
+
+  export type WorkExprienceUpdateInput = {};
+
+  export type WorkExprienceUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+  };
+
+  export type WorkExprienceCreateManyInput = {
+    id?: number;
+  };
+
+  export type WorkExprienceUpdateManyMutationInput = {};
+
+  export type WorkExprienceUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+  };
+
+  export type IntroduceCreateInput = {};
+
+  export type IntroduceUncheckedCreateInput = {
+    id?: number;
+  };
+
+  export type IntroduceUpdateInput = {};
+
+  export type IntroduceUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+  };
+
+  export type IntroduceCreateManyInput = {
+    id?: number;
+  };
+
+  export type IntroduceUpdateManyMutationInput = {};
+
+  export type IntroduceUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number;
   };
 
   export type IntFilter = {
@@ -3252,6 +5325,20 @@ export namespace Prisma {
     not?: NestedStringFilter | string;
   };
 
+  export type StringNullableFilter = {
+    equals?: string | null;
+    in?: Enumerable<string> | string | null;
+    notIn?: Enumerable<string> | string | null;
+    lt?: string;
+    lte?: string;
+    gt?: string;
+    gte?: string;
+    contains?: string;
+    startsWith?: string;
+    endsWith?: string;
+    not?: NestedStringNullableFilter | string | null;
+  };
+
   export type PostListRelationFilter = {
     every?: PostWhereInput;
     some?: PostWhereInput;
@@ -3268,6 +5355,7 @@ export namespace Prisma {
     name?: SortOrder;
     password?: SortOrder;
     role?: SortOrder;
+    profile_img?: SortOrder;
   };
 
   export type UserAvgOrderByAggregateInput = {
@@ -3280,6 +5368,7 @@ export namespace Prisma {
     name?: SortOrder;
     password?: SortOrder;
     role?: SortOrder;
+    profile_img?: SortOrder;
   };
 
   export type UserMinOrderByAggregateInput = {
@@ -3288,6 +5377,7 @@ export namespace Prisma {
     name?: SortOrder;
     password?: SortOrder;
     role?: SortOrder;
+    profile_img?: SortOrder;
   };
 
   export type UserSumOrderByAggregateInput = {
@@ -3327,6 +5417,23 @@ export namespace Prisma {
     _max?: NestedStringFilter;
   };
 
+  export type StringNullableWithAggregatesFilter = {
+    equals?: string | null;
+    in?: Enumerable<string> | string | null;
+    notIn?: Enumerable<string> | string | null;
+    lt?: string;
+    lte?: string;
+    gt?: string;
+    gte?: string;
+    contains?: string;
+    startsWith?: string;
+    endsWith?: string;
+    not?: NestedStringNullableWithAggregatesFilter | string | null;
+    _count?: NestedIntNullableFilter;
+    _min?: NestedStringNullableFilter;
+    _max?: NestedStringNullableFilter;
+  };
+
   export type UserRelationFilter = {
     is?: UserWhereInput;
     isNot?: UserWhereInput;
@@ -3336,6 +5443,7 @@ export namespace Prisma {
     id?: SortOrder;
     title?: SortOrder;
     content?: SortOrder;
+    thumbnail?: SortOrder;
     userId?: SortOrder;
   };
 
@@ -3347,6 +5455,7 @@ export namespace Prisma {
     id?: SortOrder;
     title?: SortOrder;
     content?: SortOrder;
+    thumbnail?: SortOrder;
     userId?: SortOrder;
   };
 
@@ -3354,10 +5463,51 @@ export namespace Prisma {
     id?: SortOrder;
     title?: SortOrder;
     content?: SortOrder;
+    thumbnail?: SortOrder;
     userId?: SortOrder;
   };
 
   export type PostSumOrderByAggregateInput = {
+    id?: SortOrder;
+  };
+
+  export type WorkExprienceCountOrderByAggregateInput = {
+    id?: SortOrder;
+  };
+
+  export type WorkExprienceAvgOrderByAggregateInput = {
+    id?: SortOrder;
+  };
+
+  export type WorkExprienceMaxOrderByAggregateInput = {
+    id?: SortOrder;
+  };
+
+  export type WorkExprienceMinOrderByAggregateInput = {
+    id?: SortOrder;
+  };
+
+  export type WorkExprienceSumOrderByAggregateInput = {
+    id?: SortOrder;
+  };
+
+  export type IntroduceCountOrderByAggregateInput = {
+    id?: SortOrder;
+  };
+
+  export type IntroduceAvgOrderByAggregateInput = {
+    id?: SortOrder;
+  };
+
+  export type IntroduceMaxOrderByAggregateInput = {
+    id?: SortOrder;
+  };
+
+  export type IntroduceMinOrderByAggregateInput = {
+    id?: SortOrder;
+  };
+
+  export type IntroduceSumOrderByAggregateInput = {
     id?: SortOrder;
   };
 
@@ -3383,6 +5533,10 @@ export namespace Prisma {
 
   export type StringFieldUpdateOperationsInput = {
     set?: string;
+  };
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null;
   };
 
   export type PostUpdateManyWithoutUserNestedInput = {
@@ -3475,6 +5629,20 @@ export namespace Prisma {
     not?: NestedStringFilter | string;
   };
 
+  export type NestedStringNullableFilter = {
+    equals?: string | null;
+    in?: Enumerable<string> | string | null;
+    notIn?: Enumerable<string> | string | null;
+    lt?: string;
+    lte?: string;
+    gt?: string;
+    gte?: string;
+    contains?: string;
+    startsWith?: string;
+    endsWith?: string;
+    not?: NestedStringNullableFilter | string | null;
+  };
+
   export type NestedIntWithAggregatesFilter = {
     equals?: number;
     in?: Enumerable<number> | number;
@@ -3519,15 +5687,45 @@ export namespace Prisma {
     _max?: NestedStringFilter;
   };
 
+  export type NestedStringNullableWithAggregatesFilter = {
+    equals?: string | null;
+    in?: Enumerable<string> | string | null;
+    notIn?: Enumerable<string> | string | null;
+    lt?: string;
+    lte?: string;
+    gt?: string;
+    gte?: string;
+    contains?: string;
+    startsWith?: string;
+    endsWith?: string;
+    not?: NestedStringNullableWithAggregatesFilter | string | null;
+    _count?: NestedIntNullableFilter;
+    _min?: NestedStringNullableFilter;
+    _max?: NestedStringNullableFilter;
+  };
+
+  export type NestedIntNullableFilter = {
+    equals?: number | null;
+    in?: Enumerable<number> | number | null;
+    notIn?: Enumerable<number> | number | null;
+    lt?: number;
+    lte?: number;
+    gt?: number;
+    gte?: number;
+    not?: NestedIntNullableFilter | number | null;
+  };
+
   export type PostCreateWithoutUserInput = {
     title: string;
     content: string;
+    thumbnail: string;
   };
 
   export type PostUncheckedCreateWithoutUserInput = {
     id?: number;
     title: string;
     content: string;
+    thumbnail: string;
   };
 
   export type PostCreateOrConnectWithoutUserInput = {
@@ -3575,6 +5773,7 @@ export namespace Prisma {
     id?: IntFilter | number;
     title?: StringFilter | string;
     content?: StringFilter | string;
+    thumbnail?: StringFilter | string;
     userId?: StringFilter | string;
   };
 
@@ -3583,6 +5782,7 @@ export namespace Prisma {
     name: string;
     password: string;
     role: string;
+    profile_img?: string | null;
   };
 
   export type UserUncheckedCreateWithoutPostsInput = {
@@ -3591,6 +5791,7 @@ export namespace Prisma {
     name: string;
     password: string;
     role: string;
+    profile_img?: string | null;
   };
 
   export type UserCreateOrConnectWithoutPostsInput = {
@@ -3617,6 +5818,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     role?: StringFieldUpdateOperationsInput | string;
+    profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
   };
 
   export type UserUncheckedUpdateWithoutPostsInput = {
@@ -3625,29 +5827,34 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     role?: StringFieldUpdateOperationsInput | string;
+    profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
   };
 
   export type PostCreateManyUserInput = {
     id?: number;
     title: string;
     content: string;
+    thumbnail: string;
   };
 
   export type PostUpdateWithoutUserInput = {
     title?: StringFieldUpdateOperationsInput | string;
     content?: StringFieldUpdateOperationsInput | string;
+    thumbnail?: StringFieldUpdateOperationsInput | string;
   };
 
   export type PostUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number;
     title?: StringFieldUpdateOperationsInput | string;
     content?: StringFieldUpdateOperationsInput | string;
+    thumbnail?: StringFieldUpdateOperationsInput | string;
   };
 
   export type PostUncheckedUpdateManyWithoutPostsInput = {
     id?: IntFieldUpdateOperationsInput | number;
     title?: StringFieldUpdateOperationsInput | string;
     content?: StringFieldUpdateOperationsInput | string;
+    thumbnail?: StringFieldUpdateOperationsInput | string;
   };
 
   /**

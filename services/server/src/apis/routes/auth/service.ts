@@ -41,8 +41,8 @@ export class AuthService {
     }
 
     const isEqualPassword = await comparePassword(
-      userRecord.password,
-      body.password
+      body.password,
+      userRecord.password
     );
 
     if (!isEqualPassword) {

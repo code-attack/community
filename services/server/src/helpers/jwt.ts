@@ -23,7 +23,7 @@ const generateRefresh = (account_id: string) => {
 };
 
 interface JWTPayload {
-  userId: string;
+  account_id: string;
   iat: number;
   exp: number;
   sub: string;
