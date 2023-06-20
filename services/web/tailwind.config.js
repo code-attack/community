@@ -24,6 +24,10 @@ module.exports = {
       extraBold: 800,
       black: 900,
     },
+    screens: {
+      mb: { max: "360px" },
+      tb: { max: "834px" },
+    },
   },
   plugins: [],
 };
