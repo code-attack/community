@@ -13,6 +13,17 @@ module.exports = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
     },
+    fontWeight: {
+      thin: 100,
+      extraLight: 200,
+      light: 300,
+      regular: 400,
+      medium: 500,
+      semiBold: 600,
+      bold: 700,
+      extraBold: 800,
+      black: 900,
+    },
   },
   plugins: [],
 };
