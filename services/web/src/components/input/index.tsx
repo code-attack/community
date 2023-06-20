@@ -4,11 +4,17 @@ import { ChangeEvent, InputHTMLAttributes, useState } from "react";
 import { Text } from "../Text";
 import { Svg } from "@/assets";
 
-interface PropsType extends InputHTMLAttributes<HTMLInputElement> {
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   hint?: string[];
-  error?: boolean[];
+  error?: (keyof typeof errorType)[];
 }
+
+const errorType = {
+  success: "text-green-400 fill:green-400",
+  unCheck: "text-gray-500 fill:gray-500",
+  error: "text-red-500 fill:red-500",
+};
 
 export const Input = ({
   type,
@@ -19,7 +25,7 @@ export const Input = ({
   label,
   error,
   onChange,
-}: PropsType) => {
+}: Props) => {
   const [close, setClose] = useState<boolean>(true);
   const openEye = () => setClose(true);
   const closeEye = () => setClose(false);
@@ -32,7 +38,7 @@ export const Input = ({
         <input
           className={`pl-3 ${
             isPassword ? "pr-12" : "pr-3"
-          } w-full h-12 outline-none border-[1px] box-border border-gray200 rounded-[4px] focus:border-blue-500`}
+          } w-full h-12 outline-none border-[1px] box-border border-gray200 rounded-[4px] focus:shadow-[0px_0px_0px_2px_rgba(209,250,229,1)]`}
           type={close ? type : "text"}
           value={value}
           name={name}
@@ -49,12 +55,17 @@ export const Input = ({
         </div>
       </div>
       <div className="px-1">
-        {hint?.map((text) => (
-          <div className="flex items-center gap-1">
-            <Svg.Okay />
-            <Text.body5>{text}</Text.body5>
-          </div>
-        ))}
+        {error &&
+          hint?.map((text, idx) => {
+            return (
+              <div
+                className={`flex items-center gap-1 ${errorType[error[idx]]}`}
+              >
+                <Svg.Okay />
+                <Text.body5>{text}</Text.body5>
+              </div>
+            );
+          })}
       </div>
     </div>
   );
