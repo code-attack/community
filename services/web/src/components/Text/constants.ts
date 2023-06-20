@@ -1,4 +1,4 @@
-export const fontObject = {
+export const typograpy = {
   heading1: `font-semiBold text-[48px]`,
   heading2: `font-semiBold text-[36px]`,
   heading3: `font-semiBold text-[24px]`,
@@ -17,4 +17,4 @@ export const fontObject = {
   body5: `font-regular text-[10px]`,
 };
 
-export type keyOfFont = keyof typeof fontObject;
+export type KeyOfFont = keyof typeof typograpy;

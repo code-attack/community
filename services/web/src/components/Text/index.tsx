@@ -1,19 +1,25 @@
 import { ReactNode, createElement } from "react";
-import { fontObject, keyOfFont } from "./constants";
+import { typograpy, KeyOfFont } from "./constants";
 
-interface PropsType {
-  as?: "div" | "p" | "span" | "li";
+interface Props {
+  as?: keyof JSX.IntrinsicElements;
   className?: string;
-  size?: keyOfFont;
-  children?: ReactNode;
+  children: ReactNode;
 }
 
-export const Text = ({
-  as = "div",
-  className = "",
-  size = "body3",
-  children,
-}: PropsType) => {
-  const textClassName = `${className} ${fontObject[size]}`;
-  return createElement(as, { className: textClassName, children });
+const ComponentBind = (
+  typograpySize: string,
+  { className, ...props }: Props
+) => <SigleText className={`${className} ${typograpySize}`} {...props} />;
+
+export const Text = Object.entries(typograpy).reduce(
+  (arr, [key, value]) => ({
+    ...arr,
+    [key]: (props: Props) => ComponentBind(value, props),
+  }),
+  {} as { [key in KeyOfFont]: ({ as, className }: Props) => any }
+);
+
+const SigleText = ({ as = "div", className = "", children }: Props) => {
+  return createElement(as, { className, children });
 };
