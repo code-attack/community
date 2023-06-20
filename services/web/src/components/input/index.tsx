@@ -20,7 +20,7 @@ export const Input = ({
   error,
   onChange,
 }: PropsType) => {
-  const [close, setClose] = useState<boolean>(false);
+  const [close, setClose] = useState<boolean>(true);
   const openEye = () => setClose(true);
   const closeEye = () => setClose(false);
 
@@ -42,9 +42,9 @@ export const Input = ({
         <div className="absolute top-3 right-4">
           {isPassword &&
             (close ? (
-              <Svg.Close onClick={openEye} />
-            ) : (
               <Svg.Open onClick={closeEye} />
+            ) : (
+              <Svg.Close onClick={openEye} />
             ))}
         </div>
       </div>
