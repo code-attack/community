@@ -38,14 +38,16 @@ export default () => {
             </Button.Text>
           </Link>
           <Text.heading3 as="p">회원가입</Text.heading3>
-          <div className="flex flex-col gap-4 mt-14">
+          <div className="flex flex-col gap-5 mt-14">
             <Input
+              label="아이디"
               onChange={onChange}
               name="account_id"
               value={form.account_id}
               placeholder="example@email.com"
             />
             <Input
+              label="비밀번호"
               onChange={onChange}
               name="password"
               type="password"
@@ -53,6 +55,7 @@ export default () => {
               placeholder="••••••••"
             />
             <Input
+              label="이름"
               onChange={onChange}
               name="name"
               value={form.name}
