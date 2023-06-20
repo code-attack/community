@@ -11,22 +11,22 @@
 */
 
 export const fontObject = {
-  heading1: `font-[600] text-[48px]`,
-  heading2: `font-[600] text-[36px]`,
-  heading3: `font-[600] text-[24px]`,
-  heading4: `font-[700] text-[17px]`,
-  heading5: `font-[500] text-[14px]`,
-  heading6: `font-[400] text-[13px]`,
-  title1: `font-[600] text-[23px]`,
-  title2: `font-[500] text-[19px]`,
-  title3: `font-[400] text-[16px]`,
-  title4: `font-[500] text-[15px]`,
-  title5: `font-[600] text-[14px]`,
-  body1: `font-[400] text-[16px]`,
-  body2: `font-[400] text-[14px]`,
-  body3: `font-[400] text-[13px]`,
-  body4: `font-[400] text-[12px]`,
-  body5: `font-[400] text-[10px]`,
+  heading1: `font-semiBold text-[48px]`,
+  heading2: `font-semiBold text-[36px]`,
+  heading3: `font-semiBold text-[24px]`,
+  heading4: `font-bold text-[17px]`,
+  heading5: `font-medium text-[14px]`,
+  heading6: `font-regular text-[13px]`,
+  title1: `font-semiBold text-[23px]`,
+  title2: `font-medium text-[19px]`,
+  title3: `font-regular text-[16px]`,
+  title4: `font-medium text-[15px]`,
+  title5: `font-semiBold text-[14px]`,
+  body1: `font-regular text-[16px]`,
+  body2: `font-regular text-[14px]`,
+  body3: `font-regular text-[13px]`,
+  body4: `font-regular text-[12px]`,
+  body5: `font-regular text-[10px]`,
 };
 
 export type keyOfFont = keyof typeof fontObject;
