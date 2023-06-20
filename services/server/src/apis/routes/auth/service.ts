@@ -45,8 +45,6 @@ export class AuthService {
       userRecord.password
     );
 
-    console.log(userRecord.password, body.password);
-
     if (!isEqualPassword) {
       throw new ErrorResponse(commonError.unauthorized);
     }

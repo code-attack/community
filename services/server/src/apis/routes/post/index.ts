@@ -86,7 +86,7 @@ postRouter.get("/", async (req, res, next) => {
 
     const postRecord = await postService.getAll(+(req.query.from as string));
 
-    res.status(200).json({ post: postRecord, isLast: postRecord.length < 20 });
+    res.status(200).json({ post: postRecord, isLast: postRecord.length <= 20 });
   } catch (e) {
     next(e);
   }

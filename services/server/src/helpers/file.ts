@@ -1,6 +1,8 @@
 import multer from "multer";
 import path from "path";
 
+const KB30 = 30 * 1024 * 1024;
+
 export const file = multer({
   storage: multer.diskStorage({
     destination: (req, file, cb) => {
@@ -20,8 +22,8 @@ export const file = multer({
     ) {
       cb(null, true);
     } else {
-      cb(new Error("jpg,jpeg,png,gif,webp 파일만 업로드 가능합니다."));
+      cb(new Error("jpg, jpeg, png, gif, webp 파일만 업로드 가능합니다."));
     }
   },
-  limits: { fileSize: 30 * 1024 * 1024 },
+  limits: { fileSize: KB30 },
 });

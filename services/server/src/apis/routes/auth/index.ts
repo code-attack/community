@@ -45,7 +45,6 @@ authRouter.post(URI.SIGN_UP, async (req, res, next) => {
 
     res.status(201).json({ access_token, refresh_token });
   } catch (e) {
-    console.log(e);
     next(e);
   }
 });
