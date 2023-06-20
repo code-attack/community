@@ -1,4 +1,4 @@
-const URIS = ["auth", "sign-in", "sign-up"] as const;
+const URIS = ["auth", "sign-in", "sign-up", "post"] as const;
 type UriKey = ToSnakeCase<(typeof URIS)[number]>;
 
 type ToSnakeCase<T extends string> = T extends `${infer F}-${infer Rest}`

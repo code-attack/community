@@ -83,6 +83,13 @@ Prisma.NullTypes = {
  * Enums
  */
 
+exports.Prisma.PostScalarFieldEnum = {
+  id: "id",
+  title: "title",
+  content: "content",
+  userId: "userId",
+};
+
 exports.Prisma.SortOrder = {
   asc: "asc",
   desc: "desc",
@@ -105,6 +112,7 @@ exports.Prisma.UserScalarFieldEnum = {
 
 exports.Prisma.ModelName = {
   User: "User",
+  Post: "Post",
 };
 
 /**
