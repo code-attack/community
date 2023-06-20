@@ -1,15 +1,17 @@
 import cors from "cors";
 import morgan from "morgan";
-import { Application, json } from "express";
 
 import { router } from "../apis/routes";
 import { commonError } from "@/constants";
+import express, { Application, json, urlencoded } from "express";
 import { ErrorResponse } from "@/utils/error-res";
 import { errorHandler } from "@/apis/middlewares/error";
 
 export const loader = (app: Application) => {
   app.use(json());
+  app.use(urlencoded({ extended: false }));
 
+  app.use(express.static("public"));
   app.use(morgan("dev"));
   app.use(cors());
 

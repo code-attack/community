@@ -16,8 +16,8 @@ export class PostRepository {
     await client.post.update({ where: { id }, data: { ...postInfo } });
   };
 
-  getAll = async () => {
-    return await client.post.findMany({});
+  getAll = async (from: number) => {
+    return await client.post.findMany({ skip: from, take: from + 20 });
   };
 
   getById = async (id: number) => {

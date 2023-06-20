@@ -83,10 +83,15 @@ Prisma.NullTypes = {
  * Enums
  */
 
+exports.Prisma.IntroduceScalarFieldEnum = {
+  id: "id",
+};
+
 exports.Prisma.PostScalarFieldEnum = {
   id: "id",
   title: "title",
   content: "content",
+  thumbnail: "thumbnail",
   userId: "userId",
 };
 
@@ -108,11 +113,18 @@ exports.Prisma.UserScalarFieldEnum = {
   name: "name",
   password: "password",
   role: "role",
+  profile_img: "profile_img",
+};
+
+exports.Prisma.WorkExprienceScalarFieldEnum = {
+  id: "id",
 };
 
 exports.Prisma.ModelName = {
   User: "User",
   Post: "Post",
+  WorkExprience: "WorkExprience",
+  Introduce: "Introduce",
 };
 
 /**

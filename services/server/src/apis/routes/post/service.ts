@@ -23,8 +23,8 @@ export class PostService {
     await this.postRepository.removeById(+id);
   };
 
-  getAll = async () => {
-    return await this.postRepository.getAll();
+  getAll = async (from: number) => {
+    return await this.postRepository.getAll(from);
   };
 
   getById = async (id: string) => {

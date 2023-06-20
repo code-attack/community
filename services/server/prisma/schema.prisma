@@ -12,18 +12,28 @@ datasource db {
 }
 
 model User {
-  id         Int    @id @default(autoincrement())
-  account_id String @unique @db.VarChar(20)
-  name       String @db.VarChar(20)
-  password   String @db.Char(60)
-  role       String
-  posts      Post[]
+  id          Int     @id @default(autoincrement())
+  account_id  String  @unique @db.VarChar(20)
+  name        String  @db.VarChar(20)
+  password    String  @db.Char(60)
+  role        String
+  profile_img String?
+  posts       Post[]
 }
 
 model Post {
-  id      Int    @id @default(autoincrement())
-  title   String @db.VarChar(20)
-  content String
-  user    User   @relation(fields: [userId], references: [account_id])
-  userId  String
+  id        Int    @id @default(autoincrement())
+  title     String @db.VarChar(40)
+  content   String
+  thumbnail String
+  user      User   @relation(fields: [userId], references: [account_id])
+  userId    String
+}
+
+model WorkExprience {
+  id Int @id @default(autoincrement())
+}
+
+model Introduce {
+  id Int @id @default(autoincrement())
 }
