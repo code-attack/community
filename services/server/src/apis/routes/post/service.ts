@@ -10,15 +10,16 @@ export class PostService {
     this.postRepository = postRepository;
   }
 
-  create = async (postInfo: Post.CreateReq) => {
-    await this.postRepository.create(postInfo);
+  create = async (postInfo: Post.CreateReq, userId: string) => {
+    await this.postRepository.create(postInfo, userId);
   };
 
-  updateById = async (id: string, postInfo: Post.UpdateReq) => {
-    await this.postRepository.updateById(+id, postInfo);
+  updateById = async (id: string, postInfo: Post.UpdateReq, userId: string) => {
+    // Todo:본인 게시글인지 검증을 어떻게 하지?
+    await this.postRepository.updateById(+id, postInfo, userId);
   };
 
-  removeById = async (id: string) => {
+  removeById = async (id: string, userId: string) => {
     await this.postRepository.removeById(+id);
   };
 

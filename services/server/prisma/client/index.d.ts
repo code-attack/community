@@ -34,7 +34,7 @@ export type Post = {
   id: number;
   title: string;
   content: string;
-  userId: number;
+  userId: string;
 };
 
 /**
@@ -1997,26 +1997,24 @@ export namespace Prisma {
 
   export type PostAvgAggregateOutputType = {
     id: number | null;
-    userId: number | null;
   };
 
   export type PostSumAggregateOutputType = {
     id: number | null;
-    userId: number | null;
   };
 
   export type PostMinAggregateOutputType = {
     id: number | null;
     title: string | null;
     content: string | null;
-    userId: number | null;
+    userId: string | null;
   };
 
   export type PostMaxAggregateOutputType = {
     id: number | null;
     title: string | null;
     content: string | null;
-    userId: number | null;
+    userId: string | null;
   };
 
   export type PostCountAggregateOutputType = {
@@ -2029,12 +2027,10 @@ export namespace Prisma {
 
   export type PostAvgAggregateInputType = {
     id?: true;
-    userId?: true;
   };
 
   export type PostSumAggregateInputType = {
     id?: true;
-    userId?: true;
   };
 
   export type PostMinAggregateInputType = {
@@ -2146,7 +2142,7 @@ export namespace Prisma {
     id: number;
     title: string;
     content: string;
-    userId: number;
+    userId: string;
     _count: PostCountAggregateOutputType | null;
     _avg: PostAvgAggregateOutputType | null;
     _sum: PostSumAggregateOutputType | null;
@@ -3091,7 +3087,7 @@ export namespace Prisma {
     id?: IntFilter | number;
     title?: StringFilter | string;
     content?: StringFilter | string;
-    userId?: IntFilter | number;
+    userId?: StringFilter | string;
     user?: XOR<UserRelationFilter, UserWhereInput>;
   };
 
@@ -3126,7 +3122,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter | number;
     title?: StringWithAggregatesFilter | string;
     content?: StringWithAggregatesFilter | string;
-    userId?: IntWithAggregatesFilter | number;
+    userId?: StringWithAggregatesFilter | string;
   };
 
   export type UserCreateInput = {
@@ -3196,7 +3192,7 @@ export namespace Prisma {
     id?: number;
     title: string;
     content: string;
-    userId: number;
+    userId: string;
   };
 
   export type PostUpdateInput = {
@@ -3209,14 +3205,14 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     title?: StringFieldUpdateOperationsInput | string;
     content?: StringFieldUpdateOperationsInput | string;
-    userId?: IntFieldUpdateOperationsInput | number;
+    userId?: StringFieldUpdateOperationsInput | string;
   };
 
   export type PostCreateManyInput = {
     id?: number;
     title: string;
     content: string;
-    userId: number;
+    userId: string;
   };
 
   export type PostUpdateManyMutationInput = {
@@ -3228,7 +3224,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     title?: StringFieldUpdateOperationsInput | string;
     content?: StringFieldUpdateOperationsInput | string;
-    userId?: IntFieldUpdateOperationsInput | number;
+    userId?: StringFieldUpdateOperationsInput | string;
   };
 
   export type IntFilter = {
@@ -3345,7 +3341,6 @@ export namespace Prisma {
 
   export type PostAvgOrderByAggregateInput = {
     id?: SortOrder;
-    userId?: SortOrder;
   };
 
   export type PostMaxOrderByAggregateInput = {
@@ -3364,7 +3359,6 @@ export namespace Prisma {
 
   export type PostSumOrderByAggregateInput = {
     id?: SortOrder;
-    userId?: SortOrder;
   };
 
   export type PostCreateNestedManyWithoutUserInput = {
@@ -3581,7 +3575,7 @@ export namespace Prisma {
     id?: IntFilter | number;
     title?: StringFilter | string;
     content?: StringFilter | string;
-    userId?: IntFilter | number;
+    userId?: StringFilter | string;
   };
 
   export type UserCreateWithoutPostsInput = {

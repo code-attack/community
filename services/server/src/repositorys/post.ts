@@ -4,15 +4,15 @@ import { Post } from "@package/api-types";
 
 @Service()
 export class PostRepository {
-  create = async (postInfo: Post.CreateReq) => {
-    await client.post.create({ data: { ...postInfo } });
+  create = async (postInfo: Post.CreateReq, userId: string) => {
+    await client.post.create({ data: { ...postInfo, userId } });
   };
 
   removeById = async (id: number) => {
     await client.post.delete({ where: { id } });
   };
 
-  updateById = async (id: number, postInfo: Post.UpdateReq) => {
+  updateById = async (id: number, postInfo: Post.UpdateReq, userId: string) => {
     await client.post.update({ where: { id }, data: { ...postInfo } });
   };
 
