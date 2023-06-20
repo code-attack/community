@@ -1,36 +1,60 @@
 "use client";
 
-import { Close, Open } from "@/assets/svg";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, InputHTMLAttributes, useState } from "react";
 import { Text } from "../Text";
+import { Svg } from "@/assets";
 
-interface PropsType {
-  value: string;
-  name: string;
-  placeholder: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-
-  type?: "text" | "password";
-
+interface PropsType extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   hint?: string[];
   error?: boolean[];
 }
 
-export const Input = ({ type }: PropsType) => {
+export const Input = ({
+  type,
+  value,
+  name,
+  placeholder,
+  hint,
+  label,
+  error,
+  onChange,
+}: PropsType) => {
   const [close, setClose] = useState<boolean>(false);
-  const reverseClose = () => setClose(!close);
+  const openEye = () => setClose(true);
+  const closeEye = () => setClose(false);
+
+  const isPassword = type === "password";
   return (
     <div>
-      <Text.body3 className=" ml-1 mb-1">라벨입니다</Text.body3>
+      <Text.body3 className=" ml-1 mb-1">{label}</Text.body3>
       <div className="relative">
         <input
-          className=" w-full h-12 outline-none border-[1px] box-border border-gray200 rounded-[4px]"
+          className={`pl-3 ${
+            isPassword ? "pr-12" : "pr-3"
+          } w-full h-12 outline-none border-[1px] box-border border-gray200 rounded-[4px] focus:border-blue-500`}
           type={close ? type : "text"}
+          value={value}
+          name={name}
+          placeholder={placeholder}
+          onChange={onChange}
         />
         <div className="absolute top-3 right-4">
-          {close ? <Close /> : <Open />}
+          {isPassword &&
+            (close ? (
+              <Svg.Close onClick={openEye} />
+            ) : (
+              <Svg.Open onClick={closeEye} />
+            ))}
         </div>
+      </div>
+      <div className="px-1">
+        {hint?.map((text) => (
+          <div className="flex items-center gap-1">
+            <Svg.Okay />
+            <Text.body5>{text}</Text.body5>
+          </div>
+        ))}
       </div>
     </div>
   );
