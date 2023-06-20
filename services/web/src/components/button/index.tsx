@@ -1,9 +1,7 @@
-import { ReactNode } from "react";
+import { Contain } from "./Contain";
+import { Text } from "./Text";
 
-interface Props {
-  children: ReactNode;
-}
-
-export const Button = ({ children }: Props) => {
-  return <button className=" w-full bg-slate-200">{children}</button>;
+export const Button = {
+  Contain,
+  Text,
 };

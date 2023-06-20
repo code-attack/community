@@ -1,5 +1,5 @@
 import "./globals.css";
-import { pretendard } from "@/font";
+import { pretendard } from "@/assets/font";
 
 export default function RootLayout({
   children,
