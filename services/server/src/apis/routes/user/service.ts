@@ -9,7 +9,22 @@ export class UserService {
     this.userRepository = userRepository;
   }
 
-  getAll = async () => {};
+  getAll = async () => {
+    return await this.userRepository.findUserProfile();
+  };
 
-  getById = async (id: string) => {};
+  getById = async (id: string) => {
+    return await this.userRepository.findUserProfileById(+id);
+  };
+
+  writeProfile = async (
+    type: "introduce" | "work-experience",
+    account_id: string
+  ) => {
+    switch (type) {
+      case "introduce":
+
+      case "work-experience":
+    }
+  };
 }

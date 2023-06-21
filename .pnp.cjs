@@ -6476,6 +6476,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:20.3.1"],\
             ["@types/react", "npm:18.2.12"],\
             ["@types/react-dom", "npm:18.2.5"],\
+            ["@types/react-outside-click-handler", "npm:1.3.1"],\
             ["autoprefixer", "virtual:02c685ac45e3556ae486bf479bf384a01b7a1cc732f101d34d908ec80ca9db1259c681b853ed73abf360a3e84590c85064fbec6242ee00a1c1ca0e1e6a83e267#npm:10.4.14"],\
             ["axios", "npm:1.4.0"],\
             ["next", "virtual:02c685ac45e3556ae486bf479bf384a01b7a1cc732f101d34d908ec80ca9db1259c681b853ed73abf360a3e84590c85064fbec6242ee00a1c1ca0e1e6a83e267#npm:13.4.6"],\
@@ -17035,7 +17036,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["object.values", "npm:1.1.6"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:18.2.0"],\
-            ["react-dom", "virtual:d3fc4307d1b1fe8c6002ecd7a5a631a751b982f8c852409d6e4a134c545fe3cc0e32052807a791e8181e7f4899aa78cc5c684fa85156755d17c1547ec99e4e1e#npm:18.2.0"]\
+            ["react-dom", "virtual:02c685ac45e3556ae486bf479bf384a01b7a1cc732f101d34d908ec80ca9db1259c681b853ed73abf360a3e84590c85064fbec6242ee00a1c1ca0e1e6a83e267#npm:18.2.0"]\
           ],\
           "packagePeers": [\
             "@types/react-dom",\

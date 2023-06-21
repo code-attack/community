@@ -12,17 +12,22 @@ datasource db {
 }
 
 model User {
-  id            Int             @id @default(autoincrement())
-  account_id    String          @unique @db.VarChar(20)
-  name          String          @db.VarChar(20)
-  password      String          @db.Char(60)
-  role          String          @db.VarChar(5)
+  id            Int              @id @default(autoincrement())
+  account_id    String           @unique @db.VarChar(20)
+  name          String           @db.VarChar(20)
+  password      String           @db.Char(60)
+  role          String           @db.VarChar(5)
   tag           String?
-  technology    String?
+  technology    Technology[]
   profile_img   String?
   posts         Post[]
-  workExprience WorkExprience[]
-  Introduce     Introduce?
+  workExperience WorkExperience[]
+  introduce     Introduce?
+}
+
+model Technology {
+  id   Int    @id @default(autoincrement())
+  user User[]
 }
 
 model Post {
@@ -34,16 +39,16 @@ model Post {
   userId    String
 }
 
-model WorkExprience {
-  id     Int    @id @default(autoincrement())
-  name   String
-  field  String
-  User   User   @relation(fields: [userId], references: [account_id])
-  userId String
+model WorkExperience {
+  name      String
+  field     String
+  startDate String
+  endDate   String?
+  User      User    @relation(fields: [userId], references: [account_id])
+  userId    String  @unique
 }
 
 model Introduce {
-  id      Int    @id @default(autoincrement())
   content String
   User    User   @relation(fields: [userId], references: [account_id])
   userId  String @unique
