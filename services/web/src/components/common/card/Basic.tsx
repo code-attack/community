@@ -19,18 +19,26 @@ export const Basic = ({
   profile,
 }: Props) => {
   return (
-    <article className="w-80">
-      <div className="relative">
-        <Image fill src={thumbnail} alt="thumbnail" />
+    <article className="relative w-80 h-[382px] flex flex-col gap-[17px]">
+      <div className="relative h-[180px]">
+        <Image fill src="/auth.png" alt="thumbnail" />
       </div>
-      <Image src={profile} width={28} height={28} alt="profile" />
-      <p>
-        <span>{name}</span>
-        <span></span>
-        <span>{date}</span>
-      </p>
-      <Text.title2>{title}</Text.title2>
-      <Text.body1 className="bg-gray-500">{title}</Text.body1>
+      <div className="absolute top-[160px] bg-white right-[33px] p-1.5 justify-center w-[40px] h-[40px] rounded-full">
+        <div className="relative w-full h-full rounded-full overflow-hidden">
+          <Image src="/auth.png" alt="profile" fill />
+        </div>
+      </div>
+      <div className="flex flex-col gap-y-[6px] ">
+        <p className="flex gap-[10px]">
+          <span className="text-gray-500">{name}</span>
+          <span className="text-gray-300">|</span>
+          <span className="text-gray-400">{date}</span>
+        </p>
+        <Text.title2>{title}</Text.title2>
+        <Text.body1 className="text-gray-800 break-all text-ellipsis">
+          {content}
+        </Text.body1>
+      </div>
     </article>
   );
 };
