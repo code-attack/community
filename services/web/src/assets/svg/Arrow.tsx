@@ -1,5 +1,30 @@
-export const Arrow = () => (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+import { SvgPropsType } from ".";
+
+interface Props extends SvgPropsType {
+  direction?: "left" | "top" | "right" | "bottom";
+}
+
+const rotate = {
+  left: "rotate-[0deg]",
+  top: "rotate-[90deg]",
+  right: "rotate-[180deg]",
+  bottom: "rotate-[270deg]",
+};
+
+export const Arrow = ({
+  onClick,
+  className,
+  size = 16,
+  direction = "left",
+}: Props) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 16 16"
+    fill="none"
+    onClick={onClick}
+    className={`cursor-pointer ${rotate[direction]} ${className}`}
+  >
     <path
       fillRule="evenodd"
       clipRule="evenodd"

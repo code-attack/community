@@ -1,7 +1,10 @@
+"use client";
+
 import { Text } from "@/components/common/text";
 import { Header } from "@/components/common/header";
 import Image from "next/image";
 import { Footer } from "@/components/common/footer";
+import { DateInput } from "@/components/common/date";
 
 export default function Home() {
   return (
