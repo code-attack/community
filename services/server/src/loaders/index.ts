@@ -6,10 +6,27 @@ import { commonError } from "@/constants";
 import express, { Application, json, urlencoded } from "express";
 import { ErrorResponse } from "@/utils/error-res";
 import { errorHandler } from "@/apis/middlewares/error";
+import http from "http";
+import { Server } from "socket.io";
 
 export const loader = (app: Application) => {
   app.use(json());
   app.use(urlencoded({ extended: false }));
+
+  const server = http.createServer(app);
+  const io = new Server(server);
+
+  io.of("/chat").on("connection", (socket) => {
+    socket.on("chat message", (msg) => {
+      io.emit("chat message", msg);
+    });
+
+    socket.on("disconnect", () => {
+      console.log("user disconnected");
+    });
+  });
+
+  server.listen(3001);
 
   app.use(express.static("public"));
   app.use(morgan("dev"));

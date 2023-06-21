@@ -1,5 +1,5 @@
 {
-    "name": "community",
+    "name": "mentos",
     "packageManager": "yarn@3.6.0",
     "workspaces": {
         "packages": [

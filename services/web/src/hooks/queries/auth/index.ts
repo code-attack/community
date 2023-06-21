@@ -11,8 +11,8 @@ export const useSignUp = (form: Auth.SignUpReq) => {
   return useMutation([URI.SIGN_UP], () => route.post(URI.SIGN_UP, form), {
     onSuccess: () => {
       const router = useRouter();
-      toast.success("회원가입 성공");
       router.push("/");
+      toast.success("회원가입 성공");
     },
     onError: () => {
       toast.error("회원가입 실패");
@@ -24,8 +24,8 @@ export const useSignIn = (form: Auth.SignInReq) => {
   return useMutation([URI.SIGN_IN], () => route.post(URI.SIGN_IN, form), {
     onSuccess: () => {
       const router = useRouter();
-      toast.success("로그인 성공");
       router.push("/");
+      toast.success("로그인 성공");
     },
     onError: () => {
       toast.error("로그인 실패");

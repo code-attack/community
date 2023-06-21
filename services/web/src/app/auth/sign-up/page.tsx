@@ -10,7 +10,7 @@ import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { Auth } from "@package/api-types";
 import { useForm } from "@/hooks/useForm";
-import { query } from "@/hooks/queries";
+import { query } from "@/hooks";
 
 export default () => {
   const { form, onChange, setForm } = useForm<Auth.SignUpReq>({
@@ -20,7 +20,7 @@ export default () => {
     role: "menti",
   });
 
-  const { mutate } = query.useSignUp(form);
+  const { mutate } = query.auth.useSignUp(form);
 
   const signUp = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -34,11 +34,13 @@ export default () => {
         className="w-1/2 flex justify-center px-4 tb:flex-1"
       >
         <div className="w-96 m-auto">
-          <Link href={"/"}>
-            <Button.Text Icon={<Svg.Arrow />} className="w-28">
-              홈으로
-            </Button.Text>
-          </Link>
+          <div className="w-fit">
+            <Link href={"/"}>
+              <Button.Text Icon={<Svg.Arrow />} className="w-28 mb-4">
+                홈으로
+              </Button.Text>
+            </Link>
+          </div>
           <Text.heading3 as="p">회원가입</Text.heading3>
           <div className="flex flex-col gap-5 mt-14">
             <Input.Basic

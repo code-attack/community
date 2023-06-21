@@ -10,6 +10,7 @@ import { FormEvent, useState } from "react";
 import { Auth } from "@package/api-types";
 import { useForm } from "@/hooks/useForm";
 import { query } from "@/hooks";
+import { toast } from "react-hot-toast";
 
 export default () => {
   const { form, onChange, setForm } = useForm<Auth.SignInReq>({
@@ -31,11 +32,13 @@ export default () => {
         className="w-1/2 flex justify-center px-4 tb:flex-1"
       >
         <div className="w-96 m-auto">
-          <Link href={"/"}>
-            <Button.Text Icon={<Svg.Arrow />} className="w-28">
-              홈으로
-            </Button.Text>
-          </Link>
+          <div className="w-fit">
+            <Link href={"/"}>
+              <Button.Text Icon={<Svg.Arrow />} className="w-28 mb-4">
+                홈으로
+              </Button.Text>
+            </Link>
+          </div>
           <Text.heading3 as="p">로그인</Text.heading3>
           <div className="flex flex-col gap-5 my-14">
             <Input.Basic
@@ -51,6 +54,7 @@ export default () => {
               name="password"
               value={form.password}
               placeholder="••••••••"
+              type="password"
             />
           </div>
           <Button.Contain>로그인</Button.Contain>

@@ -48,3 +48,17 @@ authRouter.post(URI.SIGN_UP, async (req, res, next) => {
     next(e);
   }
 });
+
+authRouter.get("/", async (req, res, next) => {
+  try {
+  } catch (e) {
+    next(e);
+  }
+});
+
+authRouter.delete("/", async (req, res, next) => {
+  try {
+  } catch (e) {
+    next(e);
+  }
+});

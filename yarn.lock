@@ -5963,24 +5963,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"community@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "community@workspace:."
-  dependencies:
-    husky: ">=6"
-    lint-staged: ">=10"
-    pinst: ">=2"
-    prettier: ^2.8.8
-    prettier-plugin-tailwindcss: ^0.3.0
-    typescript: 5.0.4
-  dependenciesMeta:
-    "@prisma/client@4.15.0":
-      unplugged: true
-    prisma@4.15.0:
-      unplugged: true
-  languageName: unknown
-  linkType: soft
-
 "compressible@npm:~2.0.16":
   version: 2.0.18
   resolution: "compressible@npm:2.0.18"
@@ -9243,6 +9225,24 @@ __metadata:
   checksum: d51bdc3ed8c39b4b73845c90eb62d243ddf21899914352d0c303f5e1d477abcb192f4c605e008caa4a31d823225eeb22a99ba5ee825fb88d0c33382db3aee95a
   languageName: node
   linkType: hard
+
+"mentos@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "mentos@workspace:."
+  dependencies:
+    husky: ">=6"
+    lint-staged: ">=10"
+    pinst: ">=2"
+    prettier: ^2.8.8
+    prettier-plugin-tailwindcss: ^0.3.0
+    typescript: 5.0.4
+  dependenciesMeta:
+    "@prisma/client@4.15.0":
+      unplugged: true
+    prisma@4.15.0:
+      unplugged: true
+  languageName: unknown
+  linkType: soft
 
 "merge-descriptors@npm:1.0.1":
   version: 1.0.1
