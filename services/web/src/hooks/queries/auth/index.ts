@@ -15,9 +15,20 @@ export const useSignUp = (form: Auth.SignUpReq) => {
       router.push("/");
     },
     onError: () => {
-      toast.error("회원가입 성공");
+      toast.error("회원가입 실패");
     },
   });
 };
 
-export const useSignIn = () => {};
+export const useSignIn = (form: Auth.SignInReq) => {
+  return useMutation([URI.SIGN_IN], () => route.post(URI.SIGN_IN, form), {
+    onSuccess: () => {
+      const router = useRouter();
+      toast.success("로그인 성공");
+      router.push("/");
+    },
+    onError: () => {
+      toast.error("로그인 실패");
+    },
+  });
+};

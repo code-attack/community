@@ -1,22 +1,35 @@
 "use client";
 
 import { Svg } from "@/assets";
-import { Button, Input, Switch } from "@/components";
-import { Text } from "@/components/Text";
+import { Button } from "@/components/common/button";
+import { Input } from "@/components/common/input";
+import { Text } from "@/components/common/text";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { Auth } from "@package/api-types";
+import { useForm } from "@/hooks/useForm";
+import { query } from "@/hooks";
 
 export default () => {
-  const [signInState, setSignInState] = useState<Auth.SignInReq>({
+  const { form, onChange, setForm } = useForm<Auth.SignInReq>({
     account_id: "",
     password: "",
   });
 
+  const { mutate } = query.auth.useSignIn(form);
+
+  const signIn = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    mutate();
+  };
+
   return (
     <div className="flex">
-      <div className="w-1/2 flex justify-center px-4 tb:flex-1">
+      <form
+        onSubmit={signIn}
+        className="w-1/2 flex justify-center px-4 tb:flex-1"
+      >
         <div className="w-96 m-auto">
           <Link href={"/"}>
             <Button.Text Icon={<Svg.Arrow />} className="w-28">
@@ -24,17 +37,19 @@ export default () => {
             </Button.Text>
           </Link>
           <Text.heading3 as="p">로그인</Text.heading3>
-          <div className="flex flex-col gap-4 my-14">
-            <Input
-              onChange={() => {}}
+          <div className="flex flex-col gap-5 my-14">
+            <Input.Basic
+              label="아이디"
+              onChange={onChange}
               name="account_id"
-              value={signInState.account_id}
+              value={form.account_id}
               placeholder="example@email.com"
             />
-            <Input
-              onChange={() => {}}
+            <Input.Basic
+              label="비밀번호"
+              onChange={onChange}
               name="password"
-              value={signInState.password}
+              value={form.password}
               placeholder="••••••••"
             />
           </div>
@@ -43,7 +58,7 @@ export default () => {
             <Button.Text className="mt-2">회원가입</Button.Text>
           </Link>
         </div>
-      </div>
+      </form>
       <div className="h-screen w-1/2 relative tb:hidden">
         <Image className="object-cover" fill src="/auth.png" alt="wqd" />
       </div>

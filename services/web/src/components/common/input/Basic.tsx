@@ -1,7 +1,7 @@
 "use client";
 
 import { ChangeEvent, InputHTMLAttributes, useState } from "react";
-import { Text } from "../Text";
+import { Text } from "../text";
 import { Svg } from "@/assets";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
@@ -16,7 +16,7 @@ const errorType = {
   error: "text-red-500 fill:red-500",
 };
 
-export const Input = ({
+export const Basic = ({
   type,
   value,
   name,
@@ -45,14 +45,14 @@ export const Input = ({
           placeholder={placeholder}
           onChange={onChange}
         />
-        <div className="absolute top-3 right-4">
+        <button className="absolute top-3 right-4 cursor-pointer">
           {isPassword &&
             (close ? (
-              <Svg.Open onClick={closeEye} />
+              <Svg.Close onClick={closeEye} />
             ) : (
-              <Svg.Close onClick={openEye} />
+              <Svg.Open onClick={openEye} />
             ))}
-        </div>
+        </button>
       </div>
       <div className="px-1">
         {error &&

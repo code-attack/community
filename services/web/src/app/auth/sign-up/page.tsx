@@ -1,8 +1,10 @@
 "use client";
 
 import { Svg } from "@/assets";
-import { Button, Input, Switch } from "@/components";
-import { Text } from "@/components/Text";
+import { Button } from "@/components/common/button";
+import { Input } from "@/components/common/input";
+import { Switch } from "@/components/common/switch";
+import { Text } from "@/components/common/text";
 import Image from "next/image";
 import Link from "next/link";
 import { FormEvent, useState } from "react";
@@ -39,14 +41,14 @@ export default () => {
           </Link>
           <Text.heading3 as="p">회원가입</Text.heading3>
           <div className="flex flex-col gap-5 mt-14">
-            <Input
+            <Input.Basic
               label="아이디"
               onChange={onChange}
               name="account_id"
               value={form.account_id}
               placeholder="example@email.com"
             />
-            <Input
+            <Input.Basic
               label="비밀번호"
               onChange={onChange}
               name="password"
@@ -54,7 +56,7 @@ export default () => {
               value={form.password}
               placeholder="••••••••"
             />
-            <Input
+            <Input.Basic
               label="이름"
               onChange={onChange}
               name="name"

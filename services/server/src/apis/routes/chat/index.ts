@@ -1,8 +1,12 @@
 import { Router } from "express";
-import { Server as io } from "socket.io";
+import { Server } from "socket.io";
+import { DefaultEventsMap } from "socket.io/dist/typed-events";
 
-const chatRouter = Router();
+export const chatRouter = new Server().of("/");
 
-// io.on("connection", (socket: any) => {
-//   console.log(socket);
-// });
+chatRouter.on("connection", (socket) => {
+  console.log(socket);
+  socket.on("chat message", (msg) => {
+    console.log("message: " + msg);
+  });
+});
