@@ -1,5 +1,5 @@
 {
-  "name": "react-sb",
+  "name": "@template/react-sb",
   "packageManager": "yarn@3.5.0",
   "main": "./src/index.ts",
   "devDependencies": {
