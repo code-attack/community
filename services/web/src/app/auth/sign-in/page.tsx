@@ -34,7 +34,11 @@ export default () => {
         <div className="w-96 m-auto">
           <div className="w-fit">
             <Link href={"/"}>
-              <Button.Text Icon={<Svg.Arrow />} className="w-28 mb-4">
+              <Button.Text
+                type="button"
+                Icon={<Svg.Arrow />}
+                className="w-28 mb-4"
+              >
                 홈으로
               </Button.Text>
             </Link>
@@ -59,7 +63,9 @@ export default () => {
           </div>
           <Button.Contain>로그인</Button.Contain>
           <Link href={"/auth/sign-up"}>
-            <Button.Text className="mt-2">회원가입</Button.Text>
+            <Button.Text type="button" className="mt-2">
+              회원가입
+            </Button.Text>
           </Link>
         </div>
       </form>
