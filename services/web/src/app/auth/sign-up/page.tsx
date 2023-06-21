@@ -10,7 +10,7 @@ import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { Auth } from "@package/api-types";
 import { useForm } from "@/hooks/useForm";
-import { query } from "@/hooks/queries";
+import { query } from "@/hooks";
 
 export default () => {
   const { form, onChange, setForm } = useForm<Auth.SignUpReq>({
@@ -20,7 +20,7 @@ export default () => {
     role: "menti",
   });
 
-  const { mutate } = query.useSignUp(form);
+  const { mutate } = query.auth.useSignUp(form);
 
   const signUp = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

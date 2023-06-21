@@ -1,5 +1,6 @@
 {
     "name": "community",
+    "private": true,
     "packageManager": "yarn@3.6.0",
     "workspaces": {
         "packages": [
