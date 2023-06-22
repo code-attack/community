@@ -6,11 +6,10 @@ import { Input } from "@/components/common/input";
 import { Text } from "@/components/common/text";
 import Image from "next/image";
 import Link from "next/link";
-import { FormEvent, useState } from "react";
+import { FormEvent } from "react";
 import { Auth } from "@package/api-types";
 import { useForm } from "@/hooks/useForm";
 import { query } from "@/hooks";
-import { toast } from "react-hot-toast";
 
 export default () => {
   const { form, onChange, setForm } = useForm<Auth.SignInReq>({
