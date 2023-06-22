@@ -25,52 +25,47 @@ export default () => {
   };
 
   return (
-    <div className="flex">
-      <form
-        onSubmit={signIn}
-        className="w-1/2 flex justify-center px-4 tb:flex-1"
-      >
-        <div className="w-96 m-auto">
-          <div className="w-fit">
-            <Link href={"/"}>
-              <Button.Text
-                type="button"
-                Icon={<Svg.Arrow />}
-                className="w-28 mb-4"
-              >
-                홈으로
-              </Button.Text>
-            </Link>
-          </div>
-          <Text.heading3 as="p">로그인</Text.heading3>
-          <div className="flex flex-col gap-5 my-14">
-            <Input.Basic
-              label="아이디"
-              onChange={onChange}
-              name="account_id"
-              value={form.account_id}
-              placeholder="example@email.com"
-            />
-            <Input.Basic
-              label="비밀번호"
-              onChange={onChange}
-              name="password"
-              value={form.password}
-              placeholder="••••••••"
-              type="password"
-            />
-          </div>
-          <Button.Contain>로그인</Button.Contain>
-          <Link href={"/auth/sign-up"}>
-            <Button.Text type="button" className="mt-2">
-              회원가입
+    <form
+      onSubmit={signIn}
+      className="w-1/2 flex justify-center px-4 tb:flex-1"
+    >
+      <div className="w-96 m-auto">
+        <div className="w-fit">
+          <Link href={"/"}>
+            <Button.Text
+              type="button"
+              Icon={<Svg.Arrow />}
+              className="w-28 mb-4"
+            >
+              홈으로
             </Button.Text>
           </Link>
         </div>
-      </form>
-      <div className="h-screen w-1/2 relative tb:hidden">
-        <Image className="object-cover" fill src="/auth.png" alt="wqd" />
+        <Text.heading3 as="p">로그인</Text.heading3>
+        <div className="flex flex-col gap-5 my-14">
+          <Input.Basic
+            label="아이디"
+            onChange={onChange}
+            name="account_id"
+            value={form.account_id}
+            placeholder="example@email.com"
+          />
+          <Input.Basic
+            label="비밀번호"
+            onChange={onChange}
+            name="password"
+            value={form.password}
+            placeholder="••••••••"
+            type="password"
+          />
+        </div>
+        <Button.Contain>로그인</Button.Contain>
+        <Link href={"/auth/sign-up"}>
+          <Button.Text type="button" className="mt-2">
+            회원가입
+          </Button.Text>
+        </Link>
       </div>
-    </div>
+    </form>
   );
 };

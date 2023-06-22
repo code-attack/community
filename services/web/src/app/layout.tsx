@@ -1,13 +1,14 @@
-import "./globals.css";
+import "../styles/globals.css";
 import { pretendard } from "@/assets/font";
 import { Providers } from "@/helpers/query/provider";
+import { ReactNode } from "react";
 import { Toaster } from "react-hot-toast";
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+interface Props {
+  children: ReactNode;
+}
+
+const RootLayout = ({ children }: Props) => {
   return (
     <html lang="en">
       <body className={pretendard.className}>
@@ -18,4 +19,6 @@ export default function RootLayout({
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;

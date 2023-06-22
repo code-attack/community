@@ -1,3 +1,5 @@
+"use client";
+
 import { Text } from "@/components/common/text";
 import { Header } from "@/components/common/header";
 import Image from "next/image";

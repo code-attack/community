@@ -1,5 +1,5 @@
 import { UserRepository } from "@/repositorys/user";
-import { Inject, Service } from "typedi";
+import { Service } from "typedi";
 import { Auth } from "@package/api-types";
 import { ErrorResponse } from "@/utils/error-res";
 import { commonError } from "@/constants";
@@ -14,7 +14,7 @@ export class AuthService {
     this.userRepository = userRepository;
   }
 
-  signUp = async (body: Auth.SignUpReq) => {
+  signUp = async (body: Auth.SingUp<"req">) => {
     const isAlreadyUser = await this.userRepository.findUser(body.account_id);
 
     if (isAlreadyUser) {
@@ -33,7 +33,7 @@ export class AuthService {
     return jwtHelper.generateToken(userInfo.account_id);
   };
 
-  signIn = async (body: Auth.SignInReq) => {
+  signIn = async (body: Auth.SignIn<"req">) => {
     const userRecord = await this.userRepository.findUser(body.account_id);
 
     if (!userRecord) {

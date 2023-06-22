@@ -4,17 +4,18 @@ import { URI } from "@package/constant";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { Auth } from "@package/api-types";
-import { setAuthToken } from "@/hooks/localstorage/auth";
+import { storage } from "@/helpers/storage";
 
 const route = instance(URI.AUTH);
 
-export const useSignUp = (form: Auth.SignUpReq) => {
+export const useSignUp = (form: Auth.SingUp<"req">) => {
   const { push } = useRouter();
-  return useMutation([URI.SIGN_UP], () => route.post(URI.SIGN_UP, form), {
+  return useMutation(() => route.post<Auth.SingUp<"res">>(URI.SIGN_UP, form), {
     onSuccess: ({ data }) => {
       const { access_token, refresh_token } = data;
       push("/");
-      setAuthToken(access_token, refresh_token);
+      storage.setLocal("ACCESS", access_token);
+      storage.setLocal("REFRESH", refresh_token);
       toast.success("회원가입 성공");
     },
     onError: () => {
@@ -23,13 +24,14 @@ export const useSignUp = (form: Auth.SignUpReq) => {
   });
 };
 
-export const useSignIn = (form: Auth.SignInReq) => {
+export const useSignIn = (form: Auth.SignIn<"req">) => {
   const { push } = useRouter();
-  return useMutation([URI.SIGN_IN], () => route.post(URI.SIGN_IN, form), {
+  return useMutation(() => route.post<Auth.SignIn<"res">>(URI.SIGN_IN, form), {
     onSuccess: ({ data }) => {
       const { access_token, refresh_token } = data;
       push("/");
-      setAuthToken(access_token, refresh_token);
+      storage.setLocal("ACCESS", access_token);
+      storage.setLocal("REFRESH", refresh_token);
       toast.success("로그인 성공");
     },
     onError: (e: any) => {

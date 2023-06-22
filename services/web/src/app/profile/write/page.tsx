@@ -4,7 +4,6 @@ import { Button } from "@/components/common/button";
 import { Input } from "@/components/common/input";
 import { Text } from "@/components/common/text";
 import { Header } from "@/components/common/header";
-import { TextArea } from "@/components/common/input/TextArea";
 import Link from "next/link";
 import { Svg } from "@/assets";
 import Image from "next/image";
@@ -79,15 +78,11 @@ const Main = ({
             <div className="border-l-2 border-gray-100 h-[calc(100%-10px)] w-[2px] top-5 left-[7px] absolute" />
             <div>
               <Text.title2 className="text-gray-400 before:w-4 before:h-4 before:border-4 before:border-gray200 before:rounded-full before:absolute before:left-0 before:top-2">
-                회사명
+                {work.name}
               </Text.title2>
-              <Text.body1>{work.name}</Text.body1>
               <Text.body1>
                 {work.startDate} ~ {work.endDate && work.endDate}
               </Text.body1>
-            </div>
-            <div>
-              <Text.title2 className="text-gray-400">직무</Text.title2>
               <Text.body1>{work.field}</Text.body1>
             </div>
           </div>

@@ -11,7 +11,7 @@ export const authRouter = Router();
 authRouter.post(URI.SIGN_IN, async (req, res, next) => {
   try {
     validation(
-      Joi.object<any, true, Auth.SignInReq>({
+      Joi.object<any, true, Auth.SignIn<"req">>({
         account_id: Joi.string().max(20).required(),
         password: Joi.string().min(8).max(20).required(),
       }),
@@ -29,7 +29,7 @@ authRouter.post(URI.SIGN_IN, async (req, res, next) => {
 authRouter.post(URI.SIGN_UP, async (req, res, next) => {
   try {
     validation(
-      Joi.object<any, true, Auth.SignUpReq>({
+      Joi.object<any, true, Auth.SingUp<"req">>({
         account_id: Joi.string().max(20).required(),
         // To-do: 비밀번호 특수문자 정규식
         password: Joi.string().min(8).max(20).required(),

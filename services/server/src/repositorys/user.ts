@@ -4,7 +4,7 @@ import { Service } from "typedi";
 
 @Service()
 export class UserRepository {
-  createUser = async (userInfo: Auth.SignUpReq) => {
+  createUser = async (userInfo: Auth.SingUp<"req">) => {
     await client.user.create({
       data: { ...userInfo },
     });
