@@ -11,8 +11,10 @@ const route = instance(URI.AUTH);
 export const useSignUp = (form: Auth.SignUpReq) => {
   const { push } = useRouter();
   return useMutation([URI.SIGN_UP], () => route.post(URI.SIGN_UP, form), {
-    onSuccess: () => {
-      push("/auth/sign-in");
+    onSuccess: ({ data }) => {
+      const { access_token, refresh_token } = data;
+      push("/");
+      setAuthToken(access_token, refresh_token);
       toast.success("회원가입 성공");
     },
     onError: () => {
@@ -26,7 +28,6 @@ export const useSignIn = (form: Auth.SignInReq) => {
   return useMutation([URI.SIGN_IN], () => route.post(URI.SIGN_IN, form), {
     onSuccess: ({ data }) => {
       const { access_token, refresh_token } = data;
-
       push("/");
       setAuthToken(access_token, refresh_token);
       toast.success("로그인 성공");
