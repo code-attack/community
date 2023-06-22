@@ -1,7 +1,7 @@
 import { Text } from "@/components/common/text";
 import { clearAuthToken, getAuthToken } from "@/hooks/localstorage/auth";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import OutsideClickHandler from "react-outside-click-handler";
 import { Button } from "../button";
 import { LinkButtonList, headerLink } from "./constants";
@@ -12,6 +12,14 @@ const dummy =
 
 export const Header = () => {
   const isLogin = getAuthToken();
+
+  const [isTop, setTop] = useState<boolean>(false);
+  useEffect(() => {
+    document.addEventListener("scroll", (e) => {
+      const isTop = (e.target as any).documentElement.scrollTop;
+      setTop(isTop);
+    });
+  }, []);
   const [dropdown, setDropdown] = useState<boolean>(false);
   const openDropdown = () => setDropdown(true);
   const closeDropdown = () => setDropdown(false);
@@ -24,8 +32,16 @@ export const Header = () => {
   };
   return (
     <>
-      <header className="fixed right-0 left-0 bg-white z-10">
-        <div className="h-20 px-4 w-[1192px] m-auto flex items-center justify-between">
+      <header
+        className={`fixed right-0 left-0 bg-white z-10 transition-all ${
+          isTop && "shadow-md"
+        }`}
+      >
+        <div
+          className={` transition-all ${
+            isTop ? "h-16" : "h-20"
+          } px-4 w-[1192px] m-auto flex items-center justify-between`}
+        >
           <Link className="flex items-center" href={"/"}>
             <div className="bg-slate-400 w-7 h-7"></div>
             <Text.title2 className="pl-3">Mentos</Text.title2>
