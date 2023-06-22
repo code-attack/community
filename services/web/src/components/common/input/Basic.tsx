@@ -25,6 +25,7 @@ export const Basic = ({
   label,
   error,
   onChange,
+  ...otherEvent
 }: Props) => {
   const [close, setClose] = useState<boolean>(true);
   const openEye = () => setClose(true);
@@ -46,6 +47,7 @@ export const Basic = ({
           name={name}
           placeholder={placeholder}
           onChange={onChange}
+          {...otherEvent}
         />
         <button type="button" className="absolute top-3 right-4 cursor-pointer">
           {isPassword &&

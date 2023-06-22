@@ -25,6 +25,7 @@ interface Props {
   as?: keyof JSX.IntrinsicElements;
   className?: string;
   children: ReactNode;
+  onClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }
 
 const ComponentBind = (
@@ -40,6 +41,11 @@ export const Text = Object.entries(typograpy).reduce(
   {} as { [key in KeyOfFont]: ({ as, className }: Props) => any }
 );
 
-const SingleText = ({ as = "div", className = "", children }: Props) => {
-  return createElement(as, { className, children });
+const SingleText = ({
+  as = "div",
+  className = "",
+  children,
+  onClick,
+}: Props) => {
+  return createElement(as, { className, children, onClick });
 };
