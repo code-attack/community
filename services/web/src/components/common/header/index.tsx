@@ -6,9 +6,7 @@ import OutsideClickHandler from "react-outside-click-handler";
 import { Button } from "../button";
 import { LinkButtonList, headerLink } from "./constants";
 import { useRouter } from "next/navigation";
-
-const dummy =
-  "https://plus.unsplash.com/premium_photo-1679731958509-d2c9c2182383?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Z3VufGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60";
+import Image from "next/image";
 
 export const Header = () => {
   const isLogin = getAuthToken();
@@ -40,7 +38,7 @@ export const Header = () => {
         <div
           className={` transition-all ${
             isTop ? "h-16" : "h-20"
-          } px-4 w-[1192px] m-auto flex items-center justify-between`}
+          } px-4 max-w-[1192px] m-auto flex items-center justify-between`}
         >
           <Link className="flex items-center" href={"/"}>
             <div className="bg-slate-400 w-7 h-7"></div>
@@ -48,15 +46,20 @@ export const Header = () => {
           </Link>
           {isLogin ? (
             <div className="relative">
-              <img
-                className=" w-12 h-12 rounded-full object-cover"
-                src={dummy}
+              <Image
+                className="rounded-full object-cover cursor-pointer"
+                src={
+                  "https://api.surfit.io/v1/directory/avatar/1812591446?t=1686917042"
+                }
+                width={48}
+                height={48}
                 onClick={openDropdown}
+                alt="profile"
               />
               {dropdown && (
                 <div className=" top-14 right-0 w-40 absolute">
                   <OutsideClickHandler onOutsideClick={closeDropdown}>
-                    <div className="bg-white shadow-md rounded-md p-3">
+                    <div className="bg-white shadow-2xl rounded-md p-3">
                       <LinkButtonList links={headerLink} />
                       <Button.Text onClick={logout}>로그아웃</Button.Text>
                     </div>

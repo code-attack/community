@@ -1,13 +1,15 @@
+import { TOKEN } from "@package/constant";
+
 export const getAuthToken = () => {
-  return localStorage.getItem("access_token");
+  return localStorage.getItem(TOKEN.ACCESS);
 };
 
 export const setAuthToken = (access: string, refresh: string) => {
-  localStorage.setItem("access_token", access);
-  localStorage.setItem("refresh_token", refresh);
+  localStorage.setItem(TOKEN.ACCESS, access);
+  localStorage.setItem(TOKEN.REFRESH, refresh);
 };
 
 export const clearAuthToken = () => {
-  localStorage.setItem("access_token", "");
-  localStorage.setItem("refresh_token", "");
+  localStorage.removeItem(TOKEN.ACCESS);
+  localStorage.removeItem(TOKEN.REFRESH);
 };

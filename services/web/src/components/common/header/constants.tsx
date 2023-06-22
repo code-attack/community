@@ -7,9 +7,9 @@ interface NavigatesType {
 }
 
 export const headerLink: NavigatesType[] = [
-  { name: "프로필 작성", link: "" },
-  { name: "게시글 작성", link: "" },
-  { name: "채팅방 보기", link: "" },
+  { name: "프로필 작성", link: "/profile/write" },
+  { name: "게시글 작성", link: "/post/write" },
+  { name: "채팅방 보기", link: "/chat" },
 ];
 
 interface LinkButtonListType {

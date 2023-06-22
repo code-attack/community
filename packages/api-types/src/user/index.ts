@@ -1,5 +1,5 @@
 export interface WorkExperience {
-  id: string;
+  id?: string;
   name: string;
   field: string;
   startDate: string;
@@ -21,4 +21,13 @@ export interface ReadProfileRes {
   profile_img: string | null;
   tag: string | null;
   technology: string[];
+}
+
+export interface MyProfileRes {
+  name: string;
+  profile_img: string | null;
+  tag: string | null;
+  technology: string[];
+  workExperience: WorkExperience[];
+  introduce: Introduce | null;
 }

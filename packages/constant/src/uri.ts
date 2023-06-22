@@ -4,9 +4,8 @@ const URIS = [
   "sign-up",
   "post",
   "user",
-  "profile-img",
   "chat",
-  "my",
+  "profile",
 ] as const;
 type UriKey = ToSnakeCase<(typeof URIS)[number]>;
 

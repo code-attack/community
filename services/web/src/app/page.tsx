@@ -10,7 +10,6 @@ import { query } from "@/hooks";
 
 export default function Home() {
   const { data } = query.user.getUserProfile();
-  console.log(data?.data);
   return (
     <>
       <Header />

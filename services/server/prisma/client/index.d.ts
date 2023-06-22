@@ -24,8 +24,8 @@ export type User = {
   name: string;
   password: string;
   role: Role;
-  tag: string | null;
   profile_img: string | null;
+  tag: string | null;
 };
 
 /**
@@ -44,8 +44,8 @@ export type Post = {
   id: number;
   title: string;
   content: string;
-  thumbnail: string;
   userId: string;
+  thumbnail: string;
 };
 
 /**
@@ -53,12 +53,12 @@ export type Post = {
  *
  */
 export type WorkExperience = {
-  id: number;
   name: string;
   field: string;
   startDate: string;
   endDate: string | null;
   userId: string;
+  id: number;
 };
 
 /**
@@ -984,15 +984,15 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
-    technology: number;
     posts: number;
     workExperience: number;
+    technology: number;
   };
 
   export type UserCountOutputTypeSelect = {
-    technology?: boolean;
     posts?: boolean;
     workExperience?: boolean;
+    technology?: boolean;
   };
 
   export type UserCountOutputTypeGetPayload<
@@ -1030,11 +1030,11 @@ export namespace Prisma {
    */
 
   export type TechnologyCountOutputType = {
-    user: number;
+    User: number;
   };
 
   export type TechnologyCountOutputTypeSelect = {
-    user?: boolean;
+    User?: boolean;
   };
 
   export type TechnologyCountOutputTypeGetPayload<
@@ -1099,8 +1099,8 @@ export namespace Prisma {
     name: string | null;
     password: string | null;
     role: Role | null;
-    tag: string | null;
     profile_img: string | null;
+    tag: string | null;
   };
 
   export type UserMaxAggregateOutputType = {
@@ -1109,8 +1109,8 @@ export namespace Prisma {
     name: string | null;
     password: string | null;
     role: Role | null;
-    tag: string | null;
     profile_img: string | null;
+    tag: string | null;
   };
 
   export type UserCountAggregateOutputType = {
@@ -1119,8 +1119,8 @@ export namespace Prisma {
     name: number;
     password: number;
     role: number;
-    tag: number;
     profile_img: number;
+    tag: number;
     _all: number;
   };
 
@@ -1138,8 +1138,8 @@ export namespace Prisma {
     name?: true;
     password?: true;
     role?: true;
-    tag?: true;
     profile_img?: true;
+    tag?: true;
   };
 
   export type UserMaxAggregateInputType = {
@@ -1148,8 +1148,8 @@ export namespace Prisma {
     name?: true;
     password?: true;
     role?: true;
-    tag?: true;
     profile_img?: true;
+    tag?: true;
   };
 
   export type UserCountAggregateInputType = {
@@ -1158,8 +1158,8 @@ export namespace Prisma {
     name?: true;
     password?: true;
     role?: true;
-    tag?: true;
     profile_img?: true;
+    tag?: true;
     _all?: true;
   };
 
@@ -1252,8 +1252,8 @@ export namespace Prisma {
     name: string;
     password: string;
     role: Role;
-    tag: string | null;
     profile_img: string | null;
+    tag: string | null;
     _count: UserCountAggregateOutputType | null;
     _avg: UserAvgAggregateOutputType | null;
     _sum: UserSumAggregateOutputType | null;
@@ -1279,20 +1279,20 @@ export namespace Prisma {
     name?: boolean;
     password?: boolean;
     role?: boolean;
-    tag?: boolean;
     profile_img?: boolean;
-    technology?: boolean | User$technologyArgs;
+    tag?: boolean;
+    introduce?: boolean | IntroduceArgs;
     posts?: boolean | User$postsArgs;
     workExperience?: boolean | User$workExperienceArgs;
-    introduce?: boolean | IntroduceArgs;
+    technology?: boolean | User$technologyArgs;
     _count?: boolean | UserCountOutputTypeArgs;
   };
 
   export type UserInclude = {
-    technology?: boolean | User$technologyArgs;
+    introduce?: boolean | IntroduceArgs;
     posts?: boolean | User$postsArgs;
     workExperience?: boolean | User$workExperienceArgs;
-    introduce?: boolean | IntroduceArgs;
+    technology?: boolean | User$technologyArgs;
     _count?: boolean | UserCountOutputTypeArgs;
   };
 
@@ -1305,28 +1305,28 @@ export namespace Prisma {
       ? never
       : S extends { include: any } & (UserArgs | UserFindManyArgs)
       ? User & {
-          [P in TruthyKeys<S["include"]>]: P extends "technology"
-            ? Array<TechnologyGetPayload<S["include"][P]>>
+          [P in TruthyKeys<S["include"]>]: P extends "introduce"
+            ? IntroduceGetPayload<S["include"][P]> | null
             : P extends "posts"
             ? Array<PostGetPayload<S["include"][P]>>
             : P extends "workExperience"
             ? Array<WorkExperienceGetPayload<S["include"][P]>>
-            : P extends "introduce"
-            ? IntroduceGetPayload<S["include"][P]> | null
+            : P extends "technology"
+            ? Array<TechnologyGetPayload<S["include"][P]>>
             : P extends "_count"
             ? UserCountOutputTypeGetPayload<S["include"][P]>
             : never;
         }
       : S extends { select: any } & (UserArgs | UserFindManyArgs)
       ? {
-          [P in TruthyKeys<S["select"]>]: P extends "technology"
-            ? Array<TechnologyGetPayload<S["select"][P]>>
+          [P in TruthyKeys<S["select"]>]: P extends "introduce"
+            ? IntroduceGetPayload<S["select"][P]> | null
             : P extends "posts"
             ? Array<PostGetPayload<S["select"][P]>>
             : P extends "workExperience"
             ? Array<WorkExperienceGetPayload<S["select"][P]>>
-            : P extends "introduce"
-            ? IntroduceGetPayload<S["select"][P]> | null
+            : P extends "technology"
+            ? Array<TechnologyGetPayload<S["select"][P]>>
             : P extends "_count"
             ? UserCountOutputTypeGetPayload<S["select"][P]>
             : P extends keyof User
@@ -1749,9 +1749,9 @@ export namespace Prisma {
       _isList?: boolean
     );
 
-    technology<T extends User$technologyArgs = {}>(
-      args?: Subset<T, User$technologyArgs>
-    ): Prisma.PrismaPromise<Array<TechnologyGetPayload<T>> | Null>;
+    introduce<T extends IntroduceArgs = {}>(
+      args?: Subset<T, IntroduceArgs>
+    ): Prisma__IntroduceClient<IntroduceGetPayload<T> | Null>;
 
     posts<T extends User$postsArgs = {}>(
       args?: Subset<T, User$postsArgs>
@@ -1761,9 +1761,9 @@ export namespace Prisma {
       args?: Subset<T, User$workExperienceArgs>
     ): Prisma.PrismaPromise<Array<WorkExperienceGetPayload<T>> | Null>;
 
-    introduce<T extends IntroduceArgs = {}>(
-      args?: Subset<T, IntroduceArgs>
-    ): Prisma__IntroduceClient<IntroduceGetPayload<T> | Null>;
+    technology<T extends User$technologyArgs = {}>(
+      args?: Subset<T, User$technologyArgs>
+    ): Prisma.PrismaPromise<Array<TechnologyGetPayload<T>> | Null>;
 
     private get _document();
     /**
@@ -2121,26 +2121,6 @@ export namespace Prisma {
   };
 
   /**
-   * User.technology
-   */
-  export type User$technologyArgs = {
-    /**
-     * Select specific fields to fetch from the Technology
-     */
-    select?: TechnologySelect | null;
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: TechnologyInclude | null;
-    where?: TechnologyWhereInput;
-    orderBy?: Enumerable<TechnologyOrderByWithRelationInput>;
-    cursor?: TechnologyWhereUniqueInput;
-    take?: number;
-    skip?: number;
-    distinct?: Enumerable<TechnologyScalarFieldEnum>;
-  };
-
-  /**
    * User.posts
    */
   export type User$postsArgs = {
@@ -2178,6 +2158,26 @@ export namespace Prisma {
     take?: number;
     skip?: number;
     distinct?: Enumerable<WorkExperienceScalarFieldEnum>;
+  };
+
+  /**
+   * User.technology
+   */
+  export type User$technologyArgs = {
+    /**
+     * Select specific fields to fetch from the Technology
+     */
+    select?: TechnologySelect | null;
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: TechnologyInclude | null;
+    where?: TechnologyWhereInput;
+    orderBy?: Enumerable<TechnologyOrderByWithRelationInput>;
+    cursor?: TechnologyWhereUniqueInput;
+    take?: number;
+    skip?: number;
+    distinct?: Enumerable<TechnologyScalarFieldEnum>;
   };
 
   /**
@@ -2355,12 +2355,12 @@ export namespace Prisma {
 
   export type TechnologySelect = {
     id?: boolean;
-    user?: boolean | Technology$userArgs;
+    User?: boolean | Technology$UserArgs;
     _count?: boolean | TechnologyCountOutputTypeArgs;
   };
 
   export type TechnologyInclude = {
-    user?: boolean | Technology$userArgs;
+    User?: boolean | Technology$UserArgs;
     _count?: boolean | TechnologyCountOutputTypeArgs;
   };
 
@@ -2374,7 +2374,7 @@ export namespace Prisma {
     ? never
     : S extends { include: any } & (TechnologyArgs | TechnologyFindManyArgs)
     ? Technology & {
-        [P in TruthyKeys<S["include"]>]: P extends "user"
+        [P in TruthyKeys<S["include"]>]: P extends "User"
           ? Array<UserGetPayload<S["include"][P]>>
           : P extends "_count"
           ? TechnologyCountOutputTypeGetPayload<S["include"][P]>
@@ -2382,7 +2382,7 @@ export namespace Prisma {
       }
     : S extends { select: any } & (TechnologyArgs | TechnologyFindManyArgs)
     ? {
-        [P in TruthyKeys<S["select"]>]: P extends "user"
+        [P in TruthyKeys<S["select"]>]: P extends "User"
           ? Array<UserGetPayload<S["select"][P]>>
           : P extends "_count"
           ? TechnologyCountOutputTypeGetPayload<S["select"][P]>
@@ -2810,8 +2810,8 @@ export namespace Prisma {
       _isList?: boolean
     );
 
-    user<T extends Technology$userArgs = {}>(
-      args?: Subset<T, Technology$userArgs>
+    User<T extends Technology$UserArgs = {}>(
+      args?: Subset<T, Technology$UserArgs>
     ): Prisma.PrismaPromise<Array<UserGetPayload<T>> | Null>;
 
     private get _document();
@@ -3174,9 +3174,9 @@ export namespace Prisma {
   };
 
   /**
-   * Technology.user
+   * Technology.User
    */
-  export type Technology$userArgs = {
+  export type Technology$UserArgs = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -3231,24 +3231,24 @@ export namespace Prisma {
     id: number | null;
     title: string | null;
     content: string | null;
-    thumbnail: string | null;
     userId: string | null;
+    thumbnail: string | null;
   };
 
   export type PostMaxAggregateOutputType = {
     id: number | null;
     title: string | null;
     content: string | null;
-    thumbnail: string | null;
     userId: string | null;
+    thumbnail: string | null;
   };
 
   export type PostCountAggregateOutputType = {
     id: number;
     title: number;
     content: number;
-    thumbnail: number;
     userId: number;
+    thumbnail: number;
     _all: number;
   };
 
@@ -3264,24 +3264,24 @@ export namespace Prisma {
     id?: true;
     title?: true;
     content?: true;
-    thumbnail?: true;
     userId?: true;
+    thumbnail?: true;
   };
 
   export type PostMaxAggregateInputType = {
     id?: true;
     title?: true;
     content?: true;
-    thumbnail?: true;
     userId?: true;
+    thumbnail?: true;
   };
 
   export type PostCountAggregateInputType = {
     id?: true;
     title?: true;
     content?: true;
-    thumbnail?: true;
     userId?: true;
+    thumbnail?: true;
     _all?: true;
   };
 
@@ -3372,8 +3372,8 @@ export namespace Prisma {
     id: number;
     title: string;
     content: string;
-    thumbnail: string;
     userId: string;
+    thumbnail: string;
     _count: PostCountAggregateOutputType | null;
     _avg: PostAvgAggregateOutputType | null;
     _sum: PostSumAggregateOutputType | null;
@@ -3397,8 +3397,8 @@ export namespace Prisma {
     id?: boolean;
     title?: boolean;
     content?: boolean;
-    thumbnail?: boolean;
     userId?: boolean;
+    thumbnail?: boolean;
     user?: boolean | UserArgs;
   };
 
@@ -4237,30 +4237,30 @@ export namespace Prisma {
   };
 
   export type WorkExperienceMinAggregateOutputType = {
-    id: number | null;
     name: string | null;
     field: string | null;
     startDate: string | null;
     endDate: string | null;
     userId: string | null;
+    id: number | null;
   };
 
   export type WorkExperienceMaxAggregateOutputType = {
-    id: number | null;
     name: string | null;
     field: string | null;
     startDate: string | null;
     endDate: string | null;
     userId: string | null;
+    id: number | null;
   };
 
   export type WorkExperienceCountAggregateOutputType = {
-    id: number;
     name: number;
     field: number;
     startDate: number;
     endDate: number;
     userId: number;
+    id: number;
     _all: number;
   };
 
@@ -4273,30 +4273,30 @@ export namespace Prisma {
   };
 
   export type WorkExperienceMinAggregateInputType = {
-    id?: true;
     name?: true;
     field?: true;
     startDate?: true;
     endDate?: true;
     userId?: true;
+    id?: true;
   };
 
   export type WorkExperienceMaxAggregateInputType = {
-    id?: true;
     name?: true;
     field?: true;
     startDate?: true;
     endDate?: true;
     userId?: true;
+    id?: true;
   };
 
   export type WorkExperienceCountAggregateInputType = {
-    id?: true;
     name?: true;
     field?: true;
     startDate?: true;
     endDate?: true;
     userId?: true;
+    id?: true;
     _all?: true;
   };
 
@@ -4386,12 +4386,12 @@ export namespace Prisma {
   };
 
   export type WorkExperienceGroupByOutputType = {
-    id: number;
     name: string;
     field: string;
     startDate: string;
     endDate: string | null;
     userId: string;
+    id: number;
     _count: WorkExperienceCountAggregateOutputType | null;
     _avg: WorkExperienceAvgAggregateOutputType | null;
     _sum: WorkExperienceSumAggregateOutputType | null;
@@ -4414,12 +4414,12 @@ export namespace Prisma {
     >;
 
   export type WorkExperienceSelect = {
-    id?: boolean;
     name?: boolean;
     field?: boolean;
     startDate?: boolean;
     endDate?: boolean;
     userId?: boolean;
+    id?: boolean;
     User?: boolean | UserArgs;
   };
 
@@ -4573,8 +4573,8 @@ export namespace Prisma {
      * // Get first 10 WorkExperiences
      * const workExperiences = await prisma.workExperience.findMany({ take: 10 })
      *
-     * // Only select the `id`
-     * const workExperienceWithIdOnly = await prisma.workExperience.findMany({ select: { id: true } })
+     * // Only select the `name`
+     * const workExperienceWithNameOnly = await prisma.workExperience.findMany({ select: { name: true } })
      *
      **/
     findMany<T extends WorkExperienceFindManyArgs>(
@@ -6229,8 +6229,8 @@ export namespace Prisma {
     id: "id";
     title: "title";
     content: "content";
-    thumbnail: "thumbnail";
     userId: "userId";
+    thumbnail: "thumbnail";
   };
 
   export type PostScalarFieldEnum =
@@ -6266,20 +6266,20 @@ export namespace Prisma {
     name: "name";
     password: "password";
     role: "role";
-    tag: "tag";
     profile_img: "profile_img";
+    tag: "tag";
   };
 
   export type UserScalarFieldEnum =
     (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum];
 
   export const WorkExperienceScalarFieldEnum: {
-    id: "id";
     name: "name";
     field: "field";
     startDate: "startDate";
     endDate: "endDate";
     userId: "userId";
+    id: "id";
   };
 
   export type WorkExperienceScalarFieldEnum =
@@ -6298,12 +6298,12 @@ export namespace Prisma {
     name?: StringFilter | string;
     password?: StringFilter | string;
     role?: EnumRoleFilter | Role;
-    tag?: StringNullableFilter | string | null;
     profile_img?: StringNullableFilter | string | null;
-    technology?: TechnologyListRelationFilter;
+    tag?: StringNullableFilter | string | null;
+    introduce?: XOR<IntroduceRelationFilter, IntroduceWhereInput> | null;
     posts?: PostListRelationFilter;
     workExperience?: WorkExperienceListRelationFilter;
-    introduce?: XOR<IntroduceRelationFilter, IntroduceWhereInput> | null;
+    technology?: TechnologyListRelationFilter;
   };
 
   export type UserOrderByWithRelationInput = {
@@ -6312,12 +6312,12 @@ export namespace Prisma {
     name?: SortOrder;
     password?: SortOrder;
     role?: SortOrder;
-    tag?: SortOrder;
     profile_img?: SortOrder;
-    technology?: TechnologyOrderByRelationAggregateInput;
+    tag?: SortOrder;
+    introduce?: IntroduceOrderByWithRelationInput;
     posts?: PostOrderByRelationAggregateInput;
     workExperience?: WorkExperienceOrderByRelationAggregateInput;
-    introduce?: IntroduceOrderByWithRelationInput;
+    technology?: TechnologyOrderByRelationAggregateInput;
   };
 
   export type UserWhereUniqueInput = {
@@ -6331,8 +6331,8 @@ export namespace Prisma {
     name?: SortOrder;
     password?: SortOrder;
     role?: SortOrder;
-    tag?: SortOrder;
     profile_img?: SortOrder;
+    tag?: SortOrder;
     _count?: UserCountOrderByAggregateInput;
     _avg?: UserAvgOrderByAggregateInput;
     _max?: UserMaxOrderByAggregateInput;
@@ -6349,8 +6349,8 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter | string;
     password?: StringWithAggregatesFilter | string;
     role?: EnumRoleWithAggregatesFilter | Role;
-    tag?: StringNullableWithAggregatesFilter | string | null;
     profile_img?: StringNullableWithAggregatesFilter | string | null;
+    tag?: StringNullableWithAggregatesFilter | string | null;
   };
 
   export type TechnologyWhereInput = {
@@ -6358,12 +6358,12 @@ export namespace Prisma {
     OR?: Enumerable<TechnologyWhereInput>;
     NOT?: Enumerable<TechnologyWhereInput>;
     id?: IntFilter | number;
-    user?: UserListRelationFilter;
+    User?: UserListRelationFilter;
   };
 
   export type TechnologyOrderByWithRelationInput = {
     id?: SortOrder;
-    user?: UserOrderByRelationAggregateInput;
+    User?: UserOrderByRelationAggregateInput;
   };
 
   export type TechnologyWhereUniqueInput = {
@@ -6393,8 +6393,8 @@ export namespace Prisma {
     id?: IntFilter | number;
     title?: StringFilter | string;
     content?: StringFilter | string;
-    thumbnail?: StringFilter | string;
     userId?: StringFilter | string;
+    thumbnail?: StringFilter | string;
     user?: XOR<UserRelationFilter, UserWhereInput>;
   };
 
@@ -6402,8 +6402,8 @@ export namespace Prisma {
     id?: SortOrder;
     title?: SortOrder;
     content?: SortOrder;
-    thumbnail?: SortOrder;
     userId?: SortOrder;
+    thumbnail?: SortOrder;
     user?: UserOrderByWithRelationInput;
   };
 
@@ -6415,8 +6415,8 @@ export namespace Prisma {
     id?: SortOrder;
     title?: SortOrder;
     content?: SortOrder;
-    thumbnail?: SortOrder;
     userId?: SortOrder;
+    thumbnail?: SortOrder;
     _count?: PostCountOrderByAggregateInput;
     _avg?: PostAvgOrderByAggregateInput;
     _max?: PostMaxOrderByAggregateInput;
@@ -6431,45 +6431,44 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter | number;
     title?: StringWithAggregatesFilter | string;
     content?: StringWithAggregatesFilter | string;
-    thumbnail?: StringWithAggregatesFilter | string;
     userId?: StringWithAggregatesFilter | string;
+    thumbnail?: StringWithAggregatesFilter | string;
   };
 
   export type WorkExperienceWhereInput = {
     AND?: Enumerable<WorkExperienceWhereInput>;
     OR?: Enumerable<WorkExperienceWhereInput>;
     NOT?: Enumerable<WorkExperienceWhereInput>;
-    id?: IntFilter | number;
     name?: StringFilter | string;
     field?: StringFilter | string;
     startDate?: StringFilter | string;
     endDate?: StringNullableFilter | string | null;
     userId?: StringFilter | string;
+    id?: IntFilter | number;
     User?: XOR<UserRelationFilter, UserWhereInput>;
   };
 
   export type WorkExperienceOrderByWithRelationInput = {
-    id?: SortOrder;
     name?: SortOrder;
     field?: SortOrder;
     startDate?: SortOrder;
     endDate?: SortOrder;
     userId?: SortOrder;
+    id?: SortOrder;
     User?: UserOrderByWithRelationInput;
   };
 
   export type WorkExperienceWhereUniqueInput = {
     id?: number;
-    userId?: string;
   };
 
   export type WorkExperienceOrderByWithAggregationInput = {
-    id?: SortOrder;
     name?: SortOrder;
     field?: SortOrder;
     startDate?: SortOrder;
     endDate?: SortOrder;
     userId?: SortOrder;
+    id?: SortOrder;
     _count?: WorkExperienceCountOrderByAggregateInput;
     _avg?: WorkExperienceAvgOrderByAggregateInput;
     _max?: WorkExperienceMaxOrderByAggregateInput;
@@ -6481,12 +6480,12 @@ export namespace Prisma {
     AND?: Enumerable<WorkExperienceScalarWhereWithAggregatesInput>;
     OR?: Enumerable<WorkExperienceScalarWhereWithAggregatesInput>;
     NOT?: Enumerable<WorkExperienceScalarWhereWithAggregatesInput>;
-    id?: IntWithAggregatesFilter | number;
     name?: StringWithAggregatesFilter | string;
     field?: StringWithAggregatesFilter | string;
     startDate?: StringWithAggregatesFilter | string;
     endDate?: StringNullableWithAggregatesFilter | string | null;
     userId?: StringWithAggregatesFilter | string;
+    id?: IntWithAggregatesFilter | number;
   };
 
   export type IntroduceWhereInput = {
@@ -6529,12 +6528,12 @@ export namespace Prisma {
     name: string;
     password: string;
     role: Role;
-    tag?: string | null;
     profile_img?: string | null;
-    technology?: TechnologyCreateNestedManyWithoutUserInput;
+    tag?: string | null;
+    introduce?: IntroduceCreateNestedOneWithoutUserInput;
     posts?: PostCreateNestedManyWithoutUserInput;
     workExperience?: WorkExperienceCreateNestedManyWithoutUserInput;
-    introduce?: IntroduceCreateNestedOneWithoutUserInput;
+    technology?: TechnologyCreateNestedManyWithoutUserInput;
   };
 
   export type UserUncheckedCreateInput = {
@@ -6543,12 +6542,12 @@ export namespace Prisma {
     name: string;
     password: string;
     role: Role;
-    tag?: string | null;
     profile_img?: string | null;
-    technology?: TechnologyUncheckedCreateNestedManyWithoutUserInput;
+    tag?: string | null;
+    introduce?: IntroduceUncheckedCreateNestedOneWithoutUserInput;
     posts?: PostUncheckedCreateNestedManyWithoutUserInput;
     workExperience?: WorkExperienceUncheckedCreateNestedManyWithoutUserInput;
-    introduce?: IntroduceUncheckedCreateNestedOneWithoutUserInput;
+    technology?: TechnologyUncheckedCreateNestedManyWithoutUserInput;
   };
 
   export type UserUpdateInput = {
@@ -6556,12 +6555,12 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     role?: EnumRoleFieldUpdateOperationsInput | Role;
-    tag?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
-    technology?: TechnologyUpdateManyWithoutUserNestedInput;
+    tag?: NullableStringFieldUpdateOperationsInput | string | null;
+    introduce?: IntroduceUpdateOneWithoutUserNestedInput;
     posts?: PostUpdateManyWithoutUserNestedInput;
     workExperience?: WorkExperienceUpdateManyWithoutUserNestedInput;
-    introduce?: IntroduceUpdateOneWithoutUserNestedInput;
+    technology?: TechnologyUpdateManyWithoutUserNestedInput;
   };
 
   export type UserUncheckedUpdateInput = {
@@ -6570,12 +6569,12 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     role?: EnumRoleFieldUpdateOperationsInput | Role;
-    tag?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
-    technology?: TechnologyUncheckedUpdateManyWithoutUserNestedInput;
+    tag?: NullableStringFieldUpdateOperationsInput | string | null;
+    introduce?: IntroduceUncheckedUpdateOneWithoutUserNestedInput;
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput;
     workExperience?: WorkExperienceUncheckedUpdateManyWithoutUserNestedInput;
-    introduce?: IntroduceUncheckedUpdateOneWithoutUserNestedInput;
+    technology?: TechnologyUncheckedUpdateManyWithoutUserNestedInput;
   };
 
   export type UserCreateManyInput = {
@@ -6584,8 +6583,8 @@ export namespace Prisma {
     name: string;
     password: string;
     role: Role;
-    tag?: string | null;
     profile_img?: string | null;
+    tag?: string | null;
   };
 
   export type UserUpdateManyMutationInput = {
@@ -6593,8 +6592,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     role?: EnumRoleFieldUpdateOperationsInput | Role;
-    tag?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
+    tag?: NullableStringFieldUpdateOperationsInput | string | null;
   };
 
   export type UserUncheckedUpdateManyInput = {
@@ -6603,26 +6602,26 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     role?: EnumRoleFieldUpdateOperationsInput | Role;
-    tag?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
+    tag?: NullableStringFieldUpdateOperationsInput | string | null;
   };
 
   export type TechnologyCreateInput = {
-    user?: UserCreateNestedManyWithoutTechnologyInput;
+    User?: UserCreateNestedManyWithoutTechnologyInput;
   };
 
   export type TechnologyUncheckedCreateInput = {
     id?: number;
-    user?: UserUncheckedCreateNestedManyWithoutTechnologyInput;
+    User?: UserUncheckedCreateNestedManyWithoutTechnologyInput;
   };
 
   export type TechnologyUpdateInput = {
-    user?: UserUpdateManyWithoutTechnologyNestedInput;
+    User?: UserUpdateManyWithoutTechnologyNestedInput;
   };
 
   export type TechnologyUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number;
-    user?: UserUncheckedUpdateManyWithoutTechnologyNestedInput;
+    User?: UserUncheckedUpdateManyWithoutTechnologyNestedInput;
   };
 
   export type TechnologyCreateManyInput = {
@@ -6646,8 +6645,8 @@ export namespace Prisma {
     id?: number;
     title: string;
     content: string;
-    thumbnail: string;
     userId: string;
+    thumbnail: string;
   };
 
   export type PostUpdateInput = {
@@ -6661,16 +6660,16 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     title?: StringFieldUpdateOperationsInput | string;
     content?: StringFieldUpdateOperationsInput | string;
-    thumbnail?: StringFieldUpdateOperationsInput | string;
     userId?: StringFieldUpdateOperationsInput | string;
+    thumbnail?: StringFieldUpdateOperationsInput | string;
   };
 
   export type PostCreateManyInput = {
     id?: number;
     title: string;
     content: string;
-    thumbnail: string;
     userId: string;
+    thumbnail: string;
   };
 
   export type PostUpdateManyMutationInput = {
@@ -6683,12 +6682,11 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number;
     title?: StringFieldUpdateOperationsInput | string;
     content?: StringFieldUpdateOperationsInput | string;
-    thumbnail?: StringFieldUpdateOperationsInput | string;
     userId?: StringFieldUpdateOperationsInput | string;
+    thumbnail?: StringFieldUpdateOperationsInput | string;
   };
 
   export type WorkExperienceCreateInput = {
-    id: number;
     name: string;
     field: string;
     startDate: string;
@@ -6697,16 +6695,15 @@ export namespace Prisma {
   };
 
   export type WorkExperienceUncheckedCreateInput = {
-    id: number;
     name: string;
     field: string;
     startDate: string;
     endDate?: string | null;
     userId: string;
+    id?: number;
   };
 
   export type WorkExperienceUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number;
     name?: StringFieldUpdateOperationsInput | string;
     field?: StringFieldUpdateOperationsInput | string;
     startDate?: StringFieldUpdateOperationsInput | string;
@@ -6715,25 +6712,24 @@ export namespace Prisma {
   };
 
   export type WorkExperienceUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number;
     name?: StringFieldUpdateOperationsInput | string;
     field?: StringFieldUpdateOperationsInput | string;
     startDate?: StringFieldUpdateOperationsInput | string;
     endDate?: NullableStringFieldUpdateOperationsInput | string | null;
     userId?: StringFieldUpdateOperationsInput | string;
+    id?: IntFieldUpdateOperationsInput | number;
   };
 
   export type WorkExperienceCreateManyInput = {
-    id: number;
     name: string;
     field: string;
     startDate: string;
     endDate?: string | null;
     userId: string;
+    id?: number;
   };
 
   export type WorkExperienceUpdateManyMutationInput = {
-    id?: IntFieldUpdateOperationsInput | number;
     name?: StringFieldUpdateOperationsInput | string;
     field?: StringFieldUpdateOperationsInput | string;
     startDate?: StringFieldUpdateOperationsInput | string;
@@ -6741,12 +6737,12 @@ export namespace Prisma {
   };
 
   export type WorkExperienceUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number;
     name?: StringFieldUpdateOperationsInput | string;
     field?: StringFieldUpdateOperationsInput | string;
     startDate?: StringFieldUpdateOperationsInput | string;
     endDate?: NullableStringFieldUpdateOperationsInput | string | null;
     userId?: StringFieldUpdateOperationsInput | string;
+    id?: IntFieldUpdateOperationsInput | number;
   };
 
   export type IntroduceCreateInput = {
@@ -6829,10 +6825,9 @@ export namespace Prisma {
     not?: NestedStringNullableFilter | string | null;
   };
 
-  export type TechnologyListRelationFilter = {
-    every?: TechnologyWhereInput;
-    some?: TechnologyWhereInput;
-    none?: TechnologyWhereInput;
+  export type IntroduceRelationFilter = {
+    is?: IntroduceWhereInput | null;
+    isNot?: IntroduceWhereInput | null;
   };
 
   export type PostListRelationFilter = {
@@ -6847,13 +6842,10 @@ export namespace Prisma {
     none?: WorkExperienceWhereInput;
   };
 
-  export type IntroduceRelationFilter = {
-    is?: IntroduceWhereInput | null;
-    isNot?: IntroduceWhereInput | null;
-  };
-
-  export type TechnologyOrderByRelationAggregateInput = {
-    _count?: SortOrder;
+  export type TechnologyListRelationFilter = {
+    every?: TechnologyWhereInput;
+    some?: TechnologyWhereInput;
+    none?: TechnologyWhereInput;
   };
 
   export type PostOrderByRelationAggregateInput = {
@@ -6864,14 +6856,18 @@ export namespace Prisma {
     _count?: SortOrder;
   };
 
+  export type TechnologyOrderByRelationAggregateInput = {
+    _count?: SortOrder;
+  };
+
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder;
     account_id?: SortOrder;
     name?: SortOrder;
     password?: SortOrder;
     role?: SortOrder;
-    tag?: SortOrder;
     profile_img?: SortOrder;
+    tag?: SortOrder;
   };
 
   export type UserAvgOrderByAggregateInput = {
@@ -6884,8 +6880,8 @@ export namespace Prisma {
     name?: SortOrder;
     password?: SortOrder;
     role?: SortOrder;
-    tag?: SortOrder;
     profile_img?: SortOrder;
+    tag?: SortOrder;
   };
 
   export type UserMinOrderByAggregateInput = {
@@ -6894,8 +6890,8 @@ export namespace Prisma {
     name?: SortOrder;
     password?: SortOrder;
     role?: SortOrder;
-    tag?: SortOrder;
     profile_img?: SortOrder;
+    tag?: SortOrder;
   };
 
   export type UserSumOrderByAggregateInput = {
@@ -7001,8 +6997,8 @@ export namespace Prisma {
     id?: SortOrder;
     title?: SortOrder;
     content?: SortOrder;
-    thumbnail?: SortOrder;
     userId?: SortOrder;
+    thumbnail?: SortOrder;
   };
 
   export type PostAvgOrderByAggregateInput = {
@@ -7013,16 +7009,16 @@ export namespace Prisma {
     id?: SortOrder;
     title?: SortOrder;
     content?: SortOrder;
-    thumbnail?: SortOrder;
     userId?: SortOrder;
+    thumbnail?: SortOrder;
   };
 
   export type PostMinOrderByAggregateInput = {
     id?: SortOrder;
     title?: SortOrder;
     content?: SortOrder;
-    thumbnail?: SortOrder;
     userId?: SortOrder;
+    thumbnail?: SortOrder;
   };
 
   export type PostSumOrderByAggregateInput = {
@@ -7030,12 +7026,12 @@ export namespace Prisma {
   };
 
   export type WorkExperienceCountOrderByAggregateInput = {
-    id?: SortOrder;
     name?: SortOrder;
     field?: SortOrder;
     startDate?: SortOrder;
     endDate?: SortOrder;
     userId?: SortOrder;
+    id?: SortOrder;
   };
 
   export type WorkExperienceAvgOrderByAggregateInput = {
@@ -7043,21 +7039,21 @@ export namespace Prisma {
   };
 
   export type WorkExperienceMaxOrderByAggregateInput = {
-    id?: SortOrder;
     name?: SortOrder;
     field?: SortOrder;
     startDate?: SortOrder;
     endDate?: SortOrder;
     userId?: SortOrder;
+    id?: SortOrder;
   };
 
   export type WorkExperienceMinOrderByAggregateInput = {
-    id?: SortOrder;
     name?: SortOrder;
     field?: SortOrder;
     startDate?: SortOrder;
     endDate?: SortOrder;
     userId?: SortOrder;
+    id?: SortOrder;
   };
 
   export type WorkExperienceSumOrderByAggregateInput = {
@@ -7079,13 +7075,13 @@ export namespace Prisma {
     userId?: SortOrder;
   };
 
-  export type TechnologyCreateNestedManyWithoutUserInput = {
+  export type IntroduceCreateNestedOneWithoutUserInput = {
     create?: XOR<
-      Enumerable<TechnologyCreateWithoutUserInput>,
-      Enumerable<TechnologyUncheckedCreateWithoutUserInput>
+      IntroduceCreateWithoutUserInput,
+      IntroduceUncheckedCreateWithoutUserInput
     >;
-    connectOrCreate?: Enumerable<TechnologyCreateOrConnectWithoutUserInput>;
-    connect?: Enumerable<TechnologyWhereUniqueInput>;
+    connectOrCreate?: IntroduceCreateOrConnectWithoutUserInput;
+    connect?: IntroduceWhereUniqueInput;
   };
 
   export type PostCreateNestedManyWithoutUserInput = {
@@ -7108,22 +7104,22 @@ export namespace Prisma {
     connect?: Enumerable<WorkExperienceWhereUniqueInput>;
   };
 
-  export type IntroduceCreateNestedOneWithoutUserInput = {
-    create?: XOR<
-      IntroduceCreateWithoutUserInput,
-      IntroduceUncheckedCreateWithoutUserInput
-    >;
-    connectOrCreate?: IntroduceCreateOrConnectWithoutUserInput;
-    connect?: IntroduceWhereUniqueInput;
-  };
-
-  export type TechnologyUncheckedCreateNestedManyWithoutUserInput = {
+  export type TechnologyCreateNestedManyWithoutUserInput = {
     create?: XOR<
       Enumerable<TechnologyCreateWithoutUserInput>,
       Enumerable<TechnologyUncheckedCreateWithoutUserInput>
     >;
     connectOrCreate?: Enumerable<TechnologyCreateOrConnectWithoutUserInput>;
     connect?: Enumerable<TechnologyWhereUniqueInput>;
+  };
+
+  export type IntroduceUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<
+      IntroduceCreateWithoutUserInput,
+      IntroduceUncheckedCreateWithoutUserInput
+    >;
+    connectOrCreate?: IntroduceCreateOrConnectWithoutUserInput;
+    connect?: IntroduceWhereUniqueInput;
   };
 
   export type PostUncheckedCreateNestedManyWithoutUserInput = {
@@ -7146,13 +7142,13 @@ export namespace Prisma {
     connect?: Enumerable<WorkExperienceWhereUniqueInput>;
   };
 
-  export type IntroduceUncheckedCreateNestedOneWithoutUserInput = {
+  export type TechnologyUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<
-      IntroduceCreateWithoutUserInput,
-      IntroduceUncheckedCreateWithoutUserInput
+      Enumerable<TechnologyCreateWithoutUserInput>,
+      Enumerable<TechnologyUncheckedCreateWithoutUserInput>
     >;
-    connectOrCreate?: IntroduceCreateOrConnectWithoutUserInput;
-    connect?: IntroduceWhereUniqueInput;
+    connectOrCreate?: Enumerable<TechnologyCreateOrConnectWithoutUserInput>;
+    connect?: Enumerable<TechnologyWhereUniqueInput>;
   };
 
   export type StringFieldUpdateOperationsInput = {
@@ -7167,20 +7163,20 @@ export namespace Prisma {
     set?: string | null;
   };
 
-  export type TechnologyUpdateManyWithoutUserNestedInput = {
+  export type IntroduceUpdateOneWithoutUserNestedInput = {
     create?: XOR<
-      Enumerable<TechnologyCreateWithoutUserInput>,
-      Enumerable<TechnologyUncheckedCreateWithoutUserInput>
+      IntroduceCreateWithoutUserInput,
+      IntroduceUncheckedCreateWithoutUserInput
     >;
-    connectOrCreate?: Enumerable<TechnologyCreateOrConnectWithoutUserInput>;
-    upsert?: Enumerable<TechnologyUpsertWithWhereUniqueWithoutUserInput>;
-    set?: Enumerable<TechnologyWhereUniqueInput>;
-    disconnect?: Enumerable<TechnologyWhereUniqueInput>;
-    delete?: Enumerable<TechnologyWhereUniqueInput>;
-    connect?: Enumerable<TechnologyWhereUniqueInput>;
-    update?: Enumerable<TechnologyUpdateWithWhereUniqueWithoutUserInput>;
-    updateMany?: Enumerable<TechnologyUpdateManyWithWhereWithoutUserInput>;
-    deleteMany?: Enumerable<TechnologyScalarWhereInput>;
+    connectOrCreate?: IntroduceCreateOrConnectWithoutUserInput;
+    upsert?: IntroduceUpsertWithoutUserInput;
+    disconnect?: boolean;
+    delete?: boolean;
+    connect?: IntroduceWhereUniqueInput;
+    update?: XOR<
+      IntroduceUpdateWithoutUserInput,
+      IntroduceUncheckedUpdateWithoutUserInput
+    >;
   };
 
   export type PostUpdateManyWithoutUserNestedInput = {
@@ -7217,31 +7213,7 @@ export namespace Prisma {
     deleteMany?: Enumerable<WorkExperienceScalarWhereInput>;
   };
 
-  export type IntroduceUpdateOneWithoutUserNestedInput = {
-    create?: XOR<
-      IntroduceCreateWithoutUserInput,
-      IntroduceUncheckedCreateWithoutUserInput
-    >;
-    connectOrCreate?: IntroduceCreateOrConnectWithoutUserInput;
-    upsert?: IntroduceUpsertWithoutUserInput;
-    disconnect?: boolean;
-    delete?: boolean;
-    connect?: IntroduceWhereUniqueInput;
-    update?: XOR<
-      IntroduceUpdateWithoutUserInput,
-      IntroduceUncheckedUpdateWithoutUserInput
-    >;
-  };
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number;
-    increment?: number;
-    decrement?: number;
-    multiply?: number;
-    divide?: number;
-  };
-
-  export type TechnologyUncheckedUpdateManyWithoutUserNestedInput = {
+  export type TechnologyUpdateManyWithoutUserNestedInput = {
     create?: XOR<
       Enumerable<TechnologyCreateWithoutUserInput>,
       Enumerable<TechnologyUncheckedCreateWithoutUserInput>
@@ -7255,6 +7227,30 @@ export namespace Prisma {
     update?: Enumerable<TechnologyUpdateWithWhereUniqueWithoutUserInput>;
     updateMany?: Enumerable<TechnologyUpdateManyWithWhereWithoutUserInput>;
     deleteMany?: Enumerable<TechnologyScalarWhereInput>;
+  };
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number;
+    increment?: number;
+    decrement?: number;
+    multiply?: number;
+    divide?: number;
+  };
+
+  export type IntroduceUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<
+      IntroduceCreateWithoutUserInput,
+      IntroduceUncheckedCreateWithoutUserInput
+    >;
+    connectOrCreate?: IntroduceCreateOrConnectWithoutUserInput;
+    upsert?: IntroduceUpsertWithoutUserInput;
+    disconnect?: boolean;
+    delete?: boolean;
+    connect?: IntroduceWhereUniqueInput;
+    update?: XOR<
+      IntroduceUpdateWithoutUserInput,
+      IntroduceUncheckedUpdateWithoutUserInput
+    >;
   };
 
   export type PostUncheckedUpdateManyWithoutUserNestedInput = {
@@ -7291,20 +7287,20 @@ export namespace Prisma {
     deleteMany?: Enumerable<WorkExperienceScalarWhereInput>;
   };
 
-  export type IntroduceUncheckedUpdateOneWithoutUserNestedInput = {
+  export type TechnologyUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<
-      IntroduceCreateWithoutUserInput,
-      IntroduceUncheckedCreateWithoutUserInput
+      Enumerable<TechnologyCreateWithoutUserInput>,
+      Enumerable<TechnologyUncheckedCreateWithoutUserInput>
     >;
-    connectOrCreate?: IntroduceCreateOrConnectWithoutUserInput;
-    upsert?: IntroduceUpsertWithoutUserInput;
-    disconnect?: boolean;
-    delete?: boolean;
-    connect?: IntroduceWhereUniqueInput;
-    update?: XOR<
-      IntroduceUpdateWithoutUserInput,
-      IntroduceUncheckedUpdateWithoutUserInput
-    >;
+    connectOrCreate?: Enumerable<TechnologyCreateOrConnectWithoutUserInput>;
+    upsert?: Enumerable<TechnologyUpsertWithWhereUniqueWithoutUserInput>;
+    set?: Enumerable<TechnologyWhereUniqueInput>;
+    disconnect?: Enumerable<TechnologyWhereUniqueInput>;
+    delete?: Enumerable<TechnologyWhereUniqueInput>;
+    connect?: Enumerable<TechnologyWhereUniqueInput>;
+    update?: Enumerable<TechnologyUpdateWithWhereUniqueWithoutUserInput>;
+    updateMany?: Enumerable<TechnologyUpdateManyWithWhereWithoutUserInput>;
+    deleteMany?: Enumerable<TechnologyScalarWhereInput>;
   };
 
   export type UserCreateNestedManyWithoutTechnologyInput = {
@@ -7554,17 +7550,19 @@ export namespace Prisma {
     not?: NestedIntNullableFilter | number | null;
   };
 
-  export type TechnologyCreateWithoutUserInput = {};
-
-  export type TechnologyUncheckedCreateWithoutUserInput = {
-    id?: number;
+  export type IntroduceCreateWithoutUserInput = {
+    content: string;
   };
 
-  export type TechnologyCreateOrConnectWithoutUserInput = {
-    where: TechnologyWhereUniqueInput;
+  export type IntroduceUncheckedCreateWithoutUserInput = {
+    content: string;
+  };
+
+  export type IntroduceCreateOrConnectWithoutUserInput = {
+    where: IntroduceWhereUniqueInput;
     create: XOR<
-      TechnologyCreateWithoutUserInput,
-      TechnologyUncheckedCreateWithoutUserInput
+      IntroduceCreateWithoutUserInput,
+      IntroduceUncheckedCreateWithoutUserInput
     >;
   };
 
@@ -7595,7 +7593,6 @@ export namespace Prisma {
   };
 
   export type WorkExperienceCreateWithoutUserInput = {
-    id: number;
     name: string;
     field: string;
     startDate: string;
@@ -7603,11 +7600,11 @@ export namespace Prisma {
   };
 
   export type WorkExperienceUncheckedCreateWithoutUserInput = {
-    id: number;
     name: string;
     field: string;
     startDate: string;
     endDate?: string | null;
+    id?: number;
   };
 
   export type WorkExperienceCreateOrConnectWithoutUserInput = {
@@ -7623,20 +7620,113 @@ export namespace Prisma {
     skipDuplicates?: boolean;
   };
 
-  export type IntroduceCreateWithoutUserInput = {
-    content: string;
+  export type TechnologyCreateWithoutUserInput = {};
+
+  export type TechnologyUncheckedCreateWithoutUserInput = {
+    id?: number;
   };
 
-  export type IntroduceUncheckedCreateWithoutUserInput = {
-    content: string;
+  export type TechnologyCreateOrConnectWithoutUserInput = {
+    where: TechnologyWhereUniqueInput;
+    create: XOR<
+      TechnologyCreateWithoutUserInput,
+      TechnologyUncheckedCreateWithoutUserInput
+    >;
   };
 
-  export type IntroduceCreateOrConnectWithoutUserInput = {
-    where: IntroduceWhereUniqueInput;
+  export type IntroduceUpsertWithoutUserInput = {
+    update: XOR<
+      IntroduceUpdateWithoutUserInput,
+      IntroduceUncheckedUpdateWithoutUserInput
+    >;
     create: XOR<
       IntroduceCreateWithoutUserInput,
       IntroduceUncheckedCreateWithoutUserInput
     >;
+  };
+
+  export type IntroduceUpdateWithoutUserInput = {
+    content?: StringFieldUpdateOperationsInput | string;
+  };
+
+  export type IntroduceUncheckedUpdateWithoutUserInput = {
+    content?: StringFieldUpdateOperationsInput | string;
+  };
+
+  export type PostUpsertWithWhereUniqueWithoutUserInput = {
+    where: PostWhereUniqueInput;
+    update: XOR<
+      PostUpdateWithoutUserInput,
+      PostUncheckedUpdateWithoutUserInput
+    >;
+    create: XOR<
+      PostCreateWithoutUserInput,
+      PostUncheckedCreateWithoutUserInput
+    >;
+  };
+
+  export type PostUpdateWithWhereUniqueWithoutUserInput = {
+    where: PostWhereUniqueInput;
+    data: XOR<PostUpdateWithoutUserInput, PostUncheckedUpdateWithoutUserInput>;
+  };
+
+  export type PostUpdateManyWithWhereWithoutUserInput = {
+    where: PostScalarWhereInput;
+    data: XOR<
+      PostUpdateManyMutationInput,
+      PostUncheckedUpdateManyWithoutPostsInput
+    >;
+  };
+
+  export type PostScalarWhereInput = {
+    AND?: Enumerable<PostScalarWhereInput>;
+    OR?: Enumerable<PostScalarWhereInput>;
+    NOT?: Enumerable<PostScalarWhereInput>;
+    id?: IntFilter | number;
+    title?: StringFilter | string;
+    content?: StringFilter | string;
+    userId?: StringFilter | string;
+    thumbnail?: StringFilter | string;
+  };
+
+  export type WorkExperienceUpsertWithWhereUniqueWithoutUserInput = {
+    where: WorkExperienceWhereUniqueInput;
+    update: XOR<
+      WorkExperienceUpdateWithoutUserInput,
+      WorkExperienceUncheckedUpdateWithoutUserInput
+    >;
+    create: XOR<
+      WorkExperienceCreateWithoutUserInput,
+      WorkExperienceUncheckedCreateWithoutUserInput
+    >;
+  };
+
+  export type WorkExperienceUpdateWithWhereUniqueWithoutUserInput = {
+    where: WorkExperienceWhereUniqueInput;
+    data: XOR<
+      WorkExperienceUpdateWithoutUserInput,
+      WorkExperienceUncheckedUpdateWithoutUserInput
+    >;
+  };
+
+  export type WorkExperienceUpdateManyWithWhereWithoutUserInput = {
+    where: WorkExperienceScalarWhereInput;
+    data: XOR<
+      WorkExperienceUpdateManyMutationInput,
+      WorkExperienceUncheckedUpdateManyWithoutWorkExperienceInput
+    >;
+  };
+
+  export type WorkExperienceScalarWhereInput = {
+    AND?: Enumerable<WorkExperienceScalarWhereInput>;
+    OR?: Enumerable<WorkExperienceScalarWhereInput>;
+    NOT?: Enumerable<WorkExperienceScalarWhereInput>;
+    name?: StringFilter | string;
+    field?: StringFilter | string;
+    startDate?: StringFilter | string;
+    endDate?: StringNullableFilter | string | null;
+    userId?: StringFilter | string;
+    id?: IntFilter | number;
   };
 
   export type TechnologyUpsertWithWhereUniqueWithoutUserInput = {
@@ -7674,111 +7764,16 @@ export namespace Prisma {
     id?: IntFilter | number;
   };
 
-  export type PostUpsertWithWhereUniqueWithoutUserInput = {
-    where: PostWhereUniqueInput;
-    update: XOR<
-      PostUpdateWithoutUserInput,
-      PostUncheckedUpdateWithoutUserInput
-    >;
-    create: XOR<
-      PostCreateWithoutUserInput,
-      PostUncheckedCreateWithoutUserInput
-    >;
-  };
-
-  export type PostUpdateWithWhereUniqueWithoutUserInput = {
-    where: PostWhereUniqueInput;
-    data: XOR<PostUpdateWithoutUserInput, PostUncheckedUpdateWithoutUserInput>;
-  };
-
-  export type PostUpdateManyWithWhereWithoutUserInput = {
-    where: PostScalarWhereInput;
-    data: XOR<
-      PostUpdateManyMutationInput,
-      PostUncheckedUpdateManyWithoutPostsInput
-    >;
-  };
-
-  export type PostScalarWhereInput = {
-    AND?: Enumerable<PostScalarWhereInput>;
-    OR?: Enumerable<PostScalarWhereInput>;
-    NOT?: Enumerable<PostScalarWhereInput>;
-    id?: IntFilter | number;
-    title?: StringFilter | string;
-    content?: StringFilter | string;
-    thumbnail?: StringFilter | string;
-    userId?: StringFilter | string;
-  };
-
-  export type WorkExperienceUpsertWithWhereUniqueWithoutUserInput = {
-    where: WorkExperienceWhereUniqueInput;
-    update: XOR<
-      WorkExperienceUpdateWithoutUserInput,
-      WorkExperienceUncheckedUpdateWithoutUserInput
-    >;
-    create: XOR<
-      WorkExperienceCreateWithoutUserInput,
-      WorkExperienceUncheckedCreateWithoutUserInput
-    >;
-  };
-
-  export type WorkExperienceUpdateWithWhereUniqueWithoutUserInput = {
-    where: WorkExperienceWhereUniqueInput;
-    data: XOR<
-      WorkExperienceUpdateWithoutUserInput,
-      WorkExperienceUncheckedUpdateWithoutUserInput
-    >;
-  };
-
-  export type WorkExperienceUpdateManyWithWhereWithoutUserInput = {
-    where: WorkExperienceScalarWhereInput;
-    data: XOR<
-      WorkExperienceUpdateManyMutationInput,
-      WorkExperienceUncheckedUpdateManyWithoutWorkExperienceInput
-    >;
-  };
-
-  export type WorkExperienceScalarWhereInput = {
-    AND?: Enumerable<WorkExperienceScalarWhereInput>;
-    OR?: Enumerable<WorkExperienceScalarWhereInput>;
-    NOT?: Enumerable<WorkExperienceScalarWhereInput>;
-    id?: IntFilter | number;
-    name?: StringFilter | string;
-    field?: StringFilter | string;
-    startDate?: StringFilter | string;
-    endDate?: StringNullableFilter | string | null;
-    userId?: StringFilter | string;
-  };
-
-  export type IntroduceUpsertWithoutUserInput = {
-    update: XOR<
-      IntroduceUpdateWithoutUserInput,
-      IntroduceUncheckedUpdateWithoutUserInput
-    >;
-    create: XOR<
-      IntroduceCreateWithoutUserInput,
-      IntroduceUncheckedCreateWithoutUserInput
-    >;
-  };
-
-  export type IntroduceUpdateWithoutUserInput = {
-    content?: StringFieldUpdateOperationsInput | string;
-  };
-
-  export type IntroduceUncheckedUpdateWithoutUserInput = {
-    content?: StringFieldUpdateOperationsInput | string;
-  };
-
   export type UserCreateWithoutTechnologyInput = {
     account_id: string;
     name: string;
     password: string;
     role: Role;
-    tag?: string | null;
     profile_img?: string | null;
+    tag?: string | null;
+    introduce?: IntroduceCreateNestedOneWithoutUserInput;
     posts?: PostCreateNestedManyWithoutUserInput;
     workExperience?: WorkExperienceCreateNestedManyWithoutUserInput;
-    introduce?: IntroduceCreateNestedOneWithoutUserInput;
   };
 
   export type UserUncheckedCreateWithoutTechnologyInput = {
@@ -7787,11 +7782,11 @@ export namespace Prisma {
     name: string;
     password: string;
     role: Role;
-    tag?: string | null;
     profile_img?: string | null;
+    tag?: string | null;
+    introduce?: IntroduceUncheckedCreateNestedOneWithoutUserInput;
     posts?: PostUncheckedCreateNestedManyWithoutUserInput;
     workExperience?: WorkExperienceUncheckedCreateNestedManyWithoutUserInput;
-    introduce?: IntroduceUncheckedCreateNestedOneWithoutUserInput;
   };
 
   export type UserCreateOrConnectWithoutTechnologyInput = {
@@ -7839,8 +7834,8 @@ export namespace Prisma {
     name?: StringFilter | string;
     password?: StringFilter | string;
     role?: EnumRoleFilter | Role;
-    tag?: StringNullableFilter | string | null;
     profile_img?: StringNullableFilter | string | null;
+    tag?: StringNullableFilter | string | null;
   };
 
   export type UserCreateWithoutPostsInput = {
@@ -7848,11 +7843,11 @@ export namespace Prisma {
     name: string;
     password: string;
     role: Role;
-    tag?: string | null;
     profile_img?: string | null;
-    technology?: TechnologyCreateNestedManyWithoutUserInput;
-    workExperience?: WorkExperienceCreateNestedManyWithoutUserInput;
+    tag?: string | null;
     introduce?: IntroduceCreateNestedOneWithoutUserInput;
+    workExperience?: WorkExperienceCreateNestedManyWithoutUserInput;
+    technology?: TechnologyCreateNestedManyWithoutUserInput;
   };
 
   export type UserUncheckedCreateWithoutPostsInput = {
@@ -7861,11 +7856,11 @@ export namespace Prisma {
     name: string;
     password: string;
     role: Role;
-    tag?: string | null;
     profile_img?: string | null;
-    technology?: TechnologyUncheckedCreateNestedManyWithoutUserInput;
-    workExperience?: WorkExperienceUncheckedCreateNestedManyWithoutUserInput;
+    tag?: string | null;
     introduce?: IntroduceUncheckedCreateNestedOneWithoutUserInput;
+    workExperience?: WorkExperienceUncheckedCreateNestedManyWithoutUserInput;
+    technology?: TechnologyUncheckedCreateNestedManyWithoutUserInput;
   };
 
   export type UserCreateOrConnectWithoutPostsInput = {
@@ -7892,11 +7887,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     role?: EnumRoleFieldUpdateOperationsInput | Role;
-    tag?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
-    technology?: TechnologyUpdateManyWithoutUserNestedInput;
-    workExperience?: WorkExperienceUpdateManyWithoutUserNestedInput;
+    tag?: NullableStringFieldUpdateOperationsInput | string | null;
     introduce?: IntroduceUpdateOneWithoutUserNestedInput;
+    workExperience?: WorkExperienceUpdateManyWithoutUserNestedInput;
+    technology?: TechnologyUpdateManyWithoutUserNestedInput;
   };
 
   export type UserUncheckedUpdateWithoutPostsInput = {
@@ -7905,11 +7900,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     role?: EnumRoleFieldUpdateOperationsInput | Role;
-    tag?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
-    technology?: TechnologyUncheckedUpdateManyWithoutUserNestedInput;
-    workExperience?: WorkExperienceUncheckedUpdateManyWithoutUserNestedInput;
+    tag?: NullableStringFieldUpdateOperationsInput | string | null;
     introduce?: IntroduceUncheckedUpdateOneWithoutUserNestedInput;
+    workExperience?: WorkExperienceUncheckedUpdateManyWithoutUserNestedInput;
+    technology?: TechnologyUncheckedUpdateManyWithoutUserNestedInput;
   };
 
   export type UserCreateWithoutWorkExperienceInput = {
@@ -7917,11 +7912,11 @@ export namespace Prisma {
     name: string;
     password: string;
     role: Role;
-    tag?: string | null;
     profile_img?: string | null;
-    technology?: TechnologyCreateNestedManyWithoutUserInput;
-    posts?: PostCreateNestedManyWithoutUserInput;
+    tag?: string | null;
     introduce?: IntroduceCreateNestedOneWithoutUserInput;
+    posts?: PostCreateNestedManyWithoutUserInput;
+    technology?: TechnologyCreateNestedManyWithoutUserInput;
   };
 
   export type UserUncheckedCreateWithoutWorkExperienceInput = {
@@ -7930,11 +7925,11 @@ export namespace Prisma {
     name: string;
     password: string;
     role: Role;
-    tag?: string | null;
     profile_img?: string | null;
-    technology?: TechnologyUncheckedCreateNestedManyWithoutUserInput;
-    posts?: PostUncheckedCreateNestedManyWithoutUserInput;
+    tag?: string | null;
     introduce?: IntroduceUncheckedCreateNestedOneWithoutUserInput;
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput;
+    technology?: TechnologyUncheckedCreateNestedManyWithoutUserInput;
   };
 
   export type UserCreateOrConnectWithoutWorkExperienceInput = {
@@ -7961,11 +7956,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     role?: EnumRoleFieldUpdateOperationsInput | Role;
-    tag?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
-    technology?: TechnologyUpdateManyWithoutUserNestedInput;
-    posts?: PostUpdateManyWithoutUserNestedInput;
+    tag?: NullableStringFieldUpdateOperationsInput | string | null;
     introduce?: IntroduceUpdateOneWithoutUserNestedInput;
+    posts?: PostUpdateManyWithoutUserNestedInput;
+    technology?: TechnologyUpdateManyWithoutUserNestedInput;
   };
 
   export type UserUncheckedUpdateWithoutWorkExperienceInput = {
@@ -7974,11 +7969,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     role?: EnumRoleFieldUpdateOperationsInput | Role;
-    tag?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
-    technology?: TechnologyUncheckedUpdateManyWithoutUserNestedInput;
-    posts?: PostUncheckedUpdateManyWithoutUserNestedInput;
+    tag?: NullableStringFieldUpdateOperationsInput | string | null;
     introduce?: IntroduceUncheckedUpdateOneWithoutUserNestedInput;
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput;
+    technology?: TechnologyUncheckedUpdateManyWithoutUserNestedInput;
   };
 
   export type UserCreateWithoutIntroduceInput = {
@@ -7986,11 +7981,11 @@ export namespace Prisma {
     name: string;
     password: string;
     role: Role;
-    tag?: string | null;
     profile_img?: string | null;
-    technology?: TechnologyCreateNestedManyWithoutUserInput;
+    tag?: string | null;
     posts?: PostCreateNestedManyWithoutUserInput;
     workExperience?: WorkExperienceCreateNestedManyWithoutUserInput;
+    technology?: TechnologyCreateNestedManyWithoutUserInput;
   };
 
   export type UserUncheckedCreateWithoutIntroduceInput = {
@@ -7999,11 +7994,11 @@ export namespace Prisma {
     name: string;
     password: string;
     role: Role;
-    tag?: string | null;
     profile_img?: string | null;
-    technology?: TechnologyUncheckedCreateNestedManyWithoutUserInput;
+    tag?: string | null;
     posts?: PostUncheckedCreateNestedManyWithoutUserInput;
     workExperience?: WorkExperienceUncheckedCreateNestedManyWithoutUserInput;
+    technology?: TechnologyUncheckedCreateNestedManyWithoutUserInput;
   };
 
   export type UserCreateOrConnectWithoutIntroduceInput = {
@@ -8030,11 +8025,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     role?: EnumRoleFieldUpdateOperationsInput | Role;
-    tag?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
-    technology?: TechnologyUpdateManyWithoutUserNestedInput;
+    tag?: NullableStringFieldUpdateOperationsInput | string | null;
     posts?: PostUpdateManyWithoutUserNestedInput;
     workExperience?: WorkExperienceUpdateManyWithoutUserNestedInput;
+    technology?: TechnologyUpdateManyWithoutUserNestedInput;
   };
 
   export type UserUncheckedUpdateWithoutIntroduceInput = {
@@ -8043,11 +8038,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     role?: EnumRoleFieldUpdateOperationsInput | Role;
-    tag?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
-    technology?: TechnologyUncheckedUpdateManyWithoutUserNestedInput;
+    tag?: NullableStringFieldUpdateOperationsInput | string | null;
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput;
     workExperience?: WorkExperienceUncheckedUpdateManyWithoutUserNestedInput;
+    technology?: TechnologyUncheckedUpdateManyWithoutUserNestedInput;
   };
 
   export type PostCreateManyUserInput = {
@@ -8058,21 +8053,11 @@ export namespace Prisma {
   };
 
   export type WorkExperienceCreateManyUserInput = {
-    id: number;
     name: string;
     field: string;
     startDate: string;
     endDate?: string | null;
-  };
-
-  export type TechnologyUpdateWithoutUserInput = {};
-
-  export type TechnologyUncheckedUpdateWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number;
-  };
-
-  export type TechnologyUncheckedUpdateManyWithoutTechnologyInput = {
-    id?: IntFieldUpdateOperationsInput | number;
+    id?: number;
   };
 
   export type PostUpdateWithoutUserInput = {
@@ -8096,7 +8081,6 @@ export namespace Prisma {
   };
 
   export type WorkExperienceUpdateWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number;
     name?: StringFieldUpdateOperationsInput | string;
     field?: StringFieldUpdateOperationsInput | string;
     startDate?: StringFieldUpdateOperationsInput | string;
@@ -8104,19 +8088,29 @@ export namespace Prisma {
   };
 
   export type WorkExperienceUncheckedUpdateWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number;
     name?: StringFieldUpdateOperationsInput | string;
     field?: StringFieldUpdateOperationsInput | string;
     startDate?: StringFieldUpdateOperationsInput | string;
     endDate?: NullableStringFieldUpdateOperationsInput | string | null;
+    id?: IntFieldUpdateOperationsInput | number;
   };
 
   export type WorkExperienceUncheckedUpdateManyWithoutWorkExperienceInput = {
-    id?: IntFieldUpdateOperationsInput | number;
     name?: StringFieldUpdateOperationsInput | string;
     field?: StringFieldUpdateOperationsInput | string;
     startDate?: StringFieldUpdateOperationsInput | string;
     endDate?: NullableStringFieldUpdateOperationsInput | string | null;
+    id?: IntFieldUpdateOperationsInput | number;
+  };
+
+  export type TechnologyUpdateWithoutUserInput = {};
+
+  export type TechnologyUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number;
+  };
+
+  export type TechnologyUncheckedUpdateManyWithoutTechnologyInput = {
+    id?: IntFieldUpdateOperationsInput | number;
   };
 
   export type UserUpdateWithoutTechnologyInput = {
@@ -8124,11 +8118,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     role?: EnumRoleFieldUpdateOperationsInput | Role;
-    tag?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
+    tag?: NullableStringFieldUpdateOperationsInput | string | null;
+    introduce?: IntroduceUpdateOneWithoutUserNestedInput;
     posts?: PostUpdateManyWithoutUserNestedInput;
     workExperience?: WorkExperienceUpdateManyWithoutUserNestedInput;
-    introduce?: IntroduceUpdateOneWithoutUserNestedInput;
   };
 
   export type UserUncheckedUpdateWithoutTechnologyInput = {
@@ -8137,11 +8131,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     role?: EnumRoleFieldUpdateOperationsInput | Role;
-    tag?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
+    tag?: NullableStringFieldUpdateOperationsInput | string | null;
+    introduce?: IntroduceUncheckedUpdateOneWithoutUserNestedInput;
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput;
     workExperience?: WorkExperienceUncheckedUpdateManyWithoutUserNestedInput;
-    introduce?: IntroduceUncheckedUpdateOneWithoutUserNestedInput;
   };
 
   export type UserUncheckedUpdateManyWithoutUserInput = {
@@ -8150,8 +8144,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     role?: EnumRoleFieldUpdateOperationsInput | Role;
-    tag?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
+    tag?: NullableStringFieldUpdateOperationsInput | string | null;
   };
 
   /**

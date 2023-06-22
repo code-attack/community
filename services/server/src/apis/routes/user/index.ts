@@ -31,7 +31,7 @@ userRouter.post("/", tokenValidate, async (req, res, next) => {
   }
 });
 
-userRouter.get("/", async (req, res, next) => {
+userRouter.get(URI.PROFILE, async (req, res, next) => {
   try {
     const userService = Container.get(UserService);
     const userProfileList = await userService.getAll();
@@ -53,7 +53,7 @@ userRouter.get("/:id", async (req, res, next) => {
   }
 });
 
-userRouter.get(URI.MY, tokenValidate, async (req, res, next) => {
+userRouter.get("/", tokenValidate, async (req, res, next) => {
   try {
     const access_token = getAccessToken(req.headers.authorization);
     const { decodedToken } = jwtHelper.decodeToken(access_token, TOKEN.ACCESS);

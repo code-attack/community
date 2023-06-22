@@ -92,8 +92,8 @@ exports.Prisma.PostScalarFieldEnum = {
   id: "id",
   title: "title",
   content: "content",
-  thumbnail: "thumbnail",
   userId: "userId",
+  thumbnail: "thumbnail",
 };
 
 exports.Prisma.SortOrder = {
@@ -118,17 +118,17 @@ exports.Prisma.UserScalarFieldEnum = {
   name: "name",
   password: "password",
   role: "role",
-  tag: "tag",
   profile_img: "profile_img",
+  tag: "tag",
 };
 
 exports.Prisma.WorkExperienceScalarFieldEnum = {
-  id: "id",
   name: "name",
   field: "field",
   startDate: "startDate",
   endDate: "endDate",
   userId: "userId",
+  id: "id",
 };
 exports.Role = {
   mento: "mento",

@@ -32,8 +32,21 @@ export class UserRepository {
   };
 
   findUserByAccountId = async (account_id: string) => {
-    return await client.user.findUnique({
+    return await client.user.findFirst({
       where: { account_id },
+      select: {
+        name: true,
+        role: true,
+        tag: true,
+        profile_img: true,
+        introduce: {
+          select: {
+            content: true,
+          },
+        },
+        technology: true,
+        workExperience: true,
+      },
     });
   };
 
@@ -58,26 +71,22 @@ export class UserRepository {
 
   updateWorkExperience = async (
     account_id: string,
-    workExperienceInfo: User.WorkExperience
+    workExperienceInfo: User.WorkExperience[]
   ) => {
-    const id = +workExperienceInfo.id;
-    console.log(workExperienceInfo);
-
-    await client.user.update({
-      where: { account_id },
-      data: {
-        workExperience: {
-          upsert: {
-            where: { userId: account_id },
-            create: { ...workExperienceInfo, id },
-            update: {
-              ...workExperienceInfo,
-              id,
-            },
-          },
-        },
-      },
+    const promises = workExperienceInfo.map(async (workExperience) => {
+      const { id, ...rest } = workExperience;
+      if (id) {
+        await client.workExperience.update({
+          where: { id: +id },
+          data: { ...rest, userId: account_id },
+        });
+      } else {
+        await client.workExperience.create({
+          data: { ...rest, userId: account_id },
+        });
+      }
     });
+    await Promise.all(promises);
   };
 
   updateIntroduce = async (id: string, introduceInfo: User.Introduce) => {
