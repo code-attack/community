@@ -9,7 +9,7 @@ export default () => {
     <>
       <Header />
       <main className="m-auto w-[1192px] px-4">
-        <Text.title1>포스팅</Text.title1>
+        <Text.title1 className="mt-32 mb-8">포스팅</Text.title1>
         <div className="flex flex-wrap gap-6 gap-y-7"></div>
         <Card.Basic
           {...{

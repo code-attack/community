@@ -23,7 +23,7 @@ export type User = {
   account_id: string;
   name: string;
   password: string;
-  role: string;
+  role: Role;
   tag: string | null;
   profile_img: string | null;
 };
@@ -53,6 +53,7 @@ export type Post = {
  *
  */
 export type WorkExperience = {
+  id: number;
   name: string;
   field: string;
   startDate: string;
@@ -68,6 +69,17 @@ export type Introduce = {
   content: string;
   userId: string;
 };
+
+/**
+ * Enums
+ */
+
+export const Role: {
+  mento: "mento";
+  menti: "menti";
+};
+
+export type Role = (typeof Role)[keyof typeof Role];
 
 /**
  * ##  Prisma Client ʲˢ
@@ -1086,7 +1098,7 @@ export namespace Prisma {
     account_id: string | null;
     name: string | null;
     password: string | null;
-    role: string | null;
+    role: Role | null;
     tag: string | null;
     profile_img: string | null;
   };
@@ -1096,7 +1108,7 @@ export namespace Prisma {
     account_id: string | null;
     name: string | null;
     password: string | null;
-    role: string | null;
+    role: Role | null;
     tag: string | null;
     profile_img: string | null;
   };
@@ -1239,7 +1251,7 @@ export namespace Prisma {
     account_id: string;
     name: string;
     password: string;
-    role: string;
+    role: Role;
     tag: string | null;
     profile_img: string | null;
     _count: UserCountAggregateOutputType | null;
@@ -4210,11 +4222,22 @@ export namespace Prisma {
 
   export type AggregateWorkExperience = {
     _count: WorkExperienceCountAggregateOutputType | null;
+    _avg: WorkExperienceAvgAggregateOutputType | null;
+    _sum: WorkExperienceSumAggregateOutputType | null;
     _min: WorkExperienceMinAggregateOutputType | null;
     _max: WorkExperienceMaxAggregateOutputType | null;
   };
 
+  export type WorkExperienceAvgAggregateOutputType = {
+    id: number | null;
+  };
+
+  export type WorkExperienceSumAggregateOutputType = {
+    id: number | null;
+  };
+
   export type WorkExperienceMinAggregateOutputType = {
+    id: number | null;
     name: string | null;
     field: string | null;
     startDate: string | null;
@@ -4223,6 +4246,7 @@ export namespace Prisma {
   };
 
   export type WorkExperienceMaxAggregateOutputType = {
+    id: number | null;
     name: string | null;
     field: string | null;
     startDate: string | null;
@@ -4231,6 +4255,7 @@ export namespace Prisma {
   };
 
   export type WorkExperienceCountAggregateOutputType = {
+    id: number;
     name: number;
     field: number;
     startDate: number;
@@ -4239,7 +4264,16 @@ export namespace Prisma {
     _all: number;
   };
 
+  export type WorkExperienceAvgAggregateInputType = {
+    id?: true;
+  };
+
+  export type WorkExperienceSumAggregateInputType = {
+    id?: true;
+  };
+
   export type WorkExperienceMinAggregateInputType = {
+    id?: true;
     name?: true;
     field?: true;
     startDate?: true;
@@ -4248,6 +4282,7 @@ export namespace Prisma {
   };
 
   export type WorkExperienceMaxAggregateInputType = {
+    id?: true;
     name?: true;
     field?: true;
     startDate?: true;
@@ -4256,6 +4291,7 @@ export namespace Prisma {
   };
 
   export type WorkExperienceCountAggregateInputType = {
+    id?: true;
     name?: true;
     field?: true;
     startDate?: true;
@@ -4302,6 +4338,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      *
+     * Select which fields to average
+     **/
+    _avg?: WorkExperienceAvgAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to sum
+     **/
+    _sum?: WorkExperienceSumAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
      * Select which fields to find the minimum value
      **/
     _min?: WorkExperienceMinAggregateInputType;
@@ -4331,17 +4379,22 @@ export namespace Prisma {
     take?: number;
     skip?: number;
     _count?: WorkExperienceCountAggregateInputType | true;
+    _avg?: WorkExperienceAvgAggregateInputType;
+    _sum?: WorkExperienceSumAggregateInputType;
     _min?: WorkExperienceMinAggregateInputType;
     _max?: WorkExperienceMaxAggregateInputType;
   };
 
   export type WorkExperienceGroupByOutputType = {
+    id: number;
     name: string;
     field: string;
     startDate: string;
     endDate: string | null;
     userId: string;
     _count: WorkExperienceCountAggregateOutputType | null;
+    _avg: WorkExperienceAvgAggregateOutputType | null;
+    _sum: WorkExperienceSumAggregateOutputType | null;
     _min: WorkExperienceMinAggregateOutputType | null;
     _max: WorkExperienceMaxAggregateOutputType | null;
   };
@@ -4361,6 +4414,7 @@ export namespace Prisma {
     >;
 
   export type WorkExperienceSelect = {
+    id?: boolean;
     name?: boolean;
     field?: boolean;
     startDate?: boolean;
@@ -4519,8 +4573,8 @@ export namespace Prisma {
      * // Get first 10 WorkExperiences
      * const workExperiences = await prisma.workExperience.findMany({ take: 10 })
      *
-     * // Only select the `name`
-     * const workExperienceWithNameOnly = await prisma.workExperience.findMany({ select: { name: true } })
+     * // Only select the `id`
+     * const workExperienceWithIdOnly = await prisma.workExperience.findMany({ select: { id: true } })
      *
      **/
     findMany<T extends WorkExperienceFindManyArgs>(
@@ -6220,6 +6274,7 @@ export namespace Prisma {
     (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum];
 
   export const WorkExperienceScalarFieldEnum: {
+    id: "id";
     name: "name";
     field: "field";
     startDate: "startDate";
@@ -6242,7 +6297,7 @@ export namespace Prisma {
     account_id?: StringFilter | string;
     name?: StringFilter | string;
     password?: StringFilter | string;
-    role?: StringFilter | string;
+    role?: EnumRoleFilter | Role;
     tag?: StringNullableFilter | string | null;
     profile_img?: StringNullableFilter | string | null;
     technology?: TechnologyListRelationFilter;
@@ -6293,7 +6348,7 @@ export namespace Prisma {
     account_id?: StringWithAggregatesFilter | string;
     name?: StringWithAggregatesFilter | string;
     password?: StringWithAggregatesFilter | string;
-    role?: StringWithAggregatesFilter | string;
+    role?: EnumRoleWithAggregatesFilter | Role;
     tag?: StringNullableWithAggregatesFilter | string | null;
     profile_img?: StringNullableWithAggregatesFilter | string | null;
   };
@@ -6384,6 +6439,7 @@ export namespace Prisma {
     AND?: Enumerable<WorkExperienceWhereInput>;
     OR?: Enumerable<WorkExperienceWhereInput>;
     NOT?: Enumerable<WorkExperienceWhereInput>;
+    id?: IntFilter | number;
     name?: StringFilter | string;
     field?: StringFilter | string;
     startDate?: StringFilter | string;
@@ -6393,6 +6449,7 @@ export namespace Prisma {
   };
 
   export type WorkExperienceOrderByWithRelationInput = {
+    id?: SortOrder;
     name?: SortOrder;
     field?: SortOrder;
     startDate?: SortOrder;
@@ -6402,24 +6459,29 @@ export namespace Prisma {
   };
 
   export type WorkExperienceWhereUniqueInput = {
+    id?: number;
     userId?: string;
   };
 
   export type WorkExperienceOrderByWithAggregationInput = {
+    id?: SortOrder;
     name?: SortOrder;
     field?: SortOrder;
     startDate?: SortOrder;
     endDate?: SortOrder;
     userId?: SortOrder;
     _count?: WorkExperienceCountOrderByAggregateInput;
+    _avg?: WorkExperienceAvgOrderByAggregateInput;
     _max?: WorkExperienceMaxOrderByAggregateInput;
     _min?: WorkExperienceMinOrderByAggregateInput;
+    _sum?: WorkExperienceSumOrderByAggregateInput;
   };
 
   export type WorkExperienceScalarWhereWithAggregatesInput = {
     AND?: Enumerable<WorkExperienceScalarWhereWithAggregatesInput>;
     OR?: Enumerable<WorkExperienceScalarWhereWithAggregatesInput>;
     NOT?: Enumerable<WorkExperienceScalarWhereWithAggregatesInput>;
+    id?: IntWithAggregatesFilter | number;
     name?: StringWithAggregatesFilter | string;
     field?: StringWithAggregatesFilter | string;
     startDate?: StringWithAggregatesFilter | string;
@@ -6466,7 +6528,7 @@ export namespace Prisma {
     account_id: string;
     name: string;
     password: string;
-    role: string;
+    role: Role;
     tag?: string | null;
     profile_img?: string | null;
     technology?: TechnologyCreateNestedManyWithoutUserInput;
@@ -6480,7 +6542,7 @@ export namespace Prisma {
     account_id: string;
     name: string;
     password: string;
-    role: string;
+    role: Role;
     tag?: string | null;
     profile_img?: string | null;
     technology?: TechnologyUncheckedCreateNestedManyWithoutUserInput;
@@ -6493,7 +6555,7 @@ export namespace Prisma {
     account_id?: StringFieldUpdateOperationsInput | string;
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
-    role?: StringFieldUpdateOperationsInput | string;
+    role?: EnumRoleFieldUpdateOperationsInput | Role;
     tag?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
     technology?: TechnologyUpdateManyWithoutUserNestedInput;
@@ -6507,7 +6569,7 @@ export namespace Prisma {
     account_id?: StringFieldUpdateOperationsInput | string;
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
-    role?: StringFieldUpdateOperationsInput | string;
+    role?: EnumRoleFieldUpdateOperationsInput | Role;
     tag?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
     technology?: TechnologyUncheckedUpdateManyWithoutUserNestedInput;
@@ -6521,7 +6583,7 @@ export namespace Prisma {
     account_id: string;
     name: string;
     password: string;
-    role: string;
+    role: Role;
     tag?: string | null;
     profile_img?: string | null;
   };
@@ -6530,7 +6592,7 @@ export namespace Prisma {
     account_id?: StringFieldUpdateOperationsInput | string;
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
-    role?: StringFieldUpdateOperationsInput | string;
+    role?: EnumRoleFieldUpdateOperationsInput | Role;
     tag?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
   };
@@ -6540,7 +6602,7 @@ export namespace Prisma {
     account_id?: StringFieldUpdateOperationsInput | string;
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
-    role?: StringFieldUpdateOperationsInput | string;
+    role?: EnumRoleFieldUpdateOperationsInput | Role;
     tag?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
   };
@@ -6626,6 +6688,7 @@ export namespace Prisma {
   };
 
   export type WorkExperienceCreateInput = {
+    id: number;
     name: string;
     field: string;
     startDate: string;
@@ -6634,6 +6697,7 @@ export namespace Prisma {
   };
 
   export type WorkExperienceUncheckedCreateInput = {
+    id: number;
     name: string;
     field: string;
     startDate: string;
@@ -6642,6 +6706,7 @@ export namespace Prisma {
   };
 
   export type WorkExperienceUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number;
     name?: StringFieldUpdateOperationsInput | string;
     field?: StringFieldUpdateOperationsInput | string;
     startDate?: StringFieldUpdateOperationsInput | string;
@@ -6650,6 +6715,7 @@ export namespace Prisma {
   };
 
   export type WorkExperienceUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number;
     name?: StringFieldUpdateOperationsInput | string;
     field?: StringFieldUpdateOperationsInput | string;
     startDate?: StringFieldUpdateOperationsInput | string;
@@ -6658,6 +6724,7 @@ export namespace Prisma {
   };
 
   export type WorkExperienceCreateManyInput = {
+    id: number;
     name: string;
     field: string;
     startDate: string;
@@ -6666,6 +6733,7 @@ export namespace Prisma {
   };
 
   export type WorkExperienceUpdateManyMutationInput = {
+    id?: IntFieldUpdateOperationsInput | number;
     name?: StringFieldUpdateOperationsInput | string;
     field?: StringFieldUpdateOperationsInput | string;
     startDate?: StringFieldUpdateOperationsInput | string;
@@ -6673,6 +6741,7 @@ export namespace Prisma {
   };
 
   export type WorkExperienceUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number;
     name?: StringFieldUpdateOperationsInput | string;
     field?: StringFieldUpdateOperationsInput | string;
     startDate?: StringFieldUpdateOperationsInput | string;
@@ -6737,6 +6806,13 @@ export namespace Prisma {
     startsWith?: string;
     endsWith?: string;
     not?: NestedStringFilter | string;
+  };
+
+  export type EnumRoleFilter = {
+    equals?: Role;
+    in?: Enumerable<Role>;
+    notIn?: Enumerable<Role>;
+    not?: NestedEnumRoleFilter | Role;
   };
 
   export type StringNullableFilter = {
@@ -6859,6 +6935,16 @@ export namespace Prisma {
     _max?: NestedStringFilter;
   };
 
+  export type EnumRoleWithAggregatesFilter = {
+    equals?: Role;
+    in?: Enumerable<Role>;
+    notIn?: Enumerable<Role>;
+    not?: NestedEnumRoleWithAggregatesFilter | Role;
+    _count?: NestedIntFilter;
+    _min?: NestedEnumRoleFilter;
+    _max?: NestedEnumRoleFilter;
+  };
+
   export type StringNullableWithAggregatesFilter = {
     equals?: string | null;
     in?: Enumerable<string> | string | null;
@@ -6944,6 +7030,7 @@ export namespace Prisma {
   };
 
   export type WorkExperienceCountOrderByAggregateInput = {
+    id?: SortOrder;
     name?: SortOrder;
     field?: SortOrder;
     startDate?: SortOrder;
@@ -6951,7 +7038,12 @@ export namespace Prisma {
     userId?: SortOrder;
   };
 
+  export type WorkExperienceAvgOrderByAggregateInput = {
+    id?: SortOrder;
+  };
+
   export type WorkExperienceMaxOrderByAggregateInput = {
+    id?: SortOrder;
     name?: SortOrder;
     field?: SortOrder;
     startDate?: SortOrder;
@@ -6960,11 +7052,16 @@ export namespace Prisma {
   };
 
   export type WorkExperienceMinOrderByAggregateInput = {
+    id?: SortOrder;
     name?: SortOrder;
     field?: SortOrder;
     startDate?: SortOrder;
     endDate?: SortOrder;
     userId?: SortOrder;
+  };
+
+  export type WorkExperienceSumOrderByAggregateInput = {
+    id?: SortOrder;
   };
 
   export type IntroduceCountOrderByAggregateInput = {
@@ -7060,6 +7157,10 @@ export namespace Prisma {
 
   export type StringFieldUpdateOperationsInput = {
     set?: string;
+  };
+
+  export type EnumRoleFieldUpdateOperationsInput = {
+    set?: Role;
   };
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -7350,6 +7451,13 @@ export namespace Prisma {
     not?: NestedStringFilter | string;
   };
 
+  export type NestedEnumRoleFilter = {
+    equals?: Role;
+    in?: Enumerable<Role>;
+    notIn?: Enumerable<Role>;
+    not?: NestedEnumRoleFilter | Role;
+  };
+
   export type NestedStringNullableFilter = {
     equals?: string | null;
     in?: Enumerable<string> | string | null;
@@ -7406,6 +7514,16 @@ export namespace Prisma {
     _count?: NestedIntFilter;
     _min?: NestedStringFilter;
     _max?: NestedStringFilter;
+  };
+
+  export type NestedEnumRoleWithAggregatesFilter = {
+    equals?: Role;
+    in?: Enumerable<Role>;
+    notIn?: Enumerable<Role>;
+    not?: NestedEnumRoleWithAggregatesFilter | Role;
+    _count?: NestedIntFilter;
+    _min?: NestedEnumRoleFilter;
+    _max?: NestedEnumRoleFilter;
   };
 
   export type NestedStringNullableWithAggregatesFilter = {
@@ -7477,6 +7595,7 @@ export namespace Prisma {
   };
 
   export type WorkExperienceCreateWithoutUserInput = {
+    id: number;
     name: string;
     field: string;
     startDate: string;
@@ -7484,6 +7603,7 @@ export namespace Prisma {
   };
 
   export type WorkExperienceUncheckedCreateWithoutUserInput = {
+    id: number;
     name: string;
     field: string;
     startDate: string;
@@ -7622,6 +7742,7 @@ export namespace Prisma {
     AND?: Enumerable<WorkExperienceScalarWhereInput>;
     OR?: Enumerable<WorkExperienceScalarWhereInput>;
     NOT?: Enumerable<WorkExperienceScalarWhereInput>;
+    id?: IntFilter | number;
     name?: StringFilter | string;
     field?: StringFilter | string;
     startDate?: StringFilter | string;
@@ -7652,7 +7773,7 @@ export namespace Prisma {
     account_id: string;
     name: string;
     password: string;
-    role: string;
+    role: Role;
     tag?: string | null;
     profile_img?: string | null;
     posts?: PostCreateNestedManyWithoutUserInput;
@@ -7665,7 +7786,7 @@ export namespace Prisma {
     account_id: string;
     name: string;
     password: string;
-    role: string;
+    role: Role;
     tag?: string | null;
     profile_img?: string | null;
     posts?: PostUncheckedCreateNestedManyWithoutUserInput;
@@ -7717,7 +7838,7 @@ export namespace Prisma {
     account_id?: StringFilter | string;
     name?: StringFilter | string;
     password?: StringFilter | string;
-    role?: StringFilter | string;
+    role?: EnumRoleFilter | Role;
     tag?: StringNullableFilter | string | null;
     profile_img?: StringNullableFilter | string | null;
   };
@@ -7726,7 +7847,7 @@ export namespace Prisma {
     account_id: string;
     name: string;
     password: string;
-    role: string;
+    role: Role;
     tag?: string | null;
     profile_img?: string | null;
     technology?: TechnologyCreateNestedManyWithoutUserInput;
@@ -7739,7 +7860,7 @@ export namespace Prisma {
     account_id: string;
     name: string;
     password: string;
-    role: string;
+    role: Role;
     tag?: string | null;
     profile_img?: string | null;
     technology?: TechnologyUncheckedCreateNestedManyWithoutUserInput;
@@ -7770,7 +7891,7 @@ export namespace Prisma {
     account_id?: StringFieldUpdateOperationsInput | string;
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
-    role?: StringFieldUpdateOperationsInput | string;
+    role?: EnumRoleFieldUpdateOperationsInput | Role;
     tag?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
     technology?: TechnologyUpdateManyWithoutUserNestedInput;
@@ -7783,7 +7904,7 @@ export namespace Prisma {
     account_id?: StringFieldUpdateOperationsInput | string;
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
-    role?: StringFieldUpdateOperationsInput | string;
+    role?: EnumRoleFieldUpdateOperationsInput | Role;
     tag?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
     technology?: TechnologyUncheckedUpdateManyWithoutUserNestedInput;
@@ -7795,7 +7916,7 @@ export namespace Prisma {
     account_id: string;
     name: string;
     password: string;
-    role: string;
+    role: Role;
     tag?: string | null;
     profile_img?: string | null;
     technology?: TechnologyCreateNestedManyWithoutUserInput;
@@ -7808,7 +7929,7 @@ export namespace Prisma {
     account_id: string;
     name: string;
     password: string;
-    role: string;
+    role: Role;
     tag?: string | null;
     profile_img?: string | null;
     technology?: TechnologyUncheckedCreateNestedManyWithoutUserInput;
@@ -7839,7 +7960,7 @@ export namespace Prisma {
     account_id?: StringFieldUpdateOperationsInput | string;
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
-    role?: StringFieldUpdateOperationsInput | string;
+    role?: EnumRoleFieldUpdateOperationsInput | Role;
     tag?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
     technology?: TechnologyUpdateManyWithoutUserNestedInput;
@@ -7852,7 +7973,7 @@ export namespace Prisma {
     account_id?: StringFieldUpdateOperationsInput | string;
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
-    role?: StringFieldUpdateOperationsInput | string;
+    role?: EnumRoleFieldUpdateOperationsInput | Role;
     tag?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
     technology?: TechnologyUncheckedUpdateManyWithoutUserNestedInput;
@@ -7864,7 +7985,7 @@ export namespace Prisma {
     account_id: string;
     name: string;
     password: string;
-    role: string;
+    role: Role;
     tag?: string | null;
     profile_img?: string | null;
     technology?: TechnologyCreateNestedManyWithoutUserInput;
@@ -7877,7 +7998,7 @@ export namespace Prisma {
     account_id: string;
     name: string;
     password: string;
-    role: string;
+    role: Role;
     tag?: string | null;
     profile_img?: string | null;
     technology?: TechnologyUncheckedCreateNestedManyWithoutUserInput;
@@ -7908,7 +8029,7 @@ export namespace Prisma {
     account_id?: StringFieldUpdateOperationsInput | string;
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
-    role?: StringFieldUpdateOperationsInput | string;
+    role?: EnumRoleFieldUpdateOperationsInput | Role;
     tag?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
     technology?: TechnologyUpdateManyWithoutUserNestedInput;
@@ -7921,7 +8042,7 @@ export namespace Prisma {
     account_id?: StringFieldUpdateOperationsInput | string;
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
-    role?: StringFieldUpdateOperationsInput | string;
+    role?: EnumRoleFieldUpdateOperationsInput | Role;
     tag?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
     technology?: TechnologyUncheckedUpdateManyWithoutUserNestedInput;
@@ -7937,6 +8058,7 @@ export namespace Prisma {
   };
 
   export type WorkExperienceCreateManyUserInput = {
+    id: number;
     name: string;
     field: string;
     startDate: string;
@@ -7974,6 +8096,7 @@ export namespace Prisma {
   };
 
   export type WorkExperienceUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number;
     name?: StringFieldUpdateOperationsInput | string;
     field?: StringFieldUpdateOperationsInput | string;
     startDate?: StringFieldUpdateOperationsInput | string;
@@ -7981,6 +8104,7 @@ export namespace Prisma {
   };
 
   export type WorkExperienceUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number;
     name?: StringFieldUpdateOperationsInput | string;
     field?: StringFieldUpdateOperationsInput | string;
     startDate?: StringFieldUpdateOperationsInput | string;
@@ -7988,6 +8112,7 @@ export namespace Prisma {
   };
 
   export type WorkExperienceUncheckedUpdateManyWithoutWorkExperienceInput = {
+    id?: IntFieldUpdateOperationsInput | number;
     name?: StringFieldUpdateOperationsInput | string;
     field?: StringFieldUpdateOperationsInput | string;
     startDate?: StringFieldUpdateOperationsInput | string;
@@ -7998,7 +8123,7 @@ export namespace Prisma {
     account_id?: StringFieldUpdateOperationsInput | string;
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
-    role?: StringFieldUpdateOperationsInput | string;
+    role?: EnumRoleFieldUpdateOperationsInput | Role;
     tag?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
     posts?: PostUpdateManyWithoutUserNestedInput;
@@ -8011,7 +8136,7 @@ export namespace Prisma {
     account_id?: StringFieldUpdateOperationsInput | string;
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
-    role?: StringFieldUpdateOperationsInput | string;
+    role?: EnumRoleFieldUpdateOperationsInput | Role;
     tag?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput;
@@ -8024,7 +8149,7 @@ export namespace Prisma {
     account_id?: StringFieldUpdateOperationsInput | string;
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
-    role?: StringFieldUpdateOperationsInput | string;
+    role?: EnumRoleFieldUpdateOperationsInput | Role;
     tag?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
   };

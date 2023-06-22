@@ -19,6 +19,7 @@ export default () => {
     <div className="bg-gray-50">
       <Header />
       <main className="m-auto w-[1016px]">
+        <Profile.Patch />
         <Link href={"/"}>
           <Button.Text Icon={<Svg.Arrow />} className="w-28 my-10">
             홈으로
@@ -45,7 +46,7 @@ export default () => {
         <Profile.Block>
           <Text.heading3>업무 경험</Text.heading3>
           <div>
-            <Input.TextArea label="회사명" />
+            <Input.Basic label="회사명" />
           </div>
           <div>
             <Input.TextArea label="직무" />

@@ -17,29 +17,74 @@ export class UserRepository {
   };
 
   findUserProfile = async () => {
-    return await client.user.findMany();
+    return await client.user.findMany({
+      where: {
+        role: "mento",
+      },
+      select: {
+        id: true,
+        name: true,
+        tag: true,
+        profile_img: true,
+        technology: true,
+      },
+    });
+  };
+
+  findUserByAccountId = async (account_id: string) => {
+    return await client.user.findUnique({
+      where: { account_id },
+    });
   };
 
   findUserProfileById = async (id: number) => {
     return await client.user.findFirst({
       where: { id },
+      select: {
+        name: true,
+        role: true,
+        tag: true,
+        profile_img: true,
+        introduce: {
+          select: {
+            content: true,
+          },
+        },
+        technology: true,
+        workExperience: true,
+      },
     });
   };
 
   updateWorkExperience = async (
-    id: string,
-    workExperienceInfo: User.WriteReq
+    account_id: string,
+    workExperienceInfo: User.WorkExperience
   ) => {
-    await client.workExperience.updateMany({
-      where: { userId: id },
-      data: { ...workExperienceInfo.WorkExperience },
+    const id = +workExperienceInfo.id;
+    console.log(workExperienceInfo);
+
+    await client.user.update({
+      where: { account_id },
+      data: {
+        workExperience: {
+          upsert: {
+            where: { userId: account_id },
+            create: { ...workExperienceInfo, id },
+            update: {
+              ...workExperienceInfo,
+              id,
+            },
+          },
+        },
+      },
     });
   };
 
-  updateIntroduce = async (id: string, introduceInfo: User.WriteReq) => {
-    await client.introduce.updateMany({
+  updateIntroduce = async (id: string, introduceInfo: User.Introduce) => {
+    await client.introduce.upsert({
       where: { userId: id },
-      data: { ...introduceInfo.Introduce },
+      update: { ...introduceInfo },
+      create: { ...introduceInfo, userId: id },
     });
   };
 }

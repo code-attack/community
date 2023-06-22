@@ -33,7 +33,9 @@ export const Basic = ({
   const isPassword = type === "password";
   return (
     <div>
-      <Text.body3 className=" ml-[6px] mb-[6px]">{label}</Text.body3>
+      <Text.body1 as="p" className="ml-[6px] mb-[6px]">
+        {label}
+      </Text.body1>
       <div className="relative">
         <input
           className={`pl-3 ${

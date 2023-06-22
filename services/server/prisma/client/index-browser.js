@@ -123,11 +123,16 @@ exports.Prisma.UserScalarFieldEnum = {
 };
 
 exports.Prisma.WorkExperienceScalarFieldEnum = {
+  id: "id",
   name: "name",
   field: "field",
   startDate: "startDate",
   endDate: "endDate",
   userId: "userId",
+};
+exports.Role = {
+  mento: "mento",
+  menti: "menti",
 };
 
 exports.Prisma.ModelName = {

@@ -11,18 +11,23 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  mento
+  menti
+}
+
 model User {
-  id            Int              @id @default(autoincrement())
-  account_id    String           @unique @db.VarChar(20)
-  name          String           @db.VarChar(20)
-  password      String           @db.Char(60)
-  role          String           @db.VarChar(5)
-  tag           String?
-  technology    Technology[]
-  profile_img   String?
-  posts         Post[]
+  id             Int              @id @default(autoincrement())
+  account_id     String           @unique @db.VarChar(20)
+  name           String           @db.VarChar(20)
+  password       String           @db.Char(60)
+  role           Role
+  tag            String?
+  technology     Technology[]
+  profile_img    String?
+  posts          Post[]
   workExperience WorkExperience[]
-  introduce     Introduce?
+  introduce      Introduce?
 }
 
 model Technology {
@@ -40,6 +45,7 @@ model Post {
 }
 
 model WorkExperience {
+  id        Int     @id
   name      String
   field     String
   startDate String

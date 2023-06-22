@@ -1,11 +1,24 @@
+export interface WorkExperience {
+  id: string;
+  name: string;
+  field: string;
+  startDate: string;
+  endDate?: string;
+}
+
+export interface Introduce {
+  content: string;
+}
+
 export interface WriteReq {
-  WorkExperience: {
-    name: string;
-    field: string;
-    startDate: string;
-    endDate?: string;
-  };
-  Introduce: {
-    content: string;
-  };
+  WorkExperience: WorkExperience;
+  Introduce: Introduce;
+}
+
+export interface ReadProfileRes {
+  id: number;
+  name: string;
+  profile_img: string | null;
+  tag: string | null;
+  technology: string[];
 }
