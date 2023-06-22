@@ -71,8 +71,8 @@ export const DayCalender = ({
               <div
                 key={idx + "realShowDay"}
                 className={`cursor-pointer rounded-full ${
-                  isCurrentDay(idx + 1) && "bg-gray300 text-gray50"
-                } hover:bg-gray200  hover:text-gray50 ${weekClassName}`}
+                  isCurrentDay(idx + 1) && "bg-gray-500 text-gray-50"
+                } hover:bg-gray-500  hover:text-gray-50 ${weekClassName}`}
                 onClick={() => onSaveClickedDay(idx + 1)}
               >
                 {idx + 1}
