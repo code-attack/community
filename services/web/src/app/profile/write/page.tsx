@@ -69,6 +69,7 @@ const Main = ({
         <div>
           <Text.title2 className="text-gray-400">기술스택</Text.title2>
           <Text.body1>{introduce.content}</Text.body1>
+          <Input.Skill value={[]} placeholder="" onChange={() => {}} name="" />
         </div>
       </Profile.Block>
       <Profile.Block>

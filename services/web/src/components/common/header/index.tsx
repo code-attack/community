@@ -32,7 +32,7 @@ export const Header = () => {
     <>
       <header
         className={`fixed right-0 left-0 bg-white z-10 transition-all ${
-          isTop && "shadow-md"
+          isTop && "border-b-[1px] border-gray-100"
         }`}
       >
         <div

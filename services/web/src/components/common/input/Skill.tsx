@@ -68,14 +68,16 @@ export const Skill = ({ value, placeholder, onChange, name, label }: Props) => {
       </div>
       {dropdown && !!skillFilterValue.length && (
         <div
-          className={`absolute ${label ? "top-[90px]" : "top-[60px]"} w-full`}
+          className={`absolute ${
+            label ? "top-[90px]" : "top-[60px]"
+          } w-full z-10`}
         >
           <OutsideClickHandler onOutsideClick={closeDropdown}>
             <div className=" bg-white border-[1px] rounded-md shadow-md p-2 flex flex-col gap-2">
               {skillFilterValue.map((skill) => (
                 <div
                   onClick={() => onClickSkill(skill)}
-                  className={`${typograpy.title3} hover:bg-slate-100 px-4 py-3 rounded-md flex`}
+                  className={`${typograpy.title3} hover:bg-slate-100 px-4 py-3 rounded-md flex cursor-pointer`}
                 >
                   {skill}
                 </div>
