@@ -1,7 +1,7 @@
 "use client";
 
 import OutsideClickHandler from "react-outside-click-handler";
-import { stringToDate } from "../../../hooks/useCalender";
+import { stringToDate } from "../../../../hooks/useCalender";
 import { DayCalender } from "./DayCalender";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";

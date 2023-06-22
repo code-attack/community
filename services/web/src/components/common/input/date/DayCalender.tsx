@@ -5,9 +5,9 @@ import {
   DateValueType,
   stringToDate,
   useCalender,
-} from "../../../hooks/useCalender";
-import { Button } from "../button";
-import { typograpy } from "../text";
+} from "../../../../hooks/useCalender";
+import { Button } from "../../button";
+import { typograpy } from "../../text";
 
 interface PropsType {
   initialValue: string | number | undefined;

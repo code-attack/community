@@ -9,7 +9,6 @@ import { Svg } from "@/assets";
 import Image from "next/image";
 import { Footer } from "@/components/common/footer";
 import { Profile } from "@/components/profile";
-import { DateInput } from "@/components/common/date";
 import { Dispatch, ReactNode, SetStateAction, useState } from "react";
 import { query } from "@/hooks";
 import { User } from "@package/api-types";
@@ -126,7 +125,7 @@ const WriteModal = ({ modal, type, state, setState }: WriteModalProps) => {
           profile: (
             <div className="flex flex-col gap-4">
               <Input.Basic label="테스트" value="" onChange={() => {}} />
-              <DateInput
+              <Input.DateInput
                 label="테스트"
                 value=""
                 onSubmitAtInput={() => {}}
