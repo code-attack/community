@@ -45,7 +45,7 @@ export const Basic = ({
           placeholder={placeholder}
           onChange={onChange}
         />
-        <button className="absolute top-3 right-4 cursor-pointer">
+        <button type="button" className="absolute top-3 right-4 cursor-pointer">
           {isPassword &&
             (close ? (
               <Svg.Close onClick={closeEye} />

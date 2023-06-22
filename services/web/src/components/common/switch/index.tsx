@@ -10,6 +10,7 @@ export const Switch = ({ role, onClick }: Props) => {
   return (
     <button
       onClick={onClick}
+      type="button"
       className={`w-12 h-7 rounded-full flex items-center cursor-pointer px-1 ${
         isMento ? "bg-emerald-400" : "bg-gray-400"
       }`}
