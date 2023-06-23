@@ -2,9 +2,13 @@ import { client } from "@prisma";
 import { Service } from "typedi";
 import { Post } from "@package/api-types";
 
+export interface Create extends Post.CreateReq {
+  thumbnail: string;
+}
+
 @Service()
 export class PostRepository {
-  create = async (postInfo: Post.CreateReq, userId: string) => {
+  create = async (postInfo: Create, userId: string) => {
     await client.post.create({ data: { ...postInfo, userId } });
   };
 
@@ -17,7 +21,25 @@ export class PostRepository {
   };
 
   getAll = async (from: number) => {
-    return await client.post.findMany({ skip: from, take: from + 20 });
+    return await client.post.findMany({
+      skip: from,
+      take: from + 20,
+      select: {
+        id: true,
+        title: true,
+        content: true,
+        thumbnail: true,
+        createdAt: true,
+        user: {
+          select: {
+            name: true,
+            introduce: true,
+            technology: true,
+            profile_img: true,
+          },
+        },
+      },
+    });
   };
 
   getById = async (id: number) => {

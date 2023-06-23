@@ -94,6 +94,8 @@ exports.Prisma.PostScalarFieldEnum = {
   content: "content",
   userId: "userId",
   thumbnail: "thumbnail",
+  createdAt: "createdAt",
+  updatedAt: "updatedAt",
 };
 
 exports.Prisma.SortOrder = {

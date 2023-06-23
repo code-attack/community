@@ -12,7 +12,7 @@ import { useForm } from "@/hooks/useForm";
 import { query } from "@/hooks";
 
 export default () => {
-  const { form, onChange, setForm } = useForm<Auth.SignInReq>({
+  const { form, onChange, setForm } = useForm<Auth.SignIn<"req">>({
     account_id: "",
     password: "",
   });

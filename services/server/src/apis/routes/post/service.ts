@@ -1,4 +1,4 @@
-import { PostRepository } from "@/repositorys/post";
+import { Create, PostRepository } from "@/repositorys/post";
 import { Service } from "typedi";
 import { Post } from "@package/api-types";
 
@@ -10,7 +10,7 @@ export class PostService {
     this.postRepository = postRepository;
   }
 
-  create = async (postInfo: Post.CreateReq, userId: string) => {
+  create = async (postInfo: Create, userId: string) => {
     await this.postRepository.create(postInfo, userId);
   };
 

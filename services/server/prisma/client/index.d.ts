@@ -46,6 +46,8 @@ export type Post = {
   content: string;
   userId: string;
   thumbnail: string;
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 /**
@@ -3233,6 +3235,8 @@ export namespace Prisma {
     content: string | null;
     userId: string | null;
     thumbnail: string | null;
+    createdAt: Date | null;
+    updatedAt: Date | null;
   };
 
   export type PostMaxAggregateOutputType = {
@@ -3241,6 +3245,8 @@ export namespace Prisma {
     content: string | null;
     userId: string | null;
     thumbnail: string | null;
+    createdAt: Date | null;
+    updatedAt: Date | null;
   };
 
   export type PostCountAggregateOutputType = {
@@ -3249,6 +3255,8 @@ export namespace Prisma {
     content: number;
     userId: number;
     thumbnail: number;
+    createdAt: number;
+    updatedAt: number;
     _all: number;
   };
 
@@ -3266,6 +3274,8 @@ export namespace Prisma {
     content?: true;
     userId?: true;
     thumbnail?: true;
+    createdAt?: true;
+    updatedAt?: true;
   };
 
   export type PostMaxAggregateInputType = {
@@ -3274,6 +3284,8 @@ export namespace Prisma {
     content?: true;
     userId?: true;
     thumbnail?: true;
+    createdAt?: true;
+    updatedAt?: true;
   };
 
   export type PostCountAggregateInputType = {
@@ -3282,6 +3294,8 @@ export namespace Prisma {
     content?: true;
     userId?: true;
     thumbnail?: true;
+    createdAt?: true;
+    updatedAt?: true;
     _all?: true;
   };
 
@@ -3374,6 +3388,8 @@ export namespace Prisma {
     content: string;
     userId: string;
     thumbnail: string;
+    createdAt: Date;
+    updatedAt: Date;
     _count: PostCountAggregateOutputType | null;
     _avg: PostAvgAggregateOutputType | null;
     _sum: PostSumAggregateOutputType | null;
@@ -3399,6 +3415,8 @@ export namespace Prisma {
     content?: boolean;
     userId?: boolean;
     thumbnail?: boolean;
+    createdAt?: boolean;
+    updatedAt?: boolean;
     user?: boolean | UserArgs;
   };
 
@@ -6231,6 +6249,8 @@ export namespace Prisma {
     content: "content";
     userId: "userId";
     thumbnail: "thumbnail";
+    createdAt: "createdAt";
+    updatedAt: "updatedAt";
   };
 
   export type PostScalarFieldEnum =
@@ -6395,6 +6415,8 @@ export namespace Prisma {
     content?: StringFilter | string;
     userId?: StringFilter | string;
     thumbnail?: StringFilter | string;
+    createdAt?: DateTimeFilter | Date | string;
+    updatedAt?: DateTimeFilter | Date | string;
     user?: XOR<UserRelationFilter, UserWhereInput>;
   };
 
@@ -6404,6 +6426,8 @@ export namespace Prisma {
     content?: SortOrder;
     userId?: SortOrder;
     thumbnail?: SortOrder;
+    createdAt?: SortOrder;
+    updatedAt?: SortOrder;
     user?: UserOrderByWithRelationInput;
   };
 
@@ -6417,6 +6441,8 @@ export namespace Prisma {
     content?: SortOrder;
     userId?: SortOrder;
     thumbnail?: SortOrder;
+    createdAt?: SortOrder;
+    updatedAt?: SortOrder;
     _count?: PostCountOrderByAggregateInput;
     _avg?: PostAvgOrderByAggregateInput;
     _max?: PostMaxOrderByAggregateInput;
@@ -6433,6 +6459,8 @@ export namespace Prisma {
     content?: StringWithAggregatesFilter | string;
     userId?: StringWithAggregatesFilter | string;
     thumbnail?: StringWithAggregatesFilter | string;
+    createdAt?: DateTimeWithAggregatesFilter | Date | string;
+    updatedAt?: DateTimeWithAggregatesFilter | Date | string;
   };
 
   export type WorkExperienceWhereInput = {
@@ -6638,6 +6666,8 @@ export namespace Prisma {
     title: string;
     content: string;
     thumbnail: string;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
     user: UserCreateNestedOneWithoutPostsInput;
   };
 
@@ -6647,12 +6677,16 @@ export namespace Prisma {
     content: string;
     userId: string;
     thumbnail: string;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
   };
 
   export type PostUpdateInput = {
     title?: StringFieldUpdateOperationsInput | string;
     content?: StringFieldUpdateOperationsInput | string;
     thumbnail?: StringFieldUpdateOperationsInput | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
     user?: UserUpdateOneRequiredWithoutPostsNestedInput;
   };
 
@@ -6662,6 +6696,8 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string;
     userId?: StringFieldUpdateOperationsInput | string;
     thumbnail?: StringFieldUpdateOperationsInput | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
   export type PostCreateManyInput = {
@@ -6670,12 +6706,16 @@ export namespace Prisma {
     content: string;
     userId: string;
     thumbnail: string;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
   };
 
   export type PostUpdateManyMutationInput = {
     title?: StringFieldUpdateOperationsInput | string;
     content?: StringFieldUpdateOperationsInput | string;
     thumbnail?: StringFieldUpdateOperationsInput | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
   export type PostUncheckedUpdateManyInput = {
@@ -6684,6 +6724,8 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string;
     userId?: StringFieldUpdateOperationsInput | string;
     thumbnail?: StringFieldUpdateOperationsInput | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
   export type WorkExperienceCreateInput = {
@@ -6988,6 +7030,17 @@ export namespace Prisma {
     id?: SortOrder;
   };
 
+  export type DateTimeFilter = {
+    equals?: Date | string;
+    in?: Enumerable<Date> | Enumerable<string> | Date | string;
+    notIn?: Enumerable<Date> | Enumerable<string> | Date | string;
+    lt?: Date | string;
+    lte?: Date | string;
+    gt?: Date | string;
+    gte?: Date | string;
+    not?: NestedDateTimeFilter | Date | string;
+  };
+
   export type UserRelationFilter = {
     is?: UserWhereInput;
     isNot?: UserWhereInput;
@@ -6999,6 +7052,8 @@ export namespace Prisma {
     content?: SortOrder;
     userId?: SortOrder;
     thumbnail?: SortOrder;
+    createdAt?: SortOrder;
+    updatedAt?: SortOrder;
   };
 
   export type PostAvgOrderByAggregateInput = {
@@ -7011,6 +7066,8 @@ export namespace Prisma {
     content?: SortOrder;
     userId?: SortOrder;
     thumbnail?: SortOrder;
+    createdAt?: SortOrder;
+    updatedAt?: SortOrder;
   };
 
   export type PostMinOrderByAggregateInput = {
@@ -7019,10 +7076,26 @@ export namespace Prisma {
     content?: SortOrder;
     userId?: SortOrder;
     thumbnail?: SortOrder;
+    createdAt?: SortOrder;
+    updatedAt?: SortOrder;
   };
 
   export type PostSumOrderByAggregateInput = {
     id?: SortOrder;
+  };
+
+  export type DateTimeWithAggregatesFilter = {
+    equals?: Date | string;
+    in?: Enumerable<Date> | Enumerable<string> | Date | string;
+    notIn?: Enumerable<Date> | Enumerable<string> | Date | string;
+    lt?: Date | string;
+    lte?: Date | string;
+    gt?: Date | string;
+    gte?: Date | string;
+    not?: NestedDateTimeWithAggregatesFilter | Date | string;
+    _count?: NestedIntFilter;
+    _min?: NestedDateTimeFilter;
+    _max?: NestedDateTimeFilter;
   };
 
   export type WorkExperienceCountOrderByAggregateInput = {
@@ -7362,6 +7435,10 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput;
   };
 
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string;
+  };
+
   export type UserUpdateOneRequiredWithoutPostsNestedInput = {
     create?: XOR<
       UserCreateWithoutPostsInput,
@@ -7550,6 +7627,31 @@ export namespace Prisma {
     not?: NestedIntNullableFilter | number | null;
   };
 
+  export type NestedDateTimeFilter = {
+    equals?: Date | string;
+    in?: Enumerable<Date> | Enumerable<string> | Date | string;
+    notIn?: Enumerable<Date> | Enumerable<string> | Date | string;
+    lt?: Date | string;
+    lte?: Date | string;
+    gt?: Date | string;
+    gte?: Date | string;
+    not?: NestedDateTimeFilter | Date | string;
+  };
+
+  export type NestedDateTimeWithAggregatesFilter = {
+    equals?: Date | string;
+    in?: Enumerable<Date> | Enumerable<string> | Date | string;
+    notIn?: Enumerable<Date> | Enumerable<string> | Date | string;
+    lt?: Date | string;
+    lte?: Date | string;
+    gt?: Date | string;
+    gte?: Date | string;
+    not?: NestedDateTimeWithAggregatesFilter | Date | string;
+    _count?: NestedIntFilter;
+    _min?: NestedDateTimeFilter;
+    _max?: NestedDateTimeFilter;
+  };
+
   export type IntroduceCreateWithoutUserInput = {
     content: string;
   };
@@ -7570,6 +7672,8 @@ export namespace Prisma {
     title: string;
     content: string;
     thumbnail: string;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
   };
 
   export type PostUncheckedCreateWithoutUserInput = {
@@ -7577,6 +7681,8 @@ export namespace Prisma {
     title: string;
     content: string;
     thumbnail: string;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
   };
 
   export type PostCreateOrConnectWithoutUserInput = {
@@ -7687,6 +7793,8 @@ export namespace Prisma {
     content?: StringFilter | string;
     userId?: StringFilter | string;
     thumbnail?: StringFilter | string;
+    createdAt?: DateTimeFilter | Date | string;
+    updatedAt?: DateTimeFilter | Date | string;
   };
 
   export type WorkExperienceUpsertWithWhereUniqueWithoutUserInput = {
@@ -8050,6 +8158,8 @@ export namespace Prisma {
     title: string;
     content: string;
     thumbnail: string;
+    createdAt?: Date | string;
+    updatedAt?: Date | string;
   };
 
   export type WorkExperienceCreateManyUserInput = {
@@ -8064,6 +8174,8 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string;
     content?: StringFieldUpdateOperationsInput | string;
     thumbnail?: StringFieldUpdateOperationsInput | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
   export type PostUncheckedUpdateWithoutUserInput = {
@@ -8071,6 +8183,8 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string;
     content?: StringFieldUpdateOperationsInput | string;
     thumbnail?: StringFieldUpdateOperationsInput | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
   export type PostUncheckedUpdateManyWithoutPostsInput = {
@@ -8078,6 +8192,8 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string;
     content?: StringFieldUpdateOperationsInput | string;
     thumbnail?: StringFieldUpdateOperationsInput | string;
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string;
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string;
   };
 
   export type WorkExperienceUpdateWithoutUserInput = {

@@ -18,7 +18,7 @@ export const Upload = ({ label, onChange, preview }: Props) => {
       />
       <label
         htmlFor="file"
-        className="border-gray300 relative m-auto mt-1 flex h-28 w-28 cursor-pointer flex-col items-center justify-center gap-2 rounded-full border-2 border-dashed bg-gray-100 transition-all hover:border-cyan-500"
+        className="border-gray300 relative m-auto mt-1 flex h-28 w-28 cursor-pointer flex-col items-center justify-center gap-2 rounded-full border-2 border-dashed bg-gray-100 transition-all hover:border-emerald-500"
       >
         {preview ? (
           <Img

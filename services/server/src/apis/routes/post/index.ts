@@ -33,6 +33,7 @@ postRouter.post(
         Joi.object<any, true, Post.CreateReq>({
           title: Joi.string().max(40).required(),
           content: Joi.string().required(),
+          //@ts-ignore
           thumbnail: Joi.string().required(),
         }),
         postInfo
