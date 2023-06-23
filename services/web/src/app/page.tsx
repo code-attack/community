@@ -4,7 +4,6 @@ import { Text } from "@/components/common/text";
 import { Header } from "@/components/common/header";
 import Image from "next/image";
 import { Footer } from "@/components/common/footer";
-import { DateInput } from "@/components/common/date";
 import { Card } from "@/components/common/card";
 import { query } from "@/hooks";
 

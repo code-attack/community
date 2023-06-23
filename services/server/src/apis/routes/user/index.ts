@@ -1,13 +1,13 @@
-import { Router } from "express";
-import { TOKEN, URI } from "@package/constant";
-import { file } from "@/helpers/file";
 import Container from "typedi";
+
+import { Router } from "express";
 import { UserService } from "./service";
-import { tokenValidate } from "@/apis/middlewares/token-validate";
-import { ErrorResponse } from "@/utils/error-res";
 import { commonError } from "@/constants";
-import { getAccessToken } from "@/utils/jwt";
 import { jwtHelper } from "@/helpers/jwt";
+import { getAccessToken } from "@/utils/jwt";
+import { TOKEN, URI } from "@package/constant";
+import { ErrorResponse } from "@/utils/error-res";
+import { tokenValidate } from "@/apis/middlewares/token-validate";
 
 export const userRouter = Router();
 

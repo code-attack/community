@@ -13,7 +13,13 @@ export default () => {
   return (
     <>
       <Header />
-      {data?.data && data.data.post.map((post) => <Main {...post} />)}
+
+      <main className="m-auto w-[1192px] px-4">
+        <Text.title1 className="mt-32 mb-8">포스팅</Text.title1>
+        <div className="flex gap-8">
+          {data?.data && data.data.post.map((post) => <Main {...post} />)}
+        </div>
+      </main>
       <Footer />
     </>
   );
@@ -21,19 +27,15 @@ export default () => {
 
 const Main = ({ thumbnail, user, title, content, createdAt }: Post.ReadRes) => {
   return (
-    <main className="m-auto w-[1192px] px-4">
-      <Text.title1 className="mt-32 mb-8">포스팅</Text.title1>
-      <div className="flex flex-wrap gap-6 gap-y-7"></div>
-      <Card.Basic
-        {...{
-          thumbnail: thumbnail,
-          name: user.name,
-          date: createdAt,
-          title: title,
-          content: content,
-          profile: user.profile_img,
-        }}
-      />
-    </main>
+    <Card.Basic
+      {...{
+        thumbnail: thumbnail,
+        name: user.name,
+        date: createdAt,
+        title: title,
+        content: content,
+        profile: user.profile_img,
+      }}
+    />
   );
 };

@@ -9,7 +9,7 @@ const route = instance(URI.POST);
 
 export const useGet = () => {
   return useQuery([URI.POST], () =>
-    route.get<{ isLast: boolean; post: Post.ReadRes[] }>("/?from=0")
+    route.get<{ isLast: boolean; post: Post.ReadRes[] }>("?from=0")
   );
 };
 
@@ -28,7 +28,7 @@ export const create = (body: Post.CreateReq) => {
       route.post("/", form, {
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoibG9raWpvamkyIiwiaWF0IjoxNjg3NDc4NzQ1LCJleHAiOjE2OTEwNzg3NDUsInN1YiI6ImFjY2Vzc190b2tlbiJ9.VhjLX6vE7P__bK_hhu2Qt41J6sKKe8TMLrdMrIDaZ1A",
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoibG9raWpvamkyIiwiaWF0IjoxNjg3NDg2MTg3LCJleHAiOjE2OTEwODYxODcsInN1YiI6ImFjY2Vzc190b2tlbiJ9.LUVka0LzI_QlDdN2EjfVmi2bgbruSpid9omSjpaHXJ8",
         },
       }),
     {

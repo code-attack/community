@@ -46,39 +46,55 @@ const Main = ({
     setModal(true);
   };
   const closeModal = () => modal && setModal(false);
+
   return (
     <main className="m-auto w-[1016px]">
-      {/* <Profile.Patch /> */}
       <Link href={"/"}>
         <Button.Text Icon={<Svg.Arrow />} className="w-28 my-10">
-          홈으로 {modal ? 1 : 2}
+          홈으로
         </Button.Text>
       </Link>
       <Text.heading3>프로필 작성</Text.heading3>
-      <Profile.Block onClick={() => openModal("profile")}>
+      <Profile.Block
+        onClick={() => openModal("profile")}
+        className="flex gap-8"
+      >
         <Image
           src={profile_img || "/auth.png"}
           alt="profile"
           width={104}
           height={104}
-          className="rounded-full"
+          className="rounded-full w-[104px] h-[104px]"
         />
-        <Text.heading3>{name}</Text.heading3>
+        <div className="flex flex-col gap-3">
+          <Text.heading3>{name}</Text.heading3>
+          <Input.DateInput
+            label="생년월일"
+            value={undefined}
+            onSubmitAtInput={() => {}}
+            name=""
+          />
+        </div>
       </Profile.Block>
       <Profile.Block onClick={() => openModal("basic")}>
         <Text.heading3 className="mb-4">기본정보</Text.heading3>
         <div>
           <Text.title2 className="text-gray-400">자기소개</Text.title2>
-          <Text.body1>{introduce?.content}</Text.body1>
+          <Text.body1>
+            {introduce?.content || "자기소개를 적어주세요..."}
+          </Text.body1>
         </div>
         <div>
           <Text.title2 className="text-gray-400">태그</Text.title2>
-          <Text.body1>{introduce?.content}</Text.body1>
+          <Text.body1>{tag || "태그 내용을 적어주세요..."}</Text.body1>
         </div>
         <div>
           <Text.title2 className="text-gray-400">기술스택</Text.title2>
-          <Text.body1>{introduce?.content}</Text.body1>
-          <Input.Skill value={[]} placeholder="" onChange={() => {}} name="" />
+          <Text.body1>
+            {!!technology.length
+              ? technology.map(() => <></>)
+              : "기술 스택을 입력해 주세요..."}
+          </Text.body1>
         </div>
       </Profile.Block>
       <Profile.Block onClick={() => openModal("experience")}>
@@ -88,12 +104,15 @@ const Main = ({
             <div className="border-l-2 border-gray-100 h-[calc(100%-10px)] w-[2px] top-5 left-[7px] absolute" />
             <div>
               <Text.title2 className="text-gray-400 before:w-4 before:h-4 before:border-4 before:border-gray200 before:rounded-full before:absolute before:left-0 before:top-2">
-                {work.name}
+                {work.name || "회사 이름을 작성해주세요..."}
               </Text.title2>
               <Text.body1>
-                {work.startDate} ~ {work.endDate && work.endDate}
+                {work.startDate || "날짜가 아직 없어요..."} ~{" "}
+                {work.endDate || "날짜가 아직 없어요..."}
               </Text.body1>
-              <Text.body1>{work.field}</Text.body1>
+              <Text.body1>
+                {work.field || "회사에서의 분야를 작성해 주세요"}
+              </Text.body1>
             </div>
           </div>
         ))}
@@ -114,6 +133,7 @@ interface WriteModalProps {
 }
 
 const WriteModal = ({ modal, type, state, setState }: WriteModalProps) => {
+  const {} = useForm({});
   return (
     <div
       className={`${
@@ -124,25 +144,65 @@ const WriteModal = ({ modal, type, state, setState }: WriteModalProps) => {
         {
           profile: (
             <div className="flex flex-col gap-4">
-              <Input.Basic label="테스트" value="" onChange={() => {}} />
+              <Input.Upload
+                label="프로필 사진"
+                value=""
+                onChange={() => {}}
+                preview={""}
+              />
+              <Input.Basic label="이름" value="" name="" />
               <Input.DateInput
-                label="테스트"
+                label="생년월일"
                 value=""
                 onSubmitAtInput={() => {}}
                 name=""
               />
+              <Button.Contain>저장하기</Button.Contain>
             </div>
           ),
           basic: (
             <div className="flex flex-col gap-4">
-              <Input.Basic label="테스트" value="" onChange={() => {}} />
-              <Input.Basic label="테스트" value="" onChange={() => {}} />
+              <Input.Basic label="자기소개" value="" onChange={() => {}} />
+              <Input.Skill
+                label="기술스택"
+                value={[]}
+                onChange={() => {}}
+                placeholder=""
+                name=""
+              />
+              <Input.Skill
+                label="태그"
+                value={[]}
+                onChange={() => {}}
+                placeholder=""
+                name=""
+              />
             </div>
           ),
           experience: (
             <div className="flex flex-col gap-4">
-              <Input.Basic label="테스트" value="" onChange={() => {}} />
-              <Input.Basic label="테스트" value="" onChange={() => {}} />
+              <Input.Basic label="회사 이름" value="" onChange={() => {}} />
+              <Input.Skill
+                label="분야"
+                value={[]}
+                onChange={() => {}}
+                placeholder="분야"
+                name=""
+              />
+              <div className="flex">
+                <Input.DateInput
+                  label="시작날짜"
+                  value=""
+                  onSubmitAtInput={() => {}}
+                  name=""
+                />
+                <Input.DateInput
+                  label="끝난날짜"
+                  value=""
+                  onSubmitAtInput={() => {}}
+                  name=""
+                />
+              </div>
             </div>
           ),
         }[type]

@@ -24,6 +24,7 @@ export type User = {
   name: string;
   password: string;
   role: Role;
+  birth: string | null;
   profile_img: string | null;
   tag: string | null;
 };
@@ -1101,6 +1102,7 @@ export namespace Prisma {
     name: string | null;
     password: string | null;
     role: Role | null;
+    birth: string | null;
     profile_img: string | null;
     tag: string | null;
   };
@@ -1111,6 +1113,7 @@ export namespace Prisma {
     name: string | null;
     password: string | null;
     role: Role | null;
+    birth: string | null;
     profile_img: string | null;
     tag: string | null;
   };
@@ -1121,6 +1124,7 @@ export namespace Prisma {
     name: number;
     password: number;
     role: number;
+    birth: number;
     profile_img: number;
     tag: number;
     _all: number;
@@ -1140,6 +1144,7 @@ export namespace Prisma {
     name?: true;
     password?: true;
     role?: true;
+    birth?: true;
     profile_img?: true;
     tag?: true;
   };
@@ -1150,6 +1155,7 @@ export namespace Prisma {
     name?: true;
     password?: true;
     role?: true;
+    birth?: true;
     profile_img?: true;
     tag?: true;
   };
@@ -1160,6 +1166,7 @@ export namespace Prisma {
     name?: true;
     password?: true;
     role?: true;
+    birth?: true;
     profile_img?: true;
     tag?: true;
     _all?: true;
@@ -1254,6 +1261,7 @@ export namespace Prisma {
     name: string;
     password: string;
     role: Role;
+    birth: string | null;
     profile_img: string | null;
     tag: string | null;
     _count: UserCountAggregateOutputType | null;
@@ -1281,6 +1289,7 @@ export namespace Prisma {
     name?: boolean;
     password?: boolean;
     role?: boolean;
+    birth?: boolean;
     profile_img?: boolean;
     tag?: boolean;
     introduce?: boolean | IntroduceArgs;
@@ -6286,6 +6295,7 @@ export namespace Prisma {
     name: "name";
     password: "password";
     role: "role";
+    birth: "birth";
     profile_img: "profile_img";
     tag: "tag";
   };
@@ -6318,6 +6328,7 @@ export namespace Prisma {
     name?: StringFilter | string;
     password?: StringFilter | string;
     role?: EnumRoleFilter | Role;
+    birth?: StringNullableFilter | string | null;
     profile_img?: StringNullableFilter | string | null;
     tag?: StringNullableFilter | string | null;
     introduce?: XOR<IntroduceRelationFilter, IntroduceWhereInput> | null;
@@ -6332,6 +6343,7 @@ export namespace Prisma {
     name?: SortOrder;
     password?: SortOrder;
     role?: SortOrder;
+    birth?: SortOrder;
     profile_img?: SortOrder;
     tag?: SortOrder;
     introduce?: IntroduceOrderByWithRelationInput;
@@ -6351,6 +6363,7 @@ export namespace Prisma {
     name?: SortOrder;
     password?: SortOrder;
     role?: SortOrder;
+    birth?: SortOrder;
     profile_img?: SortOrder;
     tag?: SortOrder;
     _count?: UserCountOrderByAggregateInput;
@@ -6369,6 +6382,7 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter | string;
     password?: StringWithAggregatesFilter | string;
     role?: EnumRoleWithAggregatesFilter | Role;
+    birth?: StringNullableWithAggregatesFilter | string | null;
     profile_img?: StringNullableWithAggregatesFilter | string | null;
     tag?: StringNullableWithAggregatesFilter | string | null;
   };
@@ -6556,6 +6570,7 @@ export namespace Prisma {
     name: string;
     password: string;
     role: Role;
+    birth?: string | null;
     profile_img?: string | null;
     tag?: string | null;
     introduce?: IntroduceCreateNestedOneWithoutUserInput;
@@ -6570,6 +6585,7 @@ export namespace Prisma {
     name: string;
     password: string;
     role: Role;
+    birth?: string | null;
     profile_img?: string | null;
     tag?: string | null;
     introduce?: IntroduceUncheckedCreateNestedOneWithoutUserInput;
@@ -6583,6 +6599,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     role?: EnumRoleFieldUpdateOperationsInput | Role;
+    birth?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
     tag?: NullableStringFieldUpdateOperationsInput | string | null;
     introduce?: IntroduceUpdateOneWithoutUserNestedInput;
@@ -6597,6 +6614,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     role?: EnumRoleFieldUpdateOperationsInput | Role;
+    birth?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
     tag?: NullableStringFieldUpdateOperationsInput | string | null;
     introduce?: IntroduceUncheckedUpdateOneWithoutUserNestedInput;
@@ -6611,6 +6629,7 @@ export namespace Prisma {
     name: string;
     password: string;
     role: Role;
+    birth?: string | null;
     profile_img?: string | null;
     tag?: string | null;
   };
@@ -6620,6 +6639,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     role?: EnumRoleFieldUpdateOperationsInput | Role;
+    birth?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
     tag?: NullableStringFieldUpdateOperationsInput | string | null;
   };
@@ -6630,6 +6650,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     role?: EnumRoleFieldUpdateOperationsInput | Role;
+    birth?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
     tag?: NullableStringFieldUpdateOperationsInput | string | null;
   };
@@ -6908,6 +6929,7 @@ export namespace Prisma {
     name?: SortOrder;
     password?: SortOrder;
     role?: SortOrder;
+    birth?: SortOrder;
     profile_img?: SortOrder;
     tag?: SortOrder;
   };
@@ -6922,6 +6944,7 @@ export namespace Prisma {
     name?: SortOrder;
     password?: SortOrder;
     role?: SortOrder;
+    birth?: SortOrder;
     profile_img?: SortOrder;
     tag?: SortOrder;
   };
@@ -6932,6 +6955,7 @@ export namespace Prisma {
     name?: SortOrder;
     password?: SortOrder;
     role?: SortOrder;
+    birth?: SortOrder;
     profile_img?: SortOrder;
     tag?: SortOrder;
   };
@@ -7877,6 +7901,7 @@ export namespace Prisma {
     name: string;
     password: string;
     role: Role;
+    birth?: string | null;
     profile_img?: string | null;
     tag?: string | null;
     introduce?: IntroduceCreateNestedOneWithoutUserInput;
@@ -7890,6 +7915,7 @@ export namespace Prisma {
     name: string;
     password: string;
     role: Role;
+    birth?: string | null;
     profile_img?: string | null;
     tag?: string | null;
     introduce?: IntroduceUncheckedCreateNestedOneWithoutUserInput;
@@ -7942,6 +7968,7 @@ export namespace Prisma {
     name?: StringFilter | string;
     password?: StringFilter | string;
     role?: EnumRoleFilter | Role;
+    birth?: StringNullableFilter | string | null;
     profile_img?: StringNullableFilter | string | null;
     tag?: StringNullableFilter | string | null;
   };
@@ -7951,6 +7978,7 @@ export namespace Prisma {
     name: string;
     password: string;
     role: Role;
+    birth?: string | null;
     profile_img?: string | null;
     tag?: string | null;
     introduce?: IntroduceCreateNestedOneWithoutUserInput;
@@ -7964,6 +7992,7 @@ export namespace Prisma {
     name: string;
     password: string;
     role: Role;
+    birth?: string | null;
     profile_img?: string | null;
     tag?: string | null;
     introduce?: IntroduceUncheckedCreateNestedOneWithoutUserInput;
@@ -7995,6 +8024,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     role?: EnumRoleFieldUpdateOperationsInput | Role;
+    birth?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
     tag?: NullableStringFieldUpdateOperationsInput | string | null;
     introduce?: IntroduceUpdateOneWithoutUserNestedInput;
@@ -8008,6 +8038,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     role?: EnumRoleFieldUpdateOperationsInput | Role;
+    birth?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
     tag?: NullableStringFieldUpdateOperationsInput | string | null;
     introduce?: IntroduceUncheckedUpdateOneWithoutUserNestedInput;
@@ -8020,6 +8051,7 @@ export namespace Prisma {
     name: string;
     password: string;
     role: Role;
+    birth?: string | null;
     profile_img?: string | null;
     tag?: string | null;
     introduce?: IntroduceCreateNestedOneWithoutUserInput;
@@ -8033,6 +8065,7 @@ export namespace Prisma {
     name: string;
     password: string;
     role: Role;
+    birth?: string | null;
     profile_img?: string | null;
     tag?: string | null;
     introduce?: IntroduceUncheckedCreateNestedOneWithoutUserInput;
@@ -8064,6 +8097,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     role?: EnumRoleFieldUpdateOperationsInput | Role;
+    birth?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
     tag?: NullableStringFieldUpdateOperationsInput | string | null;
     introduce?: IntroduceUpdateOneWithoutUserNestedInput;
@@ -8077,6 +8111,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     role?: EnumRoleFieldUpdateOperationsInput | Role;
+    birth?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
     tag?: NullableStringFieldUpdateOperationsInput | string | null;
     introduce?: IntroduceUncheckedUpdateOneWithoutUserNestedInput;
@@ -8089,6 +8124,7 @@ export namespace Prisma {
     name: string;
     password: string;
     role: Role;
+    birth?: string | null;
     profile_img?: string | null;
     tag?: string | null;
     posts?: PostCreateNestedManyWithoutUserInput;
@@ -8102,6 +8138,7 @@ export namespace Prisma {
     name: string;
     password: string;
     role: Role;
+    birth?: string | null;
     profile_img?: string | null;
     tag?: string | null;
     posts?: PostUncheckedCreateNestedManyWithoutUserInput;
@@ -8133,6 +8170,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     role?: EnumRoleFieldUpdateOperationsInput | Role;
+    birth?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
     tag?: NullableStringFieldUpdateOperationsInput | string | null;
     posts?: PostUpdateManyWithoutUserNestedInput;
@@ -8146,6 +8184,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     role?: EnumRoleFieldUpdateOperationsInput | Role;
+    birth?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
     tag?: NullableStringFieldUpdateOperationsInput | string | null;
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput;
@@ -8234,6 +8273,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     role?: EnumRoleFieldUpdateOperationsInput | Role;
+    birth?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
     tag?: NullableStringFieldUpdateOperationsInput | string | null;
     introduce?: IntroduceUpdateOneWithoutUserNestedInput;
@@ -8247,6 +8287,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     role?: EnumRoleFieldUpdateOperationsInput | Role;
+    birth?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
     tag?: NullableStringFieldUpdateOperationsInput | string | null;
     introduce?: IntroduceUncheckedUpdateOneWithoutUserNestedInput;
@@ -8260,6 +8301,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string;
     password?: StringFieldUpdateOperationsInput | string;
     role?: EnumRoleFieldUpdateOperationsInput | Role;
+    birth?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
     tag?: NullableStringFieldUpdateOperationsInput | string | null;
   };
