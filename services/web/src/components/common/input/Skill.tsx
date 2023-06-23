@@ -15,7 +15,7 @@ interface Props {
   placeholder: string;
   onChange: ({ value, name }: SkillChangeType) => void;
   name: string;
-  label?: string;
+  label: string;
 }
 
 const exam = ["react", "typescript"];
