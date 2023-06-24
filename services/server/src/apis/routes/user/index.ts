@@ -6,8 +6,11 @@ import { jwtHelper } from "@/helpers/jwt";
 import { getAccessToken } from "@/utils/jwt";
 import { TOKEN, URI } from "@package/constant";
 import { tokenValidate } from "@/apis/middlewares/token-validate";
+import { introduceRouter } from "./introduce";
 
 export const userRouter = Router();
+
+userRouter.use(URI.INTRODUCE, introduceRouter);
 
 userRouter.get(URI.PROFILE, async (req, res, next) => {
   try {

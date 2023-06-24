@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Text } from "../text";
+import { Skeleton } from "./Skeleton";
 
 interface Props {
   thumbnail: string;
@@ -19,7 +20,7 @@ export const Basic = ({
   profile,
 }: Props) => {
   return (
-    <article className="relative w-80 h-[382px] flex flex-col gap-[17px]">
+    <Skeleton className="relative w-80 h-[382px] flex flex-col gap-[17px]">
       <div className="relative h-[180px]">
         <Image fill src="/auth.png" alt="thumbnail" />
       </div>
@@ -39,6 +40,6 @@ export const Basic = ({
           {content}
         </Text.body1>
       </div>
-    </article>
+    </Skeleton>
   );
 };

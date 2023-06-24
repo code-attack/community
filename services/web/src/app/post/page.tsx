@@ -9,7 +9,7 @@ import { query } from "@/hooks";
 import { Post } from "@package/api-types";
 
 export default () => {
-  const { data } = query.post.useGet();
+  const { data, isLoading } = query.post.useGet();
   return (
     <>
       <Header />

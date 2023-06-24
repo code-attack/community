@@ -16,16 +16,9 @@ model User {
   role           Role
   birth          String?
   profile_img    String?
-  tag            String?
   introduce      Introduce?
   posts          Post[]
   workExperience WorkExperience[]
-  technology     Technology[]
-}
-
-model Technology {
-  id   Int    @id @default(autoincrement())
-  User User[]
 }
 
 model Post {
@@ -50,9 +43,12 @@ model WorkExperience {
 }
 
 model Introduce {
-  content String
-  userId  String @unique
-  User    User   @relation(fields: [userId], references: [account_id])
+  id         Int     @id @default(autoincrement())
+  content    String
+  tag        String?
+  technology String
+  userId     String  @unique
+  User       User    @relation(fields: [userId], references: [account_id])
 }
 
 enum Role {

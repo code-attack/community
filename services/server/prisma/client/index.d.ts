@@ -26,15 +26,6 @@ export type User = {
   role: Role;
   birth: string | null;
   profile_img: string | null;
-  tag: string | null;
-};
-
-/**
- * Model Technology
- *
- */
-export type Technology = {
-  id: number;
 };
 
 /**
@@ -69,7 +60,10 @@ export type WorkExperience = {
  *
  */
 export type Introduce = {
+  id: number;
   content: string;
+  tag: string | null;
+  technology: string;
   userId: string;
 };
 
@@ -254,16 +248,6 @@ export class PrismaClient<
    * ```
    */
   get user(): Prisma.UserDelegate<GlobalReject>;
-
-  /**
-   * `prisma.technology`: Exposes CRUD operations for the **Technology** model.
-   * Example usage:
-   * ```ts
-   * // Fetch zero or more Technologies
-   * const technologies = await prisma.technology.findMany()
-   * ```
-   */
-  get technology(): Prisma.TechnologyDelegate<GlobalReject>;
 
   /**
    * `prisma.post`: Exposes CRUD operations for the **Post** model.
@@ -803,7 +787,6 @@ export namespace Prisma {
 
   export const ModelName: {
     User: "User";
-    Technology: "Technology";
     Post: "Post";
     WorkExperience: "WorkExperience";
     Introduce: "Introduce";
@@ -989,13 +972,11 @@ export namespace Prisma {
   export type UserCountOutputType = {
     posts: number;
     workExperience: number;
-    technology: number;
   };
 
   export type UserCountOutputTypeSelect = {
     posts?: boolean;
     workExperience?: boolean;
-    technology?: boolean;
   };
 
   export type UserCountOutputTypeGetPayload<
@@ -1026,50 +1007,6 @@ export namespace Prisma {
      * Select specific fields to fetch from the UserCountOutputType
      */
     select?: UserCountOutputTypeSelect | null;
-  };
-
-  /**
-   * Count Type TechnologyCountOutputType
-   */
-
-  export type TechnologyCountOutputType = {
-    User: number;
-  };
-
-  export type TechnologyCountOutputTypeSelect = {
-    User?: boolean;
-  };
-
-  export type TechnologyCountOutputTypeGetPayload<
-    S extends boolean | null | undefined | TechnologyCountOutputTypeArgs
-  > = S extends { select: any; include: any }
-    ? "Please either choose `select` or `include`"
-    : S extends true
-    ? TechnologyCountOutputType
-    : S extends undefined
-    ? never
-    : S extends { include: any } & TechnologyCountOutputTypeArgs
-    ? TechnologyCountOutputType
-    : S extends { select: any } & TechnologyCountOutputTypeArgs
-    ? {
-        [P in TruthyKeys<
-          S["select"]
-        >]: P extends keyof TechnologyCountOutputType
-          ? TechnologyCountOutputType[P]
-          : never;
-      }
-    : TechnologyCountOutputType;
-
-  // Custom InputTypes
-
-  /**
-   * TechnologyCountOutputType without action
-   */
-  export type TechnologyCountOutputTypeArgs = {
-    /**
-     * Select specific fields to fetch from the TechnologyCountOutputType
-     */
-    select?: TechnologyCountOutputTypeSelect | null;
   };
 
   /**
@@ -1104,7 +1041,6 @@ export namespace Prisma {
     role: Role | null;
     birth: string | null;
     profile_img: string | null;
-    tag: string | null;
   };
 
   export type UserMaxAggregateOutputType = {
@@ -1115,7 +1051,6 @@ export namespace Prisma {
     role: Role | null;
     birth: string | null;
     profile_img: string | null;
-    tag: string | null;
   };
 
   export type UserCountAggregateOutputType = {
@@ -1126,7 +1061,6 @@ export namespace Prisma {
     role: number;
     birth: number;
     profile_img: number;
-    tag: number;
     _all: number;
   };
 
@@ -1146,7 +1080,6 @@ export namespace Prisma {
     role?: true;
     birth?: true;
     profile_img?: true;
-    tag?: true;
   };
 
   export type UserMaxAggregateInputType = {
@@ -1157,7 +1090,6 @@ export namespace Prisma {
     role?: true;
     birth?: true;
     profile_img?: true;
-    tag?: true;
   };
 
   export type UserCountAggregateInputType = {
@@ -1168,7 +1100,6 @@ export namespace Prisma {
     role?: true;
     birth?: true;
     profile_img?: true;
-    tag?: true;
     _all?: true;
   };
 
@@ -1263,7 +1194,6 @@ export namespace Prisma {
     role: Role;
     birth: string | null;
     profile_img: string | null;
-    tag: string | null;
     _count: UserCountAggregateOutputType | null;
     _avg: UserAvgAggregateOutputType | null;
     _sum: UserSumAggregateOutputType | null;
@@ -1291,11 +1221,9 @@ export namespace Prisma {
     role?: boolean;
     birth?: boolean;
     profile_img?: boolean;
-    tag?: boolean;
     introduce?: boolean | IntroduceArgs;
     posts?: boolean | User$postsArgs;
     workExperience?: boolean | User$workExperienceArgs;
-    technology?: boolean | User$technologyArgs;
     _count?: boolean | UserCountOutputTypeArgs;
   };
 
@@ -1303,7 +1231,6 @@ export namespace Prisma {
     introduce?: boolean | IntroduceArgs;
     posts?: boolean | User$postsArgs;
     workExperience?: boolean | User$workExperienceArgs;
-    technology?: boolean | User$technologyArgs;
     _count?: boolean | UserCountOutputTypeArgs;
   };
 
@@ -1322,8 +1249,6 @@ export namespace Prisma {
             ? Array<PostGetPayload<S["include"][P]>>
             : P extends "workExperience"
             ? Array<WorkExperienceGetPayload<S["include"][P]>>
-            : P extends "technology"
-            ? Array<TechnologyGetPayload<S["include"][P]>>
             : P extends "_count"
             ? UserCountOutputTypeGetPayload<S["include"][P]>
             : never;
@@ -1336,8 +1261,6 @@ export namespace Prisma {
             ? Array<PostGetPayload<S["select"][P]>>
             : P extends "workExperience"
             ? Array<WorkExperienceGetPayload<S["select"][P]>>
-            : P extends "technology"
-            ? Array<TechnologyGetPayload<S["select"][P]>>
             : P extends "_count"
             ? UserCountOutputTypeGetPayload<S["select"][P]>
             : P extends keyof User
@@ -1772,10 +1695,6 @@ export namespace Prisma {
       args?: Subset<T, User$workExperienceArgs>
     ): Prisma.PrismaPromise<Array<WorkExperienceGetPayload<T>> | Null>;
 
-    technology<T extends User$technologyArgs = {}>(
-      args?: Subset<T, User$technologyArgs>
-    ): Prisma.PrismaPromise<Array<TechnologyGetPayload<T>> | Null>;
-
     private get _document();
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2172,26 +2091,6 @@ export namespace Prisma {
   };
 
   /**
-   * User.technology
-   */
-  export type User$technologyArgs = {
-    /**
-     * Select specific fields to fetch from the Technology
-     */
-    select?: TechnologySelect | null;
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: TechnologyInclude | null;
-    where?: TechnologyWhereInput;
-    orderBy?: Enumerable<TechnologyOrderByWithRelationInput>;
-    cursor?: TechnologyWhereUniqueInput;
-    take?: number;
-    skip?: number;
-    distinct?: Enumerable<TechnologyScalarFieldEnum>;
-  };
-
-  /**
    * User without action
    */
   export type UserArgs = {
@@ -2203,1019 +2102,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well.
      */
     include?: UserInclude | null;
-  };
-
-  /**
-   * Model Technology
-   */
-
-  export type AggregateTechnology = {
-    _count: TechnologyCountAggregateOutputType | null;
-    _avg: TechnologyAvgAggregateOutputType | null;
-    _sum: TechnologySumAggregateOutputType | null;
-    _min: TechnologyMinAggregateOutputType | null;
-    _max: TechnologyMaxAggregateOutputType | null;
-  };
-
-  export type TechnologyAvgAggregateOutputType = {
-    id: number | null;
-  };
-
-  export type TechnologySumAggregateOutputType = {
-    id: number | null;
-  };
-
-  export type TechnologyMinAggregateOutputType = {
-    id: number | null;
-  };
-
-  export type TechnologyMaxAggregateOutputType = {
-    id: number | null;
-  };
-
-  export type TechnologyCountAggregateOutputType = {
-    id: number;
-    _all: number;
-  };
-
-  export type TechnologyAvgAggregateInputType = {
-    id?: true;
-  };
-
-  export type TechnologySumAggregateInputType = {
-    id?: true;
-  };
-
-  export type TechnologyMinAggregateInputType = {
-    id?: true;
-  };
-
-  export type TechnologyMaxAggregateInputType = {
-    id?: true;
-  };
-
-  export type TechnologyCountAggregateInputType = {
-    id?: true;
-    _all?: true;
-  };
-
-  export type TechnologyAggregateArgs = {
-    /**
-     * Filter which Technology to aggregate.
-     */
-    where?: TechnologyWhereInput;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
-     * Determine the order of Technologies to fetch.
-     */
-    orderBy?: Enumerable<TechnologyOrderByWithRelationInput>;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
-     * Sets the start position
-     */
-    cursor?: TechnologyWhereUniqueInput;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
-     * Take `±n` Technologies from the position of the cursor.
-     */
-    take?: number;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
-     * Skip the first `n` Technologies.
-     */
-    skip?: number;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
-     * Count returned Technologies
-     **/
-    _count?: true | TechnologyCountAggregateInputType;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
-     * Select which fields to average
-     **/
-    _avg?: TechnologyAvgAggregateInputType;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
-     * Select which fields to sum
-     **/
-    _sum?: TechnologySumAggregateInputType;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
-     * Select which fields to find the minimum value
-     **/
-    _min?: TechnologyMinAggregateInputType;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     *
-     * Select which fields to find the maximum value
-     **/
-    _max?: TechnologyMaxAggregateInputType;
-  };
-
-  export type GetTechnologyAggregateType<T extends TechnologyAggregateArgs> = {
-    [P in keyof T & keyof AggregateTechnology]: P extends "_count" | "count"
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateTechnology[P]>
-      : GetScalarType<T[P], AggregateTechnology[P]>;
-  };
-
-  export type TechnologyGroupByArgs = {
-    where?: TechnologyWhereInput;
-    orderBy?: Enumerable<TechnologyOrderByWithAggregationInput>;
-    by: TechnologyScalarFieldEnum[];
-    having?: TechnologyScalarWhereWithAggregatesInput;
-    take?: number;
-    skip?: number;
-    _count?: TechnologyCountAggregateInputType | true;
-    _avg?: TechnologyAvgAggregateInputType;
-    _sum?: TechnologySumAggregateInputType;
-    _min?: TechnologyMinAggregateInputType;
-    _max?: TechnologyMaxAggregateInputType;
-  };
-
-  export type TechnologyGroupByOutputType = {
-    id: number;
-    _count: TechnologyCountAggregateOutputType | null;
-    _avg: TechnologyAvgAggregateOutputType | null;
-    _sum: TechnologySumAggregateOutputType | null;
-    _min: TechnologyMinAggregateOutputType | null;
-    _max: TechnologyMaxAggregateOutputType | null;
-  };
-
-  type GetTechnologyGroupByPayload<T extends TechnologyGroupByArgs> =
-    Prisma.PrismaPromise<
-      Array<
-        PickArray<TechnologyGroupByOutputType, T["by"]> & {
-          [P in keyof T & keyof TechnologyGroupByOutputType]: P extends "_count"
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], TechnologyGroupByOutputType[P]>
-            : GetScalarType<T[P], TechnologyGroupByOutputType[P]>;
-        }
-      >
-    >;
-
-  export type TechnologySelect = {
-    id?: boolean;
-    User?: boolean | Technology$UserArgs;
-    _count?: boolean | TechnologyCountOutputTypeArgs;
-  };
-
-  export type TechnologyInclude = {
-    User?: boolean | Technology$UserArgs;
-    _count?: boolean | TechnologyCountOutputTypeArgs;
-  };
-
-  export type TechnologyGetPayload<
-    S extends boolean | null | undefined | TechnologyArgs
-  > = S extends { select: any; include: any }
-    ? "Please either choose `select` or `include`"
-    : S extends true
-    ? Technology
-    : S extends undefined
-    ? never
-    : S extends { include: any } & (TechnologyArgs | TechnologyFindManyArgs)
-    ? Technology & {
-        [P in TruthyKeys<S["include"]>]: P extends "User"
-          ? Array<UserGetPayload<S["include"][P]>>
-          : P extends "_count"
-          ? TechnologyCountOutputTypeGetPayload<S["include"][P]>
-          : never;
-      }
-    : S extends { select: any } & (TechnologyArgs | TechnologyFindManyArgs)
-    ? {
-        [P in TruthyKeys<S["select"]>]: P extends "User"
-          ? Array<UserGetPayload<S["select"][P]>>
-          : P extends "_count"
-          ? TechnologyCountOutputTypeGetPayload<S["select"][P]>
-          : P extends keyof Technology
-          ? Technology[P]
-          : never;
-      }
-    : Technology;
-
-  type TechnologyCountArgs = Omit<
-    TechnologyFindManyArgs,
-    "select" | "include"
-  > & {
-    select?: TechnologyCountAggregateInputType | true;
-  };
-
-  export interface TechnologyDelegate<
-    GlobalRejectSettings extends
-      | Prisma.RejectOnNotFound
-      | Prisma.RejectPerOperation
-      | false
-      | undefined
-  > {
-    /**
-     * Find zero or one Technology that matches the filter.
-     * @param {TechnologyFindUniqueArgs} args - Arguments to find a Technology
-     * @example
-     * // Get one Technology
-     * const technology = await prisma.technology.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     **/
-    findUnique<
-      T extends TechnologyFindUniqueArgs,
-      LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound
-        ? T["rejectOnNotFound"]
-        : undefined
-    >(
-      args: SelectSubset<T, TechnologyFindUniqueArgs>
-    ): HasReject<
-      GlobalRejectSettings,
-      LocalRejectSettings,
-      "findUnique",
-      "Technology"
-    > extends True
-      ? Prisma__TechnologyClient<TechnologyGetPayload<T>>
-      : Prisma__TechnologyClient<TechnologyGetPayload<T> | null, null>;
-
-    /**
-     * Find one Technology that matches the filter or throw an error  with `error.code='P2025'`
-     *     if no matches were found.
-     * @param {TechnologyFindUniqueOrThrowArgs} args - Arguments to find a Technology
-     * @example
-     * // Get one Technology
-     * const technology = await prisma.technology.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     **/
-    findUniqueOrThrow<T extends TechnologyFindUniqueOrThrowArgs>(
-      args?: SelectSubset<T, TechnologyFindUniqueOrThrowArgs>
-    ): Prisma__TechnologyClient<TechnologyGetPayload<T>>;
-
-    /**
-     * Find the first Technology that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TechnologyFindFirstArgs} args - Arguments to find a Technology
-     * @example
-     * // Get one Technology
-     * const technology = await prisma.technology.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     **/
-    findFirst<
-      T extends TechnologyFindFirstArgs,
-      LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound
-        ? T["rejectOnNotFound"]
-        : undefined
-    >(
-      args?: SelectSubset<T, TechnologyFindFirstArgs>
-    ): HasReject<
-      GlobalRejectSettings,
-      LocalRejectSettings,
-      "findFirst",
-      "Technology"
-    > extends True
-      ? Prisma__TechnologyClient<TechnologyGetPayload<T>>
-      : Prisma__TechnologyClient<TechnologyGetPayload<T> | null, null>;
-
-    /**
-     * Find the first Technology that matches the filter or
-     * throw `NotFoundError` if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TechnologyFindFirstOrThrowArgs} args - Arguments to find a Technology
-     * @example
-     * // Get one Technology
-     * const technology = await prisma.technology.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     **/
-    findFirstOrThrow<T extends TechnologyFindFirstOrThrowArgs>(
-      args?: SelectSubset<T, TechnologyFindFirstOrThrowArgs>
-    ): Prisma__TechnologyClient<TechnologyGetPayload<T>>;
-
-    /**
-     * Find zero or more Technologies that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TechnologyFindManyArgs=} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Technologies
-     * const technologies = await prisma.technology.findMany()
-     *
-     * // Get first 10 Technologies
-     * const technologies = await prisma.technology.findMany({ take: 10 })
-     *
-     * // Only select the `id`
-     * const technologyWithIdOnly = await prisma.technology.findMany({ select: { id: true } })
-     *
-     **/
-    findMany<T extends TechnologyFindManyArgs>(
-      args?: SelectSubset<T, TechnologyFindManyArgs>
-    ): Prisma.PrismaPromise<Array<TechnologyGetPayload<T>>>;
-
-    /**
-     * Create a Technology.
-     * @param {TechnologyCreateArgs} args - Arguments to create a Technology.
-     * @example
-     * // Create one Technology
-     * const Technology = await prisma.technology.create({
-     *   data: {
-     *     // ... data to create a Technology
-     *   }
-     * })
-     *
-     **/
-    create<T extends TechnologyCreateArgs>(
-      args: SelectSubset<T, TechnologyCreateArgs>
-    ): Prisma__TechnologyClient<TechnologyGetPayload<T>>;
-
-    /**
-     * Create many Technologies.
-     *     @param {TechnologyCreateManyArgs} args - Arguments to create many Technologies.
-     *     @example
-     *     // Create many Technologies
-     *     const technology = await prisma.technology.createMany({
-     *       data: {
-     *         // ... provide data here
-     *       }
-     *     })
-     *
-     **/
-    createMany<T extends TechnologyCreateManyArgs>(
-      args?: SelectSubset<T, TechnologyCreateManyArgs>
-    ): Prisma.PrismaPromise<BatchPayload>;
-
-    /**
-     * Delete a Technology.
-     * @param {TechnologyDeleteArgs} args - Arguments to delete one Technology.
-     * @example
-     * // Delete one Technology
-     * const Technology = await prisma.technology.delete({
-     *   where: {
-     *     // ... filter to delete one Technology
-     *   }
-     * })
-     *
-     **/
-    delete<T extends TechnologyDeleteArgs>(
-      args: SelectSubset<T, TechnologyDeleteArgs>
-    ): Prisma__TechnologyClient<TechnologyGetPayload<T>>;
-
-    /**
-     * Update one Technology.
-     * @param {TechnologyUpdateArgs} args - Arguments to update one Technology.
-     * @example
-     * // Update one Technology
-     * const technology = await prisma.technology.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     *
-     **/
-    update<T extends TechnologyUpdateArgs>(
-      args: SelectSubset<T, TechnologyUpdateArgs>
-    ): Prisma__TechnologyClient<TechnologyGetPayload<T>>;
-
-    /**
-     * Delete zero or more Technologies.
-     * @param {TechnologyDeleteManyArgs} args - Arguments to filter Technologies to delete.
-     * @example
-     * // Delete a few Technologies
-     * const { count } = await prisma.technology.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     *
-     **/
-    deleteMany<T extends TechnologyDeleteManyArgs>(
-      args?: SelectSubset<T, TechnologyDeleteManyArgs>
-    ): Prisma.PrismaPromise<BatchPayload>;
-
-    /**
-     * Update zero or more Technologies.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TechnologyUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Technologies
-     * const technology = await prisma.technology.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     *
-     **/
-    updateMany<T extends TechnologyUpdateManyArgs>(
-      args: SelectSubset<T, TechnologyUpdateManyArgs>
-    ): Prisma.PrismaPromise<BatchPayload>;
-
-    /**
-     * Create or update one Technology.
-     * @param {TechnologyUpsertArgs} args - Arguments to update or create a Technology.
-     * @example
-     * // Update or create a Technology
-     * const technology = await prisma.technology.upsert({
-     *   create: {
-     *     // ... data to create a Technology
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Technology we want to update
-     *   }
-     * })
-     **/
-    upsert<T extends TechnologyUpsertArgs>(
-      args: SelectSubset<T, TechnologyUpsertArgs>
-    ): Prisma__TechnologyClient<TechnologyGetPayload<T>>;
-
-    /**
-     * Count the number of Technologies.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TechnologyCountArgs} args - Arguments to filter Technologies to count.
-     * @example
-     * // Count the number of Technologies
-     * const count = await prisma.technology.count({
-     *   where: {
-     *     // ... the filter for the Technologies we want to count
-     *   }
-     * })
-     **/
-    count<T extends TechnologyCountArgs>(
-      args?: Subset<T, TechnologyCountArgs>
-    ): Prisma.PrismaPromise<
-      T extends _Record<"select", any>
-        ? T["select"] extends true
-          ? number
-          : GetScalarType<T["select"], TechnologyCountAggregateOutputType>
-        : number
-    >;
-
-    /**
-     * Allows you to perform aggregations operations on a Technology.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TechnologyAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-     **/
-    aggregate<T extends TechnologyAggregateArgs>(
-      args: Subset<T, TechnologyAggregateArgs>
-    ): Prisma.PrismaPromise<GetTechnologyAggregateType<T>>;
-
-    /**
-     * Group by Technology.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TechnologyGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     *
-     **/
-    groupBy<
-      T extends TechnologyGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<"skip", Keys<T>>,
-        Extends<"take", Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: TechnologyGroupByArgs["orderBy"] }
-        : { orderBy?: TechnologyGroupByArgs["orderBy"] },
-      OrderFields extends ExcludeUnderscoreKeys<
-        Keys<MaybeTupleToUnion<T["orderBy"]>>
-      >,
-      ByFields extends TupleToUnion<T["by"]>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T["having"]>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T["by"] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-        ? `Error: "by" must not be empty.`
-        : HavingValid extends False
-        ? {
-            [P in HavingFields]: P extends ByFields
-              ? never
-              : P extends string
-              ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-              : [
-                  Error,
-                  "Field ",
-                  P,
-                  ` in "having" needs to be provided in "by"`
-                ];
-          }[HavingFields]
-        : "take" extends Keys<T>
-        ? "orderBy" extends Keys<T>
-          ? ByValid extends True
-            ? {}
-            : {
-                [P in OrderFields]: P extends ByFields
-                  ? never
-                  : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
-              }[OrderFields]
-          : 'Error: If you provide "take", you also need to provide "orderBy"'
-        : "skip" extends Keys<T>
-        ? "orderBy" extends Keys<T>
-          ? ByValid extends True
-            ? {}
-            : {
-                [P in OrderFields]: P extends ByFields
-                  ? never
-                  : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
-              }[OrderFields]
-          : 'Error: If you provide "skip", you also need to provide "orderBy"'
-        : ByValid extends True
-        ? {}
-        : {
-            [P in OrderFields]: P extends ByFields
-              ? never
-              : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`;
-          }[OrderFields]
-    >(
-      args: SubsetIntersection<T, TechnologyGroupByArgs, OrderByArg> &
-        InputErrors
-    ): {} extends InputErrors
-      ? GetTechnologyGroupByPayload<T>
-      : Prisma.PrismaPromise<InputErrors>;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Technology.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export class Prisma__TechnologyClient<T, Null = never>
-    implements Prisma.PrismaPromise<T>
-  {
-    private readonly _dmmf;
-    private readonly _queryType;
-    private readonly _rootField;
-    private readonly _clientMethod;
-    private readonly _args;
-    private readonly _dataPath;
-    private readonly _errorFormat;
-    private readonly _measurePerformance?;
-    private _isList;
-    private _callsite;
-    private _requestPromise?;
-    readonly [Symbol.toStringTag]: "PrismaPromise";
-    constructor(
-      _dmmf: runtime.DMMFClass,
-      _queryType: "query" | "mutation",
-      _rootField: string,
-      _clientMethod: string,
-      _args: any,
-      _dataPath: string[],
-      _errorFormat: ErrorFormat,
-      _measurePerformance?: boolean | undefined,
-      _isList?: boolean
-    );
-
-    User<T extends Technology$UserArgs = {}>(
-      args?: Subset<T, Technology$UserArgs>
-    ): Prisma.PrismaPromise<Array<UserGetPayload<T>> | Null>;
-
-    private get _document();
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(
-      onfulfilled?:
-        | ((value: T) => TResult1 | PromiseLike<TResult1>)
-        | undefined
-        | null,
-      onrejected?:
-        | ((reason: any) => TResult2 | PromiseLike<TResult2>)
-        | undefined
-        | null
-    ): Promise<TResult1 | TResult2>;
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(
-      onrejected?:
-        | ((reason: any) => TResult | PromiseLike<TResult>)
-        | undefined
-        | null
-    ): Promise<T | TResult>;
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
-  }
-
-  // Custom InputTypes
-
-  /**
-   * Technology base type for findUnique actions
-   */
-  export type TechnologyFindUniqueArgsBase = {
-    /**
-     * Select specific fields to fetch from the Technology
-     */
-    select?: TechnologySelect | null;
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: TechnologyInclude | null;
-    /**
-     * Filter, which Technology to fetch.
-     */
-    where: TechnologyWhereUniqueInput;
-  };
-
-  /**
-   * Technology findUnique
-   */
-  export interface TechnologyFindUniqueArgs
-    extends TechnologyFindUniqueArgsBase {
-    /**
-     * Throw an Error if query returns no results
-     * @deprecated since 4.0.0: use `findUniqueOrThrow` method instead
-     */
-    rejectOnNotFound?: RejectOnNotFound;
-  }
-
-  /**
-   * Technology findUniqueOrThrow
-   */
-  export type TechnologyFindUniqueOrThrowArgs = {
-    /**
-     * Select specific fields to fetch from the Technology
-     */
-    select?: TechnologySelect | null;
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: TechnologyInclude | null;
-    /**
-     * Filter, which Technology to fetch.
-     */
-    where: TechnologyWhereUniqueInput;
-  };
-
-  /**
-   * Technology base type for findFirst actions
-   */
-  export type TechnologyFindFirstArgsBase = {
-    /**
-     * Select specific fields to fetch from the Technology
-     */
-    select?: TechnologySelect | null;
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: TechnologyInclude | null;
-    /**
-     * Filter, which Technology to fetch.
-     */
-    where?: TechnologyWhereInput;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
-     * Determine the order of Technologies to fetch.
-     */
-    orderBy?: Enumerable<TechnologyOrderByWithRelationInput>;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
-     * Sets the position for searching for Technologies.
-     */
-    cursor?: TechnologyWhereUniqueInput;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
-     * Take `±n` Technologies from the position of the cursor.
-     */
-    take?: number;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
-     * Skip the first `n` Technologies.
-     */
-    skip?: number;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
-     * Filter by unique combinations of Technologies.
-     */
-    distinct?: Enumerable<TechnologyScalarFieldEnum>;
-  };
-
-  /**
-   * Technology findFirst
-   */
-  export interface TechnologyFindFirstArgs extends TechnologyFindFirstArgsBase {
-    /**
-     * Throw an Error if query returns no results
-     * @deprecated since 4.0.0: use `findFirstOrThrow` method instead
-     */
-    rejectOnNotFound?: RejectOnNotFound;
-  }
-
-  /**
-   * Technology findFirstOrThrow
-   */
-  export type TechnologyFindFirstOrThrowArgs = {
-    /**
-     * Select specific fields to fetch from the Technology
-     */
-    select?: TechnologySelect | null;
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: TechnologyInclude | null;
-    /**
-     * Filter, which Technology to fetch.
-     */
-    where?: TechnologyWhereInput;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
-     * Determine the order of Technologies to fetch.
-     */
-    orderBy?: Enumerable<TechnologyOrderByWithRelationInput>;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
-     * Sets the position for searching for Technologies.
-     */
-    cursor?: TechnologyWhereUniqueInput;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
-     * Take `±n` Technologies from the position of the cursor.
-     */
-    take?: number;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
-     * Skip the first `n` Technologies.
-     */
-    skip?: number;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     *
-     * Filter by unique combinations of Technologies.
-     */
-    distinct?: Enumerable<TechnologyScalarFieldEnum>;
-  };
-
-  /**
-   * Technology findMany
-   */
-  export type TechnologyFindManyArgs = {
-    /**
-     * Select specific fields to fetch from the Technology
-     */
-    select?: TechnologySelect | null;
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: TechnologyInclude | null;
-    /**
-     * Filter, which Technologies to fetch.
-     */
-    where?: TechnologyWhereInput;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     *
-     * Determine the order of Technologies to fetch.
-     */
-    orderBy?: Enumerable<TechnologyOrderByWithRelationInput>;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     *
-     * Sets the position for listing Technologies.
-     */
-    cursor?: TechnologyWhereUniqueInput;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
-     * Take `±n` Technologies from the position of the cursor.
-     */
-    take?: number;
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     *
-     * Skip the first `n` Technologies.
-     */
-    skip?: number;
-    distinct?: Enumerable<TechnologyScalarFieldEnum>;
-  };
-
-  /**
-   * Technology create
-   */
-  export type TechnologyCreateArgs = {
-    /**
-     * Select specific fields to fetch from the Technology
-     */
-    select?: TechnologySelect | null;
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: TechnologyInclude | null;
-    /**
-     * The data needed to create a Technology.
-     */
-    data: XOR<TechnologyCreateInput, TechnologyUncheckedCreateInput>;
-  };
-
-  /**
-   * Technology createMany
-   */
-  export type TechnologyCreateManyArgs = {
-    /**
-     * The data used to create many Technologies.
-     */
-    data: Enumerable<TechnologyCreateManyInput>;
-    skipDuplicates?: boolean;
-  };
-
-  /**
-   * Technology update
-   */
-  export type TechnologyUpdateArgs = {
-    /**
-     * Select specific fields to fetch from the Technology
-     */
-    select?: TechnologySelect | null;
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: TechnologyInclude | null;
-    /**
-     * The data needed to update a Technology.
-     */
-    data: XOR<TechnologyUpdateInput, TechnologyUncheckedUpdateInput>;
-    /**
-     * Choose, which Technology to update.
-     */
-    where: TechnologyWhereUniqueInput;
-  };
-
-  /**
-   * Technology updateMany
-   */
-  export type TechnologyUpdateManyArgs = {
-    /**
-     * The data used to update Technologies.
-     */
-    data: XOR<
-      TechnologyUpdateManyMutationInput,
-      TechnologyUncheckedUpdateManyInput
-    >;
-    /**
-     * Filter which Technologies to update
-     */
-    where?: TechnologyWhereInput;
-  };
-
-  /**
-   * Technology upsert
-   */
-  export type TechnologyUpsertArgs = {
-    /**
-     * Select specific fields to fetch from the Technology
-     */
-    select?: TechnologySelect | null;
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: TechnologyInclude | null;
-    /**
-     * The filter to search for the Technology to update in case it exists.
-     */
-    where: TechnologyWhereUniqueInput;
-    /**
-     * In case the Technology found by the `where` argument doesn't exist, create a new Technology with this data.
-     */
-    create: XOR<TechnologyCreateInput, TechnologyUncheckedCreateInput>;
-    /**
-     * In case the Technology was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<TechnologyUpdateInput, TechnologyUncheckedUpdateInput>;
-  };
-
-  /**
-   * Technology delete
-   */
-  export type TechnologyDeleteArgs = {
-    /**
-     * Select specific fields to fetch from the Technology
-     */
-    select?: TechnologySelect | null;
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: TechnologyInclude | null;
-    /**
-     * Filter which Technology to delete.
-     */
-    where: TechnologyWhereUniqueInput;
-  };
-
-  /**
-   * Technology deleteMany
-   */
-  export type TechnologyDeleteManyArgs = {
-    /**
-     * Filter which Technologies to delete
-     */
-    where?: TechnologyWhereInput;
-  };
-
-  /**
-   * Technology.User
-   */
-  export type Technology$UserArgs = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect | null;
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: UserInclude | null;
-    where?: UserWhereInput;
-    orderBy?: Enumerable<UserOrderByWithRelationInput>;
-    cursor?: UserWhereUniqueInput;
-    take?: number;
-    skip?: number;
-    distinct?: Enumerable<UserScalarFieldEnum>;
-  };
-
-  /**
-   * Technology without action
-   */
-  export type TechnologyArgs = {
-    /**
-     * Select specific fields to fetch from the Technology
-     */
-    select?: TechnologySelect | null;
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: TechnologyInclude | null;
   };
 
   /**
@@ -5286,38 +4172,74 @@ export namespace Prisma {
 
   export type AggregateIntroduce = {
     _count: IntroduceCountAggregateOutputType | null;
+    _avg: IntroduceAvgAggregateOutputType | null;
+    _sum: IntroduceSumAggregateOutputType | null;
     _min: IntroduceMinAggregateOutputType | null;
     _max: IntroduceMaxAggregateOutputType | null;
   };
 
+  export type IntroduceAvgAggregateOutputType = {
+    id: number | null;
+  };
+
+  export type IntroduceSumAggregateOutputType = {
+    id: number | null;
+  };
+
   export type IntroduceMinAggregateOutputType = {
+    id: number | null;
     content: string | null;
+    tag: string | null;
+    technology: string | null;
     userId: string | null;
   };
 
   export type IntroduceMaxAggregateOutputType = {
+    id: number | null;
     content: string | null;
+    tag: string | null;
+    technology: string | null;
     userId: string | null;
   };
 
   export type IntroduceCountAggregateOutputType = {
+    id: number;
     content: number;
+    tag: number;
+    technology: number;
     userId: number;
     _all: number;
   };
 
+  export type IntroduceAvgAggregateInputType = {
+    id?: true;
+  };
+
+  export type IntroduceSumAggregateInputType = {
+    id?: true;
+  };
+
   export type IntroduceMinAggregateInputType = {
+    id?: true;
     content?: true;
+    tag?: true;
+    technology?: true;
     userId?: true;
   };
 
   export type IntroduceMaxAggregateInputType = {
+    id?: true;
     content?: true;
+    tag?: true;
+    technology?: true;
     userId?: true;
   };
 
   export type IntroduceCountAggregateInputType = {
+    id?: true;
     content?: true;
+    tag?: true;
+    technology?: true;
     userId?: true;
     _all?: true;
   };
@@ -5360,6 +4282,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      *
+     * Select which fields to average
+     **/
+    _avg?: IntroduceAvgAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
+     * Select which fields to sum
+     **/
+    _sum?: IntroduceSumAggregateInputType;
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     *
      * Select which fields to find the minimum value
      **/
     _min?: IntroduceMinAggregateInputType;
@@ -5387,14 +4321,21 @@ export namespace Prisma {
     take?: number;
     skip?: number;
     _count?: IntroduceCountAggregateInputType | true;
+    _avg?: IntroduceAvgAggregateInputType;
+    _sum?: IntroduceSumAggregateInputType;
     _min?: IntroduceMinAggregateInputType;
     _max?: IntroduceMaxAggregateInputType;
   };
 
   export type IntroduceGroupByOutputType = {
+    id: number;
     content: string;
+    tag: string | null;
+    technology: string;
     userId: string;
     _count: IntroduceCountAggregateOutputType | null;
+    _avg: IntroduceAvgAggregateOutputType | null;
+    _sum: IntroduceSumAggregateOutputType | null;
     _min: IntroduceMinAggregateOutputType | null;
     _max: IntroduceMaxAggregateOutputType | null;
   };
@@ -5413,7 +4354,10 @@ export namespace Prisma {
     >;
 
   export type IntroduceSelect = {
+    id?: boolean;
     content?: boolean;
+    tag?: boolean;
+    technology?: boolean;
     userId?: boolean;
     User?: boolean | UserArgs;
   };
@@ -5562,8 +4506,8 @@ export namespace Prisma {
      * // Get first 10 Introduces
      * const introduces = await prisma.introduce.findMany({ take: 10 })
      *
-     * // Only select the `content`
-     * const introduceWithContentOnly = await prisma.introduce.findMany({ select: { content: true } })
+     * // Only select the `id`
+     * const introduceWithIdOnly = await prisma.introduce.findMany({ select: { id: true } })
      *
      **/
     findMany<T extends IntroduceFindManyArgs>(
@@ -6245,7 +5189,10 @@ export namespace Prisma {
    */
 
   export const IntroduceScalarFieldEnum: {
+    id: "id";
     content: "content";
+    tag: "tag";
+    technology: "technology";
     userId: "userId";
   };
 
@@ -6272,13 +5219,6 @@ export namespace Prisma {
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder];
 
-  export const TechnologyScalarFieldEnum: {
-    id: "id";
-  };
-
-  export type TechnologyScalarFieldEnum =
-    (typeof TechnologyScalarFieldEnum)[keyof typeof TechnologyScalarFieldEnum];
-
   export const TransactionIsolationLevel: {
     ReadUncommitted: "ReadUncommitted";
     ReadCommitted: "ReadCommitted";
@@ -6297,7 +5237,6 @@ export namespace Prisma {
     role: "role";
     birth: "birth";
     profile_img: "profile_img";
-    tag: "tag";
   };
 
   export type UserScalarFieldEnum =
@@ -6330,11 +5269,9 @@ export namespace Prisma {
     role?: EnumRoleFilter | Role;
     birth?: StringNullableFilter | string | null;
     profile_img?: StringNullableFilter | string | null;
-    tag?: StringNullableFilter | string | null;
     introduce?: XOR<IntroduceRelationFilter, IntroduceWhereInput> | null;
     posts?: PostListRelationFilter;
     workExperience?: WorkExperienceListRelationFilter;
-    technology?: TechnologyListRelationFilter;
   };
 
   export type UserOrderByWithRelationInput = {
@@ -6345,11 +5282,9 @@ export namespace Prisma {
     role?: SortOrder;
     birth?: SortOrder;
     profile_img?: SortOrder;
-    tag?: SortOrder;
     introduce?: IntroduceOrderByWithRelationInput;
     posts?: PostOrderByRelationAggregateInput;
     workExperience?: WorkExperienceOrderByRelationAggregateInput;
-    technology?: TechnologyOrderByRelationAggregateInput;
   };
 
   export type UserWhereUniqueInput = {
@@ -6365,7 +5300,6 @@ export namespace Prisma {
     role?: SortOrder;
     birth?: SortOrder;
     profile_img?: SortOrder;
-    tag?: SortOrder;
     _count?: UserCountOrderByAggregateInput;
     _avg?: UserAvgOrderByAggregateInput;
     _max?: UserMaxOrderByAggregateInput;
@@ -6384,40 +5318,6 @@ export namespace Prisma {
     role?: EnumRoleWithAggregatesFilter | Role;
     birth?: StringNullableWithAggregatesFilter | string | null;
     profile_img?: StringNullableWithAggregatesFilter | string | null;
-    tag?: StringNullableWithAggregatesFilter | string | null;
-  };
-
-  export type TechnologyWhereInput = {
-    AND?: Enumerable<TechnologyWhereInput>;
-    OR?: Enumerable<TechnologyWhereInput>;
-    NOT?: Enumerable<TechnologyWhereInput>;
-    id?: IntFilter | number;
-    User?: UserListRelationFilter;
-  };
-
-  export type TechnologyOrderByWithRelationInput = {
-    id?: SortOrder;
-    User?: UserOrderByRelationAggregateInput;
-  };
-
-  export type TechnologyWhereUniqueInput = {
-    id?: number;
-  };
-
-  export type TechnologyOrderByWithAggregationInput = {
-    id?: SortOrder;
-    _count?: TechnologyCountOrderByAggregateInput;
-    _avg?: TechnologyAvgOrderByAggregateInput;
-    _max?: TechnologyMaxOrderByAggregateInput;
-    _min?: TechnologyMinOrderByAggregateInput;
-    _sum?: TechnologySumOrderByAggregateInput;
-  };
-
-  export type TechnologyScalarWhereWithAggregatesInput = {
-    AND?: Enumerable<TechnologyScalarWhereWithAggregatesInput>;
-    OR?: Enumerable<TechnologyScalarWhereWithAggregatesInput>;
-    NOT?: Enumerable<TechnologyScalarWhereWithAggregatesInput>;
-    id?: IntWithAggregatesFilter | number;
   };
 
   export type PostWhereInput = {
@@ -6534,34 +5434,49 @@ export namespace Prisma {
     AND?: Enumerable<IntroduceWhereInput>;
     OR?: Enumerable<IntroduceWhereInput>;
     NOT?: Enumerable<IntroduceWhereInput>;
+    id?: IntFilter | number;
     content?: StringFilter | string;
+    tag?: StringNullableFilter | string | null;
+    technology?: StringFilter | string;
     userId?: StringFilter | string;
     User?: XOR<UserRelationFilter, UserWhereInput>;
   };
 
   export type IntroduceOrderByWithRelationInput = {
+    id?: SortOrder;
     content?: SortOrder;
+    tag?: SortOrder;
+    technology?: SortOrder;
     userId?: SortOrder;
     User?: UserOrderByWithRelationInput;
   };
 
   export type IntroduceWhereUniqueInput = {
+    id?: number;
     userId?: string;
   };
 
   export type IntroduceOrderByWithAggregationInput = {
+    id?: SortOrder;
     content?: SortOrder;
+    tag?: SortOrder;
+    technology?: SortOrder;
     userId?: SortOrder;
     _count?: IntroduceCountOrderByAggregateInput;
+    _avg?: IntroduceAvgOrderByAggregateInput;
     _max?: IntroduceMaxOrderByAggregateInput;
     _min?: IntroduceMinOrderByAggregateInput;
+    _sum?: IntroduceSumOrderByAggregateInput;
   };
 
   export type IntroduceScalarWhereWithAggregatesInput = {
     AND?: Enumerable<IntroduceScalarWhereWithAggregatesInput>;
     OR?: Enumerable<IntroduceScalarWhereWithAggregatesInput>;
     NOT?: Enumerable<IntroduceScalarWhereWithAggregatesInput>;
+    id?: IntWithAggregatesFilter | number;
     content?: StringWithAggregatesFilter | string;
+    tag?: StringNullableWithAggregatesFilter | string | null;
+    technology?: StringWithAggregatesFilter | string;
     userId?: StringWithAggregatesFilter | string;
   };
 
@@ -6572,11 +5487,9 @@ export namespace Prisma {
     role: Role;
     birth?: string | null;
     profile_img?: string | null;
-    tag?: string | null;
     introduce?: IntroduceCreateNestedOneWithoutUserInput;
     posts?: PostCreateNestedManyWithoutUserInput;
     workExperience?: WorkExperienceCreateNestedManyWithoutUserInput;
-    technology?: TechnologyCreateNestedManyWithoutUserInput;
   };
 
   export type UserUncheckedCreateInput = {
@@ -6587,11 +5500,9 @@ export namespace Prisma {
     role: Role;
     birth?: string | null;
     profile_img?: string | null;
-    tag?: string | null;
     introduce?: IntroduceUncheckedCreateNestedOneWithoutUserInput;
     posts?: PostUncheckedCreateNestedManyWithoutUserInput;
     workExperience?: WorkExperienceUncheckedCreateNestedManyWithoutUserInput;
-    technology?: TechnologyUncheckedCreateNestedManyWithoutUserInput;
   };
 
   export type UserUpdateInput = {
@@ -6601,11 +5512,9 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | Role;
     birth?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
-    tag?: NullableStringFieldUpdateOperationsInput | string | null;
     introduce?: IntroduceUpdateOneWithoutUserNestedInput;
     posts?: PostUpdateManyWithoutUserNestedInput;
     workExperience?: WorkExperienceUpdateManyWithoutUserNestedInput;
-    technology?: TechnologyUpdateManyWithoutUserNestedInput;
   };
 
   export type UserUncheckedUpdateInput = {
@@ -6616,11 +5525,9 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | Role;
     birth?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
-    tag?: NullableStringFieldUpdateOperationsInput | string | null;
     introduce?: IntroduceUncheckedUpdateOneWithoutUserNestedInput;
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput;
     workExperience?: WorkExperienceUncheckedUpdateManyWithoutUserNestedInput;
-    technology?: TechnologyUncheckedUpdateManyWithoutUserNestedInput;
   };
 
   export type UserCreateManyInput = {
@@ -6631,7 +5538,6 @@ export namespace Prisma {
     role: Role;
     birth?: string | null;
     profile_img?: string | null;
-    tag?: string | null;
   };
 
   export type UserUpdateManyMutationInput = {
@@ -6641,7 +5547,6 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | Role;
     birth?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
-    tag?: NullableStringFieldUpdateOperationsInput | string | null;
   };
 
   export type UserUncheckedUpdateManyInput = {
@@ -6652,35 +5557,6 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | Role;
     birth?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
-    tag?: NullableStringFieldUpdateOperationsInput | string | null;
-  };
-
-  export type TechnologyCreateInput = {
-    User?: UserCreateNestedManyWithoutTechnologyInput;
-  };
-
-  export type TechnologyUncheckedCreateInput = {
-    id?: number;
-    User?: UserUncheckedCreateNestedManyWithoutTechnologyInput;
-  };
-
-  export type TechnologyUpdateInput = {
-    User?: UserUpdateManyWithoutTechnologyNestedInput;
-  };
-
-  export type TechnologyUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number;
-    User?: UserUncheckedUpdateManyWithoutTechnologyNestedInput;
-  };
-
-  export type TechnologyCreateManyInput = {
-    id?: number;
-  };
-
-  export type TechnologyUpdateManyMutationInput = {};
-
-  export type TechnologyUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number;
   };
 
   export type PostCreateInput = {
@@ -6810,35 +5686,53 @@ export namespace Prisma {
 
   export type IntroduceCreateInput = {
     content: string;
+    tag?: string | null;
+    technology: string;
     User: UserCreateNestedOneWithoutIntroduceInput;
   };
 
   export type IntroduceUncheckedCreateInput = {
+    id?: number;
     content: string;
+    tag?: string | null;
+    technology: string;
     userId: string;
   };
 
   export type IntroduceUpdateInput = {
     content?: StringFieldUpdateOperationsInput | string;
+    tag?: NullableStringFieldUpdateOperationsInput | string | null;
+    technology?: StringFieldUpdateOperationsInput | string;
     User?: UserUpdateOneRequiredWithoutIntroduceNestedInput;
   };
 
   export type IntroduceUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number;
     content?: StringFieldUpdateOperationsInput | string;
+    tag?: NullableStringFieldUpdateOperationsInput | string | null;
+    technology?: StringFieldUpdateOperationsInput | string;
     userId?: StringFieldUpdateOperationsInput | string;
   };
 
   export type IntroduceCreateManyInput = {
+    id?: number;
     content: string;
+    tag?: string | null;
+    technology: string;
     userId: string;
   };
 
   export type IntroduceUpdateManyMutationInput = {
     content?: StringFieldUpdateOperationsInput | string;
+    tag?: NullableStringFieldUpdateOperationsInput | string | null;
+    technology?: StringFieldUpdateOperationsInput | string;
   };
 
   export type IntroduceUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number;
     content?: StringFieldUpdateOperationsInput | string;
+    tag?: NullableStringFieldUpdateOperationsInput | string | null;
+    technology?: StringFieldUpdateOperationsInput | string;
     userId?: StringFieldUpdateOperationsInput | string;
   };
 
@@ -6905,21 +5799,11 @@ export namespace Prisma {
     none?: WorkExperienceWhereInput;
   };
 
-  export type TechnologyListRelationFilter = {
-    every?: TechnologyWhereInput;
-    some?: TechnologyWhereInput;
-    none?: TechnologyWhereInput;
-  };
-
   export type PostOrderByRelationAggregateInput = {
     _count?: SortOrder;
   };
 
   export type WorkExperienceOrderByRelationAggregateInput = {
-    _count?: SortOrder;
-  };
-
-  export type TechnologyOrderByRelationAggregateInput = {
     _count?: SortOrder;
   };
 
@@ -6931,7 +5815,6 @@ export namespace Prisma {
     role?: SortOrder;
     birth?: SortOrder;
     profile_img?: SortOrder;
-    tag?: SortOrder;
   };
 
   export type UserAvgOrderByAggregateInput = {
@@ -6946,7 +5829,6 @@ export namespace Prisma {
     role?: SortOrder;
     birth?: SortOrder;
     profile_img?: SortOrder;
-    tag?: SortOrder;
   };
 
   export type UserMinOrderByAggregateInput = {
@@ -6957,7 +5839,6 @@ export namespace Prisma {
     role?: SortOrder;
     birth?: SortOrder;
     profile_img?: SortOrder;
-    tag?: SortOrder;
   };
 
   export type UserSumOrderByAggregateInput = {
@@ -7022,36 +5903,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter;
     _min?: NestedStringNullableFilter;
     _max?: NestedStringNullableFilter;
-  };
-
-  export type UserListRelationFilter = {
-    every?: UserWhereInput;
-    some?: UserWhereInput;
-    none?: UserWhereInput;
-  };
-
-  export type UserOrderByRelationAggregateInput = {
-    _count?: SortOrder;
-  };
-
-  export type TechnologyCountOrderByAggregateInput = {
-    id?: SortOrder;
-  };
-
-  export type TechnologyAvgOrderByAggregateInput = {
-    id?: SortOrder;
-  };
-
-  export type TechnologyMaxOrderByAggregateInput = {
-    id?: SortOrder;
-  };
-
-  export type TechnologyMinOrderByAggregateInput = {
-    id?: SortOrder;
-  };
-
-  export type TechnologySumOrderByAggregateInput = {
-    id?: SortOrder;
   };
 
   export type DateTimeFilter = {
@@ -7158,18 +6009,35 @@ export namespace Prisma {
   };
 
   export type IntroduceCountOrderByAggregateInput = {
+    id?: SortOrder;
     content?: SortOrder;
+    tag?: SortOrder;
+    technology?: SortOrder;
     userId?: SortOrder;
   };
 
+  export type IntroduceAvgOrderByAggregateInput = {
+    id?: SortOrder;
+  };
+
   export type IntroduceMaxOrderByAggregateInput = {
+    id?: SortOrder;
     content?: SortOrder;
+    tag?: SortOrder;
+    technology?: SortOrder;
     userId?: SortOrder;
   };
 
   export type IntroduceMinOrderByAggregateInput = {
+    id?: SortOrder;
     content?: SortOrder;
+    tag?: SortOrder;
+    technology?: SortOrder;
     userId?: SortOrder;
+  };
+
+  export type IntroduceSumOrderByAggregateInput = {
+    id?: SortOrder;
   };
 
   export type IntroduceCreateNestedOneWithoutUserInput = {
@@ -7201,15 +6069,6 @@ export namespace Prisma {
     connect?: Enumerable<WorkExperienceWhereUniqueInput>;
   };
 
-  export type TechnologyCreateNestedManyWithoutUserInput = {
-    create?: XOR<
-      Enumerable<TechnologyCreateWithoutUserInput>,
-      Enumerable<TechnologyUncheckedCreateWithoutUserInput>
-    >;
-    connectOrCreate?: Enumerable<TechnologyCreateOrConnectWithoutUserInput>;
-    connect?: Enumerable<TechnologyWhereUniqueInput>;
-  };
-
   export type IntroduceUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<
       IntroduceCreateWithoutUserInput,
@@ -7237,15 +6096,6 @@ export namespace Prisma {
     connectOrCreate?: Enumerable<WorkExperienceCreateOrConnectWithoutUserInput>;
     createMany?: WorkExperienceCreateManyUserInputEnvelope;
     connect?: Enumerable<WorkExperienceWhereUniqueInput>;
-  };
-
-  export type TechnologyUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<
-      Enumerable<TechnologyCreateWithoutUserInput>,
-      Enumerable<TechnologyUncheckedCreateWithoutUserInput>
-    >;
-    connectOrCreate?: Enumerable<TechnologyCreateOrConnectWithoutUserInput>;
-    connect?: Enumerable<TechnologyWhereUniqueInput>;
   };
 
   export type StringFieldUpdateOperationsInput = {
@@ -7310,22 +6160,6 @@ export namespace Prisma {
     deleteMany?: Enumerable<WorkExperienceScalarWhereInput>;
   };
 
-  export type TechnologyUpdateManyWithoutUserNestedInput = {
-    create?: XOR<
-      Enumerable<TechnologyCreateWithoutUserInput>,
-      Enumerable<TechnologyUncheckedCreateWithoutUserInput>
-    >;
-    connectOrCreate?: Enumerable<TechnologyCreateOrConnectWithoutUserInput>;
-    upsert?: Enumerable<TechnologyUpsertWithWhereUniqueWithoutUserInput>;
-    set?: Enumerable<TechnologyWhereUniqueInput>;
-    disconnect?: Enumerable<TechnologyWhereUniqueInput>;
-    delete?: Enumerable<TechnologyWhereUniqueInput>;
-    connect?: Enumerable<TechnologyWhereUniqueInput>;
-    update?: Enumerable<TechnologyUpdateWithWhereUniqueWithoutUserInput>;
-    updateMany?: Enumerable<TechnologyUpdateManyWithWhereWithoutUserInput>;
-    deleteMany?: Enumerable<TechnologyScalarWhereInput>;
-  };
-
   export type IntFieldUpdateOperationsInput = {
     set?: number;
     increment?: number;
@@ -7382,72 +6216,6 @@ export namespace Prisma {
     update?: Enumerable<WorkExperienceUpdateWithWhereUniqueWithoutUserInput>;
     updateMany?: Enumerable<WorkExperienceUpdateManyWithWhereWithoutUserInput>;
     deleteMany?: Enumerable<WorkExperienceScalarWhereInput>;
-  };
-
-  export type TechnologyUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<
-      Enumerable<TechnologyCreateWithoutUserInput>,
-      Enumerable<TechnologyUncheckedCreateWithoutUserInput>
-    >;
-    connectOrCreate?: Enumerable<TechnologyCreateOrConnectWithoutUserInput>;
-    upsert?: Enumerable<TechnologyUpsertWithWhereUniqueWithoutUserInput>;
-    set?: Enumerable<TechnologyWhereUniqueInput>;
-    disconnect?: Enumerable<TechnologyWhereUniqueInput>;
-    delete?: Enumerable<TechnologyWhereUniqueInput>;
-    connect?: Enumerable<TechnologyWhereUniqueInput>;
-    update?: Enumerable<TechnologyUpdateWithWhereUniqueWithoutUserInput>;
-    updateMany?: Enumerable<TechnologyUpdateManyWithWhereWithoutUserInput>;
-    deleteMany?: Enumerable<TechnologyScalarWhereInput>;
-  };
-
-  export type UserCreateNestedManyWithoutTechnologyInput = {
-    create?: XOR<
-      Enumerable<UserCreateWithoutTechnologyInput>,
-      Enumerable<UserUncheckedCreateWithoutTechnologyInput>
-    >;
-    connectOrCreate?: Enumerable<UserCreateOrConnectWithoutTechnologyInput>;
-    connect?: Enumerable<UserWhereUniqueInput>;
-  };
-
-  export type UserUncheckedCreateNestedManyWithoutTechnologyInput = {
-    create?: XOR<
-      Enumerable<UserCreateWithoutTechnologyInput>,
-      Enumerable<UserUncheckedCreateWithoutTechnologyInput>
-    >;
-    connectOrCreate?: Enumerable<UserCreateOrConnectWithoutTechnologyInput>;
-    connect?: Enumerable<UserWhereUniqueInput>;
-  };
-
-  export type UserUpdateManyWithoutTechnologyNestedInput = {
-    create?: XOR<
-      Enumerable<UserCreateWithoutTechnologyInput>,
-      Enumerable<UserUncheckedCreateWithoutTechnologyInput>
-    >;
-    connectOrCreate?: Enumerable<UserCreateOrConnectWithoutTechnologyInput>;
-    upsert?: Enumerable<UserUpsertWithWhereUniqueWithoutTechnologyInput>;
-    set?: Enumerable<UserWhereUniqueInput>;
-    disconnect?: Enumerable<UserWhereUniqueInput>;
-    delete?: Enumerable<UserWhereUniqueInput>;
-    connect?: Enumerable<UserWhereUniqueInput>;
-    update?: Enumerable<UserUpdateWithWhereUniqueWithoutTechnologyInput>;
-    updateMany?: Enumerable<UserUpdateManyWithWhereWithoutTechnologyInput>;
-    deleteMany?: Enumerable<UserScalarWhereInput>;
-  };
-
-  export type UserUncheckedUpdateManyWithoutTechnologyNestedInput = {
-    create?: XOR<
-      Enumerable<UserCreateWithoutTechnologyInput>,
-      Enumerable<UserUncheckedCreateWithoutTechnologyInput>
-    >;
-    connectOrCreate?: Enumerable<UserCreateOrConnectWithoutTechnologyInput>;
-    upsert?: Enumerable<UserUpsertWithWhereUniqueWithoutTechnologyInput>;
-    set?: Enumerable<UserWhereUniqueInput>;
-    disconnect?: Enumerable<UserWhereUniqueInput>;
-    delete?: Enumerable<UserWhereUniqueInput>;
-    connect?: Enumerable<UserWhereUniqueInput>;
-    update?: Enumerable<UserUpdateWithWhereUniqueWithoutTechnologyInput>;
-    updateMany?: Enumerable<UserUpdateManyWithWhereWithoutTechnologyInput>;
-    deleteMany?: Enumerable<UserScalarWhereInput>;
   };
 
   export type UserCreateNestedOneWithoutPostsInput = {
@@ -7678,10 +6446,15 @@ export namespace Prisma {
 
   export type IntroduceCreateWithoutUserInput = {
     content: string;
+    tag?: string | null;
+    technology: string;
   };
 
   export type IntroduceUncheckedCreateWithoutUserInput = {
+    id?: number;
     content: string;
+    tag?: string | null;
+    technology: string;
   };
 
   export type IntroduceCreateOrConnectWithoutUserInput = {
@@ -7750,20 +6523,6 @@ export namespace Prisma {
     skipDuplicates?: boolean;
   };
 
-  export type TechnologyCreateWithoutUserInput = {};
-
-  export type TechnologyUncheckedCreateWithoutUserInput = {
-    id?: number;
-  };
-
-  export type TechnologyCreateOrConnectWithoutUserInput = {
-    where: TechnologyWhereUniqueInput;
-    create: XOR<
-      TechnologyCreateWithoutUserInput,
-      TechnologyUncheckedCreateWithoutUserInput
-    >;
-  };
-
   export type IntroduceUpsertWithoutUserInput = {
     update: XOR<
       IntroduceUpdateWithoutUserInput,
@@ -7777,10 +6536,15 @@ export namespace Prisma {
 
   export type IntroduceUpdateWithoutUserInput = {
     content?: StringFieldUpdateOperationsInput | string;
+    tag?: NullableStringFieldUpdateOperationsInput | string | null;
+    technology?: StringFieldUpdateOperationsInput | string;
   };
 
   export type IntroduceUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number;
     content?: StringFieldUpdateOperationsInput | string;
+    tag?: NullableStringFieldUpdateOperationsInput | string | null;
+    technology?: StringFieldUpdateOperationsInput | string;
   };
 
   export type PostUpsertWithWhereUniqueWithoutUserInput = {
@@ -7861,118 +6625,6 @@ export namespace Prisma {
     id?: IntFilter | number;
   };
 
-  export type TechnologyUpsertWithWhereUniqueWithoutUserInput = {
-    where: TechnologyWhereUniqueInput;
-    update: XOR<
-      TechnologyUpdateWithoutUserInput,
-      TechnologyUncheckedUpdateWithoutUserInput
-    >;
-    create: XOR<
-      TechnologyCreateWithoutUserInput,
-      TechnologyUncheckedCreateWithoutUserInput
-    >;
-  };
-
-  export type TechnologyUpdateWithWhereUniqueWithoutUserInput = {
-    where: TechnologyWhereUniqueInput;
-    data: XOR<
-      TechnologyUpdateWithoutUserInput,
-      TechnologyUncheckedUpdateWithoutUserInput
-    >;
-  };
-
-  export type TechnologyUpdateManyWithWhereWithoutUserInput = {
-    where: TechnologyScalarWhereInput;
-    data: XOR<
-      TechnologyUpdateManyMutationInput,
-      TechnologyUncheckedUpdateManyWithoutTechnologyInput
-    >;
-  };
-
-  export type TechnologyScalarWhereInput = {
-    AND?: Enumerable<TechnologyScalarWhereInput>;
-    OR?: Enumerable<TechnologyScalarWhereInput>;
-    NOT?: Enumerable<TechnologyScalarWhereInput>;
-    id?: IntFilter | number;
-  };
-
-  export type UserCreateWithoutTechnologyInput = {
-    account_id: string;
-    name: string;
-    password: string;
-    role: Role;
-    birth?: string | null;
-    profile_img?: string | null;
-    tag?: string | null;
-    introduce?: IntroduceCreateNestedOneWithoutUserInput;
-    posts?: PostCreateNestedManyWithoutUserInput;
-    workExperience?: WorkExperienceCreateNestedManyWithoutUserInput;
-  };
-
-  export type UserUncheckedCreateWithoutTechnologyInput = {
-    id?: number;
-    account_id: string;
-    name: string;
-    password: string;
-    role: Role;
-    birth?: string | null;
-    profile_img?: string | null;
-    tag?: string | null;
-    introduce?: IntroduceUncheckedCreateNestedOneWithoutUserInput;
-    posts?: PostUncheckedCreateNestedManyWithoutUserInput;
-    workExperience?: WorkExperienceUncheckedCreateNestedManyWithoutUserInput;
-  };
-
-  export type UserCreateOrConnectWithoutTechnologyInput = {
-    where: UserWhereUniqueInput;
-    create: XOR<
-      UserCreateWithoutTechnologyInput,
-      UserUncheckedCreateWithoutTechnologyInput
-    >;
-  };
-
-  export type UserUpsertWithWhereUniqueWithoutTechnologyInput = {
-    where: UserWhereUniqueInput;
-    update: XOR<
-      UserUpdateWithoutTechnologyInput,
-      UserUncheckedUpdateWithoutTechnologyInput
-    >;
-    create: XOR<
-      UserCreateWithoutTechnologyInput,
-      UserUncheckedCreateWithoutTechnologyInput
-    >;
-  };
-
-  export type UserUpdateWithWhereUniqueWithoutTechnologyInput = {
-    where: UserWhereUniqueInput;
-    data: XOR<
-      UserUpdateWithoutTechnologyInput,
-      UserUncheckedUpdateWithoutTechnologyInput
-    >;
-  };
-
-  export type UserUpdateManyWithWhereWithoutTechnologyInput = {
-    where: UserScalarWhereInput;
-    data: XOR<
-      UserUpdateManyMutationInput,
-      UserUncheckedUpdateManyWithoutUserInput
-    >;
-  };
-
-  export type UserScalarWhereInput = {
-    AND?: Enumerable<UserScalarWhereInput>;
-    OR?: Enumerable<UserScalarWhereInput>;
-    NOT?: Enumerable<UserScalarWhereInput>;
-    id?: IntFilter | number;
-    account_id?: StringFilter | string;
-    name?: StringFilter | string;
-    password?: StringFilter | string;
-    role?: EnumRoleFilter | Role;
-    birth?: StringNullableFilter | string | null;
-    profile_img?: StringNullableFilter | string | null;
-    tag?: StringNullableFilter | string | null;
-  };
-
   export type UserCreateWithoutPostsInput = {
     account_id: string;
     name: string;
@@ -7980,10 +6632,8 @@ export namespace Prisma {
     role: Role;
     birth?: string | null;
     profile_img?: string | null;
-    tag?: string | null;
     introduce?: IntroduceCreateNestedOneWithoutUserInput;
     workExperience?: WorkExperienceCreateNestedManyWithoutUserInput;
-    technology?: TechnologyCreateNestedManyWithoutUserInput;
   };
 
   export type UserUncheckedCreateWithoutPostsInput = {
@@ -7994,10 +6644,8 @@ export namespace Prisma {
     role: Role;
     birth?: string | null;
     profile_img?: string | null;
-    tag?: string | null;
     introduce?: IntroduceUncheckedCreateNestedOneWithoutUserInput;
     workExperience?: WorkExperienceUncheckedCreateNestedManyWithoutUserInput;
-    technology?: TechnologyUncheckedCreateNestedManyWithoutUserInput;
   };
 
   export type UserCreateOrConnectWithoutPostsInput = {
@@ -8026,10 +6674,8 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | Role;
     birth?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
-    tag?: NullableStringFieldUpdateOperationsInput | string | null;
     introduce?: IntroduceUpdateOneWithoutUserNestedInput;
     workExperience?: WorkExperienceUpdateManyWithoutUserNestedInput;
-    technology?: TechnologyUpdateManyWithoutUserNestedInput;
   };
 
   export type UserUncheckedUpdateWithoutPostsInput = {
@@ -8040,10 +6686,8 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | Role;
     birth?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
-    tag?: NullableStringFieldUpdateOperationsInput | string | null;
     introduce?: IntroduceUncheckedUpdateOneWithoutUserNestedInput;
     workExperience?: WorkExperienceUncheckedUpdateManyWithoutUserNestedInput;
-    technology?: TechnologyUncheckedUpdateManyWithoutUserNestedInput;
   };
 
   export type UserCreateWithoutWorkExperienceInput = {
@@ -8053,10 +6697,8 @@ export namespace Prisma {
     role: Role;
     birth?: string | null;
     profile_img?: string | null;
-    tag?: string | null;
     introduce?: IntroduceCreateNestedOneWithoutUserInput;
     posts?: PostCreateNestedManyWithoutUserInput;
-    technology?: TechnologyCreateNestedManyWithoutUserInput;
   };
 
   export type UserUncheckedCreateWithoutWorkExperienceInput = {
@@ -8067,10 +6709,8 @@ export namespace Prisma {
     role: Role;
     birth?: string | null;
     profile_img?: string | null;
-    tag?: string | null;
     introduce?: IntroduceUncheckedCreateNestedOneWithoutUserInput;
     posts?: PostUncheckedCreateNestedManyWithoutUserInput;
-    technology?: TechnologyUncheckedCreateNestedManyWithoutUserInput;
   };
 
   export type UserCreateOrConnectWithoutWorkExperienceInput = {
@@ -8099,10 +6739,8 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | Role;
     birth?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
-    tag?: NullableStringFieldUpdateOperationsInput | string | null;
     introduce?: IntroduceUpdateOneWithoutUserNestedInput;
     posts?: PostUpdateManyWithoutUserNestedInput;
-    technology?: TechnologyUpdateManyWithoutUserNestedInput;
   };
 
   export type UserUncheckedUpdateWithoutWorkExperienceInput = {
@@ -8113,10 +6751,8 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | Role;
     birth?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
-    tag?: NullableStringFieldUpdateOperationsInput | string | null;
     introduce?: IntroduceUncheckedUpdateOneWithoutUserNestedInput;
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput;
-    technology?: TechnologyUncheckedUpdateManyWithoutUserNestedInput;
   };
 
   export type UserCreateWithoutIntroduceInput = {
@@ -8126,10 +6762,8 @@ export namespace Prisma {
     role: Role;
     birth?: string | null;
     profile_img?: string | null;
-    tag?: string | null;
     posts?: PostCreateNestedManyWithoutUserInput;
     workExperience?: WorkExperienceCreateNestedManyWithoutUserInput;
-    technology?: TechnologyCreateNestedManyWithoutUserInput;
   };
 
   export type UserUncheckedCreateWithoutIntroduceInput = {
@@ -8140,10 +6774,8 @@ export namespace Prisma {
     role: Role;
     birth?: string | null;
     profile_img?: string | null;
-    tag?: string | null;
     posts?: PostUncheckedCreateNestedManyWithoutUserInput;
     workExperience?: WorkExperienceUncheckedCreateNestedManyWithoutUserInput;
-    technology?: TechnologyUncheckedCreateNestedManyWithoutUserInput;
   };
 
   export type UserCreateOrConnectWithoutIntroduceInput = {
@@ -8172,10 +6804,8 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | Role;
     birth?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
-    tag?: NullableStringFieldUpdateOperationsInput | string | null;
     posts?: PostUpdateManyWithoutUserNestedInput;
     workExperience?: WorkExperienceUpdateManyWithoutUserNestedInput;
-    technology?: TechnologyUpdateManyWithoutUserNestedInput;
   };
 
   export type UserUncheckedUpdateWithoutIntroduceInput = {
@@ -8186,10 +6816,8 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | Role;
     birth?: NullableStringFieldUpdateOperationsInput | string | null;
     profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
-    tag?: NullableStringFieldUpdateOperationsInput | string | null;
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput;
     workExperience?: WorkExperienceUncheckedUpdateManyWithoutUserNestedInput;
-    technology?: TechnologyUncheckedUpdateManyWithoutUserNestedInput;
   };
 
   export type PostCreateManyUserInput = {
@@ -8256,54 +6884,6 @@ export namespace Prisma {
     startDate?: StringFieldUpdateOperationsInput | string;
     endDate?: NullableStringFieldUpdateOperationsInput | string | null;
     id?: IntFieldUpdateOperationsInput | number;
-  };
-
-  export type TechnologyUpdateWithoutUserInput = {};
-
-  export type TechnologyUncheckedUpdateWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number;
-  };
-
-  export type TechnologyUncheckedUpdateManyWithoutTechnologyInput = {
-    id?: IntFieldUpdateOperationsInput | number;
-  };
-
-  export type UserUpdateWithoutTechnologyInput = {
-    account_id?: StringFieldUpdateOperationsInput | string;
-    name?: StringFieldUpdateOperationsInput | string;
-    password?: StringFieldUpdateOperationsInput | string;
-    role?: EnumRoleFieldUpdateOperationsInput | Role;
-    birth?: NullableStringFieldUpdateOperationsInput | string | null;
-    profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
-    tag?: NullableStringFieldUpdateOperationsInput | string | null;
-    introduce?: IntroduceUpdateOneWithoutUserNestedInput;
-    posts?: PostUpdateManyWithoutUserNestedInput;
-    workExperience?: WorkExperienceUpdateManyWithoutUserNestedInput;
-  };
-
-  export type UserUncheckedUpdateWithoutTechnologyInput = {
-    id?: IntFieldUpdateOperationsInput | number;
-    account_id?: StringFieldUpdateOperationsInput | string;
-    name?: StringFieldUpdateOperationsInput | string;
-    password?: StringFieldUpdateOperationsInput | string;
-    role?: EnumRoleFieldUpdateOperationsInput | Role;
-    birth?: NullableStringFieldUpdateOperationsInput | string | null;
-    profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
-    tag?: NullableStringFieldUpdateOperationsInput | string | null;
-    introduce?: IntroduceUncheckedUpdateOneWithoutUserNestedInput;
-    posts?: PostUncheckedUpdateManyWithoutUserNestedInput;
-    workExperience?: WorkExperienceUncheckedUpdateManyWithoutUserNestedInput;
-  };
-
-  export type UserUncheckedUpdateManyWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number;
-    account_id?: StringFieldUpdateOperationsInput | string;
-    name?: StringFieldUpdateOperationsInput | string;
-    password?: StringFieldUpdateOperationsInput | string;
-    role?: EnumRoleFieldUpdateOperationsInput | Role;
-    birth?: NullableStringFieldUpdateOperationsInput | string | null;
-    profile_img?: NullableStringFieldUpdateOperationsInput | string | null;
-    tag?: NullableStringFieldUpdateOperationsInput | string | null;
   };
 
   /**

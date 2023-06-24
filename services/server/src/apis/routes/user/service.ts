@@ -23,40 +23,4 @@ export class UserService {
   getByAccountId = async (account_id: string) => {
     return await this.userRepository.findUserByAccountId(account_id);
   };
-
-  writeProfile = async (
-    type: "introduce" | "work-experience",
-    account_id: string,
-    body: User.Introduce | User.WorkExperience[]
-  ) => {
-    switch (type) {
-      case "introduce":
-        validation(
-          Joi.object<any, true, User.Introduce>({
-            content: Joi.string().required(),
-          }),
-          body
-        );
-        this.userRepository.updateIntroduce(account_id, body as User.Introduce);
-        break;
-      case "work-experience":
-        // (body as User.WorkExperience[]).forEach((element) => {
-        //   validation(
-        //     Joi.object<any, true, User.WorkExperience>({
-        //       name: Joi.string().required(),
-        //       field: Joi.string().required(),
-        //       startDate: Joi.string().required(),
-        //       endDate: Joi.string(),
-        //       // id: Joi.string(),
-        //     }),
-        //     element
-        //   );
-        // });
-        this.userRepository.updateWorkExperience(
-          account_id,
-          body as User.WorkExperience[]
-        );
-        break;
-    }
-  };
 }

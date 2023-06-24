@@ -6,13 +6,15 @@ export interface WorkExperience {
   endDate?: string;
 }
 
-export interface Introduce {
+export interface UpdateIntroduceReq {
   content: string;
+  technology: string;
+  tag: string;
 }
 
 export interface WriteReq {
   WorkExperience: WorkExperience;
-  Introduce: Introduce;
+  Introduce: UpdateIntroduceReq;
 }
 
 export interface ReadProfileRes {
@@ -25,9 +27,8 @@ export interface ReadProfileRes {
 
 export interface MyProfileRes {
   name: string;
+  birth: string | null;
   profile_img: string | null;
-  tag: string | null;
-  technology: string[];
   workExperience: WorkExperience[];
-  introduce: Introduce | null;
+  introduce: UpdateIntroduceReq | null;
 }

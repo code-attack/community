@@ -34,7 +34,6 @@ export class PostRepository {
           select: {
             name: true,
             introduce: true,
-            technology: true,
             profile_img: true,
           },
         },

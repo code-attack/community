@@ -24,9 +24,13 @@ export class UserRepository {
       select: {
         id: true,
         name: true,
-        tag: true,
         profile_img: true,
-        technology: true,
+        introduce: {
+          select: {
+            tag: true,
+            technology: true,
+          },
+        },
       },
     });
   };
@@ -37,14 +41,15 @@ export class UserRepository {
       select: {
         name: true,
         role: true,
-        tag: true,
+        birth: true,
         profile_img: true,
         introduce: {
           select: {
+            tag: true,
             content: true,
+            technology: true,
           },
         },
-        technology: true,
         workExperience: true,
       },
     });
@@ -56,14 +61,14 @@ export class UserRepository {
       select: {
         name: true,
         role: true,
-        tag: true,
         profile_img: true,
         introduce: {
           select: {
             content: true,
+            technology: true,
+            tag: true,
           },
         },
-        technology: true,
         workExperience: true,
       },
     });
@@ -89,7 +94,10 @@ export class UserRepository {
     await Promise.all(promises);
   };
 
-  updateIntroduce = async (id: string, introduceInfo: User.Introduce) => {
+  updateIntroduce = async (
+    id: string,
+    introduceInfo: User.UpdateIntroduceReq
+  ) => {
     await client.introduce.upsert({
       where: { userId: id },
       update: { ...introduceInfo },
