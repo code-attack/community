@@ -13,7 +13,14 @@ interface PropsType {
   placeholder?: string;
   onSubmitAtInput: (value: { value: number; name: string }) => void;
   className?: string;
+  dropdownLocation?: "start" | "center" | "end";
 }
+
+const locationDropdown = {
+  start: "bottom-[60px]",
+  center: "-top-[140px]",
+  end: "top-[60px]",
+};
 
 export const DateInput = ({
   label,
@@ -22,6 +29,7 @@ export const DateInput = ({
   name,
   placeholder = "날짜를 입력해 주세요",
   className,
+  dropdownLocation = "end",
 }: PropsType) => {
   const [dropdown, setDropdown] = useState<boolean>(false);
   const openDropdown = () => setDropdown(true);
@@ -61,7 +69,9 @@ export const DateInput = ({
           />
         </div>
         {dropdown && (
-          <div className="w-[345px] rounded-[4px] border-[1px] bg-gray-50 absolute z-10 top-[60px] right-0">
+          <div
+            className={`w-[345px] rounded-[4px] border-[1px] bg-gray-50 absolute z-10 ${locationDropdown[dropdownLocation]} right-0`}
+          >
             <DayCalender
               initialValue={checkValue}
               closeDropdown={closeDropdown}
