@@ -16,7 +16,21 @@ export default () => {
 
       <main className="m-auto w-[1192px] px-4">
         <Text.title1 className="mt-32 mb-8">포스팅</Text.title1>
-        <div className="flex gap-8">
+        <div className="flex gap-8 flex-wrap">
+          {isLoading &&
+            Array(6)
+              .fill(0)
+              .map(() => (
+                <Card.Basic
+                  isLoading={isLoading}
+                  thumbnail=""
+                  name=""
+                  date=""
+                  title=""
+                  content=""
+                  profile=""
+                />
+              ))}
           {data?.data && data.data.post.map((post) => <Main {...post} />)}
         </div>
       </main>
@@ -25,7 +39,10 @@ export default () => {
   );
 };
 
-const Main = ({ thumbnail, user, title, content, createdAt }: Post.ReadRes) => {
+interface Props extends Post.ReadRes {
+  isLoading?: boolean;
+}
+const Main = ({ thumbnail, user, title, content, createdAt }: Props) => {
   return (
     <Card.Basic
       {...{

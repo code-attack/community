@@ -9,6 +9,7 @@ interface Props {
   title: string;
   content: string;
   profile: string;
+  isLoading?: boolean;
 }
 
 export const Basic = ({
@@ -18,9 +19,14 @@ export const Basic = ({
   title,
   content,
   profile,
+  isLoading,
 }: Props) => {
   return (
-    <Skeleton className="relative w-80 h-[382px] flex flex-col gap-[17px]">
+    <Skeleton
+      as="article"
+      isLoading={isLoading}
+      className="relative w-80 h-[382px] flex flex-col gap-[17px]"
+    >
       <div className="relative h-[180px]">
         <Image fill src="/auth.png" alt="thumbnail" />
       </div>
