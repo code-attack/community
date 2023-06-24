@@ -24,11 +24,12 @@ export const Basic = ({ type, state, setState }: Props) => {
     removeArray,
   } = useProfile(state, type, initial[type]);
   const { introduce } = form;
-  const responseIntroduce = {
+  const requestIntroduce = {
     ...introduce,
     tag: JSON.stringify(introduce.tag),
+    technology: JSON.stringify(introduce.technology),
   };
-  const { mutate } = updateIntroduce(form.introduce);
+  const { mutate } = updateIntroduce(requestIntroduce);
   const onSubmit = () => {
     setState(form);
     mutate();

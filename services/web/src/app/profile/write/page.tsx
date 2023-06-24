@@ -43,7 +43,7 @@ const Main = (data: User.MyProfileRes) => {
   const [form, setForm] = useState({
     introduce: apiIntroduce || initial.introduce,
     profile: apiProfile,
-    workExperience: data.workExperience,
+    workExperience: data.workExperience || [],
   });
   const { introduce, profile, workExperience } = form;
 
