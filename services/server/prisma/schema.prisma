@@ -56,13 +56,19 @@ model Introduce {
   User    User   @relation(fields: [userId], references: [account_id])
 }
 
-model room {
-  id Int @id @default(uuid())
-  
+model Room {
+  id Int @id @default(autoincrement())
+  reference String @unique @default(uuid())
+  chat Chat[]
 }
 
 model Chat {
-
+   id Int @id @default(autoincrement())
+   roomId String @unique
+   room Room @relation(fields: [roomId],references: [reference])
+   userId  String @unique
+   User    User   @relation(fields: [userId], references: [account_id])
+   msg String
 }
 
 enum Role {
