@@ -34,12 +34,16 @@ chatRouter.get("/before", async (req, res, next) => {
     const result = await chatService.befoereChat({
       roomId: req.query.roomId as string,
     });
+
     res.status(201).json(result);
-  } catch (e) {}
+  } catch (e) {
+    next(e);
+  }
 });
 
+// http://localhost:3001/chat/${roomId}
 export const ChatController = (io: Server) => {
-  io.of("/chat").on("connection", (socket) => {
+  return io.of("/chat").on("connection", (socket) => {
     const referer = socket.request.headers.referer;
     const roomId = referer!.split("/")[referer!.split("/").length - 1];
     const chatService = Container.get(ChatService);

@@ -18,7 +18,6 @@ export const loader = (app: Application) => {
   const io = new Server(server);
 
   // http://localhost:3001/chat/${roomId}
-
   ChatController(io);
 
   server.listen(3001);
