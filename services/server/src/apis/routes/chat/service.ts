@@ -8,12 +8,15 @@ import {
 @Service()
 export class ChatService {
   constructor(private readonly chatRepository: ChatRepository) {}
+
   create(params: IChatCreate) {
     return this.chatRepository.create(params);
   }
+
   send(params: IChatSend) {
     return this.chatRepository.send(params);
   }
+
   befoereChat(params: IBeforeChat) {
     return this.chatRepository.beforeChat(params);
   }

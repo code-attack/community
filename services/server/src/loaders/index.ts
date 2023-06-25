@@ -8,6 +8,7 @@ import { ErrorResponse } from "@/utils/error-res";
 import { errorHandler } from "@/apis/middlewares/error";
 import http from "http";
 import { Server } from "socket.io";
+import { ChatController } from "@/apis/routes/chat";
 
 export const loader = (app: Application) => {
   app.use(json());
@@ -17,20 +18,8 @@ export const loader = (app: Application) => {
   const io = new Server(server);
 
   // http://localhost:3001/chat/${roomId}
-  io.of("/chat").on("connection", (socket) => {
-    const referer = socket.request.headers.referer;
-    const roomId = referer!.split("/")[referer!.split("/").length - 1];
-    socket.join(roomId);
 
-    socket.on("chat message", (msg) => {
-      socket.to(roomId).emit("chat message", msg);
-    });
-
-    socket.on("disconnect", () => {
-      socket.leave(roomId);
-      console.log("user disconnected");
-    });
-  });
+  ChatController(io);
 
   server.listen(3001);
 
