@@ -19,11 +19,25 @@ chatRouter.post("/room", async (req, res, next) => {
       mine: decodedToken.account_id,
     });
 
-    res.status(201).json({ result });
+    res.status(201).json(result);
   } catch (e) {
     next(e);
   }
 });
+
+chatRouter.get("/before", async (req, res, next) => {
+  try {
+    const access_token = getAccessToken(req.headers.authorization);
+    const { decodedToken } = jwtHelper.decodeToken(access_token, TOKEN.ACCESS);
+
+    const chatService = Container.get(ChatService);
+    const result = await chatService.befoereChat({
+      roomId: req.query.roomId as string,
+    });
+    res.status(201).json(result);
+  } catch (e) {}
+});
+
 export const ChatController = (io: Server) => {
   io.of("/chat").on("connection", (socket) => {
     const referer = socket.request.headers.referer;
