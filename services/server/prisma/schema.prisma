@@ -21,6 +21,7 @@ model User {
   posts          Post[]
   workExperience WorkExperience[]
   technology     Technology[]
+  chat Chat[]
 }
 
 model Technology {
@@ -53,6 +54,15 @@ model Introduce {
   content String
   userId  String @unique
   User    User   @relation(fields: [userId], references: [account_id])
+}
+
+model room {
+  id Int @id @default(uuid())
+  
+}
+
+model Chat {
+
 }
 
 enum Role {

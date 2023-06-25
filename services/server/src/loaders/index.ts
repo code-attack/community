@@ -16,12 +16,18 @@ export const loader = (app: Application) => {
   const server = http.createServer(app);
   const io = new Server(server);
 
+  // http://localhost:3001/chat/${roomId}
   io.of("/chat").on("connection", (socket) => {
+    const referer = socket.request.headers.referer;
+    const roomId = referer!.split("/")[referer!.split("/").length - 1];
+    socket.join(roomId);
+
     socket.on("chat message", (msg) => {
-      io.emit("chat message", msg);
+      socket.to(roomId).emit("chat message", msg);
     });
 
     socket.on("disconnect", () => {
+      socket.leave(roomId);
       console.log("user disconnected");
     });
   });
