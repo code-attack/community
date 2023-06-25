@@ -6,3 +6,7 @@ export interface IChatSend {
 export interface IBeforeChat {
   roomId: string;
 }
+export interface IChatCreate {
+  opponent: string;
+  mine: string;
+}

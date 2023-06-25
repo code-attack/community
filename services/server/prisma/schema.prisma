@@ -22,6 +22,7 @@ model User {
   workExperience WorkExperience[]
   technology     Technology[]
   chat Chat[]
+  room Room[]
 }
 
 model Technology {
@@ -59,6 +60,7 @@ model Introduce {
 model Room {
   id Int @id @default(autoincrement())
   chat Chat[]
+  user User[]
 }
 
 model Chat {
