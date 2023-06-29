@@ -19,6 +19,14 @@ model User {
   introduce      Introduce?
   posts          Post[]
   workExperience WorkExperience[]
+  technology     Technology[]
+  chat Chat[]
+  room Room[]
+}
+
+model Technology {
+  id   Int    @id @default(autoincrement())
+  User User[]
 }
 
 model Post {
@@ -49,6 +57,21 @@ model Introduce {
   technology String
   userId     String  @unique
   User       User    @relation(fields: [userId], references: [account_id])
+}
+
+model Room {
+  id Int @id @default(autoincrement())
+  chat Chat[]
+  user User[]
+}
+
+model Chat {
+   id Int @id @default(autoincrement())
+   roomId Int @unique
+   room Room @relation(fields: [roomId],references: [id])
+   userId  String @unique
+   User    User   @relation(fields: [userId], references: [account_id])
+   msg String
 }
 
 enum Role {
