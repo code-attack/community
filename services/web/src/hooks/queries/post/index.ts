@@ -1,5 +1,5 @@
 import { instance } from "@/helpers/axios";
-import { Post } from "@package/api-types";
+import { Post, User } from "@package/api-types";
 import { URI } from "@package/constant";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";

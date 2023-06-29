@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Text } from "../text";
+import { Skeleton } from "./Skeleton";
 
 interface Props {
   thumbnail: string;
@@ -8,6 +9,7 @@ interface Props {
   title: string;
   content: string;
   profile: string;
+  isLoading?: boolean;
 }
 
 export const Basic = ({
@@ -17,9 +19,14 @@ export const Basic = ({
   title,
   content,
   profile,
+  isLoading,
 }: Props) => {
   return (
-    <article className="relative w-80 h-[382px] flex flex-col gap-[17px]">
+    <Skeleton
+      as="article"
+      isLoading={isLoading}
+      className="relative w-80 h-[382px] flex flex-col gap-[17px]"
+    >
       <div className="relative h-[180px]">
         <Image fill src="/auth.png" alt="thumbnail" />
       </div>
@@ -39,6 +46,6 @@ export const Basic = ({
           {content}
         </Text.body1>
       </div>
-    </article>
+    </Skeleton>
   );
 };

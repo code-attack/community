@@ -84,7 +84,10 @@ Prisma.NullTypes = {
  */
 
 exports.Prisma.IntroduceScalarFieldEnum = {
+  id: "id",
   content: "content",
+  tag: "tag",
+  technology: "technology",
   userId: "userId",
 };
 
@@ -103,10 +106,6 @@ exports.Prisma.SortOrder = {
   desc: "desc",
 };
 
-exports.Prisma.TechnologyScalarFieldEnum = {
-  id: "id",
-};
-
 exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   ReadUncommitted: "ReadUncommitted",
   ReadCommitted: "ReadCommitted",
@@ -122,7 +121,6 @@ exports.Prisma.UserScalarFieldEnum = {
   role: "role",
   birth: "birth",
   profile_img: "profile_img",
-  tag: "tag",
 };
 
 exports.Prisma.WorkExperienceScalarFieldEnum = {
@@ -140,7 +138,6 @@ exports.Role = {
 
 exports.Prisma.ModelName = {
   User: "User",
-  Technology: "Technology",
   Post: "Post",
   WorkExperience: "WorkExperience",
   Introduce: "Introduce",

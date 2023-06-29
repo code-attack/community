@@ -5,7 +5,7 @@ import { WorkExperience } from "./service";
 
 export const workExperienceRouter = Router();
 
-workExperienceRouter.post("/", tokenValidate, (req, res, next) => {
+workExperienceRouter.post("/", tokenValidate, async (req, res, next) => {
   try {
     const userService = Container.get(WorkExperience);
     await userService.writeProfile(type, decodedToken.account_id, req.body);
