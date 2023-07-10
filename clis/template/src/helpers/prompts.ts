@@ -10,7 +10,6 @@ const kind = async () => {
     message: "무슨 템플릿을 복사하시겠어요?",
     choices: [
       { title: "next", value: "next" },
-      { title: "express", value: "express" },
       { title: "empty", value: "empty" },
       { title: "react-sb", value: "react-sb" },
     ],

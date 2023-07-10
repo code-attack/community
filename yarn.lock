@@ -3932,6 +3932,27 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@template/next@workspace:_templates/next":
+  version: 0.0.0-use.local
+  resolution: "@template/next@workspace:_templates/next"
+  dependencies:
+    "@types/node": 20.4.1
+    "@types/react": 18.2.14
+    "@types/react-dom": 18.2.6
+    autoprefixer: 10.4.14
+    eslint: 8.44.0
+    eslint-config-next: 13.4.9
+    next: 13.4.9
+    postcss: 8.4.25
+    prettier: ^3.0.0
+    prettier-plugin-tailwindcss: ^0.3.0
+    react: 18.2.0
+    react-dom: 18.2.0
+    tailwindcss: 3.3.2
+    typescript: 5.1.6
+  languageName: unknown
+  linkType: soft
+
 "@template/react-sb@workspace:_templates/react-sb":
   version: 0.0.0-use.local
   resolution: "@template/react-sb@workspace:_templates/react-sb"
@@ -9997,27 +10018,6 @@ __metadata:
   checksum: 7adb9919dc50598e53bf32da2d0f90da325b66a23cb16c291c276d0683f81bade0bb21aeaeede10154ef53eabcb4953bf883f4d752852a62a6bd7be42021aef9
   languageName: node
   linkType: hard
-
-"next@workspace:_templates/next":
-  version: 0.0.0-use.local
-  resolution: "next@workspace:_templates/next"
-  dependencies:
-    "@types/node": 20.4.1
-    "@types/react": 18.2.14
-    "@types/react-dom": 18.2.6
-    autoprefixer: 10.4.14
-    eslint: 8.44.0
-    eslint-config-next: 13.4.9
-    next: 13.4.9
-    postcss: 8.4.25
-    prettier: ^3.0.0
-    prettier-plugin-tailwindcss: ^0.3.0
-    react: 18.2.0
-    react-dom: 18.2.0
-    tailwindcss: 3.3.2
-    typescript: 5.1.6
-  languageName: unknown
-  linkType: soft
 
 "no-case@npm:^3.0.4":
   version: 3.0.4
