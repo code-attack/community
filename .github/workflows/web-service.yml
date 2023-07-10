@@ -48,5 +48,8 @@ jobs:
             - name: Install Dependencies
               run: yarn install --immutable --immutable-cache
 
-            - name: Build User Service
+            - name: Building User Service...
               run: yarn workspace @service/user build
+
+            - name: Linting User Service...
+              run: yarn workspace @service/user lint

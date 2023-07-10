@@ -6483,8 +6483,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-config-next", "virtual:02c685ac45e3556ae486bf479bf384a01b7a1cc732f101d34d908ec80ca9db1259c681b853ed73abf360a3e84590c85064fbec6242ee00a1c1ca0e1e6a83e267#npm:13.4.9"],\
             ["next", "virtual:02c685ac45e3556ae486bf479bf384a01b7a1cc732f101d34d908ec80ca9db1259c681b853ed73abf360a3e84590c85064fbec6242ee00a1c1ca0e1e6a83e267#npm:13.4.9"],\
             ["postcss", "npm:8.4.25"],\
-            ["prettier", "npm:3.0.0"],\
-            ["prettier-plugin-tailwindcss", "virtual:02c685ac45e3556ae486bf479bf384a01b7a1cc732f101d34d908ec80ca9db1259c681b853ed73abf360a3e84590c85064fbec6242ee00a1c1ca0e1e6a83e267#npm:0.3.0"],\
+            ["prettier", "npm:2.8.8"],\
+            ["prettier-plugin-tailwindcss", "virtual:f042b9c8f1796f5b5c9e3513dfee61c96e14b6afcc707a5035e235be09a614f2547155fa8efd59f26378a6999f132d895feedf7408f51d738096d8883a47279a#npm:0.3.0"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:02c685ac45e3556ae486bf479bf384a01b7a1cc732f101d34d908ec80ca9db1259c681b853ed73abf360a3e84590c85064fbec6242ee00a1c1ca0e1e6a83e267#npm:18.2.0"],\
             ["tailwindcss", "npm:3.3.2"],\
