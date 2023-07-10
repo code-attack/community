@@ -51,5 +51,6 @@ jobs:
             - name: Build Next Template
               run: yarn workspace @template/next build
 
-            - name: Build StoryBook Template
-              run: yarn workspace @template/react-sb build-storybook
+            # this is Issue -> https://github.com/storybookjs/addon-styling/issues/54
+            # - name: Build StoryBook Template
+            #   run: yarn workspace @template/react-sb build-storybook
