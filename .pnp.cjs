@@ -42,6 +42,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       {\
         "name": "@package/design-system",\
         "reference": "workspace:packages/design-system"\
+      },\
+      {\
+        "name": "@service/user",\
+        "reference": "workspace:services/user"\
       }\
     ],\
     "enableTopLevelFallback": true,\
@@ -51,6 +55,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ["@package/api-types", ["workspace:packages/api-types"]],\
       ["@package/constant", ["workspace:packages/constant"]],\
       ["@package/design-system", ["workspace:packages/design-system"]],\
+      ["@service/user", ["workspace:services/user"]],\
       ["@template/empty", ["workspace:_templates/empty"]],\
       ["@template/next", ["workspace:_templates/next"]],\
       ["@template/react-sb", ["workspace:_templates/react-sb"]],\
@@ -6463,6 +6468,29 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@rushstack/eslint-patch", "npm:1.3.2"]\
           ],\
           "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@service/user", [\
+        ["workspace:services/user", {\
+          "packageLocation": "./services/user/",\
+          "packageDependencies": [\
+            ["@service/user", "workspace:services/user"],\
+            ["@types/node", "npm:20.4.1"],\
+            ["@types/react", "npm:18.2.14"],\
+            ["@types/react-dom", "npm:18.2.6"],\
+            ["autoprefixer", "virtual:02c685ac45e3556ae486bf479bf384a01b7a1cc732f101d34d908ec80ca9db1259c681b853ed73abf360a3e84590c85064fbec6242ee00a1c1ca0e1e6a83e267#npm:10.4.14"],\
+            ["eslint", "npm:8.44.0"],\
+            ["eslint-config-next", "virtual:02c685ac45e3556ae486bf479bf384a01b7a1cc732f101d34d908ec80ca9db1259c681b853ed73abf360a3e84590c85064fbec6242ee00a1c1ca0e1e6a83e267#npm:13.4.9"],\
+            ["next", "virtual:02c685ac45e3556ae486bf479bf384a01b7a1cc732f101d34d908ec80ca9db1259c681b853ed73abf360a3e84590c85064fbec6242ee00a1c1ca0e1e6a83e267#npm:13.4.9"],\
+            ["postcss", "npm:8.4.25"],\
+            ["prettier", "npm:3.0.0"],\
+            ["prettier-plugin-tailwindcss", "virtual:02c685ac45e3556ae486bf479bf384a01b7a1cc732f101d34d908ec80ca9db1259c681b853ed73abf360a3e84590c85064fbec6242ee00a1c1ca0e1e6a83e267#npm:0.3.0"],\
+            ["react", "npm:18.2.0"],\
+            ["react-dom", "virtual:02c685ac45e3556ae486bf479bf384a01b7a1cc732f101d34d908ec80ca9db1259c681b853ed73abf360a3e84590c85064fbec6242ee00a1c1ca0e1e6a83e267#npm:18.2.0"],\
+            ["tailwindcss", "npm:3.3.2"],\
+            ["typescript", "patch:typescript@npm%3A5.1.6#~builtin<compat/typescript>::version=5.1.6&hash=5da071"]\
+          ],\
+          "linkType": "SOFT"\
         }]\
       ]],\
       ["@sinclair/typebox", [\

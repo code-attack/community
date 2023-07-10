@@ -3,7 +3,5 @@ addReviewers: true
 addAssignees: author
 
 reviewers:
-    - 05lazy
+    - 05aj
     - ipiyou
-    - jingeon27
-    - paperdeer

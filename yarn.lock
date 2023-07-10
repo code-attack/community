@@ -2590,6 +2590,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@service/user@workspace:services/user":
+  version: 0.0.0-use.local
+  resolution: "@service/user@workspace:services/user"
+  dependencies:
+    "@types/node": 20.4.1
+    "@types/react": 18.2.14
+    "@types/react-dom": 18.2.6
+    autoprefixer: 10.4.14
+    eslint: 8.44.0
+    eslint-config-next: 13.4.9
+    next: 13.4.9
+    postcss: 8.4.25
+    prettier: ^3.0.0
+    prettier-plugin-tailwindcss: ^0.3.0
+    react: 18.2.0
+    react-dom: 18.2.0
+    tailwindcss: 3.3.2
+    typescript: 5.1.6
+  languageName: unknown
+  linkType: soft
+
 "@sinclair/typebox@npm:^0.25.16":
   version: 0.25.24
   resolution: "@sinclair/typebox@npm:0.25.24"
